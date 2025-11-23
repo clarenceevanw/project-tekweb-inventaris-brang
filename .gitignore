@@ -1,0 +1,28 @@
+# ENV files
+.env
+
+# Composer vendor
+/vendor/
+
+# IDE / Editor folders
+/.vscode/
+/.idea/
+/nbproject/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/logs/
+
+# Cache
+/cache/
+/storage/framework/cache/
+
+# Uploaded files (kalau ada fitur upload)
+public/uploads/
+
+# Session or temporary data
+/tmp/
