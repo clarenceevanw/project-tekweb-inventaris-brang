@@ -14,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title><?= $title ?? 'Inventaris'?></title>
+
+    <?= $this->renderSection('header') ?>
 </head>
 <body>
     <?php if (!empty($flash['success'])): ?>
@@ -35,9 +37,11 @@
         })
         </script>
     <?php endif; ?>
-    
+
     <main class="min-h-screen">
         <?= $this->renderSection('content') ?>
     </main>
+
+    <?= $this->renderSection('script') ?>
 </body>
 </html>
