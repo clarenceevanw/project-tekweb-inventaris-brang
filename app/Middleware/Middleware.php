@@ -10,12 +10,12 @@ class Middleware {
     }
 
     public static function admin($next) {
-    session_start();
-    if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
-        header("Location: /forbidden");
-        exit;
+        session_start();
+        if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
+            header("Location: /forbidden");
+            exit;
+        }
+        $next();
     }
-    $next();
-}
 
 }
