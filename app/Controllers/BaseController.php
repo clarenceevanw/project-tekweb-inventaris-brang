@@ -1,11 +1,14 @@
 <?php
 
+require_once __DIR__ . '/../Views/View.php';
+
 class BaseController
 {
-    protected function view($view, $data = [])
+    protected function view($viewName, $data = [])
     {
-        extract($data);
-        require __DIR__ . "/../views/{$view}.php";
+        $view = new View();
+        $data['flash'] = $this->getAllFlash();
+        return $view->render($viewName, $data);
     }
 
     protected function redirect($path)
@@ -36,5 +39,13 @@ class BaseController
         $msg = $_SESSION['flash'][$key];
         unset($_SESSION['flash'][$key]);
         return $msg;
+    }
+
+    protected function getAllFlash()
+    {
+        session_start();
+        $flashes = $_SESSION['flash'] ?? [];
+        unset($_SESSION['flash']);
+        return $flashes;
     }
 }
