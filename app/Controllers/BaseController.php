@@ -4,6 +4,12 @@ require_once __DIR__ . '/../Views/View.php';
 
 class BaseController
 {
+
+    public function __construct() {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+}
     protected function view($viewName, $data = [])
     {
         $view = new View();
@@ -27,13 +33,11 @@ class BaseController
 
     protected function flash($key, $message)
     {
-        session_start();
         $_SESSION['flash'][$key] = $message;
     }
 
     protected function getFlash($key)
     {
-        session_start();
         if (!isset($_SESSION['flash'][$key])) return null;
 
         $msg = $_SESSION['flash'][$key];
@@ -43,7 +47,6 @@ class BaseController
 
     protected function getAllFlash()
     {
-        session_start();
         $flashes = $_SESSION['flash'] ?? [];
         unset($_SESSION['flash']);
         return $flashes;
