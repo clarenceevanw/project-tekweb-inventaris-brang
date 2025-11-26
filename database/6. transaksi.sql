@@ -10,7 +10,7 @@ CREATE TABLE transaksi (
     FOREIGN KEY (id_mitra)
         REFERENCES mitra(id_mitra)
         ON DELETE SET NULL
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
     
     FOREIGN KEY (id_admin)
         REFERENCES admin(id_admin)
