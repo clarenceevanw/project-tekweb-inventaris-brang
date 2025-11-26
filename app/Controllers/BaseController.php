@@ -4,12 +4,14 @@ require_once __DIR__ . '/../Views/View.php';
 
 class BaseController
 {
+    protected $model;
 
-    public function __construct() {
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
+    public function __construct(BaseModel $model = null) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $this->model = $model;
     }
-}
     protected function view($viewName, $data = [])
     {
         $view = new View();
