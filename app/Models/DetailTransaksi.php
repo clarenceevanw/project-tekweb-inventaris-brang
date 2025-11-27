@@ -80,4 +80,38 @@ class DetailTransaksi extends BaseModel {
             return false;
         }
     }
+
+    public function getBatchDetail($id_detail_transaksi) {
+        $sql = "SELECT 
+                    dt.id_detail_transaksi,
+                    dt.sisa_kuantitas,
+                    dt.expired_date,
+                    b.nama_barang,
+                    b.id_barang,
+                    k.nama_kategori,
+                    g.nama_gudang,
+                    g.lokasi_gudang
+                FROM detail_transaksi dt
+                JOIN barang b ON dt.id_barang = b.id_barang
+                JOIN kategori k ON b.id_kategori = k.id_kategori
+                JOIN gudang g ON k.id_gudang = g.id_gudang
+                WHERE dt.id_detail_transaksi = ?";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id_detail_transaksi]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+   
+    public function getAllActiveBatches($id_gudang) {
+        $sql = "SELECT dt.*, b.nama_barang 
+                FROM detail_transaksi dt
+                JOIN barang b ON dt.id_barang = b.id_barang
+                JOIN kategori k ON b.id_kategori = k.id_kategori
+                WHERE k.id_gudang = ? AND dt.sisa_kuantitas > 0
+                ORDER BY dt.expired_date ASC";
+                
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id_gudang]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

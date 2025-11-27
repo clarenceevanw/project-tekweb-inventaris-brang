@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../app/Controllers/HomeController.php';
 require_once __DIR__ . '/../app/Controllers/AuthController.php';
+require_once __DIR__ . '/../app/Controllers/ScanController.php';
+require_once __DIR__ . '/../app/Controllers/BarangController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -16,3 +18,9 @@ Router::get("/signup/mitra", "AuthController@showSignupMitra");
 Router::post("/signup/mitra", "AuthController@signupMitra");
 
 Router::get("/logout", "AuthController@logout");
+
+Router::get("/scan", "ScanController@index");
+Router::get("/generate-qr", "ScanController@generateQr");
+
+Router::get("/barang/detail", "BarangController@detail");
+Router::get("/barang", "BarangController@index");
