@@ -10,7 +10,6 @@ class Mitra extends BaseModel
     }
 
     public function signUp($data) {
-        $data['password_mitra'] = password_hash($data['password_mitra'], PASSWORD_DEFAULT);
         return $this->insert($data);
     }
 

@@ -8,10 +8,6 @@ class Admin extends BaseModel {
         return parent::__construct();
     }
 
-    public function login($username) {
-        return $this->find('username_admin', $username);
-    }
-
     public function signUpWithGudang($adminData, $gudangData) {
         $this->db->beginTransaction();
         try {
@@ -21,7 +17,6 @@ class Admin extends BaseModel {
             
             $adminData['id_admin'] = generate_uuid();
             $adminData['id_gudang'] = $id_gudang;
-            $adminData['password_admin'] = password_hash($adminData['password_admin'], PASSWORD_DEFAULT);
             $this->insert($adminData);
             
             $this->db->commit();
@@ -33,7 +28,7 @@ class Admin extends BaseModel {
     }
 
     public function addAdminToGudang($adminData) {
-        $adminData['password_admin'] = password_hash($adminData['password_admin'], PASSWORD_DEFAULT);
+        $adminData['id_admin'] = generate_uuid();
         return $this->insert($adminData);
     }
 }
