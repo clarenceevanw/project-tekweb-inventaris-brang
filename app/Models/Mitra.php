@@ -9,6 +9,11 @@ class Mitra extends BaseModel
         return parent::__construct();
     }
 
+    public function signUp($data) {
+        $data['password_mitra'] = password_hash($data['password_mitra'], PASSWORD_DEFAULT);
+        return $this->insert($data);
+    }
+
     public function historySupply($id) {
         $stmt = $this->db->prepare("
             SELECT t.*, b.nama_barang, d.kuantitas_transaksi, g.nama_gudang

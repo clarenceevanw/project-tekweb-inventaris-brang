@@ -10,4 +10,9 @@ class Admin extends BaseModel {
     public function login($username) {
         return $this->find('username_admin', $username);
     }
+
+    public function signUp($data) {
+        $data['password_admin'] = password_hash($data['password_admin'], PASSWORD_DEFAULT);
+        return $this->insert($data);
+    }
 }
