@@ -20,11 +20,15 @@ Router::post("/signup/mitra", "AuthController@signupMitra");
 
 Router::get("/logout", "AuthController@logout");
 
-Router::get("/admin/dashboard", "DashboardController@adminDashboard");
-Router::get("/mitra/dashboard", "DashboardController@mitraDashboard");
+//Mitra Routes
+Router::get("/mitra/dashboard", "DashboardController@mitraDashboard", "auth");
 
-Router::get("/scan", "ScanController@index");
-Router::get("/generate-qr", "ScanController@generateQr");
 
-Router::get("/barang/detail", "BarangController@detail");
-Router::get("/barang", "BarangController@index");
+//Admin Routes
+Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
+
+Router::get("/admin/scan", "ScanController@index", "admin");
+Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
+
+Router::get("/admin/barang", "BarangController@index", "admin");
+Router::get("/admin/barang/detail", "BarangController@detail", "admin");
