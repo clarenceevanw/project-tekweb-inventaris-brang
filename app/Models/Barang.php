@@ -34,7 +34,7 @@ class Barang extends BaseModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function withKategoriAndStok() {
+    public function withKategoriAndStok($id_gudang = null) {
         $sql = "SELECT b.*, k.nama_kategori, 
                 (SELECT COALESCE(SUM(sisa_kuantitas), 0) 
                 FROM detail_transaksi dt 
@@ -42,8 +42,15 @@ class Barang extends BaseModel {
                 FROM barang b
                 JOIN kategori k ON b.id_kategori = k.id_kategori";
         
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if ($id_gudang) {
+            $sql .= " WHERE k.id_gudang = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id_gudang]);
+        } else {
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        }
+        
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
