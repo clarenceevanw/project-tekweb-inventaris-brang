@@ -56,8 +56,8 @@ class BarangController extends BaseController {
         }
 
         // Kirim ke View
-        return $this->view('barang/detail', [
-            'item' => $dataLengkap
-        ]);
+        $data['title'] = 'Detail Barang';
+        $data['item'] = $dataLengkap;
+        return $this->view('barang/detail', $data);
     }
 }
