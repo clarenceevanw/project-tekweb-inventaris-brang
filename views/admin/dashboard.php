@@ -1,4 +1,4 @@
-<?php $this->extend('layouts/main'); ?>
+<?php $this->extend('layouts/admin'); ?>
 
 <?php $this->section('content'); ?>
 <div class="container mx-auto px-4 py-8">
@@ -8,8 +8,9 @@
         <p class="text-gray-700">Gudang: <strong><?= $_SESSION['gudang']['nama_gudang'] ?? 'N/A' ?></strong></p>
     </div>
     
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <a href="/barang" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mr-2">Kelola Barang</a>
+    <div class="bg-white rounded-lg shadow-md p-6 flex gap-4">
+        <a href="/admin/barang" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded">Kelola Barang</a>
+        <a href="/admin/scan" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Scan Barang</a>
         <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Logout</a>
     </div>
 </div>
