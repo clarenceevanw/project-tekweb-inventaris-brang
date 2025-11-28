@@ -11,9 +11,8 @@ class BarangController extends BaseController {
     }
 
     public function index() {
-        $_SESSION['id_gudang'] = "b8e27206-cbad-11f0-a9e5-770ee1409c4d"; //Masih dummy id gudangnya nnti hapus kalau udh bisa login
         $data['title'] = 'Barang';
-        $data['dataStok'] = $this->detailTransaksi->getAllActiveBatches($_SESSION['id_gudang']);
+        $data['dataStok'] = $this->detailTransaksi->getAllActiveBatches($_SESSION['gudang']['id_gudang']);
         return $this->view('barang/index', $data);
     }
 
