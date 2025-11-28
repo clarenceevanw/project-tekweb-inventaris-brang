@@ -114,4 +114,14 @@ class DetailTransaksi extends BaseModel {
         $stmt->execute([$id_gudang]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getBatchesByBarang($id_barang) {
+        $sql = "SELECT dt.* FROM detail_transaksi dt 
+                WHERE dt.id_barang = ? AND dt.sisa_kuantitas > 0 
+                ORDER BY dt.expired_date ASC";
+                
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id_barang]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
