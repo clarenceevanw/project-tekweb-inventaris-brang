@@ -12,8 +12,31 @@ class BarangController extends BaseController {
 
     public function index() {
         $data['title'] = 'Barang';
-        $data['dataStok'] = $this->detailTransaksi->getAllActiveBatches($_SESSION['gudang']['id_gudang']);
+        $data['dataBarang'] = $this->model->withKategoriAndStok($_SESSION['gudang']['id_gudang']);
         return $this->view('barang/index', $data);
+    }
+
+    public function batch() {
+        $id_barang = $_GET['id'] ?? null;
+        
+        if (!$id_barang) {
+            $this->flash('error', 'ID barang tidak ditemukan.');
+            return $this->redirect('/admin/barang');
+        }
+
+        $barang = $this->model->findByGudang($id_barang, $_SESSION['gudang']['id_gudang']);
+        
+        if (!$barang) {
+            $this->flash('error', 'Barang tidak ditemukan.');
+            return $this->redirect('/admin/barang');
+        }
+
+        $batches = $this->detailTransaksi->getBatchesByBarang($id_barang);
+
+        $data['title'] = 'Batch Barang';
+        $data['barang'] = $barang;
+        $data['batches'] = $batches;
+        return $this->view('barang/batch', $data);
     }
 
     public function detail() {
