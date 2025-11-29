@@ -33,3 +33,4 @@ Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
 Router::get("/admin/barang", "BarangController@index", "admin");
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
+Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
