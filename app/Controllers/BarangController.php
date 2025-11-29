@@ -2,12 +2,15 @@
 
 require_once __DIR__ . '/../Models/DetailTransaksi.php';
 require_once __DIR__ . '/../Models/Barang.php';
+require_once __DIR__ . '/../Models/Ruangan.php';
 class BarangController extends BaseController {
     protected $detailTransaksi;
+    protected $ruangan;
     public function __construct()
     {
         parent::__construct(new Barang());
         $this->detailTransaksi = new DetailTransaksi();
+        $this->ruangan = new Ruangan();
     }
 
     public function index() {
@@ -59,5 +62,28 @@ class BarangController extends BaseController {
         $data['title'] = 'Detail Barang';
         $data['item'] = $dataLengkap;
         return $this->view('barang/detail', $data);
+    }
+
+    public function batchRuangan() {
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            $this->flash('error', 'ID batch tidak ditemukan.');
+            return $this->redirect('/admin/barang/batch');
+        }
+
+        $ruangan = $this->ruangan->getRuanganByBatch($id);
+
+        if (!$ruangan) {
+            $this->flash('error', 'Ruangan tidak ditemukan.');
+            return $this->redirect('/admin/barang/batch');
+        }
+
+        $barang = $this->detailTransaksi->getBatchDetail($id);
+
+        $data['title'] = 'Ruangan Batch';
+        $data['barang'] = $barang;
+        $data['ruangan'] = $ruangan;
+        return $this->view('barang/batch-ruangan', $data);
     }
 }
