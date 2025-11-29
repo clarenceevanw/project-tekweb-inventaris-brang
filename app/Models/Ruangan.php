@@ -13,4 +13,14 @@ class Ruangan extends BaseModel {
         $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getRuanganByBatch($id) {
+        $sql = "SELECT r.*, dr.kuantitas_ruangan 
+                FROM ruangan r 
+                JOIN detail_ruangan dr ON r.id_ruangan = dr.id_ruangan 
+                WHERE dr.id_detail_transaksi = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
