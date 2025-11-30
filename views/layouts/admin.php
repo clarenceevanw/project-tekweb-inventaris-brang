@@ -16,6 +16,10 @@
     <!-- Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <?= $this->renderSection('header') ?>
 
     <style>
@@ -25,13 +29,74 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .toastify {
+            padding: 16px 20px;
+            color: #1f2937;
+            display: inline-block;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background: white; 
+            position: fixed; 
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            border-radius: 8px; 
+            cursor: pointer;
+            text-decoration: none;
+            max-width: calc(100% - 20px);
+            z-index: 2147483647;
+            overflow: hidden; 
+            border: 1px solid #f3f4f6;
+        }
+
+        @media (min-width: 640px) {
+            .toastify {
+                max-width: 400px;
+            }
+        }
+
+        .toastify::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px; 
+            width: 100%;
+            animation: toast-progress 4000ms linear forwards; 
+        }
+
+        /* Warna Progress Bar: Success (Biru) */
+        .toast-success::after {
+            background-color: #3b82f6; /* Blue-500 */
+        }
+
+        @keyframes toast-progress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
+        .toastify:hover::after {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans antialiased text-gray-900">
 
     <!-- Flash Message Logic -->
     <?php if (!empty($flash['success'])): ?>
-        <script>Swal.fire({icon: 'success', title: 'Success', text: '<?= $flash['success'] ?>'})</script>
+        <script>
+            Toastify({
+                text: "<?= $flash['success'] ?>",
+                duration: 4000,
+                close: true,
+                gravity: "top", 
+                position: "right", 
+                stopOnFocus: true, 
+                className: "toast-success",
+                style: {
+                    background: "#ffffff",
+                }
+            }).showToast();
+        </script>
     <?php endif; ?>
     <?php if (!empty($flash['error'])): ?>
         <script>Swal.fire({icon: 'error', title: 'Error', text: '<?= $flash['error'] ?>'})</script>
@@ -44,16 +109,10 @@
                 <!-- Logo Container -->
                 <div class="flex items-center w-full md:w-auto">
                     <!-- Icon Logo -->
-                    <!-- 
-                        FIX: 
-                        - Changed w-12 to md:w-20 (80px) on desktop.
-                        - This forces the icon to be centered exactly within the 80px collapsed width.
-                    -->
                     <div class="w-10 md:w-20 flex justify-center items-center flex-shrink-0">
                         <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     </div>
                     <!-- Text Logo -->
-                    <!-- Added group-[.mobile-open]:opacity-100 so it shows on mobile open -->
                     <div class="opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden">
                         <span class="font-bold text-lg tracking-wider text-gray-800">GUDANG <span class="text-indigo-600">PINTAR</span></span>
                     </div>
@@ -75,7 +134,6 @@
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                     </div>
-                    <!-- Teks Menu: Muncul saat Hover Desktop ATAU saat Mobile Open -->
                     <span class="ml-3 text-sm font-medium tracking-wide opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Dashboard
                     </span>
@@ -162,8 +220,7 @@
                 // Buka Sidebar
                 sidebar.classList.remove('w-0');
                 sidebar.classList.add('w-64'); 
-                
-                // Tambahkan class marker 'mobile-open' agar teks muncul
+
                 sidebar.classList.add('mobile-open'); 
                 
                 overlay.classList.remove('hidden');
