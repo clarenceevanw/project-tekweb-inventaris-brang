@@ -4,6 +4,7 @@ require_once __DIR__ . '/../app/Controllers/AuthController.php';
 require_once __DIR__ . '/../app/Controllers/DashboardController.php';
 require_once __DIR__ . '/../app/Controllers/ScanController.php';
 require_once __DIR__ . '/../app/Controllers/BarangController.php';
+require_once __DIR__ . '/../app/Controllers/RuanganController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -34,3 +35,7 @@ Router::get("/admin/barang", "BarangController@index", "admin");
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
 Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
+
+Router::get("/admin/ruangan", "RuanganController@index", "admin");
+Router::get("/admin/ruangan/barang", "RuanganController@barang", "admin");
+Router::get("/admin/ruangan/batch", "RuanganController@batch", "admin");
