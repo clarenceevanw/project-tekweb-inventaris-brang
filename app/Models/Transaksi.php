@@ -48,4 +48,16 @@ class Transaksi extends BaseModel {
             return false;
         }
     }
+
+    public function countByGudangAndType($id_gudang, $jenis_transaksi) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as total FROM transaksi t JOIN admin a ON t.id_admin = a.id_admin WHERE a.id_gudang = ? AND t.jenis_transaksi = ?");
+        $stmt->execute([$id_gudang, $jenis_transaksi]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getMonthlyTransaksi($id_gudang, $months = 6) {
+        $stmt = $this->db->prepare("SELECT DATE_FORMAT(t.tanggal_transaksi, '%Y-%m') as bulan, t.jenis_transaksi, COUNT(*) as jumlah FROM transaksi t JOIN admin a ON t.id_admin = a.id_admin WHERE a.id_gudang = ? AND t.tanggal_transaksi >= DATE_SUB(CURDATE(), INTERVAL ? MONTH) GROUP BY bulan, t.jenis_transaksi ORDER BY bulan");
+        $stmt->execute([$id_gudang, $months]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
