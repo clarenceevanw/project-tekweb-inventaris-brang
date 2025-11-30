@@ -176,3 +176,94 @@ INSERT INTO detail_ruangan VALUES (UUID(), 120, @id_ruang_d, @id_detail_batch_5)
 
 -- Pindah sebagian kopi ke gudang 2 (Rak C)
 INSERT INTO detail_ruangan VALUES (UUID(), 10, @id_ruang_c, @id_detail_batch_2);
+-- =====================================================
+-- 13. TAMBAHAN ITEM BARU (UNTUK VARIASI TOP 5)
+-- =====================================================
+SET @id_cat_sembako = UUID();
+INSERT INTO kategori VALUES (@id_cat_sembako, 'Sembako', @id_gudang);
+
+SET @id_barang_minyak = UUID();
+SET @id_barang_gula = UUID();
+SET @id_barang_teh = UUID();
+
+INSERT INTO barang VALUES
+(@id_barang_minyak, 'Minyak Goreng Bimoli 2L', @id_cat_sembako),
+(@id_barang_gula, 'Gula Pasir Gulaku 1kg', @id_cat_sembako),
+(@id_barang_teh, 'Teh Botol Sosro Kotak', @id_cat_minuman);
+
+-- =====================================================
+-- 14. TRANSAKSI HISTORIS (SUPPLY - BULAN LALU)
+-- Agar grafik Line Chart ada isinya di bulan-bulan sebelumnya
+-- =====================================================
+
+-- Transaksi 3 Bulan yang lalu (Supply Minyak & Gula)
+SET @id_trx_history_1 = UUID();
+INSERT INTO transaksi VALUES (@id_trx_history_1, 'supply', DATE_SUB(NOW(), INTERVAL 3 MONTH), @id_mitra_supply, @id_admin);
+
+SET @id_batch_minyak = UUID();
+SET @id_batch_gula = UUID();
+
+INSERT INTO detail_transaksi VALUES
+(@id_batch_minyak, 300, 250, DATE_ADD(CURDATE(), INTERVAL 12 MONTH), @id_trx_history_1, @id_barang_minyak),
+(@id_batch_gula, 400, 350, DATE_ADD(CURDATE(), INTERVAL 24 MONTH), @id_trx_history_1, @id_barang_gula);
+
+-- Masukkan ke Rak (Gudang 1)
+INSERT INTO detail_ruangan VALUES (UUID(), 250, @id_ruang_a, @id_batch_minyak);
+INSERT INTO detail_ruangan VALUES (UUID(), 350, @id_ruang_a, @id_batch_gula);
+
+
+-- Transaksi 2 Bulan yang lalu (Supply Teh Botol)
+SET @id_trx_history_2 = UUID();
+INSERT INTO transaksi VALUES (@id_trx_history_2, 'supply', DATE_SUB(NOW(), INTERVAL 2 MONTH), @id_mitra_supply, @id_admin2);
+
+SET @id_batch_teh = UUID();
+INSERT INTO detail_transaksi VALUES
+(@id_batch_teh, 500, 400, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), @id_trx_history_2, @id_barang_teh);
+
+-- Masukkan ke Rak (Gudang 2)
+INSERT INTO detail_ruangan VALUES (UUID(), 400, @id_ruang_c, @id_batch_teh);
+
+-- =====================================================
+-- 15. TRANSAKSI 'BUY' (BARANG KELUAR)
+-- Agar widget 'Transaksi Buy' terisi
+-- =====================================================
+
+-- Mitra Baru (Pembeli)
+SET @id_mitra_warung = UUID();
+INSERT INTO mitra VALUES (@id_mitra_warung, 'Warung Bu Ijah', 'warung_ijah', @pass_default);
+
+-- Transaksi Keluar 1 (Bulan Lalu) - Beli Indomie & Kopi
+SET @id_trx_buy_1 = UUID();
+INSERT INTO transaksi VALUES (@id_trx_buy_1, 'buy', DATE_SUB(NOW(), INTERVAL 1 MONTH), @id_mitra_warung, @id_admin);
+
+-- Note: Logic sisa_kuantitas di tabel detail_transaksi untuk 'buy' biasanya 0 
+-- atau tidak relevan (tergantung logic PHP kamu), yang penting tercatat transaksinya.
+-- Di sini kita anggap detail_transaksi mencatat histori perpindahan barang.
+INSERT INTO detail_transaksi (id_detail_transaksi, kuantitas_transaksi, sisa_kuantitas, expired_date, id_transaksi, id_barang) VALUES
+(UUID(), 50, 0, NULL, @id_trx_buy_1, @id_barang_indomie),
+(UUID(), 20, 0, NULL, @id_trx_buy_1, @id_barang_kopi);
+
+
+-- Transaksi Keluar 2 (Hari Ini) - Beli Minyak & Teh
+SET @id_trx_buy_2 = UUID();
+INSERT INTO transaksi VALUES (@id_trx_buy_2, 'buy', NOW(), @id_mitra_buy, @id_admin2);
+
+INSERT INTO detail_transaksi (id_detail_transaksi, kuantitas_transaksi, sisa_kuantitas, expired_date, id_transaksi, id_barang) VALUES
+(UUID(), 50, 0, NULL, @id_trx_buy_2, @id_barang_minyak),
+(UUID(), 100, 0, NULL, @id_trx_buy_2, @id_barang_teh);
+
+-- =====================================================
+-- 16. TRANSAKSI 'SUPPLY' BARU (HARI INI)
+-- Untuk lonjakan data di bulan ini
+-- =====================================================
+
+SET @id_trx_supply_now = UUID();
+INSERT INTO transaksi VALUES (@id_trx_supply_now, 'supply', NOW(), @id_mitra_supply, @id_admin);
+
+SET @id_batch_indomie_new = UUID();
+
+INSERT INTO detail_transaksi VALUES
+(@id_batch_indomie_new, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 12 MONTH), @id_trx_supply_now, @id_barang_indomie);
+
+-- Masukkan Indomie stok baru ke Gudang 1
+INSERT INTO detail_ruangan VALUES (UUID(), 1000, @id_ruang_a, @id_batch_indomie_new);
