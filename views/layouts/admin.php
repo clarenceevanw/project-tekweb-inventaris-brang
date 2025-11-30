@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Inventaris'?></title>
+    <title>Admin: <?= $title ?? 'Inventaris'?></title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
