@@ -3,7 +3,8 @@
 require_once __DIR__ . "/../../libs/phpqrcode/qrlib.php";
 class ScanController extends BaseController {
     public function index() {
-        return $this->view("scan/index");
+        $data['title'] = "Scan QR";
+        return $this->view("scan/index", $data);
     }
 
     public function generateQr() {
