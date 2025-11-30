@@ -36,7 +36,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="<?= "/admin/ruangan/barang?id=" . $row['id_ruangan'] ?>"
-                                        class="text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-4 py-2 transition">
+                                        class="inline-block text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-4 py-2 transition">
                                     Lihat Barang
                                 </a>
                             </td>
