@@ -5,6 +5,7 @@ CREATE TABLE detail_transaksi (
     kuantitas_transaksi INT NOT NULL,
     sisa_kuantitas INT NOT NULL,
     expired_date DATE,
+    harga_detail_transaksi DECIMAL(15, 2) NOT NULL,
     id_transaksi CHAR(36),
     id_barang CHAR(36),
 

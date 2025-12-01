@@ -4,6 +4,7 @@ CREATE TABLE transaksi (
     id_transaksi CHAR(36) PRIMARY KEY DEFAULT (UUID()),
     jenis_transaksi ENUM('supply', 'buy') NOT NULL,
     tanggal_transaksi DATETIME DEFAULT CURRENT_TIMESTAMP,
+    harga_transaksi DECIMAL(15, 2) NOT NULL,
     id_mitra CHAR(36),
     id_admin CHAR(36),
 
