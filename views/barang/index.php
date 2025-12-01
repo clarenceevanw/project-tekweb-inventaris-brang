@@ -5,6 +5,9 @@
 <div class="container mx-auto px-4 py-8">
     <div class="mb-6 flex justify-between items-center">
         <div>
+            <div class="flex items-center gap-2 mb-4 text-sm">
+                <span class="text-gray-600">Barang</span>
+            </div>
             <h2 class="text-2xl font-bold text-gray-800">Daftar Barang</h2>
             <p class="text-sm text-gray-500">Kelola barang dan lihat batch stok.</p>
         </div>

@@ -4,7 +4,11 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="mb-6">
-        <a href="/admin/ruangan" class="text-indigo-600 hover:text-indigo-800 mb-4 inline-block">&larr; Kembali ke Daftar Ruangan</a>
+        <div class="flex items-center gap-2 mb-4 text-sm">
+            <a href="/admin/ruangan" class="text-indigo-600 hover:text-indigo-800 font-medium">Ruangan</a>
+            <span class="text-gray-400">></span>
+            <span class="text-gray-600">Barang</span>
+        </div>
         <h2 class="text-2xl font-bold text-gray-800">Ruangan: <?= $ruangan['nama_ruangan'] ?></h2>
         <p class="text-sm text-gray-500">Daftar barang yang tersimpan di ruangan ini.</p>
     </div>

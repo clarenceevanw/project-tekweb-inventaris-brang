@@ -4,7 +4,13 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="mb-6">
-        <a href="/admin/barang/batch?id=<?= $barang['id_barang'] ?>" class="text-indigo-600 hover:text-indigo-800 mb-4 inline-block">&larr; Kembali ke Daftar Batch</a>
+        <div class="flex items-center gap-2 mb-4 text-sm">
+            <a href="/admin/barang" class="text-indigo-600 hover:text-indigo-800 font-medium">Barang</a>
+            <span class="text-gray-400">></span>
+            <a href="/admin/barang/batch?id=<?= $barang['id_barang'] ?>" class="text-indigo-600 hover:text-indigo-800 font-medium">Batch</a>
+            <span class="text-gray-400">></span>
+            <span class="text-gray-600">Ruangan</span>
+        </div>
         <h2 class="text-2xl font-bold text-gray-800">Barang: <?= $barang['nama_barang'] ?></h2>
         <p class="text-sm text-gray-500">Batch: <?= $_GET['id'] ?></p>
     </div>
