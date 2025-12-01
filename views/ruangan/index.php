@@ -11,6 +11,9 @@
             <h2 class="text-2xl font-bold text-gray-800">Daftar Ruangan</h2>
             <p class="text-sm text-gray-500">Kelola ruangan penyimpanan di gudang.</p>
         </div>
+        <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
+            + Tambah Ruangan
+        </button>
     </div>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
@@ -51,5 +54,74 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="modalTambah" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+        <h3 class="text-xl font-bold mb-4">Tambah Ruangan</h3>
+        <form id="formTambah">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Ruangan</label>
+                <input type="text" name="nama_ruangan" id="nama_ruangan" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg transition">
+                    Batal
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    $('#modalTambah').removeClass('hidden');
+}
+
+function closeModal() {
+    $('#modalTambah').addClass('hidden');
+    $('#formTambah')[0].reset();
+}
+
+$('#formTambah').on('submit', function(e) {
+    e.preventDefault();
+    
+    $.ajax({
+        url: '/admin/ruangan/store',
+        method: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(data) {
+            if(data.success) {
+                Toastify({
+                    text: data.message,
+                    duration: 2000,
+                    close: true,
+                    gravity: "top", 
+                    position: "right", 
+                    stopOnFocus: true, 
+                    className: "toast-success",
+                    style: {
+                        background: "#ffffff",
+                    }
+                }).showToast();
+
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                Swal.fire({icon: 'error', title: 'Error', text: data.message})
+            }
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({icon: 'error', title: 'Error', text: 'Something went wrong'})
+        }
+    });
+});
+</script>
 
 <?php $this->endSection(); ?>
