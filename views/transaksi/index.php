@@ -11,6 +11,9 @@
             <h2 class="text-2xl font-bold text-gray-800">Daftar Transaksi</h2>
             <p class="text-sm text-gray-500">Riwayat transaksi supply dan buy.</p>
         </div>
+        <a href="/admin/transaksi/create" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
+            + Tambah Transaksi
+        </a>
     </div>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">

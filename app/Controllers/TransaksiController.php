@@ -2,13 +2,25 @@
 
 require_once __DIR__ . '/../Models/Transaksi.php';
 require_once __DIR__ . '/../Models/DetailTransaksi.php';
+require_once __DIR__ . '/../Models/Mitra.php';
+require_once __DIR__ . '/../Models/Barang.php';
+require_once __DIR__ . '/../Models/Ruangan.php';
+require_once __DIR__ . '/../Models/DetailRuangan.php';
 
 class TransaksiController extends BaseController {
     protected $detailTransaksi;
+    protected $mitra;
+    protected $barang;
+    protected $ruangan;
+    protected $detailRuangan;
     
     public function __construct() {
         parent::__construct(new Transaksi());
         $this->detailTransaksi = new DetailTransaksi();
+        $this->mitra = new Mitra();
+        $this->barang = new Barang();
+        $this->ruangan = new Ruangan();
+        $this->detailRuangan = new DetailRuangan();
     }
 
     public function index() {
@@ -38,5 +50,79 @@ class TransaksiController extends BaseController {
         $data['transaksi'] = $transaksi;
         $data['detailItems'] = $detailItems;
         return $this->view('transaksi/detail', $data);
+    }
+
+    public function create() {
+        $data['title'] = 'Tambah Transaksi';
+        $data['mitra'] = $this->mitra->all();
+        $data['barang'] = $this->barang->byGudang($_SESSION['gudang']['id_gudang']);
+        $data['ruangan'] = $this->ruangan->byGudang($_SESSION['gudang']['id_gudang']);
+        return $this->view('transaksi/create', $data);
+    }
+
+    public function store() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        try {
+            if (empty($_POST['jenis_transaksi'])) throw new Exception('Jenis transaksi harus dipilih');
+            if (empty($_POST['id_mitra'])) throw new Exception('Mitra harus dipilih');
+            if (empty($_POST['items'])) throw new Exception('Minimal 1 item barang harus ditambahkan');
+
+            $id_transaksi = generate_uuid();
+            $total_harga = 0;
+
+            foreach ($_POST['items'] as $item) {
+                $total_harga += floatval($item['harga']);
+            }
+
+            $resultTransaksi = $this->model->insert([
+                'id_transaksi' => $id_transaksi,
+                'jenis_transaksi' => $_POST['jenis_transaksi'],
+                'harga_transaksi' => $total_harga,
+                'id_mitra' => $_POST['id_mitra'],
+                'id_admin' => $_SESSION['user']['id_admin']
+            ]);
+
+            if (!$resultTransaksi) throw new Exception('Gagal menyimpan transaksi');
+
+            foreach ($_POST['items'] as $item) {
+                if ($_POST['jenis_transaksi'] == 'buy') {
+                    $reduced = $this->detailTransaksi->reduceStock($item['id_barang'], $item['kuantitas']);
+                    if (!$reduced) throw new Exception('Stok barang tidak mencukupi untuk transaksi buy');
+                }
+                
+                $id_detail = generate_uuid();
+                $dataDetail = [
+                    'id_detail_transaksi' => $id_detail,
+                    'kuantitas_transaksi' => $item['kuantitas'],
+                    'sisa_kuantitas' => $_POST['jenis_transaksi'] == 'supply' ? $item['kuantitas'] : 0,
+                    'expired_date' => !empty($item['expired_date']) ? $item['expired_date'] : null,
+                    'harga_detail_transaksi' => $item['harga'],
+                    'id_transaksi' => $id_transaksi,
+                    'id_barang' => $item['id_barang']
+                ];
+                
+                $resultDetail = $this->detailTransaksi->insert($dataDetail);
+                if (!$resultDetail) throw new Exception('Gagal menyimpan detail transaksi');
+
+                if ($_POST['jenis_transaksi'] == 'supply') {
+                    $resultRuangan = $this->detailRuangan->insert([
+                        'kuantitas_ruangan' => $item['kuantitas'],
+                        'id_ruangan' => $item['id_ruangan'],
+                        'id_detail_transaksi' => $id_detail
+                    ]);
+                    
+                    if (!$resultRuangan) throw new Exception('Gagal menyimpan ke ruangan');
+                }
+            }
+
+            $this->json(['success' => true, 'message' => 'Transaksi berhasil ditambahkan']);
+
+        } catch (Exception $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 }
