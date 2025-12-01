@@ -54,4 +54,6 @@ Router::get("/admin/ruangan/barang", "RuanganController@barang", "admin");
 Router::get("/admin/ruangan/batch", "RuanganController@batch", "admin");
 
 Router::get("/admin/transaksi", "TransaksiController@index", "admin");
+Router::get("/admin/transaksi/create", "TransaksiController@create", "admin");
+Router::post("/admin/transaksi/store", "TransaksiController@store", "admin");
 Router::get("/admin/transaksi/detail", "TransaksiController@detail", "admin");
