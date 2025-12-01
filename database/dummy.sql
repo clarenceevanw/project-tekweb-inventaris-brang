@@ -147,59 +147,59 @@ INSERT INTO mitra VALUES
 SET @t1 = UUID();
 INSERT INTO transaksi VALUES (@t1, 'supply', DATE_SUB(NOW(), INTERVAL 3 MONTH), 2500000, @m_supply, @adm_sby);
 SET @dt1 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt1, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 2500, @t1, @b_sby_1);
+INSERT INTO detail_transaksi VALUES (@dt1, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 2500000, @t1, @b_sby_1);
 INSERT INTO detail_ruangan VALUES (UUID(), 600, @r_sby_a, @dt1);
 INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_sby_b, @dt1);
 
 SET @t2 = UUID();
 INSERT INTO transaksi VALUES (@t2, 'supply', DATE_SUB(NOW(), INTERVAL 1 MONTH), 3750000, @m_supply, @adm_sby);
 SET @dt2 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt2, 1500, 1500, DATE_ADD(CURDATE(), INTERVAL 9 MONTH), 2500, @t2, @b_sby_1);
+INSERT INTO detail_transaksi VALUES (@dt2, 1500, 1500, DATE_ADD(CURDATE(), INTERVAL 9 MONTH), 3750000, @t2, @b_sby_1);
 INSERT INTO detail_ruangan VALUES (UUID(), 800, @r_sby_a, @dt2);
 INSERT INTO detail_ruangan VALUES (UUID(), 700, @r_sby_b, @dt2);
 
 SET @t3 = UUID();
-INSERT INTO transaksi VALUES (@t3, 'supply', NOW(), 3600000, @m_supply, @adm_sby);
+INSERT INTO transaksi VALUES (@t3, 'supply', NOW(), 3120000, @m_supply, @adm_sby);
 SET @dt3 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt3, 800, 800, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 2400, @t3, @b_sby_2);
+SET @dt4 = UUID();
+INSERT INTO detail_transaksi VALUES (@dt3, 800, 800, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 1920000, @t3, @b_sby_2);
+INSERT INTO detail_transaksi VALUES (@dt4, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 1200000, @t3, @b_sby_3);
 INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sby_a, @dt3);
 INSERT INTO detail_ruangan VALUES (UUID(), 300, @r_sby_b, @dt3);
-SET @dt4 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt4, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 2000, @t3, @b_sby_3);
 INSERT INTO detail_ruangan VALUES (UUID(), 600, @r_sby_a, @dt4);
 
 SET @t4 = UUID();
-INSERT INTO transaksi VALUES (@t4, 'supply', DATE_SUB(NOW(), INTERVAL 2 WEEK), 2100000, @m_supply, @adm_sby);
+INSERT INTO transaksi VALUES (@t4, 'supply', DATE_SUB(NOW(), INTERVAL 2 WEEK), 1900000, @m_supply, @adm_sby);
 SET @dt5 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt5, 400, 400, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 2000, @t4, @b_sby_3);
+SET @dt6 = UUID();
+INSERT INTO detail_transaksi VALUES (@dt5, 400, 400, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 800000, @t4, @b_sby_3);
+INSERT INTO detail_transaksi VALUES (@dt6, 500, 500, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 1100000, @t4, @b_sby_4);
 INSERT INTO detail_ruangan VALUES (UUID(), 250, @r_sby_a, @dt5);
 INSERT INTO detail_ruangan VALUES (UUID(), 150, @r_sby_b, @dt5);
-SET @dt6 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt6, 500, 500, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 2200, @t4, @b_sby_4);
 INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sby_b, @dt6);
 
 SET @t5 = UUID();
 INSERT INTO transaksi VALUES (@t5, 'supply', NOW(), 6000000, @m_supply, @adm_sby);
 SET @dt7 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt7, 2000, 2000, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 3000, @t5, @b_sby_5);
+INSERT INTO detail_transaksi VALUES (@dt7, 2000, 2000, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 6000000, @t5, @b_sby_5);
 INSERT INTO detail_ruangan VALUES (UUID(), 2000, @r_sby_c, @dt7);
 
 SET @t6 = UUID();
-INSERT INTO transaksi VALUES (@t6, 'supply', DATE_SUB(NOW(), INTERVAL 1 WEEK), 7200000, @m_supply, @adm_sby);
+INSERT INTO transaksi VALUES (@t6, 'supply', DATE_SUB(NOW(), INTERVAL 1 WEEK), 6600000, @m_supply, @adm_sby);
 SET @dt8 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt8, 1200, 1200, DATE_ADD(CURDATE(), INTERVAL 10 MONTH), 3000, @t6, @b_sby_5);
-INSERT INTO detail_ruangan VALUES (UUID(), 1200, @r_sby_c, @dt8);
 SET @dt9 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt9, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 9 MONTH), 3000, @t6, @b_sby_6);
+INSERT INTO detail_transaksi VALUES (@dt8, 1200, 1200, DATE_ADD(CURDATE(), INTERVAL 10 MONTH), 3600000, @t6, @b_sby_5);
+INSERT INTO detail_transaksi VALUES (@dt9, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 9 MONTH), 3000000, @t6, @b_sby_6);
+INSERT INTO detail_ruangan VALUES (UUID(), 1200, @r_sby_c, @dt8);
 INSERT INTO detail_ruangan VALUES (UUID(), 1000, @r_sby_c, @dt9);
 
 SET @t7 = UUID();
-INSERT INTO transaksi VALUES (@t7, 'supply', NOW(), 5400000, @m_supply, @adm_sby);
+INSERT INTO transaksi VALUES (@t7, 'supply', NOW(), 5200000, @m_supply, @adm_sby);
 SET @dt10 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt10, 800, 800, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 3500, @t7, @b_sby_7);
-INSERT INTO detail_ruangan VALUES (UUID(), 800, @r_sby_c, @dt10);
 SET @dt11 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt11, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 4000, @t7, @b_sby_8);
+INSERT INTO detail_transaksi VALUES (@dt10, 800, 800, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 2800000, @t7, @b_sby_7);
+INSERT INTO detail_transaksi VALUES (@dt11, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 2400000, @t7, @b_sby_8);
+INSERT INTO detail_ruangan VALUES (UUID(), 800, @r_sby_c, @dt10);
 INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_sby_c, @dt11);
 INSERT INTO detail_ruangan VALUES (UUID(), 200, @r_sby_d, @dt11);
 
@@ -207,107 +207,106 @@ INSERT INTO detail_ruangan VALUES (UUID(), 200, @r_sby_d, @dt11);
 SET @t8 = UUID();
 INSERT INTO transaksi VALUES (@t8, 'supply', DATE_SUB(NOW(), INTERVAL 2 MONTH), 4800000, @m_supply, @adm_sda);
 SET @dt12 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt12, 600, 600, DATE_ADD(CURDATE(), INTERVAL 4 MONTH), 8000, @t8, @b_sda_1);
+INSERT INTO detail_transaksi VALUES (@dt12, 600, 600, DATE_ADD(CURDATE(), INTERVAL 4 MONTH), 4800000, @t8, @b_sda_1);
 INSERT INTO detail_ruangan VALUES (UUID(), 600, @r_sda_e, @dt12);
 
 SET @t9 = UUID();
-INSERT INTO transaksi VALUES (@t9, 'supply', DATE_SUB(NOW(), INTERVAL 1 MONTH), 11900000, @m_supply, @adm_sda);
+INSERT INTO transaksi VALUES (@t9, 'supply', DATE_SUB(NOW(), INTERVAL 1 MONTH), 10250000, @m_supply, @adm_sda);
 SET @dt13 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt13, 800, 800, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 8000, @t9, @b_sda_1);
+SET @dt14 = UUID();
+INSERT INTO detail_transaksi VALUES (@dt13, 800, 800, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 6400000, @t9, @b_sda_1);
+INSERT INTO detail_transaksi VALUES (@dt14, 700, 700, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 3850000, @t9, @b_sda_2);
 INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sda_e, @dt13);
 INSERT INTO detail_ruangan VALUES (UUID(), 300, @r_sda_f, @dt13);
-SET @dt14 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt14, 700, 700, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 5500, @t9, @b_sda_2);
 INSERT INTO detail_ruangan VALUES (UUID(), 700, @r_sda_e, @dt14);
 
 SET @t10 = UUID();
-INSERT INTO transaksi VALUES (@t10, 'supply', NOW(), 7550000, @m_supply, @adm_sda);
+INSERT INTO transaksi VALUES (@t10, 'supply', NOW(), 6950000, @m_supply, @adm_sda);
 SET @dt15 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt15, 500, 500, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 5500, @t10, @b_sda_2);
-INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sda_e, @dt15);
 SET @dt16 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt16, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 7000, @t10, @b_sda_3);
+INSERT INTO detail_transaksi VALUES (@dt15, 500, 500, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 2750000, @t10, @b_sda_2);
+INSERT INTO detail_transaksi VALUES (@dt16, 600, 600, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 4200000, @t10, @b_sda_3);
+INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sda_e, @dt15);
 INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_sda_e, @dt16);
 INSERT INTO detail_ruangan VALUES (UUID(), 200, @r_sda_f, @dt16);
 
 SET @t11 = UUID();
 INSERT INTO transaksi VALUES (@t11, 'supply', DATE_SUB(NOW(), INTERVAL 3 WEEK), 18000000, @m_supply, @adm_sda);
 SET @dt17 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt17, 300, 300, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 60000, @t11, @b_sda_4);
+INSERT INTO detail_transaksi VALUES (@dt17, 300, 300, DATE_ADD(CURDATE(), INTERVAL 5 MONTH), 18000000, @t11, @b_sda_4);
 INSERT INTO detail_ruangan VALUES (UUID(), 200, @r_sda_g, @dt17);
 INSERT INTO detail_ruangan VALUES (UUID(), 100, @r_sda_h, @dt17);
 
 SET @t12 = UUID();
-INSERT INTO transaksi VALUES (@t12, 'supply', DATE_SUB(NOW(), INTERVAL 1 WEEK), 20500000, @m_supply, @adm_sda);
+INSERT INTO transaksi VALUES (@t12, 'supply', DATE_SUB(NOW(), INTERVAL 1 WEEK), 19800000, @m_supply, @adm_sda);
 SET @dt18 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt18, 250, 250, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 60000, @t12, @b_sda_4);
+SET @dt19 = UUID();
+INSERT INTO detail_transaksi VALUES (@dt18, 250, 250, DATE_ADD(CURDATE(), INTERVAL 6 MONTH), 15000000, @t12, @b_sda_4);
+INSERT INTO detail_transaksi VALUES (@dt19, 400, 400, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 4800000, @t12, @b_sda_5);
 INSERT INTO detail_ruangan VALUES (UUID(), 150, @r_sda_g, @dt18);
 INSERT INTO detail_ruangan VALUES (UUID(), 100, @r_sda_h, @dt18);
-SET @dt19 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt19, 400, 400, DATE_ADD(CURDATE(), INTERVAL 8 MONTH), 12000, @t12, @b_sda_5);
 INSERT INTO detail_ruangan VALUES (UUID(), 250, @r_sda_g, @dt19);
 INSERT INTO detail_ruangan VALUES (UUID(), 150, @r_sda_h, @dt19);
 
 SET @t13 = UUID();
-INSERT INTO transaksi VALUES (@t13, 'supply', NOW(), 10200000, @m_supply, @adm_sda);
+INSERT INTO transaksi VALUES (@t13, 'supply', NOW(), 8700000, @m_supply, @adm_sda);
 SET @dt20 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt20, 350, 350, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 12000, @t13, @b_sda_5);
-INSERT INTO detail_ruangan VALUES (UUID(), 350, @r_sda_g, @dt20);
 SET @dt21 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt21, 300, 300, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 15000, @t13, @b_sda_6);
+INSERT INTO detail_transaksi VALUES (@dt20, 350, 350, DATE_ADD(CURDATE(), INTERVAL 7 MONTH), 4200000, @t13, @b_sda_5);
+INSERT INTO detail_transaksi VALUES (@dt21, 300, 300, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 4500000, @t13, @b_sda_6);
+INSERT INTO detail_ruangan VALUES (UUID(), 350, @r_sda_g, @dt20);
 INSERT INTO detail_ruangan VALUES (UUID(), 200, @r_sda_g, @dt21);
 INSERT INTO detail_ruangan VALUES (UUID(), 100, @r_sda_h, @dt21);
 
 SET @t14 = UUID();
-INSERT INTO transaksi VALUES (@t14, 'supply', DATE_SUB(NOW(), INTERVAL 2 DAY), 5500000, @m_supply, @adm_sda);
+INSERT INTO transaksi VALUES (@t14, 'supply', DATE_SUB(NOW(), INTERVAL 2 DAY), 4700000, @m_supply, @adm_sda);
 SET @dt22 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt22, 500, 500, DATE_ADD(CURDATE(), INTERVAL 10 MONTH), 3000, @t14, @b_sda_7);
-INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sda_g, @dt22);
 SET @dt23 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt23, 400, 400, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 8000, @t14, @b_sda_8);
+INSERT INTO detail_transaksi VALUES (@dt22, 500, 500, DATE_ADD(CURDATE(), INTERVAL 10 MONTH), 1500000, @t14, @b_sda_7);
+INSERT INTO detail_transaksi VALUES (@dt23, 400, 400, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), 3200000, @t14, @b_sda_8);
+INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_sda_g, @dt22);
 INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_sda_g, @dt23);
 
 -- TRANSAKSI MALANG
 SET @t15 = UUID();
 INSERT INTO transaksi VALUES (@t15, 'supply', DATE_SUB(NOW(), INTERVAL 5 DAY), 18000000, @m_supply, @adm_mlg);
 SET @dt24 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt24, 600, 600, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 30000, @t15, @b_mlg_1);
+INSERT INTO detail_transaksi VALUES (@dt24, 600, 600, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 18000000, @t15, @b_mlg_1);
 INSERT INTO detail_ruangan VALUES (UUID(), 600, @r_mlg_i, @dt24);
 
 SET @t16 = UUID();
-INSERT INTO transaksi VALUES (@t16, 'supply', DATE_SUB(NOW(), INTERVAL 3 DAY), 27000000, @m_supply, @adm_mlg);
+INSERT INTO transaksi VALUES (@t16, 'supply', DATE_SUB(NOW(), INTERVAL 3 DAY), 24000000, @m_supply, @adm_mlg);
 SET @dt25 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt25, 400, 400, DATE_ADD(CURDATE(), INTERVAL 3 YEAR), 30000, @t16, @b_mlg_1);
-INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_mlg_i, @dt25);
 SET @dt26 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt26, 500, 500, DATE_ADD(CURDATE(), INTERVAL 3 YEAR), 24000, @t16, @b_mlg_2);
+INSERT INTO detail_transaksi VALUES (@dt25, 400, 400, DATE_ADD(CURDATE(), INTERVAL 3 YEAR), 12000000, @t16, @b_mlg_1);
+INSERT INTO detail_transaksi VALUES (@dt26, 500, 500, DATE_ADD(CURDATE(), INTERVAL 3 YEAR), 12000000, @t16, @b_mlg_2);
+INSERT INTO detail_ruangan VALUES (UUID(), 400, @r_mlg_i, @dt25);
 INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_mlg_i, @dt26);
 
 SET @t17 = UUID();
-INSERT INTO transaksi VALUES (@t17, 'supply', DATE_SUB(NOW(), INTERVAL 1 DAY), 24500000, @m_supply, @adm_mlg);
+INSERT INTO transaksi VALUES (@t17, 'supply', DATE_SUB(NOW(), INTERVAL 1 DAY), 24100000, @m_supply, @adm_mlg);
 SET @dt27 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt27, 300, 300, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 15000, @t17, @b_mlg_3);
-INSERT INTO detail_ruangan VALUES (UUID(), 300, @r_mlg_i, @dt27);
 SET @dt28 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt28, 700, 700, DATE_ADD(CURDATE(), INTERVAL 18 MONTH), 28000, @t17, @b_mlg_4);
+INSERT INTO detail_transaksi VALUES (@dt27, 300, 300, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 4500000, @t17, @b_mlg_3);
+INSERT INTO detail_transaksi VALUES (@dt28, 700, 700, DATE_ADD(CURDATE(), INTERVAL 18 MONTH), 19600000, @t17, @b_mlg_4);
+INSERT INTO detail_ruangan VALUES (UUID(), 300, @r_mlg_i, @dt27);
 INSERT INTO detail_ruangan VALUES (UUID(), 700, @r_mlg_j, @dt28);
 
 SET @t18 = UUID();
-INSERT INTO transaksi VALUES (@t18, 'supply', NOW(), 26000000, @m_supply, @adm_mlg);
+INSERT INTO transaksi VALUES (@t18, 'supply', NOW(), 23600000, @m_supply, @adm_mlg);
 SET @dt29 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt29, 500, 500, DATE_ADD(CURDATE(), INTERVAL 15 MONTH), 28000, @t18, @b_mlg_4);
-INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_mlg_j, @dt29);
 SET @dt30 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt30, 600, 600, DATE_ADD(CURDATE(), INTERVAL 12 MONTH), 16000, @t18, @b_mlg_5);
+INSERT INTO detail_transaksi VALUES (@dt29, 500, 500, DATE_ADD(CURDATE(), INTERVAL 15 MONTH), 14000000, @t18, @b_mlg_4);
+INSERT INTO detail_transaksi VALUES (@dt30, 600, 600, DATE_ADD(CURDATE(), INTERVAL 12 MONTH), 9600000, @t18, @b_mlg_5);
+INSERT INTO detail_ruangan VALUES (UUID(), 500, @r_mlg_j, @dt29);
 INSERT INTO detail_ruangan VALUES (UUID(), 600, @r_mlg_j, @dt30);
 
 SET @t19 = UUID();
 INSERT INTO transaksi VALUES (@t19, 'supply', NOW(), 22000000, @m_supply, @adm_mlg);
 SET @dt31 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt31, 800, 800, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 5000, @t19, @b_mlg_6);
-INSERT INTO detail_ruangan VALUES (UUID(), 800, @r_mlg_k, @dt31);
 SET @dt32 = UUID();
-INSERT INTO detail_transaksi VALUES (@dt32, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 18000, @t19, @b_mlg_7);
+INSERT INTO detail_transaksi VALUES (@dt31, 800, 800, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 4000000, @t19, @b_mlg_6);
+INSERT INTO detail_transaksi VALUES (@dt32, 1000, 1000, DATE_ADD(CURDATE(), INTERVAL 2 YEAR), 18000000, @t19, @b_mlg_7);
 INSERT INTO detail_ruangan VALUES (UUID(), 1000, @r_mlg_k, @dt32);
 
 -- SUBSCRIPTION
