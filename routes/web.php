@@ -5,6 +5,7 @@ require_once __DIR__ . '/../app/Controllers/DashboardController.php';
 require_once __DIR__ . '/../app/Controllers/ScanController.php';
 require_once __DIR__ . '/../app/Controllers/BarangController.php';
 require_once __DIR__ . '/../app/Controllers/RuanganController.php';
+require_once __DIR__ . '/../app/Controllers/KategoriController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -31,11 +32,15 @@ Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
 Router::get("/admin/scan", "ScanController@index", "admin");
 Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
 
+Router::get("/admin/kategori", "KategoriController@index", "admin");
+Router::post("/admin/kategori/store", "KategoriController@store", "admin");
+
 Router::get("/admin/barang", "BarangController@index", "admin");
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
 Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
 
 Router::get("/admin/ruangan", "RuanganController@index", "admin");
+Router::post("/admin/ruangan/store", "RuanganController@store", "admin");
 Router::get("/admin/ruangan/barang", "RuanganController@barang", "admin");
 Router::get("/admin/ruangan/batch", "RuanganController@batch", "admin");
