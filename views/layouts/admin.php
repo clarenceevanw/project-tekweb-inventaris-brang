@@ -123,10 +123,12 @@
             <nav class="flex-1 py-6 space-y-1 overflow-y-auto no-scrollbar px-2">
                 
                 <?php 
-                $current_uri = $_SERVER['REQUEST_URI'];
-                $isActive = function($keyword) use ($current_uri) {
-                    return strpos($current_uri, $keyword) !== false;
-                };
+                    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                    $segments = explode('/', trim($path, '/'));
+                    $activePage = isset($segments[1]) ? $segments[1] : 'dashboard';
+                    $isActive = function($keyword) use ($activePage) {
+                        return $activePage === $keyword;
+                    };
                 ?>
 
                 <!-- 1. Dashboard -->
