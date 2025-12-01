@@ -64,4 +64,33 @@ class RuanganController extends BaseController {
         $data['id_ruangan'] = $id_ruangan;
         return $this->view('ruangan/batch', $data);
     }
+
+    public function store() {
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        $nama_ruangan = $_POST['nama_ruangan'] ?? '';
+        
+        if (empty($nama_ruangan)) {
+            $this->json(['success' => false, 'message' => 'Nama ruangan harus diisi']);
+            return;
+        }
+
+        $id_gudang = $_SESSION['gudang']['id_gudang'];
+        
+        $result = $this->model->insert([
+            'nama_ruangan' => $nama_ruangan,
+            'id_gudang' => $id_gudang
+        ]);
+
+        if ($result) {
+            $this->json(['success' => true, 'message' => 'Ruangan berhasil ditambahkan']);
+        } else {
+            $this->json(['success' => false, 'message' => 'Gagal menambahkan ruangan']);
+        }
+    }
 }
