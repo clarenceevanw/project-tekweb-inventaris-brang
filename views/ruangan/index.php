@@ -3,17 +3,19 @@
 <?php $this->section('content'); ?>
 
 <div class="container mx-auto px-4 py-8">
+    <div class="flex items-center gap-2 mb-4 text-sm">
+        <span class="text-gray-600">Ruangan</span>
+    </div>
     <div class="mb-6 flex justify-between items-center">
         <div>
-            <div class="flex items-center gap-2 mb-4 text-sm">
-                <span class="text-gray-600">Ruangan</span>
-            </div>
             <h2 class="text-2xl font-bold text-gray-800">Daftar Ruangan</h2>
             <p class="text-sm text-gray-500">Kelola ruangan penyimpanan di gudang.</p>
         </div>
-        <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
-            + Tambah Ruangan
-        </button>
+        <div>
+            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
+                + Tambah Ruangan
+            </button>
+        </div>
     </div>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
@@ -56,8 +58,10 @@
 </div>
 
 <!-- Modal -->
-<div id="modalTambah" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+<div id="modalTambah" class="hidden fixed inset-0 z-50 opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300" onclick="closeModal()"></div>
+    <div class="fixed inset-0 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md transform transition-all duration-300 ease-out scale-95 opacity-0 relative z-10">
         <h3 class="text-xl font-bold mb-4">Tambah Ruangan</h3>
         <form id="formTambah">
             <div class="mb-4">
@@ -74,17 +78,30 @@
                 </button>
             </div>
         </form>
+        </div>
     </div>
 </div>
 
 <script>
 function openModal() {
-    $('#modalTambah').removeClass('hidden');
+    const modal = document.getElementById('modalTambah');
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('.bg-white').classList.remove('scale-95', 'opacity-0');
+        modal.querySelector('.bg-white').classList.add('scale-100', 'opacity-100');
+    }, 10);
 }
 
 function closeModal() {
-    $('#modalTambah').addClass('hidden');
-    $('#formTambah')[0].reset();
+    const modal = document.getElementById('modalTambah');
+    modal.classList.add('opacity-0');
+    modal.querySelector('.bg-white').classList.remove('scale-100', 'opacity-100');
+    modal.querySelector('.bg-white').classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        $('#formTambah')[0].reset();
+    }, 300);
 }
 
 $('#formTambah').on('submit', function(e) {
@@ -121,6 +138,15 @@ $('#formTambah').on('submit', function(e) {
             Swal.fire({icon: 'error', title: 'Error', text: 'Something went wrong'})
         }
     });
+});
+
+// Event listener untuk tombol ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        if (!document.getElementById('modalTambah').classList.contains('hidden')) {
+            closeModal();
+        }
+    }
 });
 </script>
 
