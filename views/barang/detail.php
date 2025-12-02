@@ -79,7 +79,7 @@
                 <div class="<?= $bgClass ?> rounded-lg p-4 border text-center hover:border-indigo-200 transition-colors flex flex-col justify-center">
                     <p class="text-xs font-medium <?= $textClass ?> uppercase tracking-wider mb-1">Kedaluwarsa</p>
                     <p class="text-lg font-bold text-gray-900 mt-1">
-                        <?= date('d M Y', strtotime($item['expired_date'])) ?>
+                        <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : 'N/A' ?>
                     </p>
                     <?php if($daysLeft < 30): ?>
                         <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
