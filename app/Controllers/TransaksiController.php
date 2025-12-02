@@ -71,6 +71,17 @@ class TransaksiController extends BaseController {
             if (empty($_POST['id_mitra'])) throw new Exception('Mitra harus dipilih');
             if (empty($_POST['items'])) throw new Exception('Minimal 1 item barang harus ditambahkan');
 
+            // Cek stok untuk transaksi buy SEBELUM insert apapun
+            if ($_POST['jenis_transaksi'] == 'buy') {
+                foreach ($_POST['items'] as $item) {
+                    $stok_tersedia = $this->detailTransaksi->getAvailableStock($item['id_barang']);
+                    if ($stok_tersedia < $item['kuantitas']) {
+                        $barang = $this->barang->find('id_barang', $item['id_barang']);
+                        throw new Exception("Stok {$barang['nama_barang']} tidak mencukupi. Tersedia: {$stok_tersedia}, Diminta: {$item['kuantitas']}");
+                    }
+                }
+            }
+
             $id_transaksi = generate_uuid();
             $total_harga = 0;
 
@@ -91,7 +102,7 @@ class TransaksiController extends BaseController {
             foreach ($_POST['items'] as $item) {
                 if ($_POST['jenis_transaksi'] == 'buy') {
                     $reduced = $this->detailTransaksi->reduceStock($item['id_barang'], $item['kuantitas']);
-                    if (!$reduced) throw new Exception('Stok barang tidak mencukupi untuk transaksi buy');
+                    if (!$reduced) throw new Exception('Gagal mengurangi stok barang');
                 }
                 
                 $id_detail = generate_uuid();
@@ -125,4 +136,5 @@ class TransaksiController extends BaseController {
             $this->json(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+
 }
