@@ -23,16 +23,7 @@
                         </svg>
                         <div>
                             <h3 class="font-semibold">Akses Dashboard</h3>
-                            <p class="text-blue-100 text-sm">Pantau inventaris gudang Anda</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <svg class="w-6 h-6 text-blue-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <div>
-                            <h3 class="font-semibold">Kelola Barang</h3>
-                            <p class="text-blue-100 text-sm">Manajemen stok dan kategori barang</p>
+                            <p class="text-blue-100 text-sm">Pantau barang dan transaksi Anda</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-3">
@@ -41,7 +32,7 @@
                         </svg>
                         <div>
                             <h3 class="font-semibold">Laporan Real-time</h3>
-                            <p class="text-blue-100 text-sm">Informasi stok dan transaksi terkini</p>
+                            <p class="text-blue-100 text-sm">Informasi barang dan transaksi terkini</p>
                         </div>
                     </div>
                 </div>
