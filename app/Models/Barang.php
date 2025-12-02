@@ -62,14 +62,14 @@ class Barang extends BaseModel {
     }
 
     public function getTotalStokByGudang($id_gudang) {
-        $stmt = $this->db->prepare("SELECT COALESCE(SUM(dt.sisa_kuantitas), 0) as total FROM detail_transaksi dt JOIN barang b ON dt.id_barang = b.id_barang JOIN kategori k ON b.id_kategori = k.id_kategori WHERE k.id_gudang = ? AND dt.expired_date > CURDATE()");
+        $stmt = $this->db->prepare("SELECT COALESCE(SUM(dt.sisa_kuantitas), 0) as total FROM detail_transaksi dt JOIN barang b ON dt.id_barang = b.id_barang JOIN kategori k ON b.id_kategori = k.id_kategori WHERE k.id_gudang = ?");
         $stmt->execute([$id_gudang]);
         return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
     public function getTopBarangByStok($id_gudang, $limit = 5) {
         $limit = (int)$limit;
-        $stmt = $this->db->prepare("SELECT b.nama_barang, COALESCE(SUM(dt.sisa_kuantitas), 0) as stok FROM barang b JOIN kategori k ON b.id_kategori = k.id_kategori LEFT JOIN detail_transaksi dt ON b.id_barang = dt.id_barang AND dt.expired_date > CURDATE() WHERE k.id_gudang = ? GROUP BY b.id_barang ORDER BY stok DESC LIMIT $limit");
+        $stmt = $this->db->prepare("SELECT b.nama_barang, COALESCE(SUM(dt.sisa_kuantitas), 0) as stok FROM barang b JOIN kategori k ON b.id_kategori = k.id_kategori LEFT JOIN detail_transaksi dt ON b.id_barang = dt.id_barang WHERE k.id_gudang = ? GROUP BY b.id_barang ORDER BY stok DESC LIMIT $limit");
         $stmt->execute([$id_gudang]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
