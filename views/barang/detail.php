@@ -81,12 +81,14 @@
                     <p class="text-lg font-bold text-gray-900 mt-1">
                         <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : 'N/A' ?>
                     </p>
-                    <?php if($daysLeft < 30): ?>
-                        <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
-                            <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
-                        </p>
-                    <?php else: ?>
-                        <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                    <?php if ($item['expired_date']): ?>
+                        <?php if($daysLeft < 30): ?>
+                            <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
+                                <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
 
