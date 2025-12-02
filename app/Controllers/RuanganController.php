@@ -32,7 +32,7 @@ class RuanganController extends BaseController {
             return $this->redirect('/admin/ruangan');
         }
 
-        $barangList = $this->detailRuangan->getBarangByRuangan($id_ruangan);
+        $barangList = $this->detailRuangan->getActiveBarangByRuangan($id_ruangan);
 
         $data['title'] = 'Barang di Ruangan';
         $data['ruangan'] = $ruangan;
