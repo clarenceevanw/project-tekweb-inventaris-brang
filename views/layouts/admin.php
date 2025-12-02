@@ -141,7 +141,21 @@
                     </span>
                 </a>
 
-                <!-- 2. Barang -->
+                <!-- 2. Kategori -->
+                <a href="/admin/kategori" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('kategori') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                    <div class="w-8 flex justify-center items-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 icon icon-tabler icons-tabler-outline icon-tabler-tag">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                            <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
+                        </svg>
+                    </div>
+                    <span class="ml-3 text-sm font-medium tracking-wide opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                        Data Kategori
+                    </span>
+                </a>
+
+                <!-- 3. Barang -->
                 <a href="/admin/barang" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('barang') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
@@ -151,7 +165,7 @@
                     </span>
                 </a>
 
-                <!-- 3. Ruangan -->
+                <!-- 4. Ruangan -->
                 <a href="/admin/ruangan" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('ruangan') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-door">
@@ -166,7 +180,27 @@
                     </span>
                 </a>
 
-                <!-- 4. Scan -->
+                <!-- 5. Transaksi -->
+                <a href="/admin/transaksi" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('transaksi') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                    <div class="w-8 flex justify-center items-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 icon icon-tabler icons-tabler-outline icon-tabler-cash-register">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" />
+                            <path d="M19 21v1m0 -8v1" />
+                            <path d="M13 21h-7c-.53 0 -1.039 -.211 -1.414 -.586c-.375 -.375 -.586 -.884 -.586 -1.414v-10c0 -.53 .211 -1.039 .586 -1.414c.375 -.375 .884 -.586 1.414 -.586h2m12 3.12v-1.12c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2" />
+                            <path d="M16 10v-6c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-4c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414v6m8 0h-8m8 0h1m-9 0h-1" />
+                            <path d="M8 14v.01" />
+                            <path d="M8 17v.01" />
+                            <path d="M12 13.99v.01" />
+                            <path d="M12 17v.01" />
+                        </svg>
+                    </div>
+                    <span class="ml-3 text-sm font-medium tracking-wide opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                        Data Transaksi
+                    </span>
+                </a>
+
+                <!-- 6. Scan -->
                 <a href="/admin/scan" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('scan') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4h2v-4zM6 6h6v6H6V6zm12 0h-6v6h6V6zm-6 12H6v-6h6v6z"></path></svg> -->
@@ -183,7 +217,7 @@
                     </span>
                 </a>
 
-                <!-- 5. Gudang -->
+                <!-- 7. Gudang -->
                 <a href="/admin/gudang" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('gudang') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg> -->

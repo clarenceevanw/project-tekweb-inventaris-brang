@@ -35,10 +35,11 @@ class Barang extends BaseModel {
     }
 
     public function withKategoriAndStok($id_gudang = null) {
+        // AND dt.expired_date > CURDATE() -> ini tk buang
         $sql = "SELECT b.*, k.nama_kategori, 
                 (SELECT COALESCE(SUM(sisa_kuantitas), 0) 
                 FROM detail_transaksi dt 
-                WHERE dt.id_barang = b.id_barang AND dt.expired_date > CURDATE()) as total_stok
+                WHERE dt.id_barang = b.id_barang) as total_stok
                 FROM barang b
                 JOIN kategori k ON b.id_kategori = k.id_kategori";
         
@@ -69,6 +70,12 @@ class Barang extends BaseModel {
     public function getTopBarangByStok($id_gudang, $limit = 5) {
         $limit = (int)$limit;
         $stmt = $this->db->prepare("SELECT b.nama_barang, COALESCE(SUM(dt.sisa_kuantitas), 0) as stok FROM barang b JOIN kategori k ON b.id_kategori = k.id_kategori LEFT JOIN detail_transaksi dt ON b.id_barang = dt.id_barang AND dt.expired_date > CURDATE() WHERE k.id_gudang = ? GROUP BY b.id_barang ORDER BY stok DESC LIMIT $limit");
+        $stmt->execute([$id_gudang]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function byGudang($id_gudang) {
+        $stmt = $this->db->prepare("SELECT b.* FROM barang b JOIN kategori k ON b.id_kategori = k.id_kategori WHERE k.id_gudang = ?");
         $stmt->execute([$id_gudang]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

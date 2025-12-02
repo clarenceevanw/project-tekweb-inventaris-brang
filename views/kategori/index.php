@@ -4,16 +4,16 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="flex items-center gap-2 mb-4 text-sm">
-        <span class="text-gray-600">Ruangan</span>
+        <span class="text-gray-600">Kategori</span>
     </div>
     <div class="mb-6 flex justify-between items-center">
         <div>
-            <h2 class="text-2xl font-bold text-gray-800">Daftar Ruangan</h2>
-            <p class="text-sm text-gray-500">Kelola ruangan penyimpanan di gudang.</p>
+            <h2 class="text-2xl font-bold text-gray-800">Daftar Kategori</h2>
+            <p class="text-sm text-gray-500">Kelola kategori barang di gudang.</p>
         </div>
         <div>
             <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
-                + Tambah Ruangan
+            + Tambah Kategori
             </button>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nama Ruangan
+                            Nama Kategori
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Aksi
@@ -32,15 +32,15 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <?php if(empty($dataRuangan)): ?>
+                    <?php if(empty($dataKategori)): ?>
                         <tr>
-                            <td colspan="2" class="px-6 py-4 text-center text-gray-500">Tidak ada data ruangan.</td>
+                            <td colspan="2" class="px-6 py-4 text-center text-gray-500">Tidak ada data kategori.</td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach ($dataRuangan as $row): ?>
+                        <?php foreach ($dataKategori as $row): ?>
                         <tr class="hover:bg-gray-50 transition-colors duration-150">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900"><?= $row['nama_ruangan'] ?></div>
+                                <div class="text-sm font-medium text-gray-900"><?= $row['nama_kategori'] ?></div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <div class="flex gap-2 justify-center">
@@ -51,15 +51,7 @@
                                         </svg>
                                         Edit
                                     </button>
-                                    <a href="<?= "/admin/ruangan/barang?id=" . $row['id_ruangan'] ?>"
-                                            class="inline-flex items-center gap-2 text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                        Lihat Barang
-                                    </a>
-                                    <button onclick="deleteRuangan('<?= $row['id_ruangan'] ?>', '<?= $row['nama_ruangan'] ?>')" 
+                                    <button onclick="deleteKategori('<?= $row['id_kategori'] ?>', '<?= $row['nama_kategori'] ?>')" 
                                             class="inline-flex items-center gap-2 text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-4 py-2 transition">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -85,13 +77,13 @@
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Tambah Ruangan</h3>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Tambah Kategori</h3>
                         <div class="mt-2">
                             <form id="formTambah">
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Ruangan</label>
-                                    <input type="text" name="nama_ruangan" id="nama_ruangan" required
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kategori</label>
+                                    <input type="text" name="nama_kategori" id="nama_kategori" required
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                             </form>
@@ -119,14 +111,14 @@
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
-                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Ruangan</h3>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Kategori</h3>
                         <div class="mt-2">
                             <form id="formEdit">
-                                <input type="hidden" name="id_ruangan" id="edit_id_ruangan">
+                                <input type="hidden" name="id_kategori" id="edit_id_kategori">
                                 <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Ruangan</label>
-                                    <input type="text" name="nama_ruangan" id="edit_nama_ruangan" required
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kategori</label>
+                                    <input type="text" name="nama_kategori" id="edit_nama_kategori" required
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                             </form>
@@ -171,7 +163,7 @@ $('#formTambah').on('submit', function(e) {
     Swal.fire({title: 'Menyimpan...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
     
     $.ajax({
-        url: '/admin/ruangan/store',
+        url: '/admin/kategori/store',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -201,8 +193,8 @@ $('#formTambah').on('submit', function(e) {
 });
 
 function openEditModal(data) {
-    $('#edit_id_ruangan').val(data.id_ruangan);
-    $('#edit_nama_ruangan').val(data.nama_ruangan);
+    $('#edit_id_kategori').val(data.id_kategori);
+    $('#edit_nama_kategori').val(data.nama_kategori);
     
     const modal = document.getElementById('modalEdit');
     modal.classList.remove('hidden');
@@ -227,7 +219,7 @@ $('#formEdit').on('submit', function(e) {
     Swal.fire({title: 'Mengupdate...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
 
     $.ajax({
-        url: '/admin/ruangan/update',
+        url: '/admin/kategori/update',
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'json',
@@ -256,10 +248,10 @@ $('#formEdit').on('submit', function(e) {
     });
 });
 
-function deleteRuangan(id, namaRuangan) {
+function deleteKategori(id, namaKategori) {
     Swal.fire({
-        title: 'Hapus Ruangan?',
-        html: `Apakah Anda yakin ingin menghapus ruangan <strong>${namaRuangan}</strong>?<br><small class="text-red-600">Data yang dihapus tidak dapat dikembalikan!</small>`,
+        title: 'Hapus Kategori?',
+        html: `Apakah Anda yakin ingin menghapus kategori <strong>${namaKategori}</strong>?<br><small class="text-red-600">Data yang dihapus tidak dapat dikembalikan!</small>`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#dc2626',
@@ -271,9 +263,9 @@ function deleteRuangan(id, namaRuangan) {
             Swal.fire({title: 'Menghapus...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
 
             $.ajax({
-                url: '/admin/ruangan/delete',
+                url: '/admin/kategori/delete',
                 method: 'POST',
-                data: { id_ruangan: id },
+                data: { id_kategori: id },
                 dataType: 'json',
                 success: function(data) {
                     Swal.close();
