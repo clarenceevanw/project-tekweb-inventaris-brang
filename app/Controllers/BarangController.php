@@ -123,7 +123,7 @@ class BarangController extends BaseController {
 
             $id_barang = $_POST['id_barang'];
 
-            $batches = $this->detailTransaksi->getBatchesByBarang($id_barang);
+            $batches = $this->detailTransaksi->find('id_barang', $id_barang);
             if (!empty($batches)) {
                 throw new Exception('Barang tidak dapat dihapus karena masih memiliki transaksi/batch aktif.');
             }
