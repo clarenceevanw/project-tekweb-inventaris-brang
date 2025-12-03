@@ -11,6 +11,7 @@ require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
 Router::get("/", "HomeController@index");
 
 // Auth Routes
+Router::get("/login", "AuthController@showLogin");
 Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");
 Router::get("/login/mitra", "AuthController@showLoginMitra");
