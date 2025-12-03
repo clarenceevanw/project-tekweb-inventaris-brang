@@ -17,6 +17,7 @@ Router::post("/login/admin", "AuthController@loginAdmin");
 Router::get("/login/mitra", "AuthController@showLoginMitra");
 Router::post("/login/mitra", "AuthController@loginMitra");
 
+Router::get("/signup", "AuthController@showSignup");
 Router::get("/signup/admin", "AuthController@showSignupAdmin");
 Router::post("/signup/admin", "AuthController@signupAdmin");
 Router::get("/signup/mitra", "AuthController@showSignupMitra");
