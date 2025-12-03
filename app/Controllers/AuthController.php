@@ -5,6 +5,11 @@ require_once __DIR__ . "/../Models/Mitra.php";
 
 class AuthController extends BaseController {
     
+    public function showLogin() {
+        $data['title'] = "Login";
+        return $this->view("auth/login", $data);
+    }
+    
     public function showLoginAdmin() {
         $data['title'] = "Login Admin";
         return $this->view("auth/login-admin", $data);
