@@ -3,18 +3,21 @@
 require_once __DIR__ . '/../Models/DetailTransaksi.php';
 require_once __DIR__ . '/../Models/Barang.php';
 require_once __DIR__ . '/../Models/Ruangan.php';
+require_once __DIR__ . '/../Models/DetailRuangan.php';
 require_once __DIR__ . '/../Utils/UploadHelper.php';
 class BarangController extends BaseController {
     
     protected $kategori;
     protected $detailTransaksi;
     protected $ruangan;
+    protected $detailRuangan;
     public function __construct()
     {
         parent::__construct(new Barang());
         $this->kategori = new Kategori();
         $this->detailTransaksi = new DetailTransaksi();
         $this->ruangan = new Ruangan();
+        $this->detailRuangan = new DetailRuangan();
     }
 
     public function index() {
@@ -203,10 +206,39 @@ class BarangController extends BaseController {
         }
 
         $barang = $this->detailTransaksi->getBatchDetail($id);
+        $allRuangan = $this->ruangan->byGudang($_SESSION['gudang']['id_gudang']);
 
         $data['title'] = 'Ruangan Batch';
         $data['barang'] = $barang;
         $data['ruangan'] = $ruangan;
+        $data['allRuangan'] = $allRuangan;
         return $this->view('barang/batch-ruangan', $data);
+    }
+
+    public function moveBarang() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        try {
+            $id_detail_ruangan = $_POST['id_detail_ruangan'] ?? null;
+            $id_ruangan_tujuan = $_POST['id_ruangan_tujuan'] ?? null;
+            $kuantitas = $_POST['kuantitas'] ?? null;
+
+            if (!$id_detail_ruangan || !$id_ruangan_tujuan || !$kuantitas) {
+                throw new Exception('Data tidak lengkap');
+            }
+
+            if ($kuantitas <= 0) {
+                throw new Exception('Kuantitas harus lebih dari 0');
+            }
+
+            $this->detailRuangan->moveBarang($id_detail_ruangan, $id_ruangan_tujuan, $kuantitas);
+            $this->json(['success' => true, 'message' => 'Barang berhasil dipindahkan']);
+
+        } catch (Exception $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 }
