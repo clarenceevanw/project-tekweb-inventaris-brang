@@ -8,4 +8,5 @@
         echo "<p>". $d['lokasi_gudang'] . "</p>";
     }
 ?>
+
 <?php $this->endSection(); ?>
