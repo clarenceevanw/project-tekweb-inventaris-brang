@@ -88,11 +88,11 @@
     </div>
 </div>
 
-<div id="qrModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+<div id="qrModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="qrModalOverlay" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeModal()"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-sm border border-gray-100">
+            <div id="qrModalContent" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-2xl transition-all duration-300 ease-out sm:my-8 sm:w-full sm:max-w-sm border border-gray-100 scale-95 opacity-0">
                 <div class="absolute top-0 right-0 pt-4 pr-4">
                     <button type="button" onclick="closeModal()" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none">
                         <span class="sr-only">Close</span>
@@ -138,6 +138,9 @@
 <script>
     function showQrModal(id, namaBarang) {
         const modal = document.getElementById('qrModal');
+        const overlay = document.getElementById('qrModalOverlay');
+        const content = document.getElementById('qrModalContent');
+        
         document.getElementById('modalTitle').innerText = namaBarang;
         document.getElementById('modalId').innerText = id;
         document.getElementById('qrImageContainer').innerHTML = '<span class="text-gray-400 text-sm animate-pulse">Loading QR...</span>';
@@ -158,10 +161,33 @@
         };
         
         modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            overlay.classList.remove('opacity-0');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }, 10);
     }
 
     function closeModal() {
-        document.getElementById('qrModal').classList.add('hidden');
+        const modal = document.getElementById('qrModal');
+        const overlay = document.getElementById('qrModalOverlay');
+        const content = document.getElementById('qrModalContent');
+        
+        modal.classList.add('opacity-0');
+        overlay.classList.add('opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
     }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
 </script>
 <?php $this->endSection(); ?>
