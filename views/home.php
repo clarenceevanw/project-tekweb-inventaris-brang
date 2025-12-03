@@ -210,7 +210,7 @@
         </div>
         <div class="nav-right">
             <a href="/login" class="btn btn-login">Login</a>
-            <a href="/signup/admin" class="btn btn-signup">Create a Free Account</a>
+            <a href="/signup" class="btn btn-signup">Create a Free Account</a>
         </div>
     </nav>
     <div class="home-container">
