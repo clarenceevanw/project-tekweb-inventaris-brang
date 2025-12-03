@@ -46,6 +46,7 @@ Router::post('/admin/barang/delete', 'BarangController@delete', 'admin');
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
 Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
+Router::post("/admin/barang/move", "BarangController@moveBarang", "admin");
 
 Router::get("/admin/ruangan", "RuanganController@index", "admin");
 Router::post("/admin/ruangan/store", "RuanganController@store", "admin");
