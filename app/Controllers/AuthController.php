@@ -20,6 +20,11 @@ class AuthController extends BaseController {
         return $this->view("auth/login-mitra", $data);
     }
 
+    public function showSignup() {
+        $data['title'] = "Signup";
+        return $this->view("auth/signup", $data);
+    }
+
     public function showSignupAdmin() {
         $data['title'] = "Signup Admin";
         return $this->view("auth/signup-admin", $data);
