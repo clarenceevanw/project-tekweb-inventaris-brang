@@ -5,6 +5,8 @@ require_once __DIR__ . '/../app/Controllers/DashboardController.php';
 require_once __DIR__ . '/../app/Controllers/ScanController.php';
 require_once __DIR__ . '/../app/Controllers/BarangController.php';
 require_once __DIR__ . '/../app/Controllers/RuanganController.php';
+require_once __DIR__ . '/../app/Controllers/KategoriController.php';
+require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -31,11 +33,27 @@ Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
 Router::get("/admin/scan", "ScanController@index", "admin");
 Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
 
+Router::get("/admin/kategori", "KategoriController@index", "admin");
+Router::post("/admin/kategori/store", "KategoriController@store", "admin");
+Router::post("/admin/kategori/update", "KategoriController@update", "admin");
+Router::post("/admin/kategori/delete", "KategoriController@delete", "admin");
+
 Router::get("/admin/barang", "BarangController@index", "admin");
+Router::post("/admin/barang/store", "BarangController@store", "admin");
+Router::post("/admin/barang/update", "BarangController@update", "admin");
+Router::post('/admin/barang/delete', 'BarangController@delete', 'admin');
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
 Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
 
 Router::get("/admin/ruangan", "RuanganController@index", "admin");
+Router::post("/admin/ruangan/store", "RuanganController@store", "admin");
+Router::post("/admin/ruangan/update", "RuanganController@update", "admin");
+Router::post("/admin/ruangan/delete", "RuanganController@delete", "admin");
 Router::get("/admin/ruangan/barang", "RuanganController@barang", "admin");
 Router::get("/admin/ruangan/batch", "RuanganController@batch", "admin");
+
+Router::get("/admin/transaksi", "TransaksiController@index", "admin");
+Router::get("/admin/transaksi/create", "TransaksiController@create", "admin");
+Router::post("/admin/transaksi/store", "TransaksiController@store", "admin");
+Router::get("/admin/transaksi/detail", "TransaksiController@detail", "admin");

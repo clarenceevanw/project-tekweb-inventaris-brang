@@ -32,7 +32,7 @@ class RuanganController extends BaseController {
             return $this->redirect('/admin/ruangan');
         }
 
-        $barangList = $this->detailRuangan->getBarangByRuangan($id_ruangan);
+        $barangList = $this->detailRuangan->getActiveBarangByRuangan($id_ruangan);
 
         $data['title'] = 'Barang di Ruangan';
         $data['ruangan'] = $ruangan;
@@ -63,5 +63,81 @@ class RuanganController extends BaseController {
         $data['batches'] = $batches;
         $data['id_ruangan'] = $id_ruangan;
         return $this->view('ruangan/batch', $data);
+    }
+
+    public function store() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        try {
+            if (empty($_POST['nama_ruangan'])) throw new Exception('Nama ruangan harus diisi');
+
+            $result = $this->model->insert([
+                'nama_ruangan' => $_POST['nama_ruangan'],
+                'id_gudang' => $_SESSION['gudang']['id_gudang']
+            ]);
+
+            if ($result) {
+                $this->json(['success' => true, 'message' => 'Ruangan berhasil ditambahkan']);
+            } else {
+                throw new Exception('Gagal menambahkan ruangan');
+            }
+        } catch (Exception $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function update() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        try {
+            if (empty($_POST['id_ruangan'])) throw new Exception('ID ruangan tidak ditemukan');
+            if (empty($_POST['nama_ruangan'])) throw new Exception('Nama ruangan harus diisi');
+
+            $result = $this->model->update(
+                ['nama_ruangan' => $_POST['nama_ruangan']],
+                'id_ruangan',
+                $_POST['id_ruangan']
+            );
+
+            if ($result) {
+                $this->json(['success' => true, 'message' => 'Ruangan berhasil diupdate']);
+            } else {
+                throw new Exception('Gagal mengupdate ruangan');
+            }
+        } catch (Exception $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function delete() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->json(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        try {
+            if (empty($_POST['id_ruangan'])) throw new Exception('ID ruangan tidak ditemukan');
+
+            $barangList = $this->detailRuangan->getBarangByRuangan($_POST['id_ruangan']);
+            if (!empty($barangList)) {
+                throw new Exception('Ruangan tidak dapat dihapus karena masih memiliki barang.');
+            }
+
+            $result = $this->model->delete('id_ruangan', $_POST['id_ruangan']);
+
+            if ($result) {
+                $this->json(['success' => true, 'message' => 'Ruangan berhasil dihapus']);
+            } else {
+                throw new Exception('Gagal menghapus ruangan');
+            }
+        } catch (Exception $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 }

@@ -124,4 +124,26 @@ class DetailTransaksi extends BaseModel {
         $stmt->execute([$id_barang]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getByTransaksi($id_transaksi) {
+        $sql = "SELECT dt.*, b.nama_barang, k.nama_kategori 
+                FROM detail_transaksi dt 
+                JOIN barang b ON dt.id_barang = b.id_barang 
+                JOIN kategori k ON b.id_kategori = k.id_kategori 
+                WHERE dt.id_transaksi = ?";
+                
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id_transaksi]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAvailableStock($id_barang) {
+        $sql = "SELECT COALESCE(SUM(sisa_kuantitas), 0) as total_stok
+                FROM {$this->table}
+                WHERE id_barang = ? AND sisa_kuantitas > 0";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id_barang]);
+        return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total_stok'];
+    }
 }

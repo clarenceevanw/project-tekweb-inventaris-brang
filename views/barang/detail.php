@@ -4,10 +4,13 @@
 
 <div class="max-w-2xl mx-auto py-8 px-4">
     <nav class="mb-6">
-        <a href="<?= '/admin/barang/batch?id=' . $item['id_barang'] ?>" class="inline-flex items-center text-sm text-gray-500 hover:text-indigo-600 transition-colors">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            Kembali ke Batch
-        </a>
+        <div class="flex items-center gap-2 text-sm">
+            <a href="/admin/barang" class="text-indigo-600 hover:text-indigo-800 font-medium">Barang</a>
+            <span class="text-gray-400">></span>
+            <a href="<?= '/admin/barang/batch?id=' . $item['id_barang'] ?>" class="text-indigo-600 hover:text-indigo-800 font-medium">Batch</a>
+            <span class="text-gray-400">></span>
+            <span class="text-gray-600">Detail</span>
+        </div>
     </nav>
 
     <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
@@ -35,15 +38,15 @@
                 </div>
 
                 <?php if($item['sisa_kuantitas'] > 100): ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-green-100 text-green-700 border-green-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-green-100 text-green-700 border-green-200 text-center">
                         Stok Aman
                     </span>
                 <?php elseif ($item['sisa_kuantitas'] > 50): ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-yellow-100 text-yellow-700 border-yellow-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-yellow-100 text-yellow-700 border-yellow-200 text-center">
                         Stok Sedang
                     </span>
                 <?php else: ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-red-100 text-red-700 border-red-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-red-100 text-red-700 border-red-200 text-center">
                         Stok Menipis
                     </span>
                 <?php endif; ?>
@@ -53,9 +56,9 @@
         <div class="p-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="md:col-span-2 bg-gray-50 rounded-lg p-4 border border-gray-100 text-center hover:border-indigo-200 transition-colors flex flex-col justify-center">
-                    <p class="text-md font-medium text-gray-500 uppercase tracking-wider mb-2">ID Batch</p>
+                    <p class="text-sm md:text-md font-medium text-gray-500 uppercase tracking-wider mb-2">ID Batch</p>
                     <div class="flex justify-center w-full">
-                        <code class="text-sm font-mono font-semibold text-gray-700 bg-white px-2 py-1 rounded border border-gray-200 break-all w-full">
+                        <code class="text-xs md:text-sm font-mono font-semibold text-gray-700 bg-white px-2 py-1 rounded border border-gray-200 break-all w-full">
                             <?= $item['id_detail_transaksi'] ?>
                         </code>
                     </div>
@@ -76,14 +79,16 @@
                 <div class="<?= $bgClass ?> rounded-lg p-4 border text-center hover:border-indigo-200 transition-colors flex flex-col justify-center">
                     <p class="text-xs font-medium <?= $textClass ?> uppercase tracking-wider mb-1">Kedaluwarsa</p>
                     <p class="text-lg font-bold text-gray-900 mt-1">
-                        <?= date('d M Y', strtotime($item['expired_date'])) ?>
+                        <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : 'N/A' ?>
                     </p>
-                    <?php if($daysLeft < 30): ?>
-                        <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
-                            <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
-                        </p>
-                    <?php else: ?>
-                        <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                    <?php if ($item['expired_date']): ?>
+                        <?php if($daysLeft < 30): ?>
+                            <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
+                                <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
 
@@ -92,7 +97,10 @@
 
         <div class="bg-gray-50 px-8 py-5 border-t border-gray-200 flex flex-col sm:flex-row gap-3">
             <a href="/admin/scan" class="flex-1 inline-flex justify-center items-center px-4 py-2.5 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4h2v-4zM6 6h6v6H6V6zm12 0h-6v6h6V6zm-6 12H6v-6h6v6z"></path></svg>
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
+                </svg>
                 Scan Barang Lain
             </a>
             

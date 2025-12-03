@@ -4,7 +4,13 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="mb-6">
-        <a href="<?= "/admin/ruangan/barang?id=" . $id_ruangan ?>" class="text-indigo-600 hover:text-indigo-800 mb-4 inline-block">&larr; Kembali ke Daftar Barang</a>
+        <div class="flex items-center gap-2 mb-4 text-sm">
+            <a href="/admin/ruangan" class="text-indigo-600 hover:text-indigo-800 font-medium">Ruangan</a>
+            <span class="text-gray-400">></span>
+            <a href="<?= "/admin/ruangan/barang?id=" . $id_ruangan ?>" class="text-indigo-600 hover:text-indigo-800 font-medium">Barang</a>
+            <span class="text-gray-400">></span>
+            <span class="text-gray-600">Batch</span>
+        </div>
         <h2 class="text-2xl font-bold text-gray-800">Ruangan: <?= $ruangan['nama_ruangan'] ?></h2>
         <p class="text-sm text-gray-500">Batch barang: <?= !empty($batches) ? $batches[0]['nama_barang'] : '' ?></p>
     </div>
@@ -49,12 +55,13 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex justify-center">
                                 <button onclick="" 
-                                        class="cursor-pointer text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center gap-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 icon icon-tabler icons-tabler-outline icon-tabler-door">
+                                        class="cursor-pointer text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 icon icon-tabler icons-tabler-outline icon-tabler-door-exit">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M14 12v.01" />
+                                        <path d="M13 12v.01" />
                                         <path d="M3 21h18" />
-                                        <path d="M6 21v-16a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v16" />
+                                        <path d="M5 21v-16a2 2 0 0 1 2 -2h7.5m2.5 10.5v7.5" />
+                                        <path d="M14 7h7m-3 -3l3 3l-3 3" />
                                     </svg>
                                     Pindah Ruangan
                                 </button>

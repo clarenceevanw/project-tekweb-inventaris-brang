@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,24 +18,28 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-    <title><?= $title ?? 'Inventaris'?></title>
+    <title><?= $title ?? 'Inventaris' ?></title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         .toastify {
             padding: 16px 20px;
             color: #1f2937;
             display: inline-block;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            background: white; 
-            position: fixed; 
+            background: white;
+            position: fixed;
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-            border-radius: 8px; 
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             max-width: calc(100% - 20px);
             z-index: 2147483647;
-            overflow: hidden; 
+            overflow: hidden;
             border: 1px solid #f3f4f6;
         }
 
@@ -49,19 +54,25 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 4px; 
+            height: 4px;
             width: 100%;
-            animation: toast-progress 4000ms linear forwards; 
+            animation: toast-progress 4000ms linear forwards;
         }
 
         /* Warna Progress Bar: Success (Biru) */
         .toast-success::after {
-            background-color: #3b82f6; /* Blue-500 */
+            background-color: #3b82f6;
+            /* Blue-500 */
         }
 
         @keyframes toast-progress {
-            from { width: 100%; }
-            to { width: 0%; }
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
         }
 
         .toastify:hover::after {
@@ -71,6 +82,7 @@
 
     <?= $this->renderSection('header') ?>
 </head>
+
 <body>
     <?php if (!empty($flash['success'])): ?>
         <script>
@@ -78,9 +90,9 @@
                 text: "<?= $flash['success'] ?>",
                 duration: 4000,
                 close: true,
-                gravity: "top", 
-                position: "right", 
-                stopOnFocus: true, 
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
                 className: "toast-success",
                 style: {
                     background: "#ffffff",
@@ -91,11 +103,11 @@
 
     <?php if (!empty($flash['error'])): ?>
         <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '<?= $flash['error'] ?>'
-        })
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '<?= $flash['error'] ?>'
+            })
         </script>
     <?php endif; ?>
 
@@ -105,4 +117,5 @@
 
     <?= $this->renderSection('script') ?>
 </body>
+
 </html>
