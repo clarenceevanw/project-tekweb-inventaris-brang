@@ -10,7 +10,12 @@ require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
 
 Router::get("/", "HomeController@index");
 
-// Auth Routes
+// Auth Routesd
+// Auth select login/signup
+Router::get("/auth/select/login", "AuthController@redirectSelectLogin");
+Router::get("/auth/select/signup", "AuthController@redirectSelectSignup");
+Router::get("/auth/select", "AuthController@showSelectAuthAdminMitra");
+
 Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");
 Router::get("/login/mitra", "AuthController@showLoginMitra");

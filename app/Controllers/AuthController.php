@@ -3,29 +3,64 @@
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
 
-class AuthController extends BaseController {
-    
-    public function showLoginAdmin() {
+class AuthController extends BaseController
+{
+    public function redirectSelectLogin()
+    {
+        $_SESSION['auth_mode'] = 'login';
+        setcookie("auth_mode", "login", time() + (5 * 60), "/");
+        header("Location: /auth/select");
+        exit;
+    }
+
+    public function redirectSelectSignup()
+    {
+        $_SESSION['auth_mode'] = 'signup';
+        setcookie("auth_mode", "login", time() + (5 * 60), "/");
+        header("Location: /auth/select");
+        exit;
+    }
+
+    public function showSelectAuthAdminMitra()
+    {
+        if (!isset($_SESSION['auth_mode']) && isset($_COOKIE['auth_mode'])) {
+            $_SESSION['auth_mode'] = $_COOKIE['auth_mode'];
+        }
+
+        $mode = $_SESSION['auth_mode'] ?? 'login';
+
+        return $this->view("auth/select-auth-admin-mitra", [
+            'title' => "Select Admin/Mitra",
+            'mode'  => $mode
+        ]);
+    }
+
+    public function showLoginAdmin()
+    {
         $data['title'] = "Login Admin";
         return $this->view("auth/login-admin", $data);
     }
 
-    public function showLoginMitra() {
+    public function showLoginMitra()
+    {
         $data['title'] = "Login Mitra";
         return $this->view("auth/login-mitra", $data);
     }
 
-    public function showSignupAdmin() {
+    public function showSignupAdmin()
+    {
         $data['title'] = "Signup Admin";
         return $this->view("auth/signup-admin", $data);
     }
 
-    public function showSignupMitra() {
+    public function showSignupMitra()
+    {
         $data['title'] = "Signup Mitra";
         return $this->view("auth/signup-mitra", $data);
     }
 
-    public function loginAdmin() {
+    public function loginAdmin()
+    {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
@@ -33,7 +68,7 @@ class AuthController extends BaseController {
         $user = $adminModel->find('username_admin', $username);
         $gudangModel = new Gudang();
         $gudang = $gudangModel->find('id_gudang', $user['id_gudang']);
-        
+
         if ($user && password_verify($password, $user['password_admin'])) {
             $_SESSION['user'] = $user;
             $_SESSION['role'] = 'admin';
@@ -46,13 +81,14 @@ class AuthController extends BaseController {
         return $this->redirect('/login/admin');
     }
 
-    public function loginMitra() {
+    public function loginMitra()
+    {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
         $mitraModel = new Mitra();
         $user = $mitraModel->find('username_mitra', $username);
-        
+
         if ($user && password_verify($password, $user['password_mitra'])) {
             $_SESSION['user'] = $user;
             $_SESSION['role'] = 'mitra';
@@ -64,7 +100,8 @@ class AuthController extends BaseController {
         return $this->redirect('/login/mitra');
     }
 
-    public function signupAdmin() {
+    public function signupAdmin()
+    {
         $adminData = [
             'nama_admin' => $_POST['nama_admin'],
             'username_admin' => $_POST['username_admin'],
@@ -86,7 +123,8 @@ class AuthController extends BaseController {
         return $this->redirect('/signup/admin');
     }
 
-    public function signupMitra() {
+    public function signupMitra()
+    {
         $mitraData = [
             'nama_mitra' => $_POST['nama_mitra'],
             'username_mitra' => $_POST['username_mitra'],
@@ -103,7 +141,8 @@ class AuthController extends BaseController {
         return $this->redirect('/signup/mitra');
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_destroy();
         return $this->redirect('/');
     }
