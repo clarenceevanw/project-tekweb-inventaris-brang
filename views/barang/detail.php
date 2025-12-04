@@ -38,15 +38,15 @@
                 </div>
 
                 <?php if($item['sisa_kuantitas'] > 100): ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-green-100 text-green-700 border-green-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-green-100 text-green-700 border-green-200 text-center">
                         Stok Aman
                     </span>
                 <?php elseif ($item['sisa_kuantitas'] > 50): ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-yellow-100 text-yellow-700 border-yellow-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-yellow-100 text-yellow-700 border-yellow-200 text-center">
                         Stok Sedang
                     </span>
                 <?php else: ?>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-red-100 text-red-700 border-red-200">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold border bg-red-100 text-red-700 border-red-200 text-center">
                         Stok Menipis
                     </span>
                 <?php endif; ?>
@@ -56,9 +56,9 @@
         <div class="p-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="md:col-span-2 bg-gray-50 rounded-lg p-4 border border-gray-100 text-center hover:border-indigo-200 transition-colors flex flex-col justify-center">
-                    <p class="text-md font-medium text-gray-500 uppercase tracking-wider mb-2">ID Batch</p>
+                    <p class="text-sm md:text-md font-medium text-gray-500 uppercase tracking-wider mb-2">ID Batch</p>
                     <div class="flex justify-center w-full">
-                        <code class="text-sm font-mono font-semibold text-gray-700 bg-white px-2 py-1 rounded border border-gray-200 break-all w-full">
+                        <code class="text-xs md:text-sm font-mono font-semibold text-gray-700 bg-white px-2 py-1 rounded border border-gray-200 break-all w-full">
                             <?= $item['id_detail_transaksi'] ?>
                         </code>
                     </div>
@@ -79,14 +79,16 @@
                 <div class="<?= $bgClass ?> rounded-lg p-4 border text-center hover:border-indigo-200 transition-colors flex flex-col justify-center">
                     <p class="text-xs font-medium <?= $textClass ?> uppercase tracking-wider mb-1">Kedaluwarsa</p>
                     <p class="text-lg font-bold text-gray-900 mt-1">
-                        <?= date('d M Y', strtotime($item['expired_date'])) ?>
+                        <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : 'N/A' ?>
                     </p>
-                    <?php if($daysLeft < 30): ?>
-                        <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
-                            <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
-                        </p>
-                    <?php else: ?>
-                        <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                    <?php if ($item['expired_date']): ?>
+                        <?php if($daysLeft < 30): ?>
+                            <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
+                                <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-xs text-green-600 mt-1">Masih Aman</p>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
 

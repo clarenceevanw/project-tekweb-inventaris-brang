@@ -32,7 +32,7 @@ class RuanganController extends BaseController {
             return $this->redirect('/admin/ruangan');
         }
 
-        $barangList = $this->detailRuangan->getBarangByRuangan($id_ruangan);
+        $barangList = $this->detailRuangan->getActiveBarangByRuangan($id_ruangan);
 
         $data['title'] = 'Barang di Ruangan';
         $data['ruangan'] = $ruangan;
@@ -57,11 +57,13 @@ class RuanganController extends BaseController {
         }
 
         $batches = $this->detailRuangan->getBatchByRuanganBarang($id_ruangan, $id_barang);
+        $allRuangan = $this->model->byGudang($_SESSION['gudang']['id_gudang']);
 
         $data['title'] = 'Batch Barang di Ruangan';
         $data['ruangan'] = $ruangan;
         $data['batches'] = $batches;
         $data['id_ruangan'] = $id_ruangan;
+        $data['allRuangan'] = $allRuangan;
         return $this->view('ruangan/batch', $data);
     }
 

@@ -16,11 +16,14 @@ Router::get("/auth/select/login", "AuthController@redirectSelectLogin");
 Router::get("/auth/select/signup", "AuthController@redirectSelectSignup");
 Router::get("/auth/select", "AuthController@showSelectAuthAdminMitra");
 
+// Auth Routes
+Router::get("/login", "AuthController@showLogin");
 Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");
 Router::get("/login/mitra", "AuthController@showLoginMitra");
 Router::post("/login/mitra", "AuthController@loginMitra");
 
+Router::get("/signup", "AuthController@showSignup");
 Router::get("/signup/admin", "AuthController@showSignupAdmin");
 Router::post("/signup/admin", "AuthController@signupAdmin");
 Router::get("/signup/mitra", "AuthController@showSignupMitra");
@@ -50,6 +53,7 @@ Router::post('/admin/barang/delete', 'BarangController@delete', 'admin');
 Router::get("/admin/barang/batch", "BarangController@batch", "admin");
 Router::get("/admin/barang/detail", "BarangController@detail", "admin");
 Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
+Router::post("/admin/barang/move", "BarangController@moveBarang", "admin");
 
 Router::get("/admin/ruangan", "RuanganController@index", "admin");
 Router::post("/admin/ruangan/store", "RuanganController@store", "admin");

@@ -3,40 +3,9 @@
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
 
-class AuthController extends BaseController
-{
-    public function redirectSelectLogin()
-    {
-        $_SESSION['auth_mode'] = 'login';
-        setcookie("auth_mode", "login", time() + (5 * 60), "/");
-        header("Location: /auth/select");
-        exit;
-    }
-
-    public function redirectSelectSignup()
-    {
-        $_SESSION['auth_mode'] = 'signup';
-        setcookie("auth_mode", "login", time() + (5 * 60), "/");
-        header("Location: /auth/select");
-        exit;
-    }
-
-    public function showSelectAuthAdminMitra()
-    {
-        if (!isset($_SESSION['auth_mode']) && isset($_COOKIE['auth_mode'])) {
-            $_SESSION['auth_mode'] = $_COOKIE['auth_mode'];
-        }
-
-        $mode = $_SESSION['auth_mode'] ?? 'login';
-
-        return $this->view("auth/select-auth-admin-mitra", [
-            'title' => "Select Admin/Mitra",
-            'mode'  => $mode
-        ]);
-    }
-
-    public function showLoginAdmin()
-    {
+class AuthController extends BaseController {
+    
+    public function showLoginAdmin() {
         $data['title'] = "Login Admin";
         return $this->view("auth/login-admin", $data);
     }
@@ -45,6 +14,11 @@ class AuthController extends BaseController
     {
         $data['title'] = "Login Mitra";
         return $this->view("auth/login-mitra", $data);
+    }
+
+    public function showSignup() {
+        $data['title'] = "Signup";
+        return $this->view("auth/signup", $data);
     }
 
     public function showSignupAdmin()

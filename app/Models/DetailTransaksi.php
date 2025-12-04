@@ -45,10 +45,15 @@ class DetailTransaksi extends BaseModel {
                 // tapi gak boleh lebih dari sisa permintaan
                 $ambil = min($item['sisa_di_ruangan'], $sisa_permintaan);
 
-                // Update Ruangan (Langsung eksekusi karena id_detail_ruangan unik per baris)
+                // Update or delete Ruangan (Langsung eksekusi karena id_detail_ruangan unik per baris)
                 $new_stok_ruangan = $item['sisa_di_ruangan'] - $ambil;
-                $updRuang = $this->db->prepare("UPDATE detail_ruangan SET kuantitas_ruangan = ? WHERE id_detail_ruangan = ?");
-                $updRuang->execute([$new_stok_ruangan, $item['id_detail_ruangan']]);
+                if ($new_stok_ruangan == 0) {
+                    $delRuang = $this->db->prepare("DELETE FROM detail_ruangan WHERE id_detail_ruangan = ?");
+                    $delRuang->execute([$item['id_detail_ruangan']]);
+                } else {
+                    $updRuang = $this->db->prepare("UPDATE detail_ruangan SET kuantitas_ruangan = ? WHERE id_detail_ruangan = ?");
+                    $updRuang->execute([$new_stok_ruangan, $item['id_detail_ruangan']]);
+                }
 
                 // Simpan hutang update ke Batch (detail_transaksi)
                 // Kita kumpulkan dulu pengurangannya, jangan langsung update DB berulang kali untuk ID Batch yang sama
