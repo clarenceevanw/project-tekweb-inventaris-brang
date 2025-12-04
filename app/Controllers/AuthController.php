@@ -44,7 +44,7 @@ class AuthController extends BaseController {
     }
 
     public function subscribeRedirect() {
-        $_SESSION['redirect_after_login'] = '/admin/pembayaran';
+        $_SESSION['redirect_after_login'] = '/admin/gudang/pembayaran';
         return $this->redirect('/login/admin');
     }
 
