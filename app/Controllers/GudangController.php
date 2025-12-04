@@ -47,7 +47,7 @@ class GudangController extends BaseController {
         try {
             $id_gudang = $_POST['id_gudang'] ?? null;
             $nama_gudang = $_POST['nama_gudang'] ?? null;
-            $alamat_gudang = $_POST['alamat_gudang'] ?? null;
+            $alamat_gudang = $_POST['lokasi_gudang'] ?? null;
 
             if (!$id_gudang || !$nama_gudang || !$alamat_gudang) {
                 throw new Exception('Semua field harus diisi');
@@ -55,7 +55,7 @@ class GudangController extends BaseController {
 
             $result = $this->model->update([
                 'nama_gudang' => $nama_gudang,
-                'alamat_gudang' => $alamat_gudang
+                'lokasi_gudang' => $alamat_gudang
             ], 'id_gudang', $id_gudang);
 
             if ($result) {

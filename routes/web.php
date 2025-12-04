@@ -77,6 +77,7 @@ Router::post("/admin/transaksi/store", "TransaksiController@store", "subscriptio
 Router::get("/admin/transaksi/detail", "TransaksiController@detail", "subscription");
 
 Router::get('/admin/gudang', "GudangController@index", "admin");
+Router::post('/admin/gudang/update', "GudangController@update", "subscription");
 Router::get("/admin/gudang/pembayaran", "DashboardController@pembayaran", "admin");
 
 // Subscription Routes
