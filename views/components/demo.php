@@ -11,14 +11,14 @@
                 <p class="demo-description">Pantau stok, transaksi, dan laporan sekaligus dengan laporan grafik terpadu</p>
             </div>
             <div class="demo-mockup">
-                <img src="gambar_demo/demo_tekweb_1.png" alt="Demo Dashboard" class="demo-image">
+                <img src="/assets/gambar_demo/demo_tekweb_1.png" alt="Demo Dashboard" class="demo-image">
             </div>
         </div>
 
         <!-- Demo Preview 2: Gambar Kiri, Keterangan Kanan -->
         <div class="demo-preview demo-preview-right">
             <div class="demo-mockup">
-                <img src="gambar_demo/demo_tekweb_2.png" alt="Demo Dashboard" class="demo-image">
+                <img src="/assets/gambar_demo/demo_tekweb_2.png" alt="Demo Dashboard" class="demo-image">
             </div>
             <div class="demo-header">
                 <h3 class="demo-title">Integrated QR Scan</h3>
