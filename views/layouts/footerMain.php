@@ -92,7 +92,6 @@
     .btn-signup:hover {
         transform: translateY(-4px) scale(1.02);
         box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 255, 255, 0.4);
-        background: linear-gradient(135deg, #ffffff 0%, #f0eefe 100%);
     }
 
     .footer-legal-link {

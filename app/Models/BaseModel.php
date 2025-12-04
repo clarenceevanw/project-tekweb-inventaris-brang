@@ -47,4 +47,10 @@ class BaseModel {
         $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE $field=?");
         return $stmt->execute([$value]);
     }
+
+    public function query($sql, $params = []) {
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

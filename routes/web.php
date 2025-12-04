@@ -7,6 +7,7 @@ require_once __DIR__ . '/../app/Controllers/BarangController.php';
 require_once __DIR__ . '/../app/Controllers/RuanganController.php';
 require_once __DIR__ . '/../app/Controllers/KategoriController.php';
 require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
+require_once __DIR__ . '/../app/Controllers/AdminController.php';
 require_once __DIR__ . '/../app/Controllers/SubscriptionController.php';
 
 Router::get("/", "HomeController@index");
@@ -36,6 +37,12 @@ Router::get("/mitra/dashboard", "DashboardController@mitraDashboard", "auth");
 
 //Admin Routes
 Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
+
+// Admin Management Routes
+Router::get("/admin/manage-admin", "AdminController@index", "admin");
+Router::post("/admin/manage-admin/store", "AdminController@store", "admin");
+Router::post("/admin/manage-admin/update", "AdminController@update", "admin");
+Router::post("/admin/manage-admin/delete", "AdminController@delete", "admin");
 Router::get("/admin/pembayaran", "DashboardController@pembayaran", "admin");
 
 Router::get("/admin/scan", "ScanController@index", "admin");
