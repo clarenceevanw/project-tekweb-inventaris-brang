@@ -1,16 +1,20 @@
+<?php
+$cardStyles = [
+    ['bg' => 'rgba(255, 255, 255, 0.15)', 'text' => '#7a6bb8', 'subtext' => '#877acc', 'feature' => 'feature-item', 'badge' => true],
+    ['bg' => 'rgba(122, 107, 184, 0.2)', 'text' => 'white', 'subtext' => 'white', 'feature' => 'feature-item2', 'badge' => false, 'featured' => true],
+    ['bg' => 'rgba(255, 255, 255, 0.15)', 'text' => '#7a6bb8', 'subtext' => '#877acc', 'feature' => 'feature-item', 'badge' => false]
+];
+?>
+
 <style>
     .subscription-card {
-        background: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow:
-            0 8px 32px rgba(122, 107, 184, 0.15),
-            0 4px 16px rgba(135, 122, 204, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(122, 107, 184, 0.15), 0 4px 16px rgba(135, 122, 204, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .subscription-card::before {
@@ -30,15 +34,11 @@
 
     .subscription-card:hover {
         transform: translateY(-8px) scale(1.02);
-        box-shadow:
-            0 20px 60px rgba(122, 107, 184, 0.25),
-            0 10px 30px rgba(135, 122, 204, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 60px rgba(122, 107, 184, 0.25), 0 10px 30px rgba(135, 122, 204, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         border-color: rgba(255, 255, 255, 0.3);
     }
 
     .featured {
-        background: rgba(122, 107, 184, 0.2) !important;
         border: 2px solid rgba(122, 107, 184, 0.4) !important;
     }
 
@@ -134,78 +134,45 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <!-- Trial Plan -->
-            <div class="subscription-card rounded-3xl p-6 text-center relative">
-                <div class="trial-badge rounded-full px-4 py-2 text-sm font-semibold mb-3 inline-block">Free Trial</div>
-                <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: #7a6bb8;">Trial</h3>
-                <p class="text-sm font-medium mb-4" style="color: #877acc;">7 Days Free</p>
+            <?php if (isset($paket_subscriptions) && !empty($paket_subscriptions)): ?>
+                <?php foreach ($paket_subscriptions as $index => $paket): ?>
+                    <?php $style = $cardStyles[$index % 3]; ?>
+                    <div class="subscription-card rounded-3xl p-6 text-center relative <?= isset($style['featured']) ? 'featured transform scale-105' : '' ?>" style="background: <?= $style['bg'] ?>">
+                        <?php if ($style['badge']): ?>
+                            <div class="trial-badge rounded-full px-4 py-2 text-sm font-semibold mb-3 inline-block">Free Trial</div>
+                        <?php endif; ?>
 
-                <div class="mb-4">
-                    <span class="text-4xl font-extrabold" style="color: #7a6bb8;">
-                        <span class="text-xl align-top">Rp</span>0
-                    </span>
-                    <div class="text-sm font-medium" style="color: #877acc;">untuk 7 hari</div>
+                        <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: <?= $style['text'] ?>"><?= htmlspecialchars($paket['nama_paket']) ?></h3>
+                        <p class="text-sm font-medium mb-4" style="color: <?= $style['subtext'] ?>"><?= $paket['durasi_hari'] ?> Hari</p>
+
+                        <div class="mb-4">
+                            <span class="text-4xl font-extrabold" style="color: <?= $style['text'] ?>">
+                                <span class="text-xl align-top">Rp</span><?= number_format($paket['harga'], 0, ',', '.') ?>
+                            </span>
+                            <div class="text-sm font-medium" style="color: <?= $style['subtext'] ?>">
+                                <?= $paket['durasi_hari'] == 7 ? 'untuk 7 hari' : ($paket['durasi_hari'] <= 31 ? 'per bulan' : 'per tahun') ?>
+                            </div>
+                        </div>
+
+                        <div class="divider mx-auto mb-4"></div>
+
+                        <ul class="space-y-2 mb-6 text-sm">
+                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Akses Penuh sistem inventaris</li>
+                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Manajemen barang & ruangan</li>
+                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Laporan & analitik</li>
+                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">QR Code Scanner</li>
+                        </ul>
+
+                        <a href="/login/admin" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
+                            <?= $paket['harga'] == 0 ? 'Start Trial' : 'Subscribe Now' ?>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-span-3 text-center text-white">
+                    <p>Tidak ada paket subscription tersedia saat ini.</p>
                 </div>
-
-                <div class="divider mx-auto mb-4"></div>
-
-                <ul class="space-y-2 mb-6 text-sm">
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Akses Penuh sistem inventaris</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Manajemen barang & ruangan</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Laporan & analitik</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">QR Code Scanner</li>
-                </ul>
-
-                <a href="/login/admin" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">Start Trial</a>
-            </div>
-
-            <!-- Monthly Plan -->
-            <div class="subscription-card featured rounded-3xl p-6 text-center relative transform scale-105">
-                <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: white;">Basic</h3>
-                <p class="text-sm font-medium mb-4" style="color: white;">Monthly Plan</p>
-
-                <div class="mb-4">
-                    <span class="text-4xl font-extrabold" style="color: white;">
-                        <span class="text-xl align-top">Rp</span>500K
-                    </span>
-                    <div class="text-sm font-medium" style="color: white;">per bulan</div>
-                </div>
-
-                <div class="divider mx-auto mb-4"></div>
-
-                <ul class="space-y-2 mb-6 text-sm">
-                    <li class="feature-item2 relative pl-6 font-medium" style="color: white;">Akses Penuh sistem inventaris</li>
-                    <li class="feature-item2 relative pl-6 font-medium" style="color: white;">Manajemen barang & ruangan</li>
-                    <li class="feature-item2 relative pl-6 font-medium" style="color: white;">Laporan & analitik</li>
-                    <li class="feature-item2 relative pl-6 font-medium" style="color: white;">QR Code Scanner</li>
-                </ul>
-
-                <a href="/login/admin" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">Subscribe Now</a>
-            </div>
-
-            <!-- Annual Plan -->
-            <div class="subscription-card rounded-3xl p-6 text-center relative">
-                <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: #7a6bb8;">Pro</h3>
-                <p class="text-sm font-medium mb-4" style="color: #877acc;">Annual Plan</p>
-
-                <div class="mb-4">
-                    <span class="text-4xl font-extrabold" style="color: #7a6bb8;">
-                        <span class="text-xl align-top">Rp</span>5.000.000
-                    </span>
-                    <div class="text-sm font-medium" style="color: #877acc;">per tahun</div>
-                </div>
-
-                <div class="divider mx-auto mb-4"></div>
-
-                <ul class="space-y-2 mb-6 text-sm">
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Akses Penuh sistem inventaris</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Manajemen barang & ruangan</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">Laporan & analitik</li>
-                    <li class="feature-item relative pl-6 font-medium" style="color: #7a6bb8;">QR Code Scanner</li>
-                </ul>
-
-                <a href="/login/admin" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">Subscribe Now</a>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </section>
