@@ -33,7 +33,7 @@
                 <p class="text-sm font-medium text-gray-900"><?= date('d M Y H:i', strtotime($transaksi['tanggal_transaksi'])) ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500">Mitra</p>
+                <p class="text-sm text-gray-500"><?= $transaksi['jenis_transaksi'] == 'supply' ? 'From Mitra' : 'To Mitra' ?></p>
                 <p class="text-sm font-medium text-gray-900"><?= $transaksi['nama_mitra'] ?? '-' ?></p>
             </div>
             <div>
