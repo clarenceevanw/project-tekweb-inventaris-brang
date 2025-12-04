@@ -78,7 +78,7 @@
 
 <div class="home-wrapper">
     <div class="home-container">
-        <img src="gambar_home/homepagefix.png" alt="Homepage">
+        <img src="/assets/gambar_home/homepagefix.png" alt="Homepage">
     </div>
 
     <?php include __DIR__ . '/components/demo.php'; ?>
