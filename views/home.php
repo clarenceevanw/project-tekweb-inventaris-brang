@@ -82,6 +82,7 @@
     </div>
 
     <?php include __DIR__ . '/components/demo.php'; ?>
+    <?php include __DIR__ . '/components/subscription.php'; ?>
 
     <section id="about" class="section">
         <h2 class="section-title">About Us</h2>
