@@ -31,4 +31,12 @@ class Admin extends BaseModel {
         $adminData['id_admin'] = generate_uuid();
         return $this->insert($adminData);
     }
+
+    public function updateAdmin($id, $data) {
+        return $this->update($data, 'id_admin', $id);
+    }
+
+    public function deleteAdmin($id) {
+        return $this->delete('id_admin', $id);
+    }
 }
