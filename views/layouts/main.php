@@ -25,6 +25,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         .toastify {
             padding: 16px 20px;
             color: #1f2937;
@@ -84,7 +88,7 @@
 </head>
 
 <body>
-    <?php if (!empty($flash['success'])): ?>
+    <!-- <?php if (!empty($flash['success'])): ?>
         <script>
             Toastify({
                 text: "<?= $flash['success'] ?>",
@@ -109,10 +113,12 @@
                 text: '<?= $flash['error'] ?>'
             })
         </script>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
-    <main class="min-h-screen">
+    <main class="relative min-h-screen overflow-x-hidden">
+        <?php include __DIR__ . '/navbarMain.php'; ?>
         <?= $this->renderSection('content') ?>
+        <?php include __DIR__ . '/footerMain.php'; ?>
     </main>
 
     <?= $this->renderSection('script') ?>
