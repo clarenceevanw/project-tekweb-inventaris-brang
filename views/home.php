@@ -217,6 +217,8 @@
         <img src="gambar_home/homepagefix.png" alt="Homepage">
     </div>
 
+    <?php include __DIR__ . '/components/demo.php'; ?>
+
     <section id="about" class="section">
         <h2 class="section-title">About Us</h2>
         <div class="about-content">
