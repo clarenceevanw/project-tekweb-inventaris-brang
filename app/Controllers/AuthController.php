@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
+require_once __DIR__ . "/../Models/Gudang.php";
 
 class AuthController extends BaseController
 {
