@@ -2,15 +2,18 @@
 
 require __DIR__ . '/../Models/Barang.php';
 require __DIR__ . '/../Models/Transaksi.php';
+require __DIR__ . '/../Models/PaketSubscription.php';
 
 class DashboardController extends BaseController {
     private $barangModel;
     private $transaksiModel;
+    private $paketModel;
 
     public function __construct() {
         parent::__construct();
         $this->barangModel = new Barang();
         $this->transaksiModel = new Transaksi();
+        $this->paketModel = new PaketSubscription();
     }
     
     public function adminDashboard() {
@@ -30,5 +33,11 @@ class DashboardController extends BaseController {
     public function mitraDashboard() {
         $data['title'] = 'Dashboard Mitra';
         return $this->view('mitra/dashboard', $data);
+    }
+
+    public function pembayaran() {
+        $data['paket_list'] = $this->paketModel->all();
+        $data['title'] = 'Perpanjang Langganan';
+        return $this->view('admin/pembayaran', $data);
     }
 }
