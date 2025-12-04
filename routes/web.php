@@ -34,6 +34,8 @@ Router::get("/logout", "AuthController@logout");
 //Mitra Routes
 Router::get("/mitra/dashboard", "DashboardController@mitraDashboard", "auth");
 
+Router::get("/mitra/transaksi", "TransaksiController@historyMitra", "auth");
+Router::get("/mitra/transaksi/detail", "TransaksiController@detailMitra", "auth");
 
 //Admin Routes
 Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
