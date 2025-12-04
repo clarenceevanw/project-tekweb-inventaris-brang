@@ -9,6 +9,7 @@ require_once __DIR__ . '/../app/Controllers/KategoriController.php';
 require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
 require_once __DIR__ . '/../app/Controllers/AdminController.php';
 require_once __DIR__ . '/../app/Controllers/SubscriptionController.php';
+require_once __DIR__ . '/../app/Controllers/GudangController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -38,48 +39,50 @@ Router::get("/mitra/transaksi", "TransaksiController@historyMitra", "auth");
 Router::get("/mitra/transaksi/detail", "TransaksiController@detailMitra", "auth");
 
 //Admin Routes
-Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
+Router::get("/admin/dashboard", "DashboardController@adminDashboard", "subscription");
 
 // Admin Management Routes
-Router::get("/admin/manage-admin", "AdminController@index", "admin");
-Router::post("/admin/manage-admin/store", "AdminController@store", "admin");
-Router::post("/admin/manage-admin/update", "AdminController@update", "admin");
-Router::post("/admin/manage-admin/delete", "AdminController@delete", "admin");
-Router::get("/admin/pembayaran", "DashboardController@pembayaran", "admin");
+Router::get("/admin/manage-admin", "AdminController@index", "subscription");
+Router::post("/admin/manage-admin/store", "AdminController@store", "subscription");
+Router::post("/admin/manage-admin/update", "AdminController@update", "subscription");
+Router::post("/admin/manage-admin/delete", "AdminController@delete", "subscription");
 
-Router::get("/admin/scan", "ScanController@index", "admin");
-Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
+Router::get("/admin/scan", "ScanController@index", "subscription");
+Router::get("/admin/generate-qr", "ScanController@generateQr", "subscription");
 
-Router::get("/admin/kategori", "KategoriController@index", "admin");
-Router::post("/admin/kategori/store", "KategoriController@store", "admin");
-Router::post("/admin/kategori/update", "KategoriController@update", "admin");
-Router::post("/admin/kategori/delete", "KategoriController@delete", "admin");
+Router::get("/admin/kategori", "KategoriController@index", "subscription");
+Router::post("/admin/kategori/store", "KategoriController@store", "subscription");
+Router::post("/admin/kategori/update", "KategoriController@update", "subscription");
+Router::post("/admin/kategori/delete", "KategoriController@delete", "subscription");
 
-Router::get("/admin/barang", "BarangController@index", "admin");
-Router::post("/admin/barang/store", "BarangController@store", "admin");
-Router::post("/admin/barang/update", "BarangController@update", "admin");
-Router::post('/admin/barang/delete', 'BarangController@delete', 'admin');
-Router::get("/admin/barang/batch", "BarangController@batch", "admin");
-Router::get("/admin/barang/detail", "BarangController@detail", "admin");
-Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "admin");
-Router::post("/admin/barang/move", "BarangController@moveBarang", "admin");
+Router::get("/admin/barang", "BarangController@index", "subscription");
+Router::post("/admin/barang/store", "BarangController@store", "subscription");
+Router::post("/admin/barang/update", "BarangController@update", "subscription");
+Router::post('/admin/barang/delete', 'BarangController@delete', 'subscription');
+Router::get("/admin/barang/batch", "BarangController@batch", "subscription");
+Router::get("/admin/barang/detail", "BarangController@detail", "subscription");
+Router::get("/admin/barang/batch/ruangan", "BarangController@batchRuangan", "subscription");
+Router::post("/admin/barang/move", "BarangController@moveBarang", "subscription");
 
-Router::get("/admin/ruangan", "RuanganController@index", "admin");
-Router::post("/admin/ruangan/store", "RuanganController@store", "admin");
-Router::post("/admin/ruangan/update", "RuanganController@update", "admin");
-Router::post("/admin/ruangan/delete", "RuanganController@delete", "admin");
-Router::get("/admin/ruangan/barang", "RuanganController@barang", "admin");
-Router::get("/admin/ruangan/batch", "RuanganController@batch", "admin");
+Router::get("/admin/ruangan", "RuanganController@index", "subscription");
+Router::post("/admin/ruangan/store", "RuanganController@store", "subscription");
+Router::post("/admin/ruangan/update", "RuanganController@update", "subscription");
+Router::post("/admin/ruangan/delete", "RuanganController@delete", "subscription");
+Router::get("/admin/ruangan/barang", "RuanganController@barang", "subscription");
+Router::get("/admin/ruangan/batch", "RuanganController@batch", "subscription");
 
-Router::get("/admin/transaksi", "TransaksiController@index", "admin");
-Router::get("/admin/transaksi/create", "TransaksiController@create", "admin");
-Router::post("/admin/transaksi/store", "TransaksiController@store", "admin");
-Router::get("/admin/transaksi/detail", "TransaksiController@detail", "admin");
+Router::get("/admin/transaksi", "TransaksiController@index", "subscription");
+Router::get("/admin/transaksi/create", "TransaksiController@create", "subscription");
+Router::post("/admin/transaksi/store", "TransaksiController@store", "subscription");
+Router::get("/admin/transaksi/detail", "TransaksiController@detail", "subscription");
+
+Router::get('/admin/gudang', "GudangController@index", "admin");
+Router::get("/admin/gudang/pembayaran", "DashboardController@pembayaran", "admin");
 
 // Subscription Routes
 // Router untuk memproses klik tombol bayar
-Router::post("/subscription/pay", "SubscriptionController@pay");
+Router::post("/subscription/pay", "SubscriptionController@pay", "admin");
 // Router balik dari Midtrans (Callback Redirect)
-Router::get("/subscription/finish", "SubscriptionController@finish");
+Router::get("/subscription/finish", "SubscriptionController@finish", "admin");
 // Router untuk menerima notifikasi dari Midtrans (Webhook)
-Router::post("/subscription/notification", "SubscriptionController@notification");
+Router::post("/subscription/notification", "SubscriptionController@notification", "admin");
