@@ -45,6 +45,7 @@ class AuthController extends BaseController {
 
     public function showLoginAdmin() {
         $data['title'] = "Login Admin";
+        $data['redirect'] = $_GET['redirect'] ?? '';
         return $this->view("auth/login-admin", $data);
     }
 
@@ -76,7 +77,10 @@ class AuthController extends BaseController {
             $_SESSION['role'] = 'admin';
             $_SESSION['gudang'] = $gudang;
             $this->flash('success', 'Login berhasil!');
-            return $this->redirect('/admin/dashboard');
+            
+            // Check for redirect parameter
+            $redirect = $_GET['redirect'] ?? '/admin/dashboard';
+            return $this->redirect($redirect);
         }
 
         $this->flash('error', 'Username atau password salah!');

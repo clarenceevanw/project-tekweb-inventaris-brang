@@ -163,7 +163,7 @@ $cardStyles = [
                             <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">QR Code Scanner</li>
                         </ul>
 
-                        <a href="/login/admin" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
+                        <a href="/login/admin?redirect=/admin/pembayaran" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
                             <?= $paket['harga'] == 0 ? 'Start Trial' : 'Subscribe Now' ?>
                         </a>
                     </div>

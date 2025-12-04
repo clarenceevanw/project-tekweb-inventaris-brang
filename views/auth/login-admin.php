@@ -80,7 +80,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form action="/login/admin" method="POST" class="space-y-6">
+                    <form action="/login/admin<?= !empty($redirect) ? '?redirect=' . urlencode($redirect) : '' ?>" method="POST" class="space-y-6">
                         <div>
                             <label for="username" class="block text-sm font-semibold text-gray-700 mb-2">Username</label>
                             <div class="relative">
