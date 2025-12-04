@@ -1,10 +1,68 @@
-<?php $this->extend('layouts/admin'); ?>
+<?php $this->extend('layouts/mitra'); ?>
+
+<?php $this->section('header'); ?>
+<style>
+@page {
+    size: landscape;
+    margin: 10mm;
+}
+@media print {
+    aside, header, .no-print {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        margin: 0 !important;
+    }
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 10px !important;
+    }
+    h2 {
+        font-size: 18px !important;
+        margin-bottom: 8px !important;
+    }
+    h3 {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    .mb-6 {
+        margin-bottom: 12px !important;
+    }
+    .p-6 {
+        padding: 12px !important;
+    }
+    .px-6 {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    .py-3, .py-4 {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+    }
+    .gap-4 {
+        gap: 8px !important;
+    }
+    table {
+        font-size: 11px !important;
+    }
+    .grid-cols-1.md\:grid-cols-2 {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+</style>
+<?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
 
 <div class="container mx-auto px-4 py-8">
-    <div class="flex items-center gap-2 mb-4 text-sm">
-        <a href="/admin/transaksi" class="text-blue-600 hover:text-blue-800">Transaksi</a>
+    <div class="flex items-center gap-2 mb-4 text-sm no-print">
+        <a href="/mitra/transaksi" class="text-blue-600 hover:text-blue-800">Transaksi</a>
         <span class="text-gray-400">></span>
         <span class="text-gray-600">Detail</span>
     </div>
@@ -33,8 +91,8 @@
                 <p class="text-sm font-medium text-gray-900"><?= date('d M Y H:i', strtotime($transaksi['tanggal_transaksi'])) ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500"><?= $transaksi['jenis_transaksi'] == 'supply' ? 'From Mitra' : 'To Mitra' ?></p>
-                <p class="text-sm font-medium text-gray-900"><?= $transaksi['nama_mitra'] ?? '-' ?></p>
+                <p class="text-sm text-gray-500"><?= $transaksi['jenis_transaksi'] == 'buy' ? 'From Gudang' : 'To Gudang' ?></p>
+                <p class="text-sm font-medium text-gray-900"><?= $transaksi['nama_gudang'] ?? '-' ?></p>
             </div>
             <div>
                 <p class="text-sm text-gray-500">Admin</p>
@@ -114,13 +172,19 @@
         </div>
     </div>
 
-    <div class="mt-6">
-        <a href="/admin/transaksi" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition">
+    <div class="mt-6 flex gap-3 no-print">
+        <a href="/mitra/transaksi" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Kembali
         </a>
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Print PDF
+        </button>
     </div>
 </div>
 
