@@ -17,6 +17,7 @@ Router::get("/", "HomeController@index");
 Router::get("/auth/select/login", "AuthController@redirectSelectLogin");
 Router::get("/auth/select/signup", "AuthController@redirectSelectSignup");
 Router::get("/auth/select", "AuthController@showSelectAuthAdminMitra");
+Router::get("/auth/subscribe-redirect", "AuthController@subscribeRedirect");
 
 // Auth Routes
 Router::get("/login/admin", "AuthController@showLoginAdmin");

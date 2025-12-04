@@ -45,12 +45,13 @@ $cardStyles = [
     .featured::after {
         content: 'POPULAR';
         position: absolute;
-        top: 10px;
+        top: -4px;
         right: 16px;
         background: linear-gradient(135deg, #877acc, #7a6bb8);
         color: white;
         padding: 6px 16px;
-        border-radius: 16px;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
         font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 1px;
@@ -163,7 +164,7 @@ $cardStyles = [
                             <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">QR Code Scanner</li>
                         </ul>
 
-                        <a href="/login/admin?redirect=/admin/pembayaran" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
+                        <a href="/auth/subscribe-redirect" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
                             <?= $paket['harga'] == 0 ? 'Start Trial' : 'Subscribe Now' ?>
                         </a>
                     </div>

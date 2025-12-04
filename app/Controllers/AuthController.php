@@ -43,9 +43,13 @@ class AuthController extends BaseController {
         ]);
     }
 
+    public function subscribeRedirect() {
+        $_SESSION['redirect_after_login'] = '/admin/pembayaran';
+        return $this->redirect('/login/admin');
+    }
+
     public function showLoginAdmin() {
         $data['title'] = "Login Admin";
-        $data['redirect'] = $_GET['redirect'] ?? '';
         return $this->view("auth/login-admin", $data);
     }
 
@@ -78,8 +82,9 @@ class AuthController extends BaseController {
             $_SESSION['gudang'] = $gudang;
             $this->flash('success', 'Login berhasil!');
             
-            // Check for redirect parameter
-            $redirect = $_GET['redirect'] ?? '/admin/dashboard';
+            // Check for redirect in session
+            $redirect = $_SESSION['redirect_after_login'] ?? '/admin/dashboard';
+            unset($_SESSION['redirect_after_login']); // Clear redirect after use
             return $this->redirect($redirect);
         }
 
