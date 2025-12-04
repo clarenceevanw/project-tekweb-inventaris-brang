@@ -7,6 +7,7 @@ require_once __DIR__ . '/../app/Controllers/BarangController.php';
 require_once __DIR__ . '/../app/Controllers/RuanganController.php';
 require_once __DIR__ . '/../app/Controllers/KategoriController.php';
 require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
+require_once __DIR__ . '/../app/Controllers/SubscriptionController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -35,6 +36,7 @@ Router::get("/mitra/dashboard", "DashboardController@mitraDashboard", "auth");
 
 //Admin Routes
 Router::get("/admin/dashboard", "DashboardController@adminDashboard", "admin");
+Router::get("/admin/pembayaran", "DashboardController@pembayaran", "admin");
 
 Router::get("/admin/scan", "ScanController@index", "admin");
 Router::get("/admin/generate-qr", "ScanController@generateQr", "admin");
@@ -64,3 +66,11 @@ Router::get("/admin/transaksi", "TransaksiController@index", "admin");
 Router::get("/admin/transaksi/create", "TransaksiController@create", "admin");
 Router::post("/admin/transaksi/store", "TransaksiController@store", "admin");
 Router::get("/admin/transaksi/detail", "TransaksiController@detail", "admin");
+
+// Subscription Routes
+// Router untuk memproses klik tombol bayar
+Router::post("/subscription/pay", "SubscriptionController@pay");
+// Router balik dari Midtrans (Callback Redirect)
+Router::get("/subscription/finish", "SubscriptionController@finish");
+// Router untuk menerima notifikasi dari Midtrans (Webhook)
+Router::post("/subscription/notification", "SubscriptionController@notification");
