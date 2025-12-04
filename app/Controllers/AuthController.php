@@ -9,6 +9,13 @@ class AuthController extends BaseController {
     protected $mitra;
     protected $gudang;
 
+    public function __construct() {
+        parent::__construct();
+        $this->admin = new Admin();
+        $this->mitra = new Mitra();
+        $this->gudang = new Gudang();
+    }
+
     public function redirectSelectLogin() {
         $_SESSION['auth_mode'] = 'login';
         setcookie("auth_mode", "login", time() + (5 * 60), "/");
