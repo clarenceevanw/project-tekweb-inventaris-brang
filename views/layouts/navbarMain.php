@@ -4,14 +4,15 @@
     }
 
     .navbar-trapezoid {
-        background: #eef2ff;
+        background: #ada1ea;
         clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
         position: relative;
         z-index: 1;
     }
 
     .navbar-right {
-        background: #eef2ff;
+        background: #ada1ea;
+        border-bottom-left-radius: 12px;
         clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
     }
 
@@ -23,7 +24,7 @@
         bottom: 0;
         width: 100%;
         height: 0%;
-        background: #4F46E5;
+        background: #fff;
         transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: -1;
     }
@@ -35,12 +36,12 @@
 
     .nav-link:hover,
     .auth-button:hover {
-        color: #eef2ff;
+        color: #ada1ea;
     }
 
     .signup-button:hover {
         background-color: #fff;
-        color: #4F46E5;
+        color: #7a6bb8;
         transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -56,7 +57,7 @@
         position: relative;
         width: 3.5rem;
         height: 3.5rem;
-        background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+        background: linear-gradient(135deg, #7a6bb8 0%, #ada1ea 100%);
         border-radius: 1rem;
         display: flex;
         align-items: center;
@@ -72,9 +73,9 @@
         max-width: 380px;
         height: 28rem;
         border-radius: 2rem;
-        background: linear-gradient(135deg, rgba(79, 70, 229, 0.98) 0%, rgba(99, 102, 241, 0.98) 100%);
+        background: linear-gradient(135deg, #7a6bb8 0%, #ada1ea 100%);
         backdrop-filter: blur(20px);
-        box-shadow: 0 20px 60px rgba(79, 70, 229, 0.5);
+        box-shadow: 0 20px 60px rgba(173, 161, 234, 0.5);
     }
 
     .hamburger-icon {
@@ -202,20 +203,20 @@
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
 
             <div class="navbar-trapezoid flex items-center gap-8 px-10 py-3">
-                <a href="/" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-indigo-600 font-medium">Home</a>
-                <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-indigo-600 font-medium">Demo</a>
-                <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-indigo-600 font-medium">Features</a>
-                <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-indigo-600 font-medium">Subscription</a>
+                <a href="/" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Home</a>
+                <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Demo</a>
+                <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Features</a>
+                <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Subscription</a>
             </div>
 
-            <div class="navbar-right absolute right-0 gap-4 px-6 py-3">
-                <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-indigo-600 font-medium">Log In</a>
-                <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block bg-indigo-600 font-medium text-white rounded-lg">Sign Up</a>
+            <div class="navbar-right absolute right-0 gap-4 px-6 py-2">
+                <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log In</a>
+                <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block bg-[#7a6bb8] font-medium text-white rounded-lg">Sign Up</a>
             </div>
         </nav>
 
     </div>
-        
+
     <!-- Mobile Dynamic Island Menu -->
     <div class="lg:hidden mobile-menu-container">
         <div class="dynamic-island" id="dynamicIsland">
@@ -236,8 +237,8 @@
                 <a href="/#features" class="menu-link">FEATURES</a>
                 <a href="/#subscription" class="menu-link">SUBSCRIPTION</a>
                 <div class="flex gap-4">
-                    <a href="/auth/select/login" class="menu-link border-2 border-[#eef2ff]">Log In</a>
-                    <a href="/auth/select/signup" class="menu-link border-2 border-[#eef2ff]">Sign Up</a>
+                    <a href="/auth/select/login" class="menu-link border-2 border-[#ada1ea]">Log In</a>
+                    <a href="/auth/select/signup" class="menu-link border-2 border-[#ada1ea]">Sign Up</a>
                 </div>
                 <a href="#footer" class="menu-link">CONTACT</a>
             </div>
