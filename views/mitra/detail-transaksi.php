@@ -118,15 +118,9 @@
                             Nama Barang
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Kategori
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Kuantitas
                         </th>
                         <?php if($transaksi['jenis_transaksi'] == 'supply'): ?>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Sisa
-                        </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Expired Date
                         </th>
@@ -139,7 +133,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     <?php if(empty($detailItems)): ?>
                         <tr>
-                            <td colspan="<?= $transaksi['jenis_transaksi'] == 'supply' ? 6 : 4 ?>" class="px-6 py-4 text-center text-gray-500">Tidak ada item.</td>
+                            <td colspan="<?= $transaksi['jenis_transaksi'] == 'supply' ? 4 : 3 ?>" class="px-6 py-4 text-center text-gray-500">Tidak ada item.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($detailItems as $item): ?>
@@ -147,16 +141,10 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900"><?= $item['nama_barang'] ?></div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <?= $item['nama_kategori'] ?>
-                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <?= $item['kuantitas_transaksi'] ?>
                             </td>
                             <?php if($transaksi['jenis_transaksi'] == 'supply'): ?>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <?= $item['sisa_kuantitas'] ?>
-                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : '-' ?>
                             </td>
