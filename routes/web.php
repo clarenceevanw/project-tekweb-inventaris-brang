@@ -17,13 +17,11 @@ Router::get("/auth/select/signup", "AuthController@redirectSelectSignup");
 Router::get("/auth/select", "AuthController@showSelectAuthAdminMitra");
 
 // Auth Routes
-Router::get("/login", "AuthController@showLogin");
 Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");
 Router::get("/login/mitra", "AuthController@showLoginMitra");
 Router::post("/login/mitra", "AuthController@loginMitra");
 
-Router::get("/signup", "AuthController@showSignup");
 Router::get("/signup/admin", "AuthController@showSignupAdmin");
 Router::post("/signup/admin", "AuthController@signupAdmin");
 Router::get("/signup/mitra", "AuthController@showSignupMitra");
