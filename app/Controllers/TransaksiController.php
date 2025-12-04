@@ -137,4 +137,32 @@ class TransaksiController extends BaseController {
         }
     }
 
+    public function historyMitra() {
+        $data['title'] = 'History Transaksi';
+        $data['dataTransaksi'] = $this->model->getByMitra($_SESSION['user']['id_mitra']);
+        return $this->view('mitra/transaksi', $data);
+    }
+
+    public function detailMitra() {
+        $id_transaksi = $_GET['id'] ?? null;
+
+        if (!$id_transaksi) {
+            $this->flash('error', 'ID transaksi tidak ditemukan.');
+            return $this->redirect('/mitra/transaksi');
+        }
+
+        $transaksi = $this->model->getDetailById($id_transaksi);
+
+        if (!$transaksi || $transaksi['id_mitra'] != $_SESSION['user']['id_mitra']) {
+            $this->flash('error', 'Transaksi tidak ditemukan.');
+            return $this->redirect('/mitra/transaksi');
+        }
+
+        $detailItems = $this->detailTransaksi->getByTransaksi($id_transaksi);
+
+        $data['title'] = 'Detail Transaksi';
+        $data['transaksi'] = $transaksi;
+        $data['detailItems'] = $detailItems;
+        return $this->view('mitra/detail-transaksi', $data);
+    }
 }
