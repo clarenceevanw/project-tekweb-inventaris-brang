@@ -2,7 +2,7 @@
 class Middleware {
     public static function auth($next) {
         if (!isset($_SESSION['user'])) {
-            header("Location: /login/mitra");
+            header("Location: /auth/select/login");
             $_SESSION['flash']['error'] = 'Anda belum login!';
             exit;
         }
@@ -10,7 +10,7 @@ class Middleware {
     }
 
     public static function admin($next) {
-        if (!isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
+        if (!isset($_SESSION['user']) || !isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
             header("Location: /login/admin");
             $_SESSION['flash']['error'] = 'Anda belum login!';
             exit;
