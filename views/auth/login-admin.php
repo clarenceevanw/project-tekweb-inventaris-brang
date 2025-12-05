@@ -118,11 +118,19 @@
                         </button>
                     </form>
 
-                    <div class="mt-6 text-center">
-                        <p class="text-sm text-gray-600">
-                            Login as partner? 
-                            <a href="/login/mitra" class="font-semibold" style="color: #877acc;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
-                        </p>
+                    <div class="mt-6 space-y-3">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">
+                                Don't have an account? 
+                                <a href="/signup/admin" class="font-semibold" style="color: #877acc;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Sign up</a>
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">
+                                Login as partner? 
+                                <a href="/login/mitra" class="font-semibold" style="color: #877acc;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -201,8 +201,8 @@
 
                     <div class="mt-6 text-center">
                         <p class="text-sm text-gray-600">
-                            Login as partner?
-                            <a href="/login/mitra" class="font-semibold" style="color: #877acc;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
+                            Login as organizer?
+                            <a href="/login/admin" class="font-semibold" style="color: #877acc;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
                         </p>
                     </div>
                 </div>
