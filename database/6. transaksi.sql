@@ -7,6 +7,12 @@ CREATE TABLE transaksi (
     harga_transaksi DECIMAL(15, 2) NOT NULL,
     id_mitra CHAR(36),
     id_admin CHAR(36),
+    id_gudang CHAR(36),
+
+    FOREIGN KEY (id_gudang)
+        REFERENCES gudang(id_gudang)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
 
     FOREIGN KEY (id_mitra)
         REFERENCES mitra(id_mitra)
