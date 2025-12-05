@@ -33,7 +33,7 @@
     <?php
     $tanggal_berakhir = strtotime($gudang['tanggal_berakhir']);
     $sekarang = time();
-    $sisa_hari = ceil(($tanggal_berakhir - $sekarang) / (60 * 60 * 24));
+    $sisa_hari = floor(($tanggal_berakhir - $sekarang) / (60 * 60 * 24));
     $is_expired = $sisa_hari <= 0;
     $is_warning = $sisa_hari <= 7 && $sisa_hari > 0;
     ?>
