@@ -12,8 +12,9 @@ class Admin extends BaseModel {
         $this->db->beginTransaction();
         try {
             $id_gudang = generate_uuid();
-            $stmtGudang = $this->db->prepare("INSERT INTO gudang (id_gudang, nama_gudang, lokasi_gudang) VALUES (?, ?, ?)");
-            $stmtGudang->execute([$id_gudang, $gudangData['nama_gudang'], $gudangData['lokasi_gudang']]);
+            $expired_date = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $stmtGudang = $this->db->prepare("INSERT INTO gudang (id_gudang, nama_gudang, lokasi_gudang, expired_date_gudang) VALUES (?, ?, ?, ?)");
+            $stmtGudang->execute([$id_gudang, $gudangData['nama_gudang'], $gudangData['lokasi_gudang'], $expired_date]);
             
             $adminData['id_admin'] = generate_uuid();
             $adminData['id_gudang'] = $id_gudang;
