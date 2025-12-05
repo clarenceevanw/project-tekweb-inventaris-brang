@@ -6,15 +6,30 @@
     <div class="flex items-center gap-2 mb-4 text-sm">
         <span class="text-gray-600">Barang</span>
     </div>
-    <div class="mb-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-800">Daftar Barang</h2>
-            <p class="text-sm text-gray-500">Kelola barang dan lihat batch stok.</p>
+    <div class="mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">Daftar Barang</h2>
+                <p class="text-sm text-gray-500">Kelola barang dan lihat batch stok.</p>
+            </div>
+            <div>
+                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
+                    <span class="hidden sm:inline">+ Tambah Barang</span>
+                    <span class="sm:hidden">+ Tambah</span>
+                </button>
+            </div>
         </div>
-        <div>
-            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                <span class="hidden sm:inline">+ Tambah Barang</span>
-                <span class="sm:hidden">+ Tambah</span>
+        
+        <div class="flex gap-3">
+            <div class="flex-1">
+                <input type="text" id="searchInput" placeholder="Cari nama barang..." 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button onclick="openFilterModal()" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                </svg>
+                Filter
             </button>
         </div>
     </div>
@@ -41,14 +56,14 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200" id="tableBody">
                     <?php if(empty($dataBarang)): ?>
                         <tr>
                             <td colspan="5" class="px-6 py-4 text-center text-gray-500">Tidak ada data barang.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($dataBarang as $row): ?>
-                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <tr class="hover:bg-gray-50 transition-colors duration-150" data-nama="<?= strtolower($row['nama_barang']) ?>" data-kategori="<?= $row['nama_kategori'] ?>" data-stok="<?= $row['total_stok'] ?? 0 ?>">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900"><?= $row['nama_barang'] ?></div>
                             </td>
@@ -238,6 +253,56 @@
                         Batal
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Filter -->
+<div id="modalFilter" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeFilterModal()"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Filter Barang</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                        <select id="kategoriFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Semua Kategori</option>
+                            <?php foreach($kategori as $k): ?>
+                                <option value="<?= $k['nama_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Range Stok</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-gray-600 mb-1">Stok Minimum</label>
+                                <input type="number" id="stokMin" placeholder="0" min="0" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-600 mb-1">Stok Maximum</label>
+                                <input type="number" id="stokMax" placeholder="Tidak terbatas" min="0" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+                    Terapkan Filter
+                </button>
+                <button onclick="resetFilter()" class="w-full sm:w-auto px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition mt-2 sm:mt-0">
+                    Reset
+                </button>
+                <button onclick="closeFilterModal()" class="w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg transition mt-2 sm:mt-0">
+                    Tutup
+                </button>
             </div>
         </div>
     </div>
@@ -526,18 +591,84 @@ function deleteBarang(id, namaBarang) {
     });
 }
 
+// Filter Modal
+function openFilterModal() {
+    const modal = $('#modalFilter');
+    modal.removeClass('hidden');
+    setTimeout(() => {
+        modal.removeClass('opacity-0');
+        modal.find('.inline-block').removeClass('scale-95 opacity-0');
+    }, 10);
+}
+
+function closeFilterModal() {
+    const modal = $('#modalFilter');
+    modal.addClass('opacity-0');
+    modal.find('.inline-block').addClass('scale-95 opacity-0');
+    setTimeout(() => modal.addClass('hidden'), 300);
+}
+
+function applyFilter() {
+    const search = $('#searchInput').val().toLowerCase();
+    const kategori = $('#kategoriFilter').val();
+    const minInput = $('#stokMin').val();
+    const maxInput = $('#stokMax').val();
+    const stokMin = minInput ? parseInt(minInput) : 0;
+    const stokMax = maxInput ? parseInt(maxInput) : Infinity;
+    
+    if (minInput && maxInput && stokMax < stokMin) {
+        Swal.fire({icon: 'error', title: 'Input Tidak Valid', text: 'Stok Maximum harus lebih besar dari Stok Minimum'});
+        return;
+    }
+
+    if (stokMin < 0 || stokMax < 0) {
+        Swal.fire({icon: 'error', title: 'Input Tidak Valid', text: 'Stok Minimum atau Maximum harus minimal nol'});
+        return;
+    }
+    
+    let visibleCount = 0;
+    
+    $('#tableBody tr').each(function() {
+        const $row = $(this);
+        const nama = $row.data('nama') || '';
+        const kat = $row.data('kategori') || '';
+        const stokVal = parseInt($row.data('stok')) || 0;
+        
+        const matchSearch = !search || nama.includes(search);
+        const matchKategori = !kategori || kat === kategori;
+        const matchStok = stokVal >= stokMin && stokVal <= stokMax;
+        
+        const isVisible = matchSearch && matchKategori && matchStok;
+        $row.toggle(isVisible);
+        if (isVisible) visibleCount++;
+    });
+    
+    $('#noDataRow').remove();
+    if (visibleCount === 0) {
+        $('#tableBody').append('<tr id="noDataRow"><td colspan="5" class="px-6 py-4 text-center text-gray-500">Tidak ada barang yang sesuai.</td></tr>');
+    }
+    
+    closeFilterModal();
+}
+
+$('#searchInput').on('input', applyFilter);
+
+function resetFilter() {
+    $('#searchInput').val('');
+    $('#kategoriFilter').val('');
+    $('#stokMin').val('');
+    $('#stokMax').val('');
+    $('#noDataRow').remove();
+    $('#tableBody tr').show();
+}
+
 // Event listener untuk tombol ESC
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        if (!document.getElementById('imageModal').classList.contains('hidden')) {
-            closeImageModal();
-        }
-        if (!document.getElementById('modalTambah').classList.contains('hidden')) {
-            closeModal();
-        }
-        if (!document.getElementById('modalEdit').classList.contains('hidden')) {
-            closeEditModal();
-        }
+$(document).on('keydown', function(e) {
+    if (e.key === 'Escape') {
+        if (!$('#imageModal').hasClass('hidden')) closeImageModal();
+        if (!$('#modalTambah').hasClass('hidden')) closeModal();
+        if (!$('#modalEdit').hasClass('hidden')) closeEditModal();
+        if (!$('#modalFilter').hasClass('hidden')) closeFilterModal();
     }
 });
 </script>

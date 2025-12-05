@@ -35,7 +35,6 @@ class Barang extends BaseModel {
     }
 
     public function withKategoriAndStok($id_gudang = null) {
-        // AND dt.expired_date > CURDATE() -> ini tk buang
         $sql = "SELECT b.*, k.nama_kategori, 
                 (SELECT COALESCE(SUM(sisa_kuantitas), 0) 
                 FROM detail_transaksi dt 
