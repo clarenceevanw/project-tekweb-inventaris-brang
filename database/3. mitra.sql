@@ -5,5 +5,5 @@ CREATE TABLE mitra (
     nama_mitra VARCHAR(100) NOT NULL,
     username_mitra VARCHAR(100) UNIQUE NOT NULL,
     password_mitra VARCHAR(255) NOT NULL,
-    email_mitra VARCHAR(255) UNIQUE NOT NULL,
+    email_mitra VARCHAR(255) UNIQUE NOT NULL
 );
