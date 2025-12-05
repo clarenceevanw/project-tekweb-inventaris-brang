@@ -142,7 +142,7 @@
     }
 </style>
 
-<footer id="footer" class="relative overflow-hidden text-white mt-auto" style="background-color:#9b8fd9;">
+<footer id="footer" class="relative z-2 overflow-hidden text-white mt-auto" style="background-color:#9b8fd9;">
     <div class="mx-auto px-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mb-12 space-y-10">
 
