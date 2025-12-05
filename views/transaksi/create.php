@@ -1,5 +1,65 @@
 <?php $this->extend('layouts/admin'); ?>
 
+<?php $this->section('header'); ?>
+<style>
+.select2-container--default .select2-selection--single {
+    height: 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: normal;
+    padding: 0;
+    color: #111827;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #9ca3af;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 40px;
+    right: 8px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--single {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.select2-dropdown {
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #3b82f6;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #eff6ff;
+    color: #1e40af;
+}
+</style>
+<?php $this->endSection(); ?>
+
 <?php $this->section('content'); ?>
 
 <div class="container mx-auto px-4 py-8">
@@ -101,7 +161,7 @@ function addItem() {
         <div class="grid grid-cols-1 ${gridCols} gap-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Barang</label>
-                <select name="items[${itemIndex}][id_barang]" required onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="items[${itemIndex}][id_barang]" id="barang_${itemIndex}" required onchange="updateTotal()" class="barang-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">-- Pilih Barang --</option>
                     ${barangData.map(b => `<option value="${b.id_barang}">${b.nama_barang}</option>`).join('')}
                 </select>
@@ -113,7 +173,7 @@ function addItem() {
             ${!isBuy ? `
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Expired Date (Opsional)</label>
-                <input type="date" name="items[${itemIndex}][expired_date]" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="date" name="items[${itemIndex}][expired_date]" class="w-full px-3 py-[0.44rem] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>` : ''}
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Harga Total</label>
@@ -131,6 +191,13 @@ function addItem() {
     `;
     
     container.appendChild(itemDiv);
+    $(`#barang_${itemIndex}`).select2({
+        placeholder: '-- Pilih Barang --',
+        allowClear: true,
+        width: '100%',
+        theme: 'default',
+        dropdownCssClass: 'select2-custom'
+    });
     itemIndex++;
 }
 
@@ -148,6 +215,15 @@ function updateTotal() {
     });
     document.getElementById('totalHarga').textContent = total.toLocaleString('id-ID');
 }
+
+// Initialize Select2 for mitra
+$('#id_mitra').select2({
+    placeholder: '-- Pilih Mitra --',
+    allowClear: true,
+    width: '100%',
+    theme: 'default',
+    dropdownCssClass: 'select2-custom'
+});
 
 // Don't add item on load, wait for jenis_transaksi selection
 
