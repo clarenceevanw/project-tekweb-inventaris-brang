@@ -22,11 +22,12 @@
     }
 
     .hero-section {
-        background: linear-gradient(135deg, #9b8fd9 0%, #877acc 50%, #7a6bb8 100%);
         min-height: 100vh;
-        position: relative;
+        min-width: 100vW;
         overflow: hidden;
         user-select: none;
+        position: fixed;
+        z-index: 1;
     }
 
     #canvas-container {
@@ -137,6 +138,79 @@
     let dragPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
     let dragPoint = new THREE.Vector3();
 
+    const wallColor = 0x877acc; // dinding kiri/kanan
+    const wallDark = 0x7a6bb8; // dinding belakang
+    const floorColor = 0x6d60b0; // lantai
+    const ceilingColor = 0x9b8fd9; // plafon
+
+    const wallMaterial = new THREE.MeshPhongMaterial({
+        color: wallColor
+    });
+    const wallDarkMaterial = new THREE.MeshPhongMaterial({
+        color: wallDark
+    });
+    const floorMaterial = new THREE.MeshPhongMaterial({
+        color: floorColor
+    });
+    const ceilingMaterial = new THREE.MeshPhongMaterial({
+        color: ceilingColor
+    });
+
+    const ROOM_W = 20; // lebar kiri kanan
+    const ROOM_H = 9; // tinggi
+    const ROOM_D = 8; // kedalaman
+
+    const backWall = new THREE.Mesh(
+        new THREE.PlaneGeometry(ROOM_W, ROOM_H),
+        wallDarkMaterial
+    );
+    backWall.position.set(0, 0, -ROOM_D / 2);
+    scene.add(backWall);
+
+    // ==== FLOOR ====
+    const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(ROOM_W, ROOM_D),
+        floorMaterial
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -ROOM_H / 2;
+    scene.add(floor);
+
+    // ==== CEILING ====
+    const ceiling = new THREE.Mesh(
+        new THREE.PlaneGeometry(ROOM_W, ROOM_D),
+        ceilingMaterial
+    );
+    ceiling.rotation.x = Math.PI / 2;
+    ceiling.position.y = ROOM_H / 2;
+    scene.add(ceiling);
+
+    // ==== LEFT WALL ====
+    const leftWall = new THREE.Mesh(
+        new THREE.PlaneGeometry(ROOM_D, ROOM_H),
+        wallMaterial
+    );
+    leftWall.rotation.y = Math.PI / 2;
+    leftWall.position.x = -ROOM_W / 2;
+    scene.add(leftWall);
+
+    // ==== RIGHT WALL ====
+    const rightWall = new THREE.Mesh(
+        new THREE.PlaneGeometry(ROOM_D, ROOM_H),
+        wallMaterial
+    );
+    rightWall.rotation.y = -Math.PI / 2;
+    rightWall.position.x = ROOM_W / 2;
+    scene.add(rightWall);
+
+    // ==== OPTIONAL LIGHT ====
+    const ambientLight2 = new THREE.AmbientLight(0x7a6bb8, 0.1);
+    scene.add(ambientLight2);
+
+    const dirLight = new THREE.DirectionalLight(0x6d60b0, 0.2);
+    dirLight.position.set(5, 10, 8);
+    scene.add(dirLight);
+
     // ini atur kardus nya brp
     for (let i = 0; i < 25; i++) {
         const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
@@ -244,9 +318,41 @@
             box.rotation.y += box.velocity.ry;
             box.rotation.z += box.velocity.rz;
 
-            if (Math.abs(box.position.x) > 5) box.velocity.x *= -1;
-            if (Math.abs(box.position.y) > 5) box.velocity.y *= -1;
-            if (Math.abs(box.position.z) > 3) box.velocity.z *= -1;
+            // === ROOM COLLISION ===F
+            // Setengah ukuran room
+            const halfW = ROOM_W / 2 - 0.5; // dikurangi 0.5 biar tidak tembus
+            const halfH = ROOM_H / 2 - 0.5;
+            const halfD = ROOM_D / 2 - 0.5;
+
+            // X collision (left/right walls)
+            if (box.position.x < -halfW) {
+                box.position.x = -halfW;
+                box.velocity.x *= -1;
+            }
+            if (box.position.x > halfW) {
+                box.position.x = halfW;
+                box.velocity.x *= -1;
+            }
+
+            // Y collision (floor/ceiling)
+            if (box.position.y < -halfH) {
+                box.position.y = -halfH;
+                box.velocity.y *= -1;
+            }
+            if (box.position.y > halfH) {
+                box.position.y = halfH;
+                box.velocity.y *= -1;
+            }
+
+            // Z collision (front/back)
+            if (box.position.z < -halfD) {
+                box.position.z = -halfD;
+                box.velocity.z *= -1;
+            }
+            if (box.position.z > halfD) {
+                box.position.z = halfD;
+                box.velocity.z *= -1;
+            }
 
             box.collisionCooldown--;
 

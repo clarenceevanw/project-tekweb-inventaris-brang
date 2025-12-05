@@ -1,5 +1,5 @@
 <!-- DEMO SECTION -->
-<section id="demo" class="relative section demo-section">
+<section id="demo" class="relative section demo-section z-2">
     <h1 class="demo-main-title">Explore Our Core Features</h1>
     <!-- <p class="demo-main-subtitle">Sistem inventaris yang terintegrasi dari dashboard hingga mobile</p> -->
     
@@ -62,6 +62,7 @@
 <style>
     .demo-section {
         padding: 80px 40px;
+        background-color: #7a6bb8;
     }
 
     .demo-main-title {

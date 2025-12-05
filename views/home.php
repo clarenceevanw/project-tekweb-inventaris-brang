@@ -10,6 +10,7 @@
 
 <div class="home-wrapper">
     <?php include __DIR__ . '/components/hero.php'; ?>
+    <div class="w-screen h-screen"></div>
     <?php include __DIR__ . '/components/demo.php'; ?>
     <?php include __DIR__ . '/components/features.php'; ?>
     <?php include __DIR__ . '/components/subscription.php'; ?>

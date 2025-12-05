@@ -127,7 +127,7 @@ $cardStyles = [
     }
 </style>
 
-<section id="subscription" class="relative h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #f9f1ffff 0%, #e0d4f7 30%, #9b8fd9 70%, #877acc 100%);">
+<section id="subscription" class="relative z-2 h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #f9f1ffff 0%, #e0d4f7 30%, #9b8fd9 70%, #877acc 100%);">
     <div class="max-w-6xl mx-auto w-full relative z-10">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Choose Your Plan</h1>

@@ -120,7 +120,7 @@
     }
 </style>
 
-<section id="features" class="py-16 md:py-24 px-4 md:px-8 text-white">
+<section id="features" class="relative bg-[#7a6bb8] py-16 md:py-24 px-4 md:px-8 text-white z-2">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12 md:mb-16">
@@ -142,7 +142,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Dashboard</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Dapatkan gambaran lengkap tentang inventaris Anda sekilas</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('dashboard-organizer')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-organizer')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Admin -->
@@ -152,7 +152,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Admin</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Kontrol akses admin dan izin untuk tim Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-admin')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-admin')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Product's Category -->
@@ -164,7 +164,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Kategori Produk</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Organisir produk ke dalam kategori untuk manajemen yang lebih baik</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-category')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-category')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Product -->
@@ -174,7 +174,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Produk</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Tambah, edit, dan lacak semua produk Anda dengan efisien</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-product')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-product')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Room -->
@@ -187,7 +187,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Ruangan</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Organisir ruang penyimpanan dan konfigurasi ruangan</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-room')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-room')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Transaction -->
@@ -205,7 +205,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Transaksi</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Lacak dan kelola semua transaksi inventaris</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-transaction')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-transaction')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- scan qr -->
@@ -219,7 +219,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Scan QR</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Scan QR untuk mendapatkan detail barang</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('scan-qr')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('scan-qr')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Warehouse -->
@@ -232,7 +232,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Kelola Gudang</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Kelola beberapa gudang dari satu platform</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('manage-warehouse')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-warehouse')">Pelajari Lebih Lanjut</button>
                 </div>
             </div>
         </div>
@@ -251,7 +251,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Dashboard</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Pantau metrik kemitraan dan kinerja Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('dashboard-partner')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-partner')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Transaction's History -->
@@ -269,7 +269,7 @@
                         </svg></div>
                     <h4 class="text-xl font-bold text-white mb-2">Riwayat Transaksi</h4>
                     <p class="text-white text-opacity-80 text-sm mb-4">Lihat riwayat detail semua transaksi Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold" onclick="openModal('transaction-history')">Pelajari Lebih Lanjut</button>
+                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('transaction-history')">Pelajari Lebih Lanjut</button>
                 </div>
             </div>
         </div>
@@ -284,7 +284,7 @@
             <button onclick="closeModal()" class="float-right text-purple-300 hover:text-purple-200 text-2xl leading-none">×</button>
 
             <!-- Modal Image -->
-            <img class="modal-icon" id="modalImage" class="w-full object-contain" src="modalImage" alt="">
+            <img class="modal-icon" id="modalImage" class="w-full object-contain" alt="">
 
             <!-- Modal Content -->
             <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-purple-200 mb-4 text-center"></h3>
