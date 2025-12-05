@@ -6,16 +6,22 @@
     <div class="flex items-center gap-2 mb-4 text-sm">
         <span class="text-gray-600">Ruangan</span>
     </div>
-    <div class="mb-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-800">Daftar Ruangan</h2>
-            <p class="text-sm text-gray-500">Kelola ruangan penyimpanan di gudang.</p>
+    <div class="mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">Daftar Ruangan</h2>
+                <p class="text-sm text-gray-500">Kelola ruangan penyimpanan di gudang.</p>
+            </div>
+            <div>
+                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
+                    <span class="hidden sm:inline">+ Tambah Ruangan</span>
+                    <span class="sm:hidden">+ Tambah</span>
+                </button>
+            </div>
         </div>
-        <div>
-            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                <span class="hidden sm:inline">+ Tambah Ruangan</span>
-                <span class="sm:hidden">+ Tambah</span>
-            </button>
+        <div class="flex-1">
+            <input type="text" id="searchInput" placeholder="Cari nama ruangan..." 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
     </div>
 
@@ -32,14 +38,14 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200" id="tableBody">
                     <?php if(empty($dataRuangan)): ?>
                         <tr>
                             <td colspan="2" class="px-6 py-4 text-center text-gray-500">Tidak ada data ruangan.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($dataRuangan as $row): ?>
-                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <tr class="hover:bg-gray-50 transition-colors duration-150" data-nama="<?= strtolower($row['nama_ruangan']) ?>">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-medium text-gray-900"><?= $row['nama_ruangan'] ?></div>
                             </td>
@@ -301,6 +307,26 @@ function deleteRuangan(id, namaRuangan) {
         }
     });
 }
+
+function applyFilter() {
+    const search = $('#searchInput').val().toLowerCase();
+    let visibleCount = 0;
+    
+    $('#tableBody tr').each(function() {
+        const $row = $(this);
+        const nama = $row.data('nama') || '';
+        const isVisible = !search || nama.includes(search);
+        $row.toggle(isVisible);
+        if (isVisible) visibleCount++;
+    });
+    
+    $('#noDataRow').remove();
+    if (visibleCount === 0) {
+        $('#tableBody').append('<tr id="noDataRow"><td colspan="2" class="px-6 py-4 text-center text-gray-500">Tidak ada ruangan yang sesuai.</td></tr>');
+    }
+}
+
+$('#searchInput').on('input', applyFilter);
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {

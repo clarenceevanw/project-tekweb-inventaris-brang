@@ -26,6 +26,7 @@ class TransaksiController extends BaseController {
     public function index() {
         $data['title'] = 'Transaksi';
         $data['dataTransaksi'] = $this->model->getByGudang($_SESSION['gudang']['id_gudang']);
+        $data['mitra'] = $this->mitra->all();
         return $this->view('transaksi/index', $data);
     }
 
