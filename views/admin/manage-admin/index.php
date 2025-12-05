@@ -124,11 +124,19 @@
                         <h3 class="text-lg leading-6 font-medium text-gray-900">Tambah Admin Baru</h3>
                         <div class="mt-2">
                             <form id="formTambah">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
-                                    <input type="text" name="nama_admin" id="nama_admin" required
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="Masukkan nama lengkap">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
+                                        <input type="text" name="nama_admin" id="nama_admin" required
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Masukkan nama lengkap">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                        <input type="email" name="email_admin" id="email_admin" required
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Masukkan email">
+                                    </div>
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
@@ -184,10 +192,17 @@
                         <div class="mt-2">
                             <form id="formEdit">
                                 <input type="hidden" name="id_admin" id="edit_id_admin">
-                                <div class="mb-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
-                                    <input type="text" name="nama_admin" id="edit_nama_admin" required
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
+                                        <input type="text" name="nama_admin" id="edit_nama_admin" required
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                        <input type="email" name="email_admin" id="edit_email_admin" required
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
@@ -275,6 +290,7 @@ $('#formTambah').on('submit', function(e) {
 function openEditModal(data) {
     $('#edit_id_admin').val(data.id_admin);
     $('#edit_nama_admin').val(data.nama_admin);
+    $('#edit_email_admin').val(data.email_admin || '');
     $('#edit_username_admin').val(data.username_admin);
     $('#edit_password_admin').val('');
     

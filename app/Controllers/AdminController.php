@@ -55,11 +55,17 @@ class AdminController extends BaseController
 
         // Sanitasi dan validasi input
         $namaAdmin = AdminManagementMiddleware::sanitizeInput($_POST['nama_admin'] ?? '');
+        $emailAdmin = AdminManagementMiddleware::sanitizeInput($_POST['email_admin'] ?? '');
         $usernameAdmin = AdminManagementMiddleware::sanitizeInput($_POST['username_admin'] ?? '');
         $passwordAdmin = $_POST['password_admin'] ?? '';
 
-        if (empty($namaAdmin) || empty($usernameAdmin) || empty($passwordAdmin)) {
+        if (empty($namaAdmin) || empty($emailAdmin) || empty($usernameAdmin) || empty($passwordAdmin)) {
             return $this->json(['success' => false, 'message' => 'Semua field harus diisi!']);
+        }
+
+        // Validasi format email
+        if (!filter_var($emailAdmin, FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['success' => false, 'message' => 'Format email tidak valid!']);
         }
 
         // Validasi password
@@ -84,6 +90,7 @@ class AdminController extends BaseController
 
         $adminData = [
             'nama_admin' => $namaAdmin,
+            'email_admin' => $emailAdmin,
             'username_admin' => $usernameAdmin,
             'password_admin' => password_hash($passwordAdmin, PASSWORD_DEFAULT),
             'id_gudang' => $currentGudangId
@@ -106,11 +113,17 @@ class AdminController extends BaseController
 
         $idAdmin = AdminManagementMiddleware::sanitizeInput($_POST['id_admin'] ?? '');
         $namaAdmin = AdminManagementMiddleware::sanitizeInput($_POST['nama_admin'] ?? '');
+        $emailAdmin = AdminManagementMiddleware::sanitizeInput($_POST['email_admin'] ?? '');
         $usernameAdmin = AdminManagementMiddleware::sanitizeInput($_POST['username_admin'] ?? '');
         $passwordAdmin = $_POST['password_admin'] ?? '';
 
-        if (empty($idAdmin) || empty($namaAdmin) || empty($usernameAdmin)) {
+        if (empty($idAdmin) || empty($namaAdmin) || empty($emailAdmin) || empty($usernameAdmin)) {
             return $this->json(['success' => false, 'message' => 'Data tidak lengkap!']);
+        }
+
+        // Validasi format email
+        if (!filter_var($emailAdmin, FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['success' => false, 'message' => 'Format email tidak valid!']);
         }
 
         // Validasi akses admin
@@ -137,6 +150,7 @@ class AdminController extends BaseController
 
         $updateData = [
             'nama_admin' => $namaAdmin,
+            'email_admin' => $emailAdmin,
             'username_admin' => $usernameAdmin
         ];
 

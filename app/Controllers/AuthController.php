@@ -112,6 +112,7 @@ class AuthController extends BaseController {
     public function signupAdmin() {
         $adminData = [
             'nama_admin' => $_POST['nama_admin'],
+            'email_admin' => $_POST['email_admin'],
             'username_admin' => $_POST['username_admin'],
             'password_admin' => password_hash($_POST['password_admin'], PASSWORD_DEFAULT)
         ];
@@ -133,6 +134,7 @@ class AuthController extends BaseController {
     public function signupMitra() {
         $mitraData = [
             'nama_mitra' => $_POST['nama_mitra'],
+            'email_mitra' => $_POST['email_mitra'],
             'username_mitra' => $_POST['username_mitra'],
             'password_mitra' => password_hash($_POST['password_mitra'], PASSWORD_DEFAULT)
         ];
