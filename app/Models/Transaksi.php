@@ -62,7 +62,7 @@ class Transaksi extends BaseModel {
     }
 
     public function getByGudang($id_gudang) {
-        $stmt = $this->db->prepare("SELECT t.*, m.nama_mitra FROM transaksi t LEFT JOIN mitra m ON t.id_mitra = m.id_mitra JOIN admin a ON t.id_admin = a.id_admin WHERE a.id_gudang = ? ORDER BY t.tanggal_transaksi DESC");
+        $stmt = $this->db->prepare("SELECT t.*, m.nama_mitra FROM transaksi t LEFT JOIN mitra m ON t.id_mitra = m.id_mitra LEFT JOIN admin a ON t.id_admin = a.id_admin WHERE t.id_gudang = ? ORDER BY t.tanggal_transaksi DESC");
         $stmt->execute([$id_gudang]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

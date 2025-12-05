@@ -94,7 +94,8 @@ class TransaksiController extends BaseController {
                 'jenis_transaksi' => $_POST['jenis_transaksi'],
                 'harga_transaksi' => $total_harga,
                 'id_mitra' => $_POST['id_mitra'],
-                'id_admin' => $_SESSION['user']['id_admin']
+                'id_admin' => $_SESSION['user']['id_admin'],
+                'id_gudang' => $_SESSION['gudang']['id_gudang']
             ]);
 
             if (!$resultTransaksi) throw new Exception('Gagal menyimpan transaksi');
