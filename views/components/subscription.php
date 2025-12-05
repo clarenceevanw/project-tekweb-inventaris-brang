@@ -127,14 +127,14 @@ $cardStyles = [
     }
 </style>
 
-<section id="subscription" class="h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #f9f1ffff 0%, #e0d4f7 30%, #9b8fd9 70%, #877acc 100%);">
+<section id="subscription" class="relative h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #f9f1ffff 0%, #e0d4f7 30%, #9b8fd9 70%, #877acc 100%);">
     <div class="max-w-6xl mx-auto w-full relative z-10">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Choose Your Plan</h1>
             <p class="text-lg font-medium" style="color: #7a6bb8;">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 max-w-5xl mx-auto p-4">
             <?php if (isset($paket_subscriptions) && !empty($paket_subscriptions)): ?>
                 <?php foreach ($paket_subscriptions as $index => $paket): ?>
                     <?php $style = $cardStyles[$index % 3]; ?>
@@ -165,7 +165,7 @@ $cardStyles = [
                         </ul>
 
                         <a href="/auth/subscribe-redirect" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
-                            <?= $paket['harga'] == 0 ? 'Start Trial' : 'Subscribe Now' ?>
+                            <?= $paket['harga'] == 0 ? 'Try Now' : 'Subscribe Now' ?>
                         </a>
                     </div>
                 <?php endforeach; ?>
