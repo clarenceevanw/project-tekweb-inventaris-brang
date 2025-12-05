@@ -274,7 +274,12 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: true,
+                animation: {
+                    animateRotate: true,
+                    animateScale: false,
+                    duration: 700,
+                    easing: 'easeOutQuart'
+                },
                 layout: {
                     padding: 10
                 },
