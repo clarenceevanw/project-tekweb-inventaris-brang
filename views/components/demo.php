@@ -1,5 +1,5 @@
 <!-- DEMO SECTION -->
-<section id="demo" class="section demo-section">
+<section id="demo" class="relative section demo-section">
     <h1 class="demo-main-title">Explore Our Core Features</h1>
     <!-- <p class="demo-main-subtitle">Sistem inventaris yang terintegrasi dari dashboard hingga mobile</p> -->
     
@@ -11,14 +11,14 @@
                 <p class="demo-description">Pantau stok, transaksi, dan laporan sekaligus dengan laporan grafik terpadu</p>
             </div>
             <div class="demo-mockup">
-                <img src="/assets/gambar_demo/demo_tekweb_1.png" alt="Demo Dashboard" class="demo-image">
+                <img src="/assets/demo/demo_tekweb_1.png" alt="Demo Dashboard" class="demo-image">
             </div>
         </div>
 
         <!-- Demo Preview 2: Gambar Kiri, Keterangan Kanan -->
         <div class="demo-preview demo-preview-right">
             <div class="demo-mockup">
-                <img src="/assets/gambar_demo/demo_tekweb_2.png" alt="Demo Dashboard" class="demo-image">
+                <img src="/assets/demo/demo_tekweb_2.png" alt="Demo Dashboard" class="demo-image">
             </div>
             <div class="demo-header">
                 <h3 class="demo-title">Integrated QR Scan</h3>
