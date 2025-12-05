@@ -4,16 +4,25 @@
     }
 
     .navbar-trapezoid {
-        background: #ada1ea;
-        clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+        background: rgba(180, 150, 220, 0.5);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         position: relative;
         z-index: 1;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 8px 24px rgba(180, 150, 220, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(210, 180, 240, 0.4);
     }
 
     .navbar-right {
-        background: #ada1ea;
-        border-bottom-left-radius: 12px;
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+        background: rgba(180, 150, 220, 0.5);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 8px 24px rgba(180, 150, 220, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(210, 180, 240, 0.4);
     }
 
     .nav-link::before,
@@ -202,11 +211,12 @@
         <!-- Desktop Navbar -->
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
 
-            <div class="navbar-trapezoid flex items-center gap-8 px-10 py-3">
-                <a href="/" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Home</a>
+            <div class="navbar-trapezoid flex items-center gap-8 px-4 py-3">
+                <a href="/#hero" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Home</a>
                 <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Demo</a>
                 <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Features</a>
                 <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Subscription</a>
+                <a href="/#contact" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Contact</a>
             </div>
 
             <div class="navbar-right absolute right-0 gap-4 px-6 py-2">
@@ -232,7 +242,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                 </svg>
-                <a href="/" class="menu-link">HOME</a>
+                <a href="/#hero" class="menu-link">HOME</a>
                 <a href="/#demo" class="menu-link">DEMO</a>
                 <a href="/#features" class="menu-link">FEATURES</a>
                 <a href="/#subscription" class="menu-link">SUBSCRIPTION</a>
