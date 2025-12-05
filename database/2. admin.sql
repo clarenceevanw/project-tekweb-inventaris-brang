@@ -5,6 +5,7 @@ CREATE TABLE admin (
     nama_admin VARCHAR(100) NOT NULL,
     username_admin VARCHAR(100) UNIQUE NOT NULL,
     password_admin VARCHAR(255) NOT NULL,
+    email_admin VARCHAR(255) UNIQUE NOT NULL,
     id_gudang CHAR(36),
     deleted_at TIMESTAMP NULL DEFAULT NULL,
 
