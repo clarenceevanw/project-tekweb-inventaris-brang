@@ -6,16 +6,22 @@
     <div class="flex items-center gap-2 mb-4 text-sm">
         <span class="text-gray-600">Kelola Admin</span>
     </div>
-    <div class="mb-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-800">Daftar Admin</h2>
-            <p class="text-sm text-gray-500">Kelola admin di gudang <?= htmlspecialchars($currentGudang['nama_gudang']) ?>.</p>
+    <div class="mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">Daftar Admin</h2>
+                <p class="text-sm text-gray-500">Kelola admin di gudang <?= htmlspecialchars($currentGudang['nama_gudang']) ?>.</p>
+            </div>
+            <div>
+                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
+                    <span class="hidden sm:inline">+ Tambah Admin</span>
+                    <span class="sm:hidden">+ Tambah</span>
+                </button>
+            </div>
         </div>
-        <div>
-            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                <span class="hidden sm:inline">+ Tambah Admin</span>
-                <span class="sm:hidden">+ Tambah</span>
-            </button>
+        <div class="flex-1">
+            <input type="text" id="searchInput" placeholder="Cari nama atau username admin..." 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
     </div>
 
@@ -41,14 +47,14 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200" id="tableBody">
                     <?php if(empty($dataAdmin)): ?>
                         <tr>
                             <td colspan="5" class="px-6 py-4 text-center text-gray-500">Tidak ada data admin.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($dataAdmin as $row): ?>
-                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                        <tr class="hover:bg-gray-50 transition-colors duration-150" data-nama="<?= strtolower($row['nama_admin']) ?>" data-username="<?= strtolower($row['username_admin']) ?>">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
@@ -390,6 +396,27 @@ function deleteAdmin(id, namaAdmin) {
         }
     });
 }
+
+function applyFilter() {
+    const search = $('#searchInput').val().toLowerCase();
+    let visibleCount = 0;
+    
+    $('#tableBody tr').each(function() {
+        const $row = $(this);
+        const nama = $row.data('nama') || '';
+        const username = $row.data('username') || '';
+        const isVisible = !search || nama.includes(search) || username.includes(search);
+        $row.toggle(isVisible);
+        if (isVisible) visibleCount++;
+    });
+    
+    $('#noDataRow').remove();
+    if (visibleCount === 0) {
+        $('#tableBody').append('<tr id="noDataRow"><td colspan="5" class="px-6 py-4 text-center text-gray-500">Tidak ada admin yang sesuai.</td></tr>');
+    }
+}
+
+$('#searchInput').on('input', applyFilter);
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
