@@ -199,7 +199,7 @@
                 <!-- 4. Barang -->
                 <a href="/admin/barang" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('barang') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 bi bi-box-seam" viewBox="0 0 16 16"  stroke="currentColor" stroke-width="0.3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 bi bi-box-seam" viewBox="0 0 16 16" stroke="currentColor" stroke-width="0.3">
                             <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
                         </svg>
                     </div>
@@ -279,8 +279,20 @@
             </nav>
 
             <!-- Bottom: Logout -->
-            <div class="border-t border-gray-100 p-4">
-                <a href="/logout" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors p-2 text-gray-600 hover:text-red-600">
+            <div class="border-t border-gray-100 px-4 py-2">
+                <a href="/#hero" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-1 text-gray-600 hover:text-red-600">
+                    <div class="w-8 flex justify-center items-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-house-door" viewBox="0 0 16 16">
+                            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
+                        </svg>
+                    </div>
+                    <span class="ml-[1.15rem] text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                        Home
+                    </span>
+                </a>
+            </div>
+            <div class="px-4 py-2">
+                <a href="/logout" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-[0.45rem] text-gray-600 hover:text-red-600">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
