@@ -211,8 +211,32 @@
     dirLight.position.set(5, 10, 8);
     scene.add(dirLight);
 
+    function cameraShake(duration = 300, intensity = 0.05) {
+        const startTime = performance.now();
+        const originalPos = camera.position.clone();
+
+        function shake() {
+            const elapsed = performance.now() - startTime;
+
+            if (elapsed < duration) {
+                const power = 1 - (elapsed / duration); // makin lama makin kecil
+
+                camera.position.x = originalPos.x + (Math.random() - 0.5) * intensity * power;
+                camera.position.y = originalPos.y + (Math.random() - 0.5) * intensity * power;
+                camera.position.z = originalPos.z + (Math.random() - 0.5) * intensity * power;
+
+                requestAnimationFrame(shake);
+            } else {
+                // Kembalikan posisi kamera
+                camera.position.copy(originalPos);
+            }
+        }
+
+        shake();
+    }
+
     // ini atur kardus nya brp
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 30; i++) {
         const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
         const material = new THREE.MeshPhongMaterial({
             color: colors[i % colors.length],
@@ -220,20 +244,30 @@
         });
         const box = new THREE.Mesh(geometry, material);
 
-        box.position.x = (Math.random() - 0.5) * 8;
-        box.position.y = (Math.random() - 0.5) * 8;
-        box.position.z = (Math.random() - 0.5) * 4;
+        // === SPAWN KOTAK DI TENGAH ===
+        box.position.set(
+            (Math.random() - 0.5) * 0.3,
+            (Math.random() - 0.5) * 0.3,
+            (Math.random() - 0.5) * 0.3
+        );
 
-        box.rotation.x = Math.random() * Math.PI;
-        box.rotation.y = Math.random() * Math.PI;
+        // === VELOCITY LEDAKAN AWAL ===
+        const explodePower = 0.12;
+        const dir = new THREE.Vector3(
+            (Math.random() - 0.5),
+            (Math.random() - 0.5),
+            (Math.random() - 0.5)
+        ).normalize();
 
         box.velocity = {
-            x: (Math.random() - 0.5) * 0.04,
-            y: (Math.random() - 0.5) * 0.04,
-            z: (Math.random() - 0.5) * 0.04,
-            rx: (Math.random() - 0.5) * 0.01,
-            ry: (Math.random() - 0.5) * 0.01,
-            rz: (Math.random() - 0.5) * 0.01
+            x: dir.x * explodePower,
+            y: dir.y * explodePower,
+            z: dir.z * explodePower,
+
+            // rotasi saat ledakan
+            rx: (Math.random() - 0.5) * 0.06,
+            ry: (Math.random() - 0.5) * 0.06,
+            rz: (Math.random() - 0.5) * 0.06
         };
 
         box.collisionCooldown = 0;
@@ -241,6 +275,7 @@
         scene.add(box);
         boxes.push(box);
     }
+    cameraShake(300, 0.4);
 
     const light = new THREE.DirectionalLight(0xffffff, 0.8);
     light.position.set(5, 5, 5);
@@ -288,8 +323,8 @@
         selectedBox = null;
     });
 
-    const MAX_SPEED = 0.04;
-    const COLLISION_DAMPING = 0.8;
+    const MAX_SPEED = 0.06;
+    const COLLISION_DAMPING = 0.95;
     const MIN_DISTANCE = 0.9;
 
     function clampSpeed(vel) {
@@ -318,9 +353,8 @@
             box.rotation.y += box.velocity.ry;
             box.rotation.z += box.velocity.rz;
 
-            // === ROOM COLLISION ===F
             // Setengah ukuran room
-            const halfW = ROOM_W / 2 - 0.5; // dikurangi 0.5 biar tidak tembus
+            const halfW = ROOM_W / 2 - 0.5;
             const halfH = ROOM_H / 2 - 0.5;
             const halfD = ROOM_D / 2 - 0.5;
 
