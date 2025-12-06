@@ -10,6 +10,7 @@ require_once __DIR__ . '/../app/Controllers/TransaksiController.php';
 require_once __DIR__ . '/../app/Controllers/AdminController.php';
 require_once __DIR__ . '/../app/Controllers/SubscriptionController.php';
 require_once __DIR__ . '/../app/Controllers/GudangController.php';
+require_once __DIR__ . '/../app/Controllers/ProfileController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -32,6 +33,11 @@ Router::get("/signup/mitra", "AuthController@showSignupMitra");
 Router::post("/signup/mitra", "AuthController@signupMitra");
 
 Router::get("/logout", "AuthController@logout");
+
+// Profile Routes
+Router::get("/profile", "ProfileController@index", "auth");
+Router::post("/profile/update-username", "ProfileController@updateUsername", "auth");
+Router::post("/profile/update-email", "ProfileController@updateEmail", "auth");
 
 //Mitra Routes
 Router::get("/mitra/dashboard", "DashboardController@mitraDashboard", "auth");

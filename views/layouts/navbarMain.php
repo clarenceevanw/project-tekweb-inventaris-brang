@@ -1,3 +1,13 @@
+<?php
+if (!isset($isLoggedIn)) {
+    $isLoggedIn = isset($_SESSION['user_id']);
+    $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+}
+$userRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
+$dashboardUrl = ($userRole === 'mitra') ? '/mitra/dashboard' : '/admin/dashboard';
+$userData = isset($_SESSION['user']) ? $_SESSION['user'] : [];
+$gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
+?>
 <style>
     .nav-hidden {
         transform: translateY(-100%);
@@ -201,6 +211,38 @@
     body.menu-open {
         overflow: hidden;
     }
+
+    .profile-popup {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 0.5rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(122, 107, 184, 0.3);
+        padding: 1.5rem;
+        min-width: 280px;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
+    }
+
+    .profile-popup.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .profile-icon {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .profile-icon:hover {
+        transform: scale(1.1);
+    }
 </style>
 </head>
 
@@ -211,17 +253,29 @@
         <!-- Desktop Navbar -->
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
 
-            <div class="navbar-trapezoid flex items-center gap-8 px-4 py-3">
+            <div class="navbar-trapezoid flex items-center gap-8 px-4 py-4">
                 <a href="/#hero" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Home</a>
                 <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Demo</a>
                 <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Features</a>
                 <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Subscription</a>
                 <a href="/#contact" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Contact</a>
+                <?php if ($isLoggedIn): ?>
+                    <a href="<?php echo $dashboardUrl; ?>" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Dashboard</a>
+                <?php endif; ?>
             </div>
 
-            <div class="navbar-right absolute right-0 gap-4 px-6 py-2">
-                <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log In</a>
-                <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block bg-[#7a6bb8] font-medium text-white rounded-lg">Sign Up</a>
+            <div class="navbar-right absolute right-0 gap-4 px-6 py-4 flex items-center">
+                <?php if ($isLoggedIn): ?>
+                    <a href="/profile" class="hover:opacity-80 transition-opacity">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                        </svg>
+                    </a>
+                    <a href="/logout" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log Out</a>
+                <?php else: ?>
+                    <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log In</a>
+                    <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block bg-[#7a6bb8] font-medium text-white rounded-lg">Sign Up</a>
+                <?php endif; ?>
             </div>
         </nav>
 
@@ -242,14 +296,34 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                 </svg>
+                <?php if ($isLoggedIn): ?>
+                    <div class="w-full flex items-center justify-evenly gap-3 pb-3 border-b border-white/20">
+                        <a href="/profile" class="flex items-center gap-3 hover:bg-white/10 p-2 rounded-lg transition-colors">
+                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            </svg>
+                            <div class="text-left">
+                                <p class="text-white font-semibold text-sm"><?php echo htmlspecialchars($userData[$userRole === 'admin' ? 'nama_admin' : 'nama_mitra'] ?? ''); ?></p>
+                                <p class="text-white/70 text-xs"><?php echo htmlspecialchars($username); ?></p>
+                            </div>
+                        </a>
+                        <a href="/logout" class="text-white hover:bg-white/10 p-2 rounded-lg transition-colors">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <a href="<?php echo $dashboardUrl; ?>" class="menu-link">DASHBOARD</a>
+                <?php else: ?>
+                    <div class="flex gap-4">
+                        <a href="/auth/select/login" class="menu-link border-2 border-[#ada1ea]">Log In</a>
+                        <a href="/auth/select/signup" class="menu-link border-2 border-[#ada1ea]">Sign Up</a>
+                    </div>
+                <?php endif; ?>
                 <a href="/#hero" class="menu-link">HOME</a>
                 <a href="/#demo" class="menu-link">DEMO</a>
                 <a href="/#features" class="menu-link">FEATURES</a>
                 <a href="/#subscription" class="menu-link">SUBSCRIPTION</a>
-                <div class="flex gap-4">
-                    <a href="/auth/select/login" class="menu-link border-2 border-[#ada1ea]">Log In</a>
-                    <a href="/auth/select/signup" class="menu-link border-2 border-[#ada1ea]">Sign Up</a>
-                </div>
                 <a href="#footer" class="menu-link">CONTACT</a>
             </div>
 
@@ -372,4 +446,6 @@
                 toggleMenu();
             }
         });
+
+
     </script>

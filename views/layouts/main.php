@@ -138,7 +138,11 @@
     <?php endif; ?> -->
 
     <main class="relative min-h-screen overflow-x-hidden">
-        <?php include __DIR__ . '/navbarMain.php'; ?>
+        <?php 
+            $isLoggedIn = isset($_SESSION['user_id']);
+            $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+            include __DIR__ . '/navbarMain.php'; 
+        ?>
         <?= $this->renderSection('content') ?>
         <?php include __DIR__ . '/footerMain.php'; ?>
     </main>

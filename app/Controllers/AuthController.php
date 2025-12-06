@@ -80,6 +80,8 @@ class AuthController extends BaseController {
             $_SESSION['user'] = $user;
             $_SESSION['role'] = 'admin';
             $_SESSION['gudang'] = $gudang;
+            $_SESSION['user_id'] = $user['id_admin'];
+            $_SESSION['username'] = $user['username_admin'];
             $this->flash('success', 'Login berhasil!');
             
             // Check for redirect in session
@@ -101,6 +103,8 @@ class AuthController extends BaseController {
         if ($user && password_verify($password, $user['password_mitra'])) {
             $_SESSION['user'] = $user;
             $_SESSION['role'] = 'mitra';
+            $_SESSION['user_id'] = $user['id_mitra'];
+            $_SESSION['username'] = $user['username_mitra'];
             $this->flash('success', 'Login berhasil!');
             return $this->redirect('/mitra/dashboard');
         }
