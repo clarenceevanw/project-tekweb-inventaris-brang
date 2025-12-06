@@ -34,20 +34,20 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #f3f4f6;
+            background: #25343B;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #d4c5f9 0%, #c9b8e4 100%);
+            background: linear-gradient(135deg, #FBEFDF 0%, #FBEFDF 100%);
             border-radius: 6px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #c9b8e4 0%, #b8a8d8 100%);
+            background: linear-gradient(135deg, #FBEFDF 0%, #FBEFDF 100%);
         }
 
         * {
-            scrollbar-color: #7a6bb8 #f3f4f6;
+            scrollbar-color: #FBEFDF #25343B;
             scrollbar-width: thin;
         }
 

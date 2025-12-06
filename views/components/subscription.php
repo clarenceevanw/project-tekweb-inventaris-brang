@@ -1,8 +1,8 @@
 <?php
 $cardStyles = [
-    ['bg' => 'rgba(255, 255, 255, 0.15)', 'text' => '#7a6bb8', 'subtext' => '#877acc', 'feature' => 'feature-item', 'badge' => true],
-    ['bg' => 'rgba(122, 107, 184, 0.2)', 'text' => 'white', 'subtext' => 'white', 'feature' => 'feature-item2', 'badge' => false, 'featured' => true],
-    ['bg' => 'rgba(255, 255, 255, 0.15)', 'text' => '#7a6bb8', 'subtext' => '#877acc', 'feature' => 'feature-item', 'badge' => false]
+    ['bg' => '#FBEFDF', 'text' => '#25343B', 'subtext' => '#25343B', 'feature' => 'feature-item', 'badge' => true],
+    ['bg' => '#e8d9c8', 'text' => '#25343B', 'subtext' => '#25343B', 'feature' => 'feature-item', 'badge' => false, 'featured' => true],
+    ['bg' => '#FBEFDF', 'text' => '#25343B', 'subtext' => '#25343B', 'feature' => 'feature-item', 'badge' => false]
 ];
 ?>
 
@@ -10,11 +10,11 @@ $cardStyles = [
     .subscription-card {
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(95, 165, 156, 0.2);
         position: relative;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 8px 32px rgba(122, 107, 184, 0.15), 0 4px 16px rgba(135, 122, 204, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(37, 52, 59, 0.15), 0 4px 16px rgba(95, 165, 156, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .subscription-card::before {
@@ -34,12 +34,12 @@ $cardStyles = [
 
     .subscription-card:hover {
         transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 60px rgba(122, 107, 184, 0.25), 0 10px 30px rgba(135, 122, 204, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 20px 60px rgba(37, 52, 59, 0.25), 0 10px 30px rgba(95, 165, 156, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        border-color: rgba(95, 165, 156, 0.3);
     }
 
     .featured {
-        border: 2px solid rgba(122, 107, 184, 0.4) !important;
+        border: 2px solid rgba(236, 78, 61, 0.4) !important;
     }
 
     .featured::after {
@@ -47,7 +47,7 @@ $cardStyles = [
         position: absolute;
         top: -4px;
         right: 16px;
-        background: linear-gradient(135deg, #877acc, #7a6bb8);
+        background: #EC4E3D;
         color: white;
         padding: 6px 16px;
         border-bottom-left-radius: 16px;
@@ -55,30 +55,27 @@ $cardStyles = [
         font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 1px;
-        box-shadow: 0 4px 12px rgba(122, 107, 184, 0.4);
+        box-shadow: 0 4px 12px rgba(236, 78, 61, 0.4);
     }
 
     .gradient-text {
-        background: linear-gradient(135deg, #7a6bb8, #877acc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #FBEFDF;
     }
 
     .divider {
         width: 48px;
         height: 2px;
-        background: linear-gradient(135deg, #877acc, #7a6bb8);
+        background: linear-gradient(135deg, #5fa59c, #EC4E3D);
         border-radius: 2px;
-        box-shadow: 0 2px 8px rgba(122, 107, 184, 0.3);
+        box-shadow: 0 2px 8px rgba(95, 165, 156, 0.3);
     }
 
     .subscribe-btn {
-        background: linear-gradient(135deg, #877acc, #7a6bb8);
+        background: #EC4E3D;
         position: relative;
         overflow: hidden;
         transition: all 0.3s ease;
-        box-shadow: 0 6px 20px rgba(122, 107, 184, 0.3);
+        box-shadow: 0 6px 20px rgba(236, 78, 61, 0.3);
     }
 
     .subscribe-btn::before {
@@ -88,7 +85,7 @@ $cardStyles = [
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #9b8fd9, #877acc);
+        background: #d43d2d;
         transition: left 0.3s ease;
         z-index: -1;
     }
@@ -99,20 +96,20 @@ $cardStyles = [
 
     .subscribe-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(122, 107, 184, 0.4);
+        box-shadow: 0 10px 30px rgba(236, 78, 61, 0.4);
     }
 
     .trial-badge {
-        background: linear-gradient(135deg, #e0d4f7, #f9f1ffff);
-        color: #7a6bb8;
-        border: 1px solid rgba(122, 107, 184, 0.2);
+        background: #25343B;
+        color: #FBEFDF;
+        border: 1px solid rgba(37, 52, 59, 0.2);
     }
 
     .feature-item::before {
         content: '✓';
         position: absolute;
         left: 0;
-        color: #877acc;
+        color: #25343B;
         font-weight: 700;
         font-size: 1.1rem;
     }
@@ -121,17 +118,17 @@ $cardStyles = [
         content: '✓';
         position: absolute;
         left: 0;
-        color: #fff;
+        color: #FBEFDF;
         font-weight: 700;
         font-size: 1.1rem;
     }
 </style>
 
-<section id="subscription" class="relative z-2 h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #f9f1ffff 0%, #e0d4f7 30%, #9b8fd9 70%, #877acc 100%);">
+<section id="subscription" class="relative z-2 h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #25343B 0%, #2d3f47 50%, #25343B 100%);">
     <div class="max-w-6xl mx-auto w-full relative z-10">
         <div class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Choose Your Plan</h1>
-            <p class="text-lg font-medium" style="color: #7a6bb8;">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
+            <p class="text-lg font-medium" style="color: #FBEFDF;">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 max-w-5xl mx-auto p-4">

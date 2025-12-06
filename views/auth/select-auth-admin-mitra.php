@@ -6,7 +6,7 @@
 
     .login-wrapper {
         min-height: 100vh;
-        background: linear-gradient(135deg, #9b8fd9 0%, #877acc 50%, #7a6bb8 100%);
+        background: linear-gradient(135deg, #FBEFDF 0%, #f5e5d0 50%, #FBEFDF 100%);
         display: grid;
         grid-template-columns: 1fr 1px 1fr;
         padding: 40px 20px;
@@ -23,12 +23,12 @@
     }
 
     .divider {
-        background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0.3) 80%, transparent);
+        background: linear-gradient(to bottom, transparent, rgba(37, 52, 59, 0.3) 20%, rgba(37, 52, 59, 0.3) 80%, transparent);
     }
 
     .login-title {
         font-size: 32px;
-        color: white;
+        color: #25343B;
         margin-bottom: 20px;
     }
 
@@ -40,7 +40,7 @@
 
     .login-description {
         font-size: 16px;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(37, 52, 59, 0.9);
         line-height: 1.6;
         margin-bottom: 40px;
         max-width: 400px;
@@ -51,8 +51,8 @@
 
     .login-btn {
         padding: 15px 60px;
-        background: white;
-        color: #877acc;
+        background: #25343B;
+        color: #FBEFDF;
         border: none;
         border-radius: 8px;
         font-size: 16px;
@@ -67,17 +67,17 @@
 
     .login-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        background: #f0e6ff;
+        box-shadow: 0 10px 25px rgba(37, 52, 59, 0.3);
+        background: #EC4E3D;
     }
 
     .signup-text {
         font-size: 14px;
-        color: white;
+        color: #25343B;
     }
 
     .signup-text a {
-        color: white;
+        color: #25343B;
         font-weight: 600;
         text-decoration: underline;
     }
@@ -99,7 +99,7 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
-<div class="min-h-screen w-full flex items-center justify-center bg-white">
+<div class="min-h-screen w-full flex items-center justify-center" style="background: #FBEFDF;">
 
     <?php if ($mode === 'login'): ?>
         <div class="login-wrapper">

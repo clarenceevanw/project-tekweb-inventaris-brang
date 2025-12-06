@@ -10,7 +10,7 @@
         left: -100%;
         width: 100%;
         height: 2px;
-        background: linear-gradient(90deg, transparent, #ffffff, transparent);
+        background: linear-gradient(90deg, transparent, #FBEFDF, transparent);
         /* disesuaikan agar kontras */
         animation: shimmer 3s infinite;
     }
@@ -36,7 +36,7 @@
         bottom: -2px;
         width: 0;
         height: 2px;
-        background: linear-gradient(90deg, #ffffff, #f4f4ff);
+        background: linear-gradient(90deg, #FBEFDF, #f5e5d0);
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -50,7 +50,7 @@
     }
 
     .footer-link:hover {
-        color: #ffffff;
+        color: #FBEFDF;
         transform: translateX(8px);
         padding-right: 20px;
     }
@@ -88,11 +88,11 @@
     }
 
     .btn-login:hover {
-        background-color: #ffffff;
-        color: #4F46E5;
-        border-color: #ffffff;
+        background-color: #FBEFDF;
+        color: #25343B !important;
+        border-color: #FBEFDF;
         transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 20px rgba(251, 239, 223, 0.5);
     }
 
     .btn-signup:hover {
@@ -101,7 +101,7 @@
     }
 
     .footer-legal-link {
-        color: rgba(255, 255, 255, 0.75);
+        color: rgba(251, 239, 223, 0.75);
     }
 
     .footer-legal-link:hover {
@@ -113,7 +113,7 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(251, 239, 223, 0.15);
         border-radius: 6px;
         transform: scale(0);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -142,7 +142,7 @@
     }
 </style>
 
-<footer id="footer" class="relative z-2 overflow-hidden text-white mt-auto" style="background-color:#9b8fd9;">
+<footer id="footer" class="relative z-2 overflow-hidden mt-auto" style="background-color:#25343B; color:#FBEFDF;">
     <div class="mx-auto px-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mb-12 space-y-10">
 
@@ -291,17 +291,17 @@
             <div class="flex flex-col gap-4 p-4">
                 <h3 class="text-xs font-bold uppercase tracking-wider mb-2 opacity-90 w-fit border-b pb-2">Get Started</h3>
                 <a href="/auth/select/login"
-                    class="btn btn-login relative inline-block px-7 py-3 rounded-lg font-semibold border-2 border-white text-white">
+                    class="btn btn-login relative inline-block px-7 py-3 rounded-lg font-semibold border-2" style="border-color: #FBEFDF; color: #FBEFDF;">
                     Login
                 </a>
                 <a href="/auth/select/signup"
-                    class="btn btn-signup relative inline-block px-7 py-3 rounded-lg font-semibold text-[#9b8fd9] bg-white shadow-md">
+                    class="btn btn-signup relative inline-block px-7 py-3 rounded-lg font-semibold shadow-md" style="color: #25343B; background: #FBEFDF;">
                     Sign Up
                 </a>
             </div>
         </div>
 
-        <div class="border-t border-white/40 pt-8 mt-8">
+        <div class="pt-8 mt-8" style="border-top: 1px solid rgba(251, 239, 223, 0.4);">
             <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
                 <p class="text-sm opacity-90">© 2025 GUDANGPINTAR. All rights reserved.</p>
                 <div class="flex gap-6">

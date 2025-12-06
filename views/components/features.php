@@ -1,13 +1,16 @@
 <style>
     .feature-card {
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        background: linear-gradient(to bottom right, #9d91db, #8276c4);
-        box-shadow: 8px 8px 16px rgba(106, 90, 160, 0.3), -8px -8px 16px rgba(180, 170, 230, 0.2), inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+        background: #FBEFDF;
+        box-shadow:
+            6px 6px 12px rgba(37, 52, 59, 0.08),
+            -6px -6px 12px rgba(251, 247, 240, 0.9);
     }
 
     .feature-card:hover {
         transform: translateY(-4px);
-        box-shadow: 12px 12px 24px rgba(106, 90, 160, 0.4), -12px -12px 24px rgba(180, 170, 230, 0.3), inset 3px 3px 6px rgba(255, 255, 255, 0.15);
+        box-shadow: 10px 10px 20px rgba(37, 52, 59, 0.12),
+            -10px -10px 20px rgba(254, 250, 250, 1);
     }
 
     .feature-icon {
@@ -17,8 +20,9 @@
         align-items: center;
         justify-content: center;
         border-radius: 12px;
-        background: linear-gradient(to bottom right, #a89ee0, #8e82ce);
-        box-shadow: 4px 4px 8px rgba(106, 90, 160, 0.3), -4px -4px 8px rgba(180, 170, 230, 0.2);
+        background: #FBEFDF;
+        color: #25343B;
+        box-shadow: 3px 3px 6px rgba(37, 52, 59, 0.08), -3px -3px 6px rgba(255, 255, 255, 0.9);
     }
 
     .modal-overlay {
@@ -43,15 +47,15 @@
     }
 
     .modal-content {
-        background: rgba(155, 143, 217, 0.15);
+        background: rgba(251, 239, 223, 0.95);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(155, 143, 217, 0.3);
+        border: 1px solid rgba(95, 165, 156, 0.3);
         border-radius: 20px;
         max-width: 500px;
         width: 100%;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 8px 32px rgba(122, 107, 184, 0.2);
+        box-shadow: 0 8px 32px rgba(37, 52, 59, 0.2);
         animation: slideUp 0.3s ease-out;
     }
 
@@ -105,13 +109,15 @@
 
     .learn-more-btn {
         transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        background: linear-gradient(to bottom right, #f9f1ffff, #e0d4f7);
-        box-shadow: 4px 4px 8px rgba(106, 90, 160, 0.3), -4px -4px 8px rgba(180, 170, 230, 0.2);
+        background: #FBEFDF;
+        box-shadow: 3px 3px 6px rgba(37, 52, 59, 0.08), -3px -3px 6px rgba(255, 255, 255, 0.9);
     }
 
     .learn-more-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 6px 6px 16px rgba(106, 90, 160, 0.4), -6px -6px 16px rgba(180, 170, 230, 0.3);
+        background: #25343B;
+        color: #FBEFDF !important;
+        box-shadow: 4px 4px 8px rgba(37, 52, 59, 0.15), -4px -4px 8px rgba(255, 255, 255, 1);
     }
 
     .modal-icon {
@@ -120,18 +126,18 @@
     }
 </style>
 
-<section id="features" class="relative bg-[#7a6bb8] py-16 md:py-24 px-4 md:px-8 text-white z-2">
+<section id="features" class="relative py-16 md:py-24 px-4 md:px-8 text-white z-2" style="background: #FBEFDF;">
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12 md:mb-16">
-            <h2 class="text-4xl md:text-5xl font-black mb-4">Fitur Unggulan</h2>
-            <p class="text-lg text-white text-opacity-90 max-w-2xl mx-auto">Jelajahi alat alat yang dirancang untuk organizer dan partner untuk menyederhanakan manajemen inventaris Anda</p>
+            <h2 class="text-4xl md:text-5xl font-black text-[#2F3D44] mb-4">Fitur Unggulan</h2>
+            <p class="text-lg text-[#2F3D44] text-opacity-90 max-w-2xl mx-auto">Jelajahi alat alat yang dirancang untuk organizer dan partner untuk menyederhanakan manajemen inventaris Anda</p>
         </div>
 
         <!-- Organizer Features -->
         <div class="mb-16">
-            <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-                <span class="w-2 h-2 bg-white rounded-full"></span>
+            <h3 class="text-2xl md:text-3xl font-bold mb-8 flex text-[#2F3D44] items-center gap-3">
+                <span class="w-2 h-2 bg-[#2F3D44] rounded-full"></span>
                 Fitur Organizer
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -140,9 +146,9 @@
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Dashboard</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Dapatkan gambaran lengkap tentang inventaris Anda sekilas</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-organizer')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Dashboard</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Dapatkan gambaran lengkap tentang inventaris Anda sekilas</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-organizer')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Admin -->
@@ -150,9 +156,9 @@
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Admin</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Kontrol akses admin dan izin untuk tim Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-admin')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Admin</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Kontrol akses admin dan izin untuk tim Anda</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-admin')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Product's Category -->
@@ -162,9 +168,9 @@
                             <path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
                             <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Kategori Produk</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Organisir produk ke dalam kategori untuk manajemen yang lebih baik</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-category')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Kategori Produk</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Organisir produk ke dalam kategori untuk manajemen yang lebih baik</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-category')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Product -->
@@ -172,9 +178,9 @@
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Produk</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Tambah, edit, dan lacak semua produk Anda dengan efisien</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-product')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Produk</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Tambah, edit, dan lacak semua produk Anda dengan efisien</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-product')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Room -->
@@ -185,9 +191,9 @@
                             <path d="M3 21h18" />
                             <path d="M6 21v-16a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v16" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Ruangan</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Organisir ruang penyimpanan dan konfigurasi ruangan</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-room')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Ruangan</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Organisir ruang penyimpanan dan konfigurasi ruangan</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-room')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Transaction -->
@@ -203,9 +209,9 @@
                             <path d="M12 13.99v.01" />
                             <path d="M12 17v.01" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Transaksi</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Lacak dan kelola semua transaksi inventaris</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-transaction')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Transaksi</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Lacak dan kelola semua transaksi inventaris</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-transaction')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- scan qr -->
@@ -217,9 +223,9 @@
                             <path d="M9 2h5v5H9zm1 1v3h3V3zM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8zm2 2H9V9h1zm4 2h-1v1h-2v1h3zm-4 2v-1H8v1z" />
                             <path d="M12 9h2V8h-2z" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Scan QR</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Scan QR untuk mendapatkan detail barang</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('scan-qr')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Scan QR</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Scan QR untuk mendapatkan detail barang</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('scan-qr')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Manage Warehouse -->
@@ -230,17 +236,17 @@
                             <path d="M13 13h4v8h-10v-6h6" />
                             <path d="M13 21v-9a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v3" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Kelola Gudang</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Kelola beberapa gudang dari satu platform</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-warehouse')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Kelola Gudang</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Kelola beberapa gudang dari satu platform</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('manage-warehouse')">Pelajari Lebih Lanjut</button>
                 </div>
             </div>
         </div>
 
         <!-- Partner Features -->
         <div>
-            <h3 class="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-                <span class="w-2 h-2 bg-white rounded-full"></span>
+            <h3 class="text-2xl md:text-3xl font-bold mb-8 flex text-[#2F3D44] items-center gap-3">
+                <span class="w-2 h-2 bg-[#2F3D44] rounded-full"></span>
                 Fitur Partner
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -249,9 +255,9 @@
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Dashboard</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Pantau metrik kemitraan dan kinerja Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-partner')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Dashboard</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Pantau metrik kemitraan dan kinerja Anda</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('dashboard-partner')">Pelajari Lebih Lanjut</button>
                 </div>
 
                 <!-- Transaction's History -->
@@ -267,9 +273,9 @@
                             <path d="M12 13.99v.01" />
                             <path d="M12 17v.01" />
                         </svg></div>
-                    <h4 class="text-xl font-bold text-white mb-2">Riwayat Transaksi</h4>
-                    <p class="text-white text-opacity-80 text-sm mb-4">Lihat riwayat detail semua transaksi Anda</p>
-                    <button class="learn-more-btn px-4 py-2 text-[#9b8fd9] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('transaction-history')">Pelajari Lebih Lanjut</button>
+                    <h4 class="text-xl font-bold text-[#25343B] mb-2">Riwayat Transaksi</h4>
+                    <p class="text-[#25343B] text-opacity-80 text-sm mb-4">Lihat riwayat detail semua transaksi Anda</p>
+                    <button class="learn-more-btn px-4 py-2 text-[#2F3D44] rounded-lg text-sm font-semibold cursor-pointer" onclick="openModal('transaction-history')">Pelajari Lebih Lanjut</button>
                 </div>
             </div>
         </div>
@@ -281,23 +287,23 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <div class="p-6 md:p-8">
             <!-- Close Button -->
-            <button onclick="closeModal()" class="float-right text-purple-300 hover:text-purple-200 text-2xl leading-none">×</button>
+            <button onclick="closeModal()" class="float-right text-[#2F3D44] hover:text-[#EC4E3D] cursor-pointer transition-all text-2xl leading-none">×</button>
 
             <!-- Modal Image -->
             <img class="modal-icon" id="modalImage" class="w-full object-contain" alt="">
 
             <!-- Modal Content -->
-            <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-purple-200 mb-4 text-center"></h3>
-            <p id="modalDescription" class="text-purple-100 text-base md:text-lg leading-relaxed mb-6"></p>
+            <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold mb-4 text-center" style="color: #25343B;"></h3>
+            <p id="modalDescription" class="text-base md:text-lg leading-relaxed mb-6" style="color: #25343B; opacity: 0.8;"></p>
 
             <!-- Features List -->
             <div class="mb-6">
-                <h4 class="font-bold text-purple-200 mb-3">Fitur Utama:</h4>
+                <h4 class="font-bold mb-3" style="color: #25343B;">Fitur Utama:</h4>
                 <ul id="modalFeatures" class="space-y-2"></ul>
             </div>
 
             <!-- CTA Button -->
-            <button onclick="closeModal()" class="w-full px-6 py-3 text-white rounded-lg font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95" style="background: linear-gradient(135deg, #9b8fd9 0%, #877acc 100%);">
+            <button onclick="closeModal()" class="w-full px-6 py-3 text-white rounded-lg font-semibold transition-all cursor-pointer hover:scale-105 active:scale-95" style="background: #EC4E3D;">
                 Kembali
             </button>
         </div>
@@ -429,8 +435,8 @@
         const featuresList = document.getElementById('modalFeatures');
         featuresList.innerHTML = data.features.map(feature =>
             `<li class="flex items-start gap-3">
-                <span class="text-purple-300 font-bold mt-1">✓</span>
-                <span class="text-purple-100">${feature}</span>
+                <span class="font-bold mt-1" style="color: #2F3D44;">✓</span>
+                <span style="color: #25343B; opacity: 0.8;">${feature}</span>
             </li>`
         ).join('');
 

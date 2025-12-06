@@ -57,31 +57,30 @@
     }
 
     .btn-secondary-hero {
-        background: rgba(255, 255, 255, 0.15) !important;
+        background: rgba(251, 239, 223, 0.2) !important;
         backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        border: 2px solid #FBEFDF !important;
+        box-shadow: 0 4px 15px rgba(251, 239, 223, 0.3);
+        transition: all 0.3s ease;
     }
 
     .btn-secondary-hero:hover {
         transform: scale(1.02);
-        background: rgba(255, 255, 255, 1) !important;
-        border-color: rgba(255, 255, 255, 0.5) !important;
-        box-shadow: 0 12px 40px rgba(255, 255, 255, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.4) !important;
-        color: #7a6bb8 !important;
+        background: #FBEFDF !important;
+        border-color: #FBEFDF !important;
+        box-shadow: 0 12px 40px rgba(251, 239, 223, 0.5) !important;
+        color: #25343B !important;
     }
 
     .btn-primary-hero {
-        background: rgba(255, 255, 255, 0.95) !important;
+        background: #d43d2d !important;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(122, 107, 184, 0.2);
+        box-shadow: 0 4px 15px rgba(236, 78, 61, 0.3);
     }
 
     .btn-primary-hero:hover {
         transform: translateY(-3px) scale(1.02);
-        background: #7a6bb8 !important;
-        box-shadow: 0 12px 40px rgba(122, 107, 184, 0.4) !important;
-        color: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 12px 40px rgba(236, 78, 61, 0.5) !important;
     }
 
     @media (max-width: 768px) {
@@ -104,12 +103,12 @@
     <div id="canvas-container"></div>
 
     <div class="relative z-10 h-screen flex flex-col items-center justify-center text-center pointer-events-none">
-        <h1 class="hero-title text-6xl font-black text-white mb-4 tracking-tight drop-shadow-lg">GUDANGPINTAR</h1>
-        <p class="hero-subtitle text-lg text-white text-opacity-95 mb-10 leading-relaxed max-w-2xl mx-auto">Solusi manajemen inventaris terpadu yang mengubah cara Anda mengelola gudang dengan teknologi cerdas dan efisien.</p>
+        <h1 class="hero-title text-6xl font-black text-[#FBEFDF] mb-4 tracking-tight drop-shadow-lg">GUDANGPINTAR</h1>
+        <p class="hero-subtitle text-lg text-[#FBF5ED] font-semibold text-opacity-95 mb-10 leading-relaxed max-w-2xl mx-auto">Solusi manajemen inventaris terpadu yang mengubah cara Anda mengelola gudang dengan teknologi cerdas dan efisien.</p>
 
         <div class="hero-buttons flex gap-4 justify-center flex-wrap pointer-events-auto">
-            <a href="/#features" class="btn-hero btn-secondary-hero active:scale-95 px-9 py-3.5 text-base font-semibold rounded-xl relative overflow-hidden user-select-none text-white">Learn More</a>
-            <a href="auth/select/signup" class="btn-hero btn-primary-hero active:scale-95 px-9 py-3.5 text-base font-semibold rounded-xl border-none relative overflow-hidden user-select-none text-[#7a6bb8]">Get Started</a>
+            <a href="/#features" class="btn-hero btn-secondary-hero active:scale-95 px-9 py-3.5 text-base font-semibold rounded-xl relative overflow-hidden user-select-none text-[#FBEFDF]">Learn More</a>
+            <a href="auth/select/signup" class="btn-hero btn-primary-hero active:scale-95 px-9 py-3.5 text-base font-semibold rounded-xl border-none relative overflow-hidden user-select-none text-[#FBEFDF]">Get Started</a>
         </div>
     </div>
 </section>
@@ -129,7 +128,7 @@
 
     camera.position.z = 5;
 
-    const colors = [0xd4c5f9, 0xe0d4f7, 0xf9f1ff, 0xc9b8e4, 0xb8a8d8];
+    const colors = [0xFBEFDF, 0x9B948B, 0xFBF7F0, 0x923125, 0xEC4E3D, 0xF2867B, 0x365E57, 0x5FA59C, 0x9CC7C1];
     const boxes = [];
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
@@ -138,10 +137,10 @@
     let dragPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
     let dragPoint = new THREE.Vector3();
 
-    const wallColor = 0x877acc; // dinding kiri/kanan
-    const wallDark = 0x7a6bb8; // dinding belakang
-    const floorColor = 0x6d60b0; // lantai
-    const ceilingColor = 0x9b8fd9; // plafon
+    const wallColor = 0x1F2B31; // dinding kiri/kanan
+    const wallDark = 0x25343B; // dinding belakang
+    const floorColor = 0x2F3D44; // lantai
+    const ceilingColor = 0x39464D; // plafon
 
     const wallMaterial = new THREE.MeshPhongMaterial({
         color: wallColor
@@ -204,10 +203,10 @@
     scene.add(rightWall);
 
     // ==== OPTIONAL LIGHT ====
-    const ambientLight2 = new THREE.AmbientLight(0x7a6bb8, 0.1);
+    const ambientLight2 = new THREE.AmbientLight(0x5fa59c, 0.1);
     scene.add(ambientLight2);
 
-    const dirLight = new THREE.DirectionalLight(0x6d60b0, 0.2);
+    const dirLight = new THREE.DirectionalLight(0x5fa59c, 0.2);
     dirLight.position.set(5, 10, 8);
     scene.add(dirLight);
 
@@ -236,10 +235,11 @@
     }
 
     // ini atur kardus nya brp
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 25; i++) {
         const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
         const material = new THREE.MeshPhongMaterial({
-            color: colors[i % colors.length],
+            color: randomColor,
             shininess: 100
         });
         const box = new THREE.Mesh(geometry, material);
@@ -252,7 +252,7 @@
         );
 
         // === VELOCITY LEDAKAN AWAL ===
-        const explodePower = 0.12;
+        const explodePower = 0.1;
         const dir = new THREE.Vector3(
             (Math.random() - 0.5),
             (Math.random() - 0.5),
@@ -323,7 +323,7 @@
         selectedBox = null;
     });
 
-    const MAX_SPEED = 0.06;
+    const MAX_SPEED = 0.05;
     const COLLISION_DAMPING = 0.95;
     const MIN_DISTANCE = 0.9;
 

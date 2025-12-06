@@ -4,7 +4,7 @@
 <style>
     .home-wrapper {
         min-height: 100vh;
-        background: linear-gradient(135deg, #9b8fd9 0%, #877acc 50%, #7a6bb8 100%);
+        background: #FBEFDF;
     }
 </style>
 

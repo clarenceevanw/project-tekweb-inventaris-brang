@@ -62,21 +62,22 @@
 <style>
     .demo-section {
         padding: 80px 40px;
-        background-color: #7a6bb8;
+        background-color: #FBEFDF;
     }
 
     .demo-main-title {
         text-align: center;
         font-size: 48px;
         font-weight: bold;
-        color: white;
+        color: #2F3D44;
         margin-bottom: 100px;
     }
 
     .demo-main-subtitle {
         text-align: center;
         font-size: 20px;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2F3D44;
+        opacity: 0.8;
         margin-bottom: 60px;
         max-width: 700px;
         margin-left: auto;
@@ -86,7 +87,8 @@
     .demo-subtitle {
         text-align: center;
         font-size: 18px;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2F3D44;
+        opacity: 0.8;
         margin-bottom: 50px;
     }
 
@@ -114,13 +116,14 @@
     .demo-title {
         font-size: 44px;
         font-weight: bold;
-        color: white;
+        color: #2F3D44;
         margin-bottom: 15px;
     }
 
     .demo-description {
         font-size: 24px;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2F3D44;
+        opacity: 0.8;
         line-height: 1.6;
     }
 
@@ -155,8 +158,8 @@
     }
 
     .btn-play {
-        background: white;
-        color: #7a6bb8;
+        background: #EC4E3D;
+        color: #FBEFDF;
         border: none;
         padding: 15px 40px;
         border-radius: 50px;
@@ -168,7 +171,7 @@
 
     .btn-play:hover {
         transform: scale(1.1);
-        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(236, 78, 61, 0.4);
     }
 
     .demo-features {
@@ -181,16 +184,16 @@
     .demo-feature-item {
         display: flex;
         gap: 20px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(95, 165, 156, 0.1);
         padding: 25px;
         border-radius: 10px;
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(95, 165, 156, 0.2);
         transition: all 0.3s ease;
     }
 
     .demo-feature-item:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(95, 165, 156, 0.15);
         transform: translateY(-5px);
     }
 
@@ -202,12 +205,13 @@
     .feature-text h3 {
         font-size: 18px;
         margin-bottom: 8px;
-        color: white;
+        color: #25343B;
     }
 
     .feature-text p {
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
+        color: #25343B;
+        opacity: 0.8;
         line-height: 1.5;
     }
 
@@ -217,27 +221,28 @@
 
     .btn-demo-interactive {
         display: inline-block;
-        background: white;
-        color: #7a6bb8;
+        background: #EC4E3D;
+        color: #FBEFDF;
         padding: 15px 40px;
         border-radius: 50px;
         font-size: 18px;
         font-weight: bold;
         text-decoration: none;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 30px rgba(236, 78, 61, 0.3);
     }
 
     .btn-demo-interactive:hover {
         transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        background: #f0e6ff;
+        box-shadow: 0 15px 40px rgba(236, 78, 61, 0.4);
+        background: #d43d2d;
     }
 
     .demo-note {
         margin-top: 15px;
         font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
+        color: #25343B;
+        opacity: 0.7;
     }
 
     @media (max-width: 768px) {

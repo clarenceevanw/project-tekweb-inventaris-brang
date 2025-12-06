@@ -14,25 +14,25 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
     }
 
     .navbar-trapezoid {
-        background: rgba(180, 150, 220, 0.5);
+        background: rgba(37, 52, 59, 0.7);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         position: relative;
         z-index: 1;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        box-shadow: 0 8px 24px rgba(180, 150, 220, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        border: 1px solid rgba(210, 180, 240, 0.4);
+        box-shadow: 0 8px 24px rgba(37, 52, 59, 0.35), inset 0 1px 0 rgba(251, 239, 223, 0.1);
+        border: 1px solid rgba(251, 239, 223, 0.2);
     }
 
     .navbar-right {
-        background: rgba(180, 150, 220, 0.5);
+        background: rgba(37, 52, 59, 0.7);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        box-shadow: 0 8px 24px rgba(180, 150, 220, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        border: 1px solid rgba(210, 180, 240, 0.4);
+        box-shadow: 0 8px 24px rgba(37, 52, 59, 0.35), inset 0 1px 0 rgba(251, 239, 223, 0.1);
+        border: 1px solid rgba(251, 239, 223, 0.2);
     }
 
     .nav-link {
@@ -52,7 +52,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         bottom: 0;
         width: 100%;
         height: 0%;
-        background: #fff;
+        background: #FBEFDF;
         transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: -1;
     }
@@ -64,7 +64,13 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
 
     .nav-link:hover,
     .auth-button:hover {
-        color: #ada1ea;
+        color: #25343B !important;
+    }
+
+    .nav-link:hover svg,
+    .auth-button:hover svg {
+        color: #25343B !important;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);;
     }
 
     .nav-icon {
@@ -77,6 +83,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         overflow: hidden;
         transition: max-width 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
         white-space: nowrap;
+        color: #252525;
     }
 
     .nav-link:hover .nav-text {
@@ -84,9 +91,14 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         opacity: 1;
     }
 
+    .signup-button {
+        position: relative;
+        overflow: hidden;
+    }
+
     .signup-button:hover {
-        background-color: #fff;
-        color: #7a6bb8;
+        color: #EC4E3D !important;
+        background: #FBEFDF !important;
         transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -102,14 +114,14 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         position: relative;
         width: 3.5rem;
         height: 3.5rem;
-        background: linear-gradient(135deg, #7a6bb8 0%, #ada1ea 100%);
+        background: rgba(37, 52, 59, 0.9);
         border-radius: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 8px 32px rgba(79, 70, 229, 0.4);
+        box-shadow: 0 8px 32px rgba(37, 52, 59, 0.4);
         overflow: hidden;
     }
 
@@ -118,9 +130,9 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         max-width: 380px;
         height: 28rem;
         border-radius: 2rem;
-        background: linear-gradient(135deg, #7a6bb8 0%, #ada1ea 100%);
+        background: rgba(37, 52, 59, 0.95);
         backdrop-filter: blur(20px);
-        box-shadow: 0 20px 60px rgba(173, 161, 234, 0.5);
+        box-shadow: 0 20px 60px rgba(37, 52, 59, 0.5);
     }
 
     .hamburger-icon {
@@ -164,7 +176,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
     }
 
     .menu-link {
-        color: white;
+        color: #FBEFDF;
         font-size: 1.35rem;
         font-weight: 600;
         letter-spacing: 0.05em;
@@ -182,7 +194,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(251, 239, 223, 0.1);
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.3s ease;
@@ -280,20 +292,20 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
 
             <div class="navbar-trapezoid flex items-center gap-8 px-4 py-4">
-                <a href="/#hero" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                <a href="/#hero" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
                     <span class="nav-text">Home</span>
                 </a>
-                <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span class="nav-text">Demo</span>
                 </a>
-                <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-journal-check" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                         <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
@@ -301,7 +313,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                     </svg>
                     <span class="nav-text">Features</span>
                 </a>
-                <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                <a href="/#subscription" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi w-6 h-6 nav-icon bi-coin" viewBox="0 0 16 16">
                         <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z" />
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -309,14 +321,14 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                     </svg>
                     <span class="nav-text">Subscription</span>
                 </a>
-                <a href="/#contact" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                <a href="/#contact" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi nav-icon w-5 h-5 bi-telephone" viewBox="0 0 16 16">
                         <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
                     </svg>
                     <span class="nav-text">Contact</span>
                 </a>
                 <?php if ($isLoggedIn): ?>
-                    <a href="<?php echo $dashboardUrl; ?>" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 text-white font-medium">
+                    <a href="<?php echo $dashboardUrl; ?>" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                         <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg>
@@ -328,14 +340,14 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
             <div class="navbar-right absolute right-0 gap-4 px-6 py-4 flex items-center">
                 <?php if ($isLoggedIn): ?>
                     <a href="/profile" class="hover:opacity-80 transition-opacity">
-                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-10 h-10" style="color: #FBEFDF;" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
                         </svg>
                     </a>
-                    <a href="/logout" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log Out</a>
+                    <a href="/logout" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block font-medium" style="color: #FBEFDF;">Log Out</a>
                 <?php else: ?>
-                    <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block text-white font-medium">Log In</a>
-                    <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block bg-[#7a6bb8] font-medium text-white rounded-lg">Sign Up</a>
+                    <a href="/auth/select/login" class="auth-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block font-medium" style="color: #FBEFDF;">Log In</a>
+                    <a href="/auth/select/signup" class="signup-button relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 inline-block font-medium rounded-lg" style="background: #EC4E3D; color: #FBEFDF;">Sign Up</a>
                 <?php endif; ?>
             </div>
         </nav>
@@ -347,28 +359,28 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         <div class="dynamic-island" id="dynamicIsland">
 
             <div class="hamburger-icon absolute flex flex-col gap-[0.35rem]">
-                <span class="w-6 h-[2px] bg-white rounded"></span>
-                <span class="w-6 h-[2px] bg-white rounded"></span>
-                <span class="w-6 h-[2px] bg-white rounded"></span>
+                <span class="w-6 h-[2px] rounded" style="background: #FBEFDF;"></span>
+                <span class="w-6 h-[2px] rounded" style="background: #FBEFDF;"></span>
+                <span class="w-6 h-[2px] rounded" style="background: #FBEFDF;"></span>
             </div>
 
             <div class="menu-content absolute inset-0 flex flex-col items-center justify-center gap-5 opacity-0 scale-[0.85] pointer-events-none">
-                <svg class="menu-logo text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="menu-logo" style="color: #FBEFDF;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                 </svg>
                 <?php if ($isLoggedIn): ?>
-                    <div class="w-full flex items-center justify-evenly gap-3 pb-3 border-b border-white/20">
-                        <a href="/profile" class="flex items-center gap-3 hover:bg-white/10 p-2 rounded-lg transition-colors">
-                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <div class="w-full flex items-center justify-evenly gap-3 pb-3" style="border-bottom: 1px solid rgba(251, 239, 223, 0.2);">
+                        <a href="/profile" class="flex items-center gap-3 p-2 rounded-lg transition-colors" style="color: #FBEFDF;">
+                            <svg class="w-10 h-10" style="color: #FBEFDF;" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
                             </svg>
                             <div class="text-left">
-                                <p class="text-white font-semibold text-sm"><?php echo htmlspecialchars($userData[$userRole === 'admin' ? 'nama_admin' : 'nama_mitra'] ?? ''); ?></p>
-                                <p class="text-white/70 text-xs"><?php echo htmlspecialchars($username); ?></p>
+                                <p class="font-semibold text-sm" style="color: #FBEFDF;"><?php echo htmlspecialchars($userData[$userRole === 'admin' ? 'nama_admin' : 'nama_mitra'] ?? ''); ?></p>
+                                <p class="text-xs" style="color: rgba(251, 239, 223, 0.7);"><?php echo htmlspecialchars($username); ?></p>
                             </div>
                         </a>
-                        <a href="/logout" class="text-white hover:bg-white/10 p-2 rounded-lg transition-colors">
+                        <a href="/logout" class="p-2 rounded-lg transition-colors" style="color: #FBEFDF;">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                             </svg>
@@ -377,8 +389,8 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                     <a href="<?php echo $dashboardUrl; ?>" class="menu-link">DASHBOARD</a>
                 <?php else: ?>
                     <div class="flex gap-4">
-                        <a href="/auth/select/login" class="menu-link border-2 border-[#ada1ea]">Log In</a>
-                        <a href="/auth/select/signup" class="menu-link border-2 border-[#ada1ea]">Sign Up</a>
+                        <a href="/auth/select/login" class="menu-link border-2" style="border-color: #FBEFDF;">Log In</a>
+                        <a href="/auth/select/signup" class="menu-link border-2" style="border-color: #EC4E3D; background: #EC4E3D;">Sign Up</a>
                     </div>
                 <?php endif; ?>
                 <a href="/#hero" class="menu-link">HOME</a>
