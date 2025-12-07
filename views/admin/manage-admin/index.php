@@ -2,33 +2,33 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="p-6 space-y-6">
     <div class="flex items-center gap-2 mb-4 text-sm">
-        <span class="text-gray-600">Kelola Admin</span>
+        <span class="text-gray-600">Admin</span>
     </div>
-    <div class="mb-6">
-        <div class="flex justify-between items-center mb-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800">Daftar Admin</h2>
-                <p class="text-sm text-gray-500">Kelola admin di gudang <?= htmlspecialchars($currentGudang['nama_gudang']) ?>.</p>
-            </div>
-            <div>
-                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                    <span class="hidden sm:inline">+ Tambah Admin</span>
-                    <span class="sm:hidden">+ Tambah</span>
-                </button>
-            </div>
-        </div>
-        <div class="flex-1">
-            <input type="text" id="searchInput" placeholder="Cari nama atau username admin..." 
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Kelola Admin</h1>
+        <p class="text-theme-primary mt-1">Kelola admin di gudang <span class="font-semibold text-theme-secondary"><?= htmlspecialchars($currentGudang['nama_gudang']) ?></span></p>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+        <div class="flex-1 w-full">
+            <input type="text" id="searchInput" placeholder="Cari nama atau username admin..." 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
+        </div>
+        <button onclick="openModal()" class="btn-theme-primary inline-flex items-center justify-center">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span class="hidden sm:inline">Tambah Admin</span>
+            <span class="sm:hidden">Tambah</span>
+        </button>
+    </div>
+
+    <div class="card-theme p-6">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="table-theme min-w-full divide-y divide-gray-200">
+                <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Nama Admin
@@ -121,7 +121,7 @@
 <!-- Modal Tambah -->
 <div id="modalTambah" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeModal()"></div>
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -134,35 +134,35 @@
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
                                         <input type="text" name="nama_admin" id="nama_admin" required
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]"
                                             placeholder="Masukkan nama lengkap">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                                         <input type="email" name="email_admin" id="email_admin" required
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]"
                                             placeholder="Masukkan email">
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
                                     <input type="text" name="username_admin" id="username_admin" required
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]"
                                         placeholder="Masukkan username (huruf, angka, underscore)">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
                                     <input type="password" name="password_admin" id="password_admin" required
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]"
                                         placeholder="Minimal 6 karakter">
                                 </div>
-                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                                <div class="bg-theme-secondary-lighter border border-theme-secondary-light rounded-lg p-3 mb-4">
                                     <div class="flex">
-                                        <svg class="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg class="w-5 h-5 text-theme-secondary mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                         <div class="ml-3">
-                                            <p class="text-sm text-blue-700">
+                                            <p class="text-sm text-theme-secondary-dark">
                                                 Admin baru akan memiliki akses ke gudang: <strong><?= htmlspecialchars($currentGudang['nama_gudang']) ?></strong>
                                             </p>
                                         </div>
@@ -172,11 +172,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="$('#formTambah').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="button" onclick="$('#formTambah').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Simpan
                     </button>
-                    <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="button" onclick="closeModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">
                         Batal
                     </button>
                 </div>
@@ -188,7 +188,7 @@
 <!-- Modal Edit -->
 <div id="modalEdit" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeEditModal()"></div>
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-80 transition-opacity duration-300" onclick="closeEditModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -202,23 +202,23 @@
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Admin</label>
                                         <input type="text" name="nama_admin" id="edit_nama_admin" required
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                                         <input type="email" name="email_admin" id="edit_email_admin" required
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
                                     <input type="text" name="username_admin" id="edit_username_admin" required
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Password Baru</label>
                                     <input type="password" name="password_admin" id="edit_password_admin"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]"
                                         placeholder="Kosongkan jika tidak ingin mengubah password">
                                     <p class="text-xs text-gray-500 mt-1">Kosongkan jika tidak ingin mengubah password</p>
                                 </div>
@@ -226,11 +226,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="$('#formEdit').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="button" onclick="$('#formEdit').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Update
                     </button>
-                    <button type="button" onclick="closeEditModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="button" onclick="closeEditModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">
                         Batal
                     </button>
                 </div>

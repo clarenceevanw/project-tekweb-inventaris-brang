@@ -2,21 +2,24 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
-    <div class="mb-6">
-        <div class="flex items-center gap-2 mb-4 text-sm">
-            <a href="/admin/barang" class="text-indigo-600 hover:text-indigo-800 font-medium">Barang</a>
-            <span class="text-gray-400">></span>
-            <span class="text-gray-600">Batch</span>
-        </div>
-        <h2 class="text-2xl font-bold text-gray-800">Batch: <?= $barang['nama_barang'] ?></h2>
-        <p class="text-sm text-gray-500">Daftar batch stok masuk untuk barang ini.</p>
+<div class="p-6 space-y-6">
+    <div class="flex items-center gap-2 text-sm">
+        <a href="/admin/barang" class="text-theme-secondary hover:text-theme-secondary-hover font-medium">Barang</a>
+        <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-theme-primary font-medium">Batch</span>
+    </div>
+    
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Batch: <?= $barang['nama_barang'] ?></h1>
+        <p class="text-theme-primary mt-1">Daftar batch stok masuk untuk barang ini</p>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="card-theme p-6">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="table-theme min-w-full divide-y divide-gray-200">
+                <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             ID Batch
@@ -53,7 +56,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex justify-center items-center gap-2">
                                 <button onclick="showQrModal('<?= $batch['id_detail_transaksi'] ?>', '<?= $barang['nama_barang'] ?>')" 
-                                        class="gap-2 cursor-pointer text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center">
+                                        class="gap-2 cursor-pointer text-white bg-theme-primary focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
@@ -69,7 +72,7 @@
                                         Lihat Detail
                                 </a>
                                 <a href="<?= "/admin/barang/batch/ruangan?id=" . $batch['id_detail_transaksi'] ?>"
-                                        class="gap-2 text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center">
+                                        class="gap-2 text-white bg-theme-accent focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 icon icon-tabler icons-tabler-outline icon-tabler-door">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M14 12v.01" />

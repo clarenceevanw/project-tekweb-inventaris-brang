@@ -63,34 +63,35 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="p-6 space-y-6">
     <div class="flex items-center gap-2 mb-4 text-sm">
         <span class="text-gray-600">Transaksi</span>
     </div>
-    <div class="mb-6">
-        <div class="flex justify-between items-center mb-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800">Daftar Transaksi</h2>
-                <p class="text-sm text-gray-500">Riwayat transaksi supply dan buy.</p>
-            </div>
-            <a href="/admin/transaksi/create" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                <span class="hidden sm:inline">+ Tambah Transaksi</span>
-                <span class="sm:hidden">+ Tambah</span>
-            </a>
-        </div>
-        
-        <button onclick="openFilterModal()" class="w-full flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition justify-center">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Daftar Transaksi</h1>
+        <p class="text-theme-primary mt-1">Riwayat transaksi supply dan buy</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+        <button onclick="openFilterModal()" class="btn-theme-secondary inline-flex items-center justify-center w-full sm:w-auto">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
             </svg>
             Filter
         </button>
+        <a href="/admin/transaksi/create" class="btn-theme-primary inline-flex items-center justify-center">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span class="hidden sm:inline">Tambah Transaksi</span>
+            <span class="sm:hidden">Tambah</span>
+        </a>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="card-theme p-6">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="table-theme min-w-full divide-y divide-gray-200">
+                <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             ID Transaksi
@@ -139,8 +140,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="<?= "/admin/transaksi/detail?id=" . $row['id_transaksi'] ?>"
-                                        class="inline-flex items-center gap-2 text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        class="btn-theme-primary inline-flex items-center justify-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
@@ -159,7 +160,7 @@
 <!-- Modal Filter -->
 <div id="modalFilter" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeFilterModal()"></div>
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeFilterModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -167,7 +168,7 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Transaksi</label>
-                        <select id="jenisFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="jenisFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary">
                             <option value="">Semua Jenis</option>
                             <option value="supply">Supply</option>
                             <option value="buy">Buy</option>
@@ -179,18 +180,18 @@
                             <div>
                                 <label class="block text-xs text-gray-600 mb-1">Dari Tanggal</label>
                                 <input type="date" id="tanggalMin" 
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary">
                             </div>
                             <div>
                                 <label class="block text-xs text-gray-600 mb-1">Sampai Tanggal</label>
                                 <input type="date" id="tanggalMax" 
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary">
                             </div>
                         </div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Mitra</label>
-                        <select id="mitraFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="mitraFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary">
                             <option value="">Semua Mitra</option>
                             <?php foreach($mitra as $m): ?>
                                 <option value="<?= $m['nama_mitra'] ?>"><?= $m['nama_mitra'] ?></option>
@@ -200,10 +201,10 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
-                <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+                <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-theme-primary hover:bg-theme-primary-hover text-white rounded-lg transition">
                     Terapkan Filter
                 </button>
-                <button onclick="resetFilter()" class="w-full sm:w-auto px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition mt-2 sm:mt-0">
+                <button onclick="resetFilter()" class="w-full sm:w-auto px-4 py-2 bg-theme-secondary text-white rounded-lg transition mt-2 sm:mt-0">
                     Reset
                 </button>
                 <button onclick="closeFilterModal()" class="w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg transition mt-2 sm:mt-0">

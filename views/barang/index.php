@@ -2,42 +2,39 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="p-6 space-y-6">
     <div class="flex items-center gap-2 mb-4 text-sm">
         <span class="text-gray-600">Barang</span>
     </div>
-    <div class="mb-6">
-        <div class="flex justify-between items-center mb-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800">Daftar Barang</h2>
-                <p class="text-sm text-gray-500">Kelola barang dan lihat batch stok.</p>
-            </div>
-            <div>
-                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-2 sm:px-4 rounded-lg transition text-sm sm:text-base">
-                    <span class="hidden sm:inline">+ Tambah Barang</span>
-                    <span class="sm:hidden">+ Tambah</span>
-                </button>
-            </div>
-        </div>
-        
-        <div class="flex gap-3">
-            <div class="flex-1">
-                <input type="text" id="searchInput" placeholder="Cari nama barang..." 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <button onclick="openFilterModal()" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Daftar Barang</h1>
+        <p class="text-theme-primary mt-1">Kelola barang dan lihat batch stok</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+        <div class="flex-1 w-full flex gap-3">
+            <input type="text" id="searchInput" placeholder="Cari nama barang..." 
+                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
+            <button onclick="openFilterModal()" class="btn-theme-secondary inline-flex items-center justify-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                 </svg>
                 Filter
             </button>
         </div>
+        <button onclick="openModal()" class="btn-theme-primary inline-flex items-center justify-center">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+            </svg>
+            <span class="hidden sm:inline">Tambah Barang</span>
+            <span class="sm:hidden">Tambah</span>
+        </button>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="card-theme p-6">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="table-theme min-w-full divide-y divide-gray-200">
+                <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Nama Barang
@@ -71,14 +68,14 @@
                                 <?= $row['nama_kategori'] ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full badge-theme-info">
                                     <?= $row['total_stok'] ?? 0 ?> Units
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <button onclick="showImageModal('<?= $row['foto_barang'] ?? '' ?>', '<?= $row['nama_barang'] ?>')" 
-                                        class="inline-flex items-center gap-2 text-white bg-purple-600 hover:bg-purple-700 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                        class="btn-theme-primary inline-flex items-center justify-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                     </svg>
                                     Lihat Foto
@@ -87,23 +84,23 @@
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <div class="flex gap-2 justify-center">
                                     <button onclick='openEditModal(<?= json_encode($row) ?>)' 
-                                            class="inline-flex items-center gap-2 text-white bg-yellow-500 hover:bg-yellow-600 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            class="btn-theme-secondary inline-flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                         </svg>
                                         Edit
                                     </button>
                                     <a href="<?= "/admin/barang/batch?id=" . $row['id_barang'] ?>"
-                                            class="inline-flex items-center gap-2 text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            class="btn-theme-primary inline-flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                         Lihat Batch
                                     </a>
                                     <button onclick="deleteBarang('<?= $row['id_barang'] ?>', '<?= $row['nama_barang'] ?>')" 
-                                            class="inline-flex items-center gap-2 text-white bg-red-600 hover:bg-red-700 font-medium rounded-lg text-sm px-4 py-2 transition">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            class="btn-theme-accent inline-flex items-center justify-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                         </svg>
                                         Hapus
@@ -123,7 +120,7 @@
 <div id="modalTambah" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Overlay -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeModal()"></div>
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeModal()"></div>
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
@@ -138,13 +135,13 @@
                                 <div class="mb-4">
                                     <label for="nama_barang" class="block text-sm font-medium text-gray-700 mb-1">Nama Barang</label>
                                     <input type="text" name="nama_barang" id="nama_barang" required placeholder="Masukkan Nama Barang"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                 </div>
 
                                 <!-- Kategori -->
                                 <div class="mb-4">
                                     <label for="kategori" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                                    <select name="kategori" id="kategori" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md border p-2">
+                                    <select name="kategori" id="kategori" class="shadow-sm focus:ring-[var(--theme-secondary)] focus:border-[var(--theme-secondary)] block w-full sm:text-sm border-gray-300 rounded-md border p-2">
                                         <option value="">-- Pilih Kategori --</option>
                                         <?php foreach($kategori as $k): ?>
                                             <option value="<?= $k['id_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
@@ -160,7 +157,7 @@
                                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             <div class="flex text-sm text-gray-600 justify-center">
-                                                <label for="foto_barang" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <label for="foto_barang" class="relative cursor-pointer bg-white rounded-md font-medium text-[var(--theme-secondary)] hover:text-[var(--theme-secondary-dark)] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-[var(--theme-secondary)]">
                                                     <span>Upload file</span>
                                                     <input id="foto_barang" name="foto_barang" type="file" class="sr-only" accept="image/*">
                                                 </label>
@@ -175,11 +172,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="$('#formTambah').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="button" onclick="$('#formTambah').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Simpan
                     </button>
-                    <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="button" onclick="closeModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">
                         Batal
                     </button>
                 </div>
@@ -191,7 +188,7 @@
 <!-- Modal Edit -->
 <div id="modalEdit" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeEditModal()"></div>
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeEditModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -205,12 +202,12 @@
                                 <div class="mb-4">
                                     <label for="edit_nama_barang" class="block text-sm font-medium text-gray-700 mb-1">Nama Barang</label>
                                     <input type="text" name="nama_barang" id="edit_nama_barang" required placeholder="Masukkan Nama Barang"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="edit_kategori" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                                    <select name="kategori" id="edit_kategori" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md border p-2">
+                                    <select name="kategori" id="edit_kategori" class="shadow-sm focus:ring-[var(--theme-secondary)] focus:border-[var(--theme-secondary)] block w-full sm:text-sm border-gray-300 rounded-md border p-2">
                                         <option value="">-- Pilih Kategori --</option>
                                         <?php foreach($kategori as $k): ?>
                                             <option value="<?= $k['id_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
@@ -231,7 +228,7 @@
                                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                             <div class="flex text-sm text-gray-600 justify-center">
-                                                <label for="edit_foto_barang" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <label for="edit_foto_barang" class="relative cursor-pointer bg-white rounded-md font-medium text-[var(--theme-secondary)] hover:text-[var(--theme-secondary-dark)] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-[var(--theme-secondary)]">
                                                     <span>Upload file</span>
                                                     <input id="edit_foto_barang" name="foto_barang" type="file" class="sr-only" accept="image/*">
                                                 </label>
@@ -245,11 +242,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" onclick="$('#formEdit').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="button" onclick="$('#formEdit').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Update
                     </button>
-                    <button type="button" onclick="closeEditModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="button" onclick="closeEditModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">
                         Batal
                     </button>
                 </div>
@@ -261,7 +258,7 @@
 <!-- Modal Filter -->
 <div id="modalFilter" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-300" onclick="closeFilterModal()"></div>
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeFilterModal()"></div>
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -269,7 +266,7 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                        <select id="kategoriFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="kategoriFilter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                             <option value="">Semua Kategori</option>
                             <?php foreach($kategori as $k): ?>
                                 <option value="<?= $k['nama_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
@@ -282,22 +279,22 @@
                             <div>
                                 <label class="block text-xs text-gray-600 mb-1">Stok Minimum</label>
                                 <input type="number" id="stokMin" placeholder="0" min="0" 
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                             </div>
                             <div>
                                 <label class="block text-xs text-gray-600 mb-1">Stok Maximum</label>
                                 <input type="number" id="stokMax" placeholder="Tidak terbatas" min="0" 
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
-                <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
+                <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-theme-primary text-white rounded-lg transition">
                     Terapkan Filter
                 </button>
-                <button onclick="resetFilter()" class="w-full sm:w-auto px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition mt-2 sm:mt-0">
+                <button onclick="resetFilter()" class="w-full sm:w-auto px-4 py-2 bg-theme-secondary text-white rounded-lg transition mt-2 sm:mt-0">
                     Reset
                 </button>
                 <button onclick="closeFilterModal()" class="w-full sm:w-auto px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg transition mt-2 sm:mt-0">

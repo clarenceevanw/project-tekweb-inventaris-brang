@@ -2,23 +2,28 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
-    <div class="mb-6">
-        <div class="flex items-center gap-2 mb-4 text-sm">
-            <a href="/admin/barang" class="text-indigo-600 hover:text-indigo-800 font-medium">Barang</a>
-            <span class="text-gray-400">></span>
-            <a href="/admin/barang/batch?id=<?= $barang['id_barang'] ?>" class="text-indigo-600 hover:text-indigo-800 font-medium">Batch</a>
-            <span class="text-gray-400">></span>
-            <span class="text-gray-600">Ruangan</span>
-        </div>
-        <h2 class="text-2xl font-bold text-gray-800">Barang: <?= $barang['nama_barang'] ?></h2>
-        <p class="text-sm text-gray-500">Batch: <?= $_GET['id'] ?></p>
+<div class="p-6 space-y-6">
+    <div class="flex items-center gap-2 text-sm">
+        <a href="/admin/barang" class="text-theme-secondary hover:text-theme-secondary-hover font-medium">Barang</a>
+        <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a href="/admin/barang/batch?id=<?= $barang['id_barang'] ?>" class="text-theme-secondary hover:text-theme-secondary-hover font-medium">Batch</a>
+        <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-theme-primary font-medium">Ruangan</span>
+    </div>
+    
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Barang: <?= $barang['nama_barang'] ?></h1>
+        <p class="text-theme-primary mt-1">Batch: <?= $_GET['id'] ?></p>
     </div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="card-theme p-6">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="table-theme min-w-full divide-y divide-gray-200">
+                <thead>
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Ruangan
@@ -49,7 +54,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex justify-center items-center gap-2">
                                 <button onclick='openMoveModal(<?= json_encode($row) ?>)' 
-                                        class="cursor-pointer text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center gap-1">
+                                        class="cursor-pointer text-white bg-theme-accent focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 icon icon-tabler icons-tabler-outline icon-tabler-door-exit">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M13 12v.01" />

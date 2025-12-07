@@ -25,6 +25,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    <!-- Admin Theme -->
+    <link rel="stylesheet" href="/assets/admin-theme.css">
+
     <?= $this->renderSection('header') ?>
 
     <style>
@@ -98,7 +101,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50 font-sans antialiased text-gray-900">
+<body class="font-sans antialiased text-theme-primary">
 
     <!-- Flash Message Logic -->
     <?php if (!empty($flash['success'])): ?>
@@ -128,20 +131,20 @@
     <?php endif; ?>
 
     <div class="flex h-screen overflow-hidden">
-        <aside id="sidebar" class="bg-white text-gray-800 border-r border-gray-200 fixed md:relative z-30 h-full w-0 md:w-20 md:hover:w-64 group sidebar-transition flex flex-col shadow-xl overflow-hidden">
-            <div class="h-16 flex items-center justify-between px-4 md:px-0 border-b border-gray-100 min-w-[5rem] relative">
+        <aside id="sidebar" class="sidebar-theme border-r border-theme-primary-dark fixed md:relative z-30 h-full w-0 md:w-20 md:hover:w-64 group sidebar-transition flex flex-col shadow-xl overflow-hidden">
+            <div class="h-16 flex items-center justify-between px-4 md:px-0 border-b border-theme-primary-dark min-w-[5rem] relative">
 
                 <!-- Logo Container -->
                 <div class="flex items-center w-full md:w-auto">
                     <!-- Icon Logo -->
                     <div class="w-10 md:w-20 flex justify-center items-center flex-shrink-0">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-theme-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
                     <!-- Text Logo -->
                     <div class="opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden">
-                        <span class="font-bold text-lg tracking-wider text-gray-800">GUDANG <span class="text-indigo-600">PINTAR</span></span>
+                        <span class="font-bold text-lg tracking-wider text-theme-light">GUDANG <span class="text-theme-secondary">PINTAR</span></span>
                     </div>
                 </div>
             </div>
@@ -159,7 +162,7 @@
                 ?>
 
                 <!-- 1. Dashboard -->
-                <a href="/admin/dashboard" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('dashboard') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/dashboard" class="sidebar-theme-item <?= $isActive('dashboard') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
@@ -171,7 +174,7 @@
                 </a>
 
                 <!-- 2. Admin -->
-                <a href="/admin/manage-admin" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('manage-admin') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/manage-admin" class="sidebar-theme-item <?= $isActive('manage-admin') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.85" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
@@ -183,7 +186,7 @@
                 </a>
 
                 <!-- 3. Kategori -->
-                <a href="/admin/kategori" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('kategori') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/kategori" class="sidebar-theme-item <?= $isActive('kategori') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 icon icon-tabler icons-tabler-outline icon-tabler-tag">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -197,7 +200,7 @@
                 </a>
 
                 <!-- 4. Barang -->
-                <a href="/admin/barang" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('barang') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/barang" class="sidebar-theme-item <?= $isActive('barang') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 bi bi-box-seam" viewBox="0 0 16 16" stroke="currentColor" stroke-width="0.3">
                             <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
@@ -209,7 +212,7 @@
                 </a>
 
                 <!-- 5. Ruangan -->
-                <a href="/admin/ruangan" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('ruangan') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/ruangan" class="sidebar-theme-item <?= $isActive('ruangan') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-door">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -224,7 +227,7 @@
                 </a>
 
                 <!-- 6. Transaksi -->
-                <a href="/admin/transaksi" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('transaksi') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/transaksi" class="sidebar-theme-item <?= $isActive('transaksi') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 icon icon-tabler icons-tabler-outline icon-tabler-cash-register">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -244,7 +247,7 @@
                 </a>
 
                 <!-- 7. Scan -->
-                <a href="/admin/scan" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('scan') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/scan" class="sidebar-theme-item <?= $isActive('scan') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4h2v-4zM6 6h6v6H6V6zm12 0h-6v6h6V6zm-6 12H6v-6h6v6z"></path></svg> -->
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -255,13 +258,13 @@
                     <span class="ml-3 text-sm font-medium tracking-wide opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Scan QR
                     </span>
-                    <span class="absolute right-2 px-2 py-0.5 rounded text-[10px] bg-indigo-100 text-indigo-700 opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200">
+                    <span class="absolute right-2 badge-theme-info opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200">
                         Action
                     </span>
                 </a>
 
                 <!-- 8. Gudang -->
-                <a href="/admin/gudang" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('gudang') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/admin/gudang" class="sidebar-theme-item <?= $isActive('gudang') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <!-- <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg> -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building-warehouse">
@@ -279,26 +282,26 @@
             </nav>
 
             <!-- Bottom: Logout -->
-            <div class="border-t border-gray-100 px-4 py-2">
-                <a href="/#hero" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-1 text-gray-600 hover:text-red-600">
+            <div class="border-t border-theme-primary-dark px-2 py-2">
+                <a href="/#hero" class="sidebar-theme-item">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-house-door" viewBox="0 0 16 16">
                             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
                         </svg>
                     </div>
-                    <span class="ml-[1.15rem] text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span class="ml-3 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Home
                     </span>
                 </a>
             </div>
-            <div class="px-4 py-2">
-                <a href="/logout" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-[0.45rem] text-gray-600 hover:text-red-600">
+            <div class="px-2 py-2">
+                <a href="/logout" class="sidebar-theme-item">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                         </svg>
                     </div>
-                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span class="ml-3 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Logout
                     </span>
                 </a>
@@ -309,9 +312,9 @@
         <div class="flex-1 flex flex-col h-screen overflow-hidden">
 
             <!-- Mobile Header -->
-            <header class="md:hidden bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 z-20">
-                <div class="font-bold text-gray-800">GUDANG <span class="text-indigo-600">PINTAR</span></div>
-                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-indigo-600 focus:outline-none">
+            <header class="md:hidden bg-theme-primary border-b border-theme-primary-dark h-16 flex items-center justify-between px-4 z-20">
+                <div class="font-bold text-theme-light">GUDANG <span class="text-theme-secondary">PINTAR</span></div>
+                <button onclick="toggleSidebar()" class="text-theme-light hover:text-theme-secondary focus:outline-none">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -319,7 +322,7 @@
             </header>
 
             <!-- Main Content -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-0 relative">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-0 relative">
                 <!-- Overlay Mobile -->
                 <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-20 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 

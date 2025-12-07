@@ -13,14 +13,14 @@
             <p class="text-sm text-gray-500">Detail informasi gudang dan status langganan</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
-            <button onclick="editGudang()" class="flex items-center justify-center px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">
+            <button onclick="editGudang()" class="flex items-center justify-center px-3 sm:px-4 py-2 btn-theme-primary text-sm">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                 </svg>
                 <span class="hidden sm:inline">Edit Gudang</span>
                 <span class="sm:hidden">Edit</span>
             </button>
-            <a href="/admin/gudang/pembayaran" class="flex items-center justify-center px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
+            <a href="/admin/gudang/pembayaran" class="flex items-center justify-center px-3 sm:px-4 py-2 btn-theme-secondary text-sm">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                 </svg>
@@ -66,12 +66,12 @@
     <?php endif; ?>
 
     <!-- Main Info Card -->
-    <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-8 mb-6">
+    <div class="card-theme rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-8 mb-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             <!-- Nama Gudang -->
             <div class="text-center md:text-left">
-                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full mb-3 sm:mb-4">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-[var(--theme-light-alt)] rounded-full mb-3 sm:mb-4">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                     </svg>
                 </div>
@@ -81,8 +81,8 @@
 
             <!-- Alamat -->
             <div class="text-center md:text-left">
-                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full mb-3 sm:mb-4">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-theme-primary rounded-full mb-3 sm:mb-4">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
@@ -93,13 +93,13 @@
 
             <!-- Status Langganan -->
             <div class="text-center md:text-left md:col-span-2 lg:col-span-1">
-                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 <?= $is_expired ? 'bg-red-100' : ($is_warning ? 'bg-yellow-100' : 'bg-blue-100') ?> rounded-full mb-3 sm:mb-4">
-                    <svg class="w-6 h-6 sm:w-8 sm:h-8 <?= $is_expired ? 'text-red-600' : ($is_warning ? 'text-yellow-600' : 'text-blue-600') ?>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 <?= $is_expired ? 'bg-theme-accent' : ($is_warning ? 'bg-theme-accent-light' : 'bg-[var(--theme-light-alt)]') ?> rounded-full mb-3 sm:mb-4">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 <?= $is_expired ? 'text-white' : ($is_warning ? 'text-white' : 'text-theme-primary') ?>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
                 <h3 class="text-xs sm:text-sm font-medium text-gray-500 mb-1 sm:mb-2">Sisa Waktu Aktif</h3>
-                <p class="text-xl sm:text-2xl lg:text-3xl font-bold <?= $is_expired ? 'text-red-600' : ($is_warning ? 'text-yellow-600' : 'text-blue-600') ?>">
+                <p class="text-xl sm:text-2xl lg:text-3xl font-bold <?= $is_expired ? 'text-theme-accent' : ($is_warning ? 'text-theme-accent' : 'text-theme-primary') ?>">
                     <?= $is_expired ? 'Expired' : $sisa_hari . ' Hari' ?>
                 </p>
             </div>
@@ -107,12 +107,12 @@
     </div>
 
     <!-- Detail Langganan -->
-    <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
+    <div class="card-theme rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
         <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">Detail Langganan</h3>
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 sm:p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg gap-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 sm:p-6 bg-theme-light-alt rounded-lg gap-4">
             <div class="flex items-center">
-                <div class="bg-indigo-100 p-2 sm:p-3 rounded-full mr-3 sm:mr-4">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-light p-2 sm:p-3 rounded-full mr-3 sm:mr-4">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
@@ -149,11 +149,11 @@
                                 <input type="hidden" id="id_gudang" name="id_gudang" value="<?= $gudang['id_gudang'] ?>">
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nama Gudang</label>
-                                    <input type="text" id="nama_gudang" name="nama_gudang"" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="<?= htmlspecialchars($gudang['nama_gudang']) ?>">
+                                    <input type="text" id="nama_gudang" name="nama_gudang"" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary" value="<?= htmlspecialchars($gudang['nama_gudang']) ?>">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Gudang</label>
-                                    <textarea id="lokasi_gudang" rows="3" name="lokasi_gudang" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"><?= htmlspecialchars($gudang['alamat']) ?></textarea>
+                                    <textarea id="lokasi_gudang" rows="3" name="lokasi_gudang" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-primary"><?= htmlspecialchars($gudang['alamat']) ?></textarea>
                                 </div>
                             </form>
                         </div>
@@ -161,10 +161,10 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" onclick="$('#editForm').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                <button type="button" onclick="$('#editForm').submit()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-theme-primary text-base font-medium text-white hover:bg-theme-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-primary sm:ml-3 sm:w-auto sm:text-sm">
                     Simpan
                 </button>
-                <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-primary sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                     Batal
                 </button>
             </div>

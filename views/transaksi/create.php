@@ -81,7 +81,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Transaksi</label>
-                    <select name="jenis_transaksi" id="jenis_transaksi" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select name="jenis_transaksi" id="jenis_transaksi" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                         <option value="">-- Pilih Jenis --</option>
                         <option value="supply">Supply</option>
                         <option value="buy">Buy</option>
@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Mitra</label>
-                    <select name="id_mitra" id="id_mitra" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select name="id_mitra" id="id_mitra" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                         <option value="">-- Pilih Mitra --</option>
                         <?php foreach($mitra as $m): ?>
                             <option value="<?= $m['id_mitra'] ?>"><?= $m['nama_mitra'] ?></option>
@@ -161,28 +161,28 @@ function addItem() {
         <div class="grid grid-cols-1 ${gridCols} gap-4">
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Barang</label>
-                <select name="items[${itemIndex}][id_barang]" id="barang_${itemIndex}" required onchange="updateTotal()" class="barang-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="items[${itemIndex}][id_barang]" id="barang_${itemIndex}" required onchange="updateTotal()" class="barang-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                     <option value="">-- Pilih Barang --</option>
                     ${barangData.map(b => `<option value="${b.id_barang}">${b.nama_barang}</option>`).join('')}
                 </select>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Kuantitas</label>
-                <input type="number" name="items[${itemIndex}][kuantitas]" required min="1" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="number" name="items[${itemIndex}][kuantitas]" required min="1" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>
             ${!isBuy ? `
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Expired Date (Opsional)</label>
-                <input type="date" name="items[${itemIndex}][expired_date]" class="w-full px-3 py-[0.44rem] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="date" name="items[${itemIndex}][expired_date]" class="w-full px-3 py-[0.44rem] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>` : ''}
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Harga Total</label>
-                <input type="number" name="items[${itemIndex}][harga]" required min="0" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="number" name="items[${itemIndex}][harga]" required min="0" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>
             ${!isBuy ? `
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Ruangan</label>
-                <select name="items[${itemIndex}][id_ruangan]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="items[${itemIndex}][id_ruangan]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                     <option value="">-- Pilih Ruangan --</option>
                     ${ruanganData.map(r => `<option value="${r.id_ruangan}">${r.nama_ruangan}</option>`).join('')}
                 </select>
