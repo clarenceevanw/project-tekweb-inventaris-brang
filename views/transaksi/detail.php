@@ -2,11 +2,13 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="p-6 space-y-6">
     <div class="flex items-center gap-2 mb-4 text-sm">
-        <a href="/admin/transaksi" class="text-blue-600 hover:text-blue-800">Transaksi</a>
-        <span class="text-gray-400">></span>
-        <span class="text-gray-600">Detail</span>
+        <a href="/admin/transaksi" class="text-theme-secondary hover:text-theme-secondary-dark font-medium">Transaksi</a>
+        <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-theme-primary font-medium">Detail</span>
     </div>
 
     <div class="mb-6">
