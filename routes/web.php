@@ -25,10 +25,10 @@ Router::get("/auth/google/login", "AuthController@loginGoogle");
 Router::get("/auth/google/callback", "AuthController@callbackGoogle");
 
 // Auth Routes
-Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");
-Router::get("/login/mitra", "AuthController@showLoginMitra");
 Router::post("/login/mitra", "AuthController@loginMitra");
+Router::get("/login", "AuthController@showLogin");
+Router::post("/login", "AuthController@showLogin");
 
 Router::get("/signup/admin", "AuthController@showSignupAdmin");
 Router::post("/signup/admin", "AuthController@signupAdmin");
