@@ -79,10 +79,8 @@
             animation: toast-progress 4000ms linear forwards;
         }
 
-        /* Warna Progress Bar: Success (Biru) */
         .toast-success::after {
-            background-color: #3b82f6;
-            /* Blue-500 */
+            background-color: var(--theme-secondary);
         }
 
         @keyframes toast-progress {
