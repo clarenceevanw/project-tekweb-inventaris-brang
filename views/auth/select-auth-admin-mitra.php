@@ -108,7 +108,7 @@
                 <p class="login-description">
                     As an organizer, you have full control to create warehouses, record items entering or leaving, and transfer items between rooms for efficient inventory management.
                 </p>
-                <a href="/login/admin" class="login-btn">Login</a>
+                <a href="/login?role=admin" class="login-btn">Login</a>
                 <p class="signup-text">Don't have an account? <a href="/signup/admin">Sign up</a></p>
             </div>
 
@@ -119,7 +119,7 @@
                 <p class="login-description">
                     As a partner, you can provide supplies to the warehouse, buy items directly from it, and easily track your complete supply and purchase history.
                 </p>
-                <a href="/login/mitra" class="login-btn">Login</a>
+                <a href="/login?role=mitra" class="login-btn">Login</a>
                 <p class="signup-text">Don't have an account? <a href="/signup/mitra">Sign up</a></p>
             </div>
         </div>
@@ -132,7 +132,7 @@
                     As an organizer, you have full control to create warehouses, record items entering or leaving, and transfer items between rooms for efficient inventory management.
                 </p>
                 <a href="/signup/admin" class="login-btn">Sign Up</a>
-                <p class="signup-text">Already have an account? <a href="/login/admin">Login</a></p>
+                <p class="signup-text">Already have an account? <a href="/login?role=admin">Login</a></p>
             </div>
             <div class="divider"></div>
             <div class="login-side">
@@ -141,7 +141,7 @@
                     As a partner, you can provide supplies to the warehouse, buy items directly from it, and easily track your complete supply and purchase history.
                 </p>
                 <a href="/signup/mitra" class="login-btn">Sign Up</a>
-                <p class="signup-text">Already have an account? <a href="/login/mitra">Login</a></p>
+                <p class="signup-text">Already have an account? <a href="/login?role=mitra">Login</a></p>
             </div>
         </div>
     <?php endif; ?>

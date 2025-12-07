@@ -46,17 +46,7 @@ class AuthController extends BaseController {
 
     public function subscribeRedirect() {
         $_SESSION['redirect_after_login'] = '/admin/gudang/pembayaran';
-        return $this->redirect('/login/admin');
-    }
-
-    public function showLoginAdmin() {
-        $data['title'] = "Login Admin";
-        return $this->view("auth/login-admin", $data);
-    }
-
-    public function showLoginMitra() {
-        $data['title'] = "Login Mitra";
-        return $this->view("auth/login-mitra", $data);
+        return $this->redirect('/login?role=admin');
     }
 
     public function showSignupAdmin() {
@@ -67,6 +57,17 @@ class AuthController extends BaseController {
     public function showSignupMitra() {
         $data['title'] = "Signup Mitra";
         return $this->view("auth/signup-mitra", $data);
+    }
+
+    public function showLogin() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $role = $_POST['role'] ?? 'admin';
+            return $role === 'mitra' ? $this->loginMitra() : $this->loginAdmin();
+        }
+        
+        $data['title'] = "Login";
+        $data['role'] = $_GET['role'] ?? 'admin';
+        return $this->view('auth/login', $data);
     }
 
     public function loginAdmin() {
@@ -92,7 +93,7 @@ class AuthController extends BaseController {
         }
 
         $this->flash('error', 'Username atau password salah!');
-        return $this->redirect('/login/admin');
+        return $this->redirect('/login?role=admin');
     }
 
     public function loginMitra() {
@@ -111,7 +112,7 @@ class AuthController extends BaseController {
         }
 
         $this->flash('error', 'Username atau password salah!');
-        return $this->redirect('/login/mitra');
+        return $this->redirect('/login?role=mitra');
     }
 
     public function signupAdmin() {
@@ -129,7 +130,7 @@ class AuthController extends BaseController {
 
         if ($this->admin->signUpWithGudang($adminData, $gudangData)) {
             $this->flash('success', 'Signup berhasil! Silahkan login.');
-            return $this->redirect('/login/admin');
+            return $this->redirect('/login?role=admin');
         }
 
         $this->flash('error', 'Signup gagal!');
@@ -146,7 +147,7 @@ class AuthController extends BaseController {
 
         if ($this->mitra->signUp($mitraData)) {
             $this->flash('success', 'Signup berhasil! Silakan login.');
-            return $this->redirect('/login/mitra');
+            return $this->redirect('/login?role=mitra');
         }
 
         $this->flash('error', 'Signup gagal!');
@@ -196,7 +197,7 @@ class AuthController extends BaseController {
 
             } catch (Exception $e) {
                 $this->flash('error', 'Gagal Login Google: ' . $e->getMessage());
-                $redirect = ($role_target == 'mitra') ? '/login/mitra' : '/login/admin';
+                $redirect = ($role_target == 'mitra') ? '/login?role=mitra' : '/login?role=admin';
                 $this->redirect($redirect);
             }
         } else {
@@ -209,7 +210,7 @@ class AuthController extends BaseController {
 
         if (!$user) {
             $this->flash('error', 'Email Google tidak terdaftar sebagai Admin!');
-            $this->redirect('/login/admin');
+            $this->redirect('/login?role=admin');
             exit;
         }
 
@@ -230,7 +231,7 @@ class AuthController extends BaseController {
 
         if (!$user) {
             $this->flash('error', 'Email Google tidak terdaftar sebagai Mitra!');
-            $this->redirect('/login/mitra');
+            $this->redirect('/login?role=mitra');
             exit;
         }
 

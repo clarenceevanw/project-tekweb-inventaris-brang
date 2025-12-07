@@ -199,7 +199,7 @@
                         <div class="text-center">
                             <p class="text-sm" style="color: rgba(251, 239, 223, 0.8);">
                                 Login as partner?
-                                <a href="/login/mitra" class="font-semibold" style="color: #FBEFDF;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
+                                <a href="/login?role=mitra" class="font-semibold" style="color: #FBEFDF;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
                             </p>
                         </div>
                     </div>

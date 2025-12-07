@@ -6,7 +6,7 @@ class AdminManagementMiddleware
     {
         // Pastikan user sudah login
         if (!isset($_SESSION['user']) || !isset($_SESSION['role'])) {
-            header('Location: /login/admin');
+            header('Location: /login?role=admin');
             exit;
         }
 
@@ -19,7 +19,7 @@ class AdminManagementMiddleware
         // Pastikan ada data gudang
         if (!isset($_SESSION['gudang']) || empty($_SESSION['gudang']['id_gudang'])) {
             session_destroy();
-            header('Location: /login/admin');
+            header('Location: /login?role=admin');
             exit;
         }
 

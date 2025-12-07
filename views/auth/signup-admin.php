@@ -220,7 +220,7 @@
                     <div class="mt-6 text-center">
                         <p class="text-sm" style="color: rgba(251, 239, 223, 0.8);">
                             Login as organizer?
-                            <a href="/login/admin" class="font-semibold" style="color: #FBEFDF;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
+                            <a href="/login?role=admin" class="font-semibold" style="color: #FBEFDF;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Click here</a>
                         </p>
                     </div>
                 </div>

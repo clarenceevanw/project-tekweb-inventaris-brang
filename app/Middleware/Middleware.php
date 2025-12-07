@@ -11,7 +11,7 @@ class Middleware {
 
     public static function admin($next) {
         if (!isset($_SESSION['user']) || !isset($_SESSION["role"]) || $_SESSION["role"] !== "admin") {
-            header("Location: /login/admin");
+            header("Location: /login?role=admin");
             $_SESSION['flash']['error'] = 'Anda belum login!';
             exit;
         }
