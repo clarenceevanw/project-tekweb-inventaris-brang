@@ -18,7 +18,7 @@
 }
 
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
-    color: #9ca3af;
+    color: #374151;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -62,22 +62,22 @@
 
 <?php $this->section('content'); ?>
 
-<div class="container mx-auto px-4 py-8">
+<div class="p-6 space-y-6">
     <div class="flex items-center gap-2 mb-4 text-sm">
-        <a href="/admin/transaksi" class="text-blue-600 hover:text-blue-800">Transaksi</a>
+        <a href="/admin/transaksi" class="text-theme-secondary hover:text-theme-secondary-dark">Transaksi</a>
         <span class="text-gray-400">></span>
         <span class="text-gray-600">Tambah</span>
     </div>
 
-    <div class="mb-6">
-        <h2 class="text-2xl font-bold text-gray-800">Tambah Transaksi</h2>
-        <p class="text-sm text-gray-500">Buat transaksi supply atau buy baru.</p>
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Tambah Transaksi</h1>
+        <p class="text-theme-primary mt-1">Buat transaksi supply atau buy baru</p>
     </div>
 
     <form id="formTransaksi" class="space-y-6">
         <!-- Info Transaksi -->
-        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Informasi Transaksi</h3>
+        <div class="card-theme p-6">
+            <h3 class="text-lg font-semibold text-theme-primary mb-4">Informasi Transaksi</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Transaksi</label>
@@ -100,10 +100,10 @@
         </div>
 
         <!-- Items -->
-        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+        <div class="card-theme p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-800">Item Barang</h3>
-                <button type="button" onclick="addItem()" class="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition text-sm">
+                <h3 class="text-lg font-semibold text-theme-primary">Item Barang</h3>
+                <button type="button" onclick="addItem()" class="btn-theme-secondary inline-flex items-center justify-center">
                     + Tambah Item
                 </button>
             </div>
@@ -113,19 +113,19 @@
         </div>
 
         <!-- Total -->
-        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+        <div class="card-theme p-6">
             <div class="flex justify-between items-center">
-                <h3 class="text-lg font-semibold text-gray-800">Total Harga</h3>
-                <p class="text-2xl font-bold text-gray-900">Rp <span id="totalHarga">0</span></p>
+                <h3 class="text-lg font-semibold text-theme-primary">Total Harga</h3>
+                <p class="text-2xl font-bold text-theme-primary">Rp <span id="totalHarga">0</span></p>
             </div>
         </div>
 
         <!-- Actions -->
         <div class="flex gap-4">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition">
+            <button type="submit" class="btn-theme-primary inline-flex items-center justify-center">
                 Simpan Transaksi
             </button>
-            <a href="/admin/transaksi" class="bg-gray-600 hover:bg-gray-700 text-white font-medium px-6 py-3 rounded-lg transition">
+            <a href="/admin/transaksi" class="btn-theme-accent inline-flex items-center justify-center">
                 Batal
             </a>
         </div>
@@ -146,7 +146,7 @@ function addItem() {
     
     const container = document.getElementById('itemsContainer');
     const itemDiv = document.createElement('div');
-    itemDiv.className = 'border border-gray-200 rounded-lg p-4 relative';
+    itemDiv.className = 'border border-gray-200 rounded-lg p-4 relative bg-theme-light-alt';
     itemDiv.id = `item-${itemIndex}`;
     
     const isBuy = jenis === 'buy';
@@ -160,29 +160,29 @@ function addItem() {
         </button>
         <div class="grid grid-cols-1 ${gridCols} gap-4">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Barang</label>
+                <label class="block text-sm font-medium text-theme-primary mb-2">Barang</label>
                 <select name="items[${itemIndex}][id_barang]" id="barang_${itemIndex}" required onchange="updateTotal()" class="barang-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                     <option value="">-- Pilih Barang --</option>
                     ${barangData.map(b => `<option value="${b.id_barang}">${b.nama_barang}</option>`).join('')}
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Kuantitas</label>
+                <label class="block text-sm font-medium text-theme-primary mb-2">Kuantitas</label>
                 <input type="number" name="items[${itemIndex}][kuantitas]" required min="1" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>
             ${!isBuy ? `
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Expired Date (Opsional)</label>
+                <label class="block text-sm font-medium text-theme-primary mb-2">Expired Date (Opsional)</label>
                 <input type="date" name="items[${itemIndex}][expired_date]" class="w-full px-3 py-[0.44rem] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>` : ''}
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Harga Total</label>
+                <label class="block text-sm font-medium text-theme-primary mb-2">Harga Total</label>
                 <input type="number" name="items[${itemIndex}][harga]" required min="0" onchange="updateTotal()" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
             </div>
             ${!isBuy ? `
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Ruangan</label>
-                <select name="items[${itemIndex}][id_ruangan]" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
+                <label class="block text-sm font-medium text-theme-primary mb-2">Ruangan</label>
+                <select name="items[${itemIndex}][id_ruangan]" id="ruangan_${itemIndex}" required class="ruangan-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                     <option value="">-- Pilih Ruangan --</option>
                     ${ruanganData.map(r => `<option value="${r.id_ruangan}">${r.nama_ruangan}</option>`).join('')}
                 </select>
@@ -198,6 +198,17 @@ function addItem() {
         theme: 'default',
         dropdownCssClass: 'select2-custom'
     });
+    
+    if (!isBuy) {
+        $(`#ruangan_${itemIndex}`).select2({
+            placeholder: '-- Pilih Ruangan --',
+            allowClear: true,
+            width: '100%',
+            theme: 'default',
+            dropdownCssClass: 'select2-custom'
+        });
+    }
+    
     itemIndex++;
 }
 
