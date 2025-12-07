@@ -27,9 +27,9 @@
 }
 
 .select2-container--default.select2-container--focus .select2-selection--single {
-    border-color: #3b82f6;
+    border-color: var(--theme-secondary);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 3px rgba(95, 165, 156, 0.1);
 }
 
 .select2-dropdown {
@@ -45,17 +45,17 @@
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field:focus {
-    border-color: #3b82f6;
+    border-color: var(--theme-secondary);
     outline: none;
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #3b82f6;
+    background-color: var(--theme-secondary);
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #eff6ff;
-    color: #1e40af;
+    background-color: var(--theme-secondary-lighter);
+    color: var(--theme-secondary-dark);
 }
 </style>
 <?php $this->endSection(); ?>
@@ -254,33 +254,58 @@ $('#formTransaksi').on('submit', function(e) {
         return;
     }
     
-    Swal.fire({title: 'Menyimpan...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
+    const jenis = $('#jenis_transaksi option:selected').text();
+    const mitra = $('#id_mitra option:selected').text();
+    const total = $('#totalHarga').text();
     
-    $.ajax({
-        url: '/admin/transaksi/store',
-        method: 'POST',
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function(data) {
-            Swal.close();
-            if(data.success) {
-                Toastify({
-                    text: data.message,
-                    duration: 2000,
-                    close: true,
-                    gravity: "top", 
-                    position: "right", 
-                    stopOnFocus: true, 
-                    className: "toast-success",
-                    style: {background: "#ffffff"}
-                }).showToast();
-                setTimeout(() => {window.location.href = '/admin/transaksi';}, 1500);
-            } else {
-                Swal.fire({icon: 'error', title: 'Gagal', text: data.message})
-            }
-        },
-        error: function(xhr, status, error) {
-            Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong'})
+    Swal.fire({
+        title: 'Konfirmasi Transaksi',
+        html: `
+            <div class="text-left">
+                <p class="mb-2"><strong>Jenis:</strong> ${jenis}</p>
+                <p class="mb-2"><strong>Mitra:</strong> ${mitra}</p>
+                <p class="mb-2"><strong>Total Item:</strong> ${items.length}</p>
+                <p class="mb-2"><strong>Total Harga:</strong> Rp ${total}</p>
+            </div>
+            <p class="mt-4 text-sm text-gray-600">Apakah Anda yakin ingin menyimpan transaksi ini?</p>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#5FA59C',
+        cancelButtonColor: '#EC4E3D',
+        confirmButtonText: 'Ya, Simpan!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({title: 'Menyimpan...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
+            
+            $.ajax({
+                url: '/admin/transaksi/store',
+                method: 'POST',
+                data: $('#formTransaksi').serialize(),
+                dataType: 'json',
+                success: function(data) {
+                    Swal.close();
+                    if(data.success) {
+                        Toastify({
+                            text: data.message,
+                            duration: 2000,
+                            close: true,
+                            gravity: "top", 
+                            position: "right", 
+                            stopOnFocus: true, 
+                            className: "toast-success",
+                            style: {background: "#ffffff"}
+                        }).showToast();
+                        setTimeout(() => {window.location.href = '/admin/transaksi';}, 1500);
+                    } else {
+                        Swal.fire({icon: 'error', title: 'Gagal', text: data.message})
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong'})
+                }
+            });
         }
     });
 });
