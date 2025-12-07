@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
+                <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-0 gap-2">
                     <button type="button" onclick="window.print()" class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 sm:w-auto transition">
                         Print Label
                     </button>

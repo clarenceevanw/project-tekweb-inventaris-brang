@@ -200,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+            <div class="px-4 pt-3 pb-6 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
                 <button onclick="applyFilter()" class="w-full sm:w-auto px-4 py-2 bg-theme-primary hover:bg-theme-primary-hover text-white rounded-lg transition">
                     Terapkan Filter
                 </button>

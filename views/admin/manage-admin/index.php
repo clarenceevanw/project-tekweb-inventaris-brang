@@ -172,7 +172,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                <div class="px-4 py-3 sm:px-0 sm:flex sm:flex-row-reverse gap-2">
                     <button type="button" onclick="$('#formTambah').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Simpan
                     </button>
@@ -226,7 +226,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-2">
+                <div class="px-4 py-3 sm:px-0 sm:flex sm:flex-row-reverse gap-2">
                     <button type="button" onclick="$('#formEdit').submit()" class="btn-theme-primary w-full sm:w-auto">
                         Update
                     </button>
