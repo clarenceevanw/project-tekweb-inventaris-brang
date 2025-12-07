@@ -110,12 +110,23 @@
                         </div>
 
                         <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold transition duration-150 ease-in-out transform hover:scale-[1.02]" style="background: #EC4E3D; color: #FBEFDF;">
+                            class="w-full flex justify-center mb-0 cursor-pointer py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold transition duration-150 ease-in-out transform hover:scale-[1.02]" style="background: #EC4E3D; color: #FBEFDF;" onmouseover="this.style.backgroundColor='#d43d2e'" onmouseout="this.style.backgroundColor='#EC4E3D'">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
                             </svg>
                             Sign In to Dashboard
                         </button>
+
+                        <div class="relative flex items-center my-3">
+                            <div class="flex-grow border-t" style="border-color: #FBEFDF;"></div>
+                            <span class="flex-shrink mx-4 text-sm" style="color: #FBEFDF;">or</span>
+                            <div class="flex-grow border-t" style="border-color: #FBEFDF;"></div>
+                        </div>
+
+                        <a href="/auth/google/login?role=mitra" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold transition duration-150 ease-in-out transform hover:scale-[1.02]" style="background-color: #5FA59C; color: white; text-decoration: none;" onmouseover="this.style.backgroundColor='#4d8680'" onmouseout="this.style.backgroundColor='#5FA59C'">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-brand-google w-5 h-5 mr-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2a9.96 9.96 0 0 1 6.29 2.226a1 1 0 0 1 .04 1.52l-1.51 1.362a1 1 0 0 1 -1.265 .06a6 6 0 1 0 2.103 6.836l.001 -.004h-3.66a1 1 0 0 1 -.992 -.883l-.007 -.117v-2a1 1 0 0 1 1 -1h6.945a1 1 0 0 1 .994 .89c.04 .367 .061 .737 .061 1.11c0 5.523 -4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10z" /></svg>
+                            Login with Google
+                        </a>
                     </form>
 
                     <div class="mt-6 space-y-3">

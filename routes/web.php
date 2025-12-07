@@ -21,6 +21,9 @@ Router::get("/auth/select/signup", "AuthController@redirectSelectSignup");
 Router::get("/auth/select", "AuthController@showSelectAuthAdminMitra");
 Router::get("/auth/subscribe-redirect", "AuthController@subscribeRedirect");
 
+Router::get("/auth/google/login", "AuthController@loginGoogle");
+Router::get("/auth/google/callback", "AuthController@callbackGoogle");
+
 // Auth Routes
 Router::get("/login/admin", "AuthController@showLoginAdmin");
 Router::post("/login/admin", "AuthController@loginAdmin");

@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
 require_once __DIR__ . "/../Models/Gudang.php";
+require_once __DIR__ . "/../../config/GoogleConfig.php";
 
 class AuthController extends BaseController {
     protected $admin;
@@ -155,5 +156,90 @@ class AuthController extends BaseController {
     public function logout() {
         session_destroy();
         return $this->redirect('/');
+    }
+
+
+    public function loginGoogle() {
+        $role = $_GET['role'] ?? 'admin';
+        $client = GoogleConfig::getClient(); 
+        $client->setState($role);
+        $authUrl = $client->createAuthUrl();
+        header("Location: " . $authUrl);
+        exit;
+    }
+
+    public function callbackGoogle() {
+        $client = GoogleConfig::getClient();
+
+        if (isset($_GET['code'])) {
+            try {
+                $role_target = $_GET['state'] ?? 'admin'; 
+
+                $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                $client->setAccessToken($token);
+
+                $google_oauth = new Google\Service\Oauth2($client);
+                $google_account_info = $google_oauth->userinfo->get();
+
+                $email = $google_account_info->email;
+                $name = $google_account_info->name;
+
+                if ($role_target === 'admin') {
+                    $this->handleLoginAdmin($email);
+                } 
+                else if ($role_target === 'mitra') {
+                    $this->handleLoginMitra($email);
+                } 
+                else {
+                    throw new Exception("Role login tidak dikenali.");
+                }
+
+            } catch (Exception $e) {
+                $this->flash('error', 'Gagal Login Google: ' . $e->getMessage());
+                $redirect = ($role_target == 'mitra') ? '/login/mitra' : '/login/admin';
+                $this->redirect($redirect);
+            }
+        } else {
+            $this->redirect('/auth/select/login');
+        }
+    }
+
+    private function handleLoginAdmin($email) {
+        $user = $this->admin->find('email_admin', $email); 
+
+        if (!$user) {
+            $this->flash('error', 'Email Google tidak terdaftar sebagai Admin!');
+            $this->redirect('/login/admin');
+            exit;
+        }
+
+        $gudang = $this->gudang->find('id_gudang', $user['id_gudang']);
+
+        $_SESSION['user'] = $user;
+        $_SESSION['role'] = 'admin';
+        $_SESSION['gudang'] = $gudang;
+        $_SESSION['user_id'] = $user['id_admin'];
+        $_SESSION['username'] = $user['username_admin'];
+
+        $this->flash('success', 'Login Admin Berhasil!');
+        $this->redirect('/admin/dashboard');
+    }
+
+    private function handleLoginMitra($email) {
+        $user = $this->mitra->find('email_mitra', $email); 
+
+        if (!$user) {
+            $this->flash('error', 'Email Google tidak terdaftar sebagai Mitra!');
+            $this->redirect('/login/mitra');
+            exit;
+        }
+
+        $_SESSION['user'] = $user;
+        $_SESSION['role'] = 'mitra';
+        $_SESSION['user_id'] = $user['id_mitra'];
+        $_SESSION['username'] = $user['nama_mitra'];
+
+        $this->flash('success', 'Login Mitra Berhasil!');
+        $this->redirect('/mitra/dashboard');
     }
 }
