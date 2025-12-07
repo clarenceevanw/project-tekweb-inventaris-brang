@@ -307,7 +307,7 @@
 
 <!-- Modal Lihat Foto -->
 <div id="imageModal" class="hidden fixed inset-0 z-50 opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div id="imageModalOverlay" class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeImageModal()"></div>
+    <div id="imageModalOverlay" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeImageModal()"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4">
             <div id="imageModalContent" class="relative transform overflow-hidden rounded-lg bg-white shadow-2xl transition-all duration-300 ease-out sm:my-8 sm:w-full sm:max-w-2xl scale-95 opacity-0">
@@ -337,8 +337,19 @@ $('#foto_barang').on('change', function() {
     $('#fileNamePreview').text('File terpilih: ' + fileName).removeClass('hidden');
 });
 
+const kategori = <?= json_encode($kategori); ?>;
+
 function openModal() {
     const modal = document.getElementById('modalTambah');
+    if (!kategori.length) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Kategori Kosong',
+            text: 'Silakan tambahkan kategori terlebih dahulu sebelum menambahkan barang.',
+        });
+        return;
+    }
+    
     modal.classList.remove('hidden');
     setTimeout(() => {
         modal.classList.remove('opacity-0');
