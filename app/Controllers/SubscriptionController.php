@@ -26,6 +26,8 @@ class SubscriptionController extends BaseController {
             return;
         }
 
+        $this->cleanupOldPendingTransactions($_SESSION['gudang']['id_gudang']);
+
         $id_paket = $_POST['id_paket'] ?? null;
         if (!$id_paket) {
             $this->flash('error', 'Paket tidak dipilih');
@@ -70,8 +72,8 @@ class SubscriptionController extends BaseController {
                 'gross_amount' => $harga,
             ],
             'customer_details' => [
-                'first_name' => $_SESSION['gudang']['nama_admin'],
-                'email'      => 'admin@gudang.com',
+                'first_name' => $_SESSION['user']['nama_admin'],
+                'email'      => $_SESSION['user']['email_admin'],
             ],
             'item_details' => [
                 [
@@ -207,7 +209,6 @@ class SubscriptionController extends BaseController {
     }
 
     private function processPaymentStatus($order_id, $trx_status) {
-        // Cek apakah transaksi sudah diproses
         $transaksi = $this->transaksiModel->find('id_subscription', $order_id);
         
         if (!$transaksi) {
@@ -246,6 +247,45 @@ class SubscriptionController extends BaseController {
             $this->transaksiModel->update(['status_bayar' => 'gagal'], 'id_subscription', $order_id);
             if (session_status() === PHP_SESSION_ACTIVE) {
                 $this->flash('error', 'Pembayaran gagal.');
+            }
+        }
+    }
+
+    private function cleanupOldPendingTransactions($id_gudang) {
+        $pendingList = $this->transaksiModel->getPendingByGudang($id_gudang);
+
+        if (empty($pendingList)) return;
+
+        $server_key = MidtransConfig::getServerKey();
+        $base_api_url = MidtransConfig::isProduction() 
+            ? 'https://api.midtrans.com/v2' 
+            : 'https://api.sandbox.midtrans.com/v2';
+
+        foreach ($pendingList as $trx) {
+            $order_id = $trx['id_subscription'];
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "$base_api_url/$order_id/status");
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'Authorization: Basic ' . base64_encode($server_key . ':')
+            ]);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $status_midtrans = json_decode($response, true);
+            
+            if (!isset($status_midtrans['transaction_status'])) continue;
+
+            $trx_status = $status_midtrans['transaction_status'];
+
+            if ($trx_status == 'expire' || $trx_status == 'cancel' || $trx_status == 'deny') {
+                $this->transaksiModel->update(['status_bayar' => 'gagal'], 'id_subscription', $order_id);
+            } 
+            else if ($trx_status == 'settlement' || $trx_status == 'capture') {
+                $this->processPaymentStatus($order_id, $trx_status);
             }
         }
     }
