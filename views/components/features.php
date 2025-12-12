@@ -130,7 +130,7 @@
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12 md:mb-16">
-            <h2 class="text-4xl md:text-5xl font-black text-[#2F3D44] mb-4">Fitur Unggulan</h2>
+            <h2 class="text-4xl md:text-5xl font-black text-[#2F3D44] mb-4">Jelajahi Fitur Unggulan Kami</h2>
             <p class="text-lg text-[#2F3D44] text-opacity-90 max-w-2xl mx-auto">Jelajahi alat alat yang dirancang untuk organizer dan partner untuk menyederhanakan manajemen inventaris Anda</p>
         </div>
 

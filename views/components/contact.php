@@ -69,9 +69,9 @@
 
     <div class="max-w-6xl mx-auto relative z-10">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 md:mb-4" style="color: #25343B;">
-            Contact Us
+            Hubungi Kami
         </h2>
-        <p class="text-center mb-8 md:mb-12 text-sm md:text-lg" style="color: #25343B; opacity: 0.7;">We'd love to hear from you</p>
+        <p class="text-center mb-8 md:mb-12 text-sm md:text-lg" style="color: #25343B; opacity: 0.7;">Kami Siap Melayani Anda</p>
 
         <div class="grid md:grid-cols-2 gap-4 md:gap-8">
 
@@ -94,7 +94,7 @@
                             </svg>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <h3 class="text-base md:text-lg font-semibold mb-1 md:mb-2 drop-shadow" style="color: #25343B;">Address</h3>
+                            <h3 class="text-base md:text-lg font-semibold mb-1 md:mb-2 drop-shadow" style="color: #25343B;">Alamat</h3>
                             <p class="leading-relaxed text-sm md:text-base" style="color: #25343B; opacity: 0.8;">Jl. Siwalankerto No.121-131, Surabaya, Jawa Timur</p>
                         </div>
                         <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-all duration-300 drop-shadow flex-shrink-0" style="color: #25343B; opacity: 0.6;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,15 +164,15 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between mb-1 md:mb-2 gap-2">
-                                <h3 class="text-base md:text-lg font-semibold drop-shadow" style="color: #25343B;">Business Hours</h3>
+                                <h3 class="text-base md:text-lg font-semibold drop-shadow" style="color: #25343B;">Jam Operasional</h3>
                                 <span id="statusBadge" class="px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-semibold 
                                            bg-gradient-to-r from-green-400/30 to-green-500/30 
                                            text-green-50 neuro-badge whitespace-nowrap flex-shrink-0">
-                                    Open Now
+                                    Buka
                                 </span>
                             </div>
-                            <p class="mb-0.5 md:mb-1 text-sm md:text-base" style="color: #25343B; opacity: 0.8;">Monday - Friday: 09:00 - 17:00</p>
-                            <p class="text-sm md:text-base" style="color: #25343B; opacity: 0.8;">Saturday: 09:00 - 13:00</p>
+                            <p class="mb-0.5 md:mb-1 text-sm md:text-base" style="color: #25343B; opacity: 0.8;">Senin - Jumat: 09:00 - 17:00</p>
+                            <p class="text-sm md:text-base" style="color: #25343B; opacity: 0.8;">Sabtu: 09:00 - 13:00</p>
                         </div>
                     </div>
                 </div>
@@ -223,10 +223,10 @@
         }
 
         if (isOpen) {
-            badge.textContent = 'Open Now';
+            badge.textContent = 'Buka';
             badge.className = 'px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-semibold bg-gradient-to-r from-green-400/30 to-green-500/30 text-green-50 neuro-badge whitespace-nowrap flex-shrink-0';
         } else {
-            badge.textContent = 'Closed Now';
+            badge.textContent = 'Tutup';
             badge.className = 'px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-semibold bg-gradient-to-r from-red-400/30 to-red-500/30 text-red-50 neuro-badge-closed whitespace-nowrap flex-shrink-0';
         }
     }
