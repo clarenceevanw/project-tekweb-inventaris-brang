@@ -21,6 +21,16 @@
         }
     }
 
+    @keyframes rotate720 {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(-720deg);
+        }
+    }
+
     .hero-section {
         min-height: 100vh;
         min-width: 100vW;
@@ -40,8 +50,56 @@
         cursor: grabbing;
     }
 
-    .hero-title {
-        animation: fadeInUp 0.8s ease-out;
+    .text-reveal {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Garis tipis diam */
+    .text-reveal::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        transform: translateY(-100%);
+        z-index: 1;
+    }
+
+    /* Teks muncul dari kiri */
+    .text-reveal span {
+        display: inline-block;
+        transform: translateX(-100%);
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        animation: textRevealLeft 0.8s ease-out forwards;
+        position: relative;
+        z-index: 2;
+    }
+
+    @keyframes textRevealLeft {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+            clip-path: inset(0 100% 0 0);
+        }
+
+        60% {
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+            clip-path: inset(0 0 0 0);
+        }
+    }
+
+    .logo {
+        animation: rotate720 1s ease-out;
     }
 
     .hero-subtitle {
@@ -103,7 +161,12 @@
     <div id="canvas-container"></div>
 
     <div class="relative z-10 h-screen flex flex-col items-center justify-center text-center pointer-events-none">
-        <h1 class="hero-title text-6xl font-black text-[#FBEFDF] mb-4 tracking-tight drop-shadow-lg">GUDANGPINTAR</h1>
+        <div class="flex items-center justify-center mb-4 gap-2">
+            <svg class="logo w-20 h-20 text-[#FBEFDF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+            <h1 class="hero-title text-reveal text-6xl font-black text-[#FBEFDF] tracking-tight drop-shadow-lg"><span>GUDANGPINTAR</span></h1>
+        </div>
         <p class="hero-subtitle text-lg text-[#FBF5ED] font-semibold text-opacity-95 mb-10 leading-relaxed max-w-2xl mx-auto">Solusi manajemen inventaris terpadu yang mengubah cara Anda mengelola gudang dengan teknologi cerdas dan efisien.</p>
 
         <div class="hero-buttons flex gap-4 justify-center flex-wrap pointer-events-auto">
@@ -323,7 +386,7 @@
         selectedBox = null;
     });
 
-    const MAX_SPEED = 0.05;
+    const MAX_SPEED = 0.04;
     const COLLISION_DAMPING = 0.95;
     const MIN_DISTANCE = 0.9;
 
