@@ -84,6 +84,10 @@
     .icon-box.rotating {
         transform: rotate(360deg);
     }
+
+    .icon-box.rotating-reverse {
+        transform: rotate(-360deg);
+    }
 </style>
 <?php $this->endSection(); ?>
 
@@ -423,17 +427,17 @@
         // Desktop: sliding transition
         if (window.innerWidth >= 1024) {
             isTransitioning = true;
-            if (iconBoxAdmin) iconBoxAdmin.classList.add('rotating');
+            if (iconBoxAdmin) iconBoxAdmin.classList.add('rotating-reverse');
             wrapper.classList.add('show-mitra');
             setTimeout(() => {
                 formMitra.style.display = 'block';
                 infoMitra.style.display = 'block';
                 formAdmin.style.display = 'none';
                 infoAdmin.style.display = 'none';
-                if (iconBoxMitra) iconBoxMitra.classList.remove('rotating');
+                if (iconBoxMitra) iconBoxMitra.classList.remove('rotating-reverse');
             }, 400);
             setTimeout(() => {
-                if (iconBoxAdmin) iconBoxAdmin.classList.remove('rotating');
+                if (iconBoxAdmin) iconBoxAdmin.classList.remove('rotating-reverse');
                 isTransitioning = false;
             }, 800);
         } else {
