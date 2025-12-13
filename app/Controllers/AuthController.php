@@ -67,6 +67,12 @@ class AuthController extends BaseController {
         
         $data['title'] = "Login";
         $data['role'] = $_GET['role'] ?? 'admin';
+        
+        if (isset($_SESSION['login_error'])) {
+            $data['login_error'] = $_SESSION['login_error'];
+            unset($_SESSION['login_error']);
+        }
+        
         return $this->view('auth/login', $data);
     }
 
@@ -76,7 +82,9 @@ class AuthController extends BaseController {
 
         $user = $this->admin->find('username_admin', $username);
         
-        $gudang = $this->gudang->find('id_gudang', $user['id_gudang']);
+        if ($user) {
+            $gudang = $this->gudang->find('id_gudang', $user['id_gudang']);
+        }
 
         if ($user && password_verify($password, $user['password_admin'])) {
             $_SESSION['user'] = $user;
@@ -84,7 +92,6 @@ class AuthController extends BaseController {
             $_SESSION['gudang'] = $gudang;
             $_SESSION['user_id'] = $user['id_admin'];
             $_SESSION['username'] = $user['username_admin'];
-            $this->flash('success', 'Login berhasil!');
             
             // Check for redirect in session
             $redirect = $_SESSION['redirect_after_login'] ?? '/admin/dashboard';
@@ -92,7 +99,7 @@ class AuthController extends BaseController {
             return $this->redirect($redirect);
         }
 
-        $this->flash('error', 'Username atau password salah!');
+        $_SESSION['login_error'] = 'Username atau password salah!';
         return $this->redirect('/login?role=admin');
     }
 
@@ -107,11 +114,10 @@ class AuthController extends BaseController {
             $_SESSION['role'] = 'mitra';
             $_SESSION['user_id'] = $user['id_mitra'];
             $_SESSION['username'] = $user['username_mitra'];
-            $this->flash('success', 'Login berhasil!');
             return $this->redirect('/mitra/dashboard');
         }
 
-        $this->flash('error', 'Username atau password salah!');
+        $_SESSION['login_error'] = 'Username atau password salah!';
         return $this->redirect('/login?role=mitra');
     }
 
