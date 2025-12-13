@@ -76,6 +76,14 @@
         position: relative;
         z-index: 2;
     }
+
+    .icon-box {
+        transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .icon-box.rotating {
+        transform: rotate(360deg);
+    }
 </style>
 <?php $this->endSection(); ?>
 
@@ -250,7 +258,7 @@
                     <!-- Info Admin (untuk switch ke Mitra) -->
                     <div id="info-admin" class="info-content overlay-content" style="<?= ($role ?? 'admin') === 'mitra' ? 'display: none;' : '' ?>">
                         <div class="mb-8">
-                            <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: rgba(37, 52, 59, 0.1);">
+                            <div id="icon-box-admin" class="icon-box w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: rgba(37, 52, 59, 0.1);">
                                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                                 </svg>
@@ -296,7 +304,7 @@
                     <!-- Info Mitra (untuk switch ke Admin) -->
                     <div id="info-mitra" class="info-content overlay-content" style="position: absolute; <?= ($role ?? 'admin') === 'admin' ? 'display: none;' : '' ?>">
                         <div class="mb-8">
-                            <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: rgba(37, 52, 59, 0.1);">
+                            <div id="icon-box-mitra" class="icon-box w-16 h-16 rounded-xl flex items-center justify-center mb-6" style="background: rgba(37, 52, 59, 0.1);">
                                 <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                                 </svg>
@@ -401,6 +409,8 @@
         const infoMitra = document.getElementById('info-mitra');
         const btnMobileAdmin = document.getElementById('btn-mobile-admin');
         const btnMobileMitra = document.getElementById('btn-mobile-mitra');
+        const iconBoxAdmin = document.getElementById('icon-box-admin');
+        const iconBoxMitra = document.getElementById('icon-box-mitra');
 
         // Update mobile buttons
         if (btnMobileAdmin) {
@@ -413,14 +423,17 @@
         // Desktop: sliding transition
         if (window.innerWidth >= 1024) {
             isTransitioning = true;
+            if (iconBoxAdmin) iconBoxAdmin.classList.add('rotating');
             wrapper.classList.add('show-mitra');
             setTimeout(() => {
                 formMitra.style.display = 'block';
                 infoMitra.style.display = 'block';
                 formAdmin.style.display = 'none';
                 infoAdmin.style.display = 'none';
+                if (iconBoxMitra) iconBoxMitra.classList.remove('rotating');
             }, 400);
             setTimeout(() => {
+                if (iconBoxAdmin) iconBoxAdmin.classList.remove('rotating');
                 isTransitioning = false;
             }, 800);
         } else {
@@ -440,6 +453,8 @@
         const infoMitra = document.getElementById('info-mitra');
         const btnMobileAdmin = document.getElementById('btn-mobile-admin');
         const btnMobileMitra = document.getElementById('btn-mobile-mitra');
+        const iconBoxAdmin = document.getElementById('icon-box-admin');
+        const iconBoxMitra = document.getElementById('icon-box-mitra');
 
         // Update mobile buttons
         if (btnMobileAdmin) {
@@ -452,14 +467,17 @@
         // Desktop: sliding transition
         if (window.innerWidth >= 1024) {
             isTransitioning = true;
+            if (iconBoxMitra) iconBoxMitra.classList.add('rotating');
             wrapper.classList.remove('show-mitra');
             setTimeout(() => {
                 formAdmin.style.display = 'block';
                 infoAdmin.style.display = 'block';
                 formMitra.style.display = 'none';
                 infoMitra.style.display = 'none';
+                if (iconBoxAdmin) iconBoxAdmin.classList.remove('rotating');
             }, 400);
             setTimeout(() => {
+                if (iconBoxMitra) iconBoxMitra.classList.remove('rotating');
                 isTransitioning = false;
             }, 800);
         } else {
