@@ -11,6 +11,7 @@ require_once __DIR__ . '/../app/Controllers/AdminController.php';
 require_once __DIR__ . '/../app/Controllers/SubscriptionController.php';
 require_once __DIR__ . '/../app/Controllers/GudangController.php';
 require_once __DIR__ . '/../app/Controllers/ProfileController.php';
+require_once __DIR__ . '/../app/Controllers/SuperAdminController.php';
 
 Router::get("/", "HomeController@index");
 
@@ -27,6 +28,7 @@ Router::get("/auth/google/callback", "AuthController@callbackGoogle");
 // Auth Routes
 Router::post("/login/admin", "AuthController@loginAdmin");
 Router::post("/login/mitra", "AuthController@loginMitra");
+Router::get("/login/superadmin", "AuthController@loginSuperAdmin");
 Router::get("/login", "AuthController@showLogin");
 Router::post("/login", "AuthController@showLogin");
 
@@ -97,3 +99,20 @@ Router::post("/subscription/pay", "SubscriptionController@pay", "admin");
 Router::get("/subscription/finish", "SubscriptionController@finish", "admin");
 // Router untuk menerima notifikasi dari Midtrans (Webhook)
 Router::post("/subscription/notification", "SubscriptionController@notification", "admin");
+
+// Super Admin Routes
+Router::get("/superadmin/dashboard", "SuperAdminController@dashboard", "superadmin");
+Router::get("/superadmin/gudang", "SuperAdminController@gudang", "superadmin");
+Router::get("/superadmin/admin", "SuperAdminController@admin", "superadmin");
+Router::get("/superadmin/mitra", "SuperAdminController@mitra", "superadmin");
+Router::get("/superadmin/laporan", "SuperAdminController@laporan", "superadmin");
+
+
+// Super Admin CRUD Routes
+Router::post("/superadmin/gudang/store", "SuperAdminController@storeGudang", "superadmin");
+Router::post("/superadmin/gudang/update", "SuperAdminController@updateGudang", "superadmin");
+Router::post("/superadmin/gudang/delete", "SuperAdminController@deleteGudang", "superadmin");
+Router::post("/superadmin/admin/store", "SuperAdminController@storeAdmin", "superadmin");
+Router::post("/superadmin/admin/delete", "SuperAdminController@deleteAdmin", "superadmin");
+Router::post("/superadmin/mitra/store", "SuperAdminController@storeMitra", "superadmin");
+Router::post("/superadmin/mitra/delete", "SuperAdminController@deleteMitra", "superadmin");
