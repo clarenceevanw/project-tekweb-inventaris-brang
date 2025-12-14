@@ -149,7 +149,7 @@
             <!-- Pages -->
             <div class="flex flex-col gap-4 p-4">
                 <h3 class="text-xs font-bold uppercase tracking-wider mb-2 w-fit opacity-90 border-b pb-2">Pages</h3>
-                <a href="/" class="footer-link relative inline-flex items-center gap-1 w-fit text-base font-medium">
+                <a href="/#hero" class="footer-link relative inline-flex items-center gap-1 w-fit text-base font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-house-door" viewBox="0 0 16 16">
                         <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
                     </svg>Home</a>
