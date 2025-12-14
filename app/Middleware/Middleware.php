@@ -49,4 +49,13 @@ class Middleware {
         return $next();
     }
 
+    public static function superadmin($next) {
+        if (!isset($_SESSION['user']) || !isset($_SESSION["role"]) || $_SESSION["role"] !== "superadmin") {
+            header("Location: /login?role=admin");
+            $_SESSION['flash']['error'] = 'Akses ditolak! Hanya Super Admin yang dapat mengakses halaman ini.';
+            exit;
+        }
+        $next();
+    }
+
 }
