@@ -7,3 +7,7 @@ CREATE TABLE gudang (
     status_gudang ENUM('trial', 'active', 'expired', 'banned') DEFAULT 'trial',
     expired_date_gudang DATETIME NULL
 );
+
+ALTER TABLE `gudang` 
+ADD COLUMN IF NOT EXISTS `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN IF NOT EXISTS `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
