@@ -18,6 +18,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <title><?= $title ?? 'Inventaris' ?></title>
 
     <style>
@@ -138,10 +142,10 @@
     <?php endif; ?> -->
 
     <main class="relative min-h-screen overflow-x-hidden">
-        <?php 
-            $isLoggedIn = isset($_SESSION['user_id']);
-            $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-            include __DIR__ . '/navbarMain.php'; 
+        <?php
+        $isLoggedIn = isset($_SESSION['user_id']);
+        $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+        include __DIR__ . '/navbarMain.php';
         ?>
         <?= $this->renderSection('content') ?>
         <?php include __DIR__ . '/footerMain.php'; ?>

@@ -114,19 +114,36 @@ $cardStyles = [
         font-size: 1.1rem;
     }
 
-    .feature-item2::before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #FBEFDF;
-        font-weight: 700;
-        font-size: 1.1rem;
+    #subscription {
+        background: #FBEFDF;
+        position: relative;
+        /* min-height: 200vh; */
+        transition: background 0.5s ease;
+    }
+
+    .box {
+        background: linear-gradient(135deg, #1F2B31 0%, #25343B 50%, #2F3D44 100%);
+        box-shadow: 0 20px 60px rgba(31, 43, 49, 0.5);
+        border-radius: 20px;
+    }
+
+    .subscription-content {
+        opacity: 0;
+        position: relative;
+        z-index: 10;
+    }
+
+    .card-wrapper {
+        opacity: 0;
+        transform: translateY(100px);
     }
 </style>
 
-<section id="subscription" class="relative z-2 h-auto flex items-center justify-center px-4 relative overflow-hidden py-20" style="background: linear-gradient(135deg, #25343B 0%, #2d3f47 50%, #25343B 100%);">
-    <div class="max-w-6xl mx-auto w-full relative z-10">
-        <div class="text-center mb-8">
+
+<section id="subscription" class="relative z-2 flex items-center justify-center px-4 overflow-hidden py-20">
+    <div class="box z-1 w-[20rem] h-[20rem] absolute top-[10%] left-1/2 transform -translate-x-1/2"></div>
+    <div class="max-w-6xl mx-auto w-full relative z-10 subscription-content">
+        <div class="text-center mb-8 header-content">
             <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">Choose Your Plan</h1>
             <p class="text-lg font-medium" style="color: #FBEFDF;">Pilih paket yang sesuai dengan kebutuhan bisnis Anda</p>
         </div>
@@ -135,35 +152,37 @@ $cardStyles = [
             <?php if (isset($paket_subscriptions) && !empty($paket_subscriptions)): ?>
                 <?php foreach ($paket_subscriptions as $index => $paket): ?>
                     <?php $style = $cardStyles[$index % 3]; ?>
-                    <div class="subscription-card rounded-3xl p-6 text-center relative <?= isset($style['featured']) ? 'featured transform scale-105' : '' ?>" style="background: <?= $style['bg'] ?>">
-                        <?php if ($style['badge']): ?>
-                            <div class="trial-badge rounded-full px-4 py-2 text-sm font-semibold mb-3 inline-block">Free Trial</div>
-                        <?php endif; ?>
+                    <div class="card-wrapper">
+                        <div class="subscription-card rounded-3xl px-6 py-12 text-center relative <?= isset($style['featured']) ? 'featured transform scale-105' : '' ?>" style="background: <?= $style['bg'] ?>">
+                            <?php if ($style['badge']): ?>
+                                <div class="trial-badge absolute top-2 left-[52%] transform -translate-x-1/2 rounded-full px-4 py-2 text-sm font-semibold mb-3 inline-block">Free Trial</div>
+                            <?php endif; ?>
 
-                        <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: <?= $style['text'] ?>"><?= htmlspecialchars($paket['nama_paket']) ?></h3>
-                        <p class="text-sm font-medium mb-4" style="color: <?= $style['subtext'] ?>"><?= $paket['durasi_hari'] ?> Hari</p>
+                            <h3 class="text-2xl font-bold uppercase tracking-wide mb-1" style="color: <?= $style['text'] ?>"><?= htmlspecialchars($paket['nama_paket']) ?></h3>
+                            <p class="text-sm font-medium mb-4" style="color: <?= $style['subtext'] ?>"><?= $paket['durasi_hari'] ?> Hari</p>
 
-                        <div class="mb-4">
-                            <span class="text-4xl font-extrabold" style="color: <?= $style['text'] ?>">
-                                <span class="text-xl align-top">Rp</span><?= number_format($paket['harga'], 0, ',', '.') ?>
-                            </span>
-                            <div class="text-sm font-medium" style="color: <?= $style['subtext'] ?>">
-                                <?= $paket['durasi_hari'] == 7 ? 'untuk 7 hari' : ($paket['durasi_hari'] <= 31 ? 'per bulan' : 'per tahun') ?>
+                            <div class="mb-4">
+                                <span class="text-4xl font-extrabold" style="color: <?= $style['text'] ?>">
+                                    <span class="text-xl align-top">Rp</span><?= number_format($paket['harga'], 0, ',', '.') ?>
+                                </span>
+                                <div class="text-sm font-medium" style="color: <?= $style['subtext'] ?>">
+                                    <?= $paket['durasi_hari'] == 7 ? 'untuk 7 hari' : ($paket['durasi_hari'] <= 31 ? 'per bulan' : 'per tahun') ?>
+                                </div>
                             </div>
+
+                            <div class="divider mx-auto mb-4"></div>
+
+                            <ul class="space-y-2 mb-6 text-sm">
+                                <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Akses Penuh sistem inventaris</li>
+                                <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Manajemen barang & ruangan</li>
+                                <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Laporan & analitik</li>
+                                <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">QR Code Scanner</li>
+                            </ul>
+
+                            <a href="/auth/subscribe-redirect" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
+                                <?= $paket['harga'] == 0 ? 'Try Now' : 'Subscribe Now' ?>
+                            </a>
                         </div>
-
-                        <div class="divider mx-auto mb-4"></div>
-
-                        <ul class="space-y-2 mb-6 text-sm">
-                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Akses Penuh sistem inventaris</li>
-                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Manajemen barang & ruangan</li>
-                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">Laporan & analitik</li>
-                            <li class="<?= $style['feature'] ?> relative pl-6 font-medium" style="color: <?= $style['text'] ?>">QR Code Scanner</li>
-                        </ul>
-
-                        <a href="/auth/subscribe-redirect" class="subscribe-btn text-white border-0 px-8 py-3 rounded-full font-bold cursor-pointer no-underline inline-block uppercase tracking-wide text-sm">
-                            <?= $paket['harga'] == 0 ? 'Try Now' : 'Subscribe Now' ?>
-                        </a>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -174,3 +193,99 @@ $cardStyles = [
         </div>
     </div>
 </section>
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    (function() {
+        const box = document.querySelector('.box');
+        const section = document.querySelector('#subscription');
+        const content = document.querySelector('.subscription-content');
+        const header = document.querySelector('.header-content');
+        const cards = document.querySelectorAll('.card-wrapper');
+
+        // Reset awal
+        gsap.set(box, {
+            width: '20rem',
+            height: '20rem',
+            borderRadius: '20px'
+        });
+        gsap.set(content, {
+            opacity: 0
+        }); 
+
+        // Fungsi menentukan start/end berdasarkan orientasi
+        function getScrollValues() {
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                return {
+                    start: "top top",
+                    end: "top center"
+                };
+            } else {
+                return {
+                    start: "top center",
+                    end: "center center"
+                };
+            }
+        }
+
+        // Ambil nilai
+        let {
+            start,
+            end
+        } = getScrollValues();
+
+        // Timeline utama
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: section,
+                start: start,
+                end: end,
+                scrub: false,
+                once: true,
+                toggleActions: "play none none none",
+            }
+        });
+
+        tl.to(box, {
+            width: '100vw',
+            height: '100%',
+            borderRadius: '0px',
+            top: 0
+        }).to(content, {
+            opacity: 1
+        }, "-=0.3");
+
+        // Jika orientasi berubah → refresh ScrollTrigger
+        const mq = window.matchMedia("(orientation: portrait)");
+        mq.addEventListener("change", () => {
+            ({
+                start,
+                end
+            } = getScrollValues());
+            ScrollTrigger.refresh();
+        });
+
+        // Cards animation
+        ScrollTrigger.create({
+            trigger: section,
+            start: "center bottom",
+            onEnter: () => {
+                gsap.to(header, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+
+                gsap.to(cards, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    delay: 0.3
+                });
+            }
+        });
+    })();
+</script>
