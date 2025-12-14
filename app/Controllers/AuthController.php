@@ -3,18 +3,21 @@
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
 require_once __DIR__ . "/../Models/Gudang.php";
+require_once __DIR__ . "/../Models/SuperAdmin.php";
 require_once __DIR__ . "/../../config/GoogleConfig.php";
 
 class AuthController extends BaseController {
     protected $admin;
     protected $mitra;
     protected $gudang;
+    protected $superAdmin;
 
     public function __construct() {
         parent::__construct();
         $this->admin = new Admin();
         $this->mitra = new Mitra();
         $this->gudang = new Gudang();
+        $this->superAdmin = new SuperAdmin();
     }
 
     public function redirectSelectLogin() {
@@ -62,7 +65,11 @@ class AuthController extends BaseController {
     public function showLogin() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $role = $_POST['role'] ?? 'admin';
-            return $role === 'mitra' ? $this->loginMitra() : $this->loginAdmin();
+            if ($role === 'mitra') {
+                return $this->loginMitra();
+            } else {
+                return $this->loginAdmin();
+            }
         }
         
         $data['title'] = "Login";
@@ -119,6 +126,15 @@ class AuthController extends BaseController {
 
         $_SESSION['login_error'] = 'Username atau password salah!';
         return $this->redirect('/login?role=mitra');
+    }
+
+    public function loginSuperAdmin() {
+        // Redirect to Google OAuth for superadmin
+        $client = GoogleConfig::getClient(); 
+        $client->setState('superadmin');
+        $authUrl = $client->createAuthUrl();
+        header("Location: " . $authUrl);
+        exit;
     }
 
     public function signupAdmin() {
@@ -197,6 +213,9 @@ class AuthController extends BaseController {
                 else if ($role_target === 'mitra') {
                     $this->handleLoginMitra($email);
                 } 
+                else if ($role_target === 'superadmin') {
+                    $this->handleLoginSuperAdmin($email);
+                } 
                 else {
                     throw new Exception("Role login tidak dikenali.");
                 }
@@ -248,5 +267,23 @@ class AuthController extends BaseController {
 
         $this->flash('success', 'Login Mitra Berhasil!');
         $this->redirect('/mitra/dashboard');
+    }
+
+    private function handleLoginSuperAdmin($email) {
+        $user = $this->superAdmin->findByEmail($email); 
+
+        if (!$user) {
+            $this->flash('error', 'Email Google tidak terdaftar sebagai Super Admin!');
+            $this->redirect('/');
+            exit;
+        }
+
+        $_SESSION['user'] = $user;
+        $_SESSION['role'] = 'superadmin';
+        $_SESSION['user_id'] = $user['id_superadmin'];
+        $_SESSION['username'] = $user['nama_superadmin'];
+
+        $this->flash('success', 'Login Super Admin Berhasil!');
+        $this->redirect('/superadmin/dashboard');
     }
 }
