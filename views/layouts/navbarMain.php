@@ -13,6 +13,18 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         transform: translateY(-100%);
     }
 
+    .navbar-left {
+        background: rgba(37, 52, 59, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 8px 24px rgba(37, 52, 59, 0.35), inset 0 1px 0 rgba(251, 239, 223, 0.1);
+        border: 1px solid rgba(251, 239, 223, 0.2);
+    }
+    
     .navbar-trapezoid {
         background: rgba(37, 52, 59, 0.7);
         backdrop-filter: blur(16px);
@@ -290,6 +302,9 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
 
         <!-- Desktop Navbar -->
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
+            <a href="/" class="navbar-left absolute left-0 px-6 py-4 flex items-center flex items-center transition-colors duration-400">
+                <img src="/assets/home/logoteksgudangtransparentv2.png" alt="Gudang Pintar" class="h-10 w-auto">
+            </a>
 
             <div class="navbar-trapezoid flex items-center gap-8 px-4 py-4">
                 <a href="/#hero" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
