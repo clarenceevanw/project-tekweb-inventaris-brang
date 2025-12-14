@@ -23,6 +23,43 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         border-bottom-right-radius: 20px;
         box-shadow: 0 8px 24px rgba(37, 52, 59, 0.35), inset 0 1px 0 rgba(251, 239, 223, 0.1);
         border: 1px solid rgba(251, 239, 223, 0.2);
+        transition: background 0.5s ease;
+    }
+
+    .navbar-left:hover {
+        background: rgba(251, 239, 223, 0.8);
+    }
+
+    .logo-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+
+    .logo-wrapper img {
+        height: 2.5rem;
+        width: auto;
+        display: block;
+        transition: opacity 0.5s ease;
+    }
+
+    .logo-light {
+        opacity: 1;
+    }
+
+    .logo-dark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+
+    .navbar-left:hover .logo-light {
+        opacity: 0;
+    }
+
+    .navbar-left:hover .logo-dark {
+        opacity: 1;
     }
     
     .navbar-trapezoid {
@@ -303,7 +340,10 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
         <!-- Desktop Navbar -->
         <nav class="hidden lg:flex items-center justify-center w-full gap-16">
             <a href="/" class="navbar-left absolute left-0 px-6 py-4 flex items-center flex items-center transition-colors duration-400">
-                <img src="/assets/home/logoteksgudangtransparentv2.png" alt="Gudang Pintar" class="h-10 w-auto">
+                <div class="logo-wrapper">
+                    <img src="/assets/home/logoteksgudangtransparentv2.png" alt="Gudang Pintar" class="logo-light">
+                    <img src="/assets/home/logoteksgudangtransparentv2_dark.png" alt="Gudang Pintar" class="logo-dark">
+                </div>
             </a>
 
             <div class="navbar-trapezoid flex items-center gap-8 px-4 py-4">
