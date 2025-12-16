@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../Views/View.php';
+require_once __DIR__ . '/../Models/Gudang.php';
 
 class BaseController
 {
@@ -11,6 +12,25 @@ class BaseController
             session_start();
         }
         $this->model = $model;
+        $this->autoUpdateGudangStatus();
+    }
+
+    private function autoUpdateGudangStatus() {
+        // Update status gudang yang sudah expired
+        // Hanya jalankan sekali per session untuk efisiensi
+        if (!isset($_SESSION['gudang_status_checked'])) {
+            $gudangModel = new Gudang();
+            $gudangModel->updateExpiredStatus();
+            $_SESSION['gudang_status_checked'] = time();
+        } else {
+            // Cek ulang setiap 1 jam
+            $lastCheck = $_SESSION['gudang_status_checked'];
+            if ((time() - $lastCheck) > 3600) {
+                $gudangModel = new Gudang();
+                $gudangModel->updateExpiredStatus();
+                $_SESSION['gudang_status_checked'] = time();
+            }
+        }
     }
     protected function view($viewName, $data = [])
     {
