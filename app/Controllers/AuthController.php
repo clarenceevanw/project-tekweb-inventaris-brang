@@ -133,6 +133,7 @@ class AuthController extends BaseController {
         $client = GoogleConfig::getClient(); 
         $client->setState('superadmin');
         $authUrl = $client->createAuthUrl();
+        $_SESSION['role'] = 'superadmin';
         header("Location: " . $authUrl);
         exit;
     }
