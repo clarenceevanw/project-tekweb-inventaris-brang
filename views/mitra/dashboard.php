@@ -2,43 +2,85 @@
 
 <?php $this->section('content'); ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Perhitungan Performa -->
+<?php 
+    $perubahan = $transaksi_bulan_lalu > 0 ? (($transaksi_bulan_ini - $transaksi_bulan_lalu) / $transaksi_bulan_lalu * 100) : 0;
+    // hardcode
+    // $perubahan = -5;
+    $isNaik = $perubahan >= 0;
+?>
+
 <div class="container mx-auto px-4 py-8 space-y-6">
     
     <!-- Welcome Section -->
-    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-6 text-white">
-        <h1 class="text-3xl font-bold">Dashboard</h1>
-        <p class="mt-1 text-indigo-100">Selamat datang, <span class="font-semibold"><?= $_SESSION['user']['nama_mitra'] ?></span></p>
+    <div>
+        <h1 class="text-3xl font-bold text-theme-primary">Dashboard</h1>
+        <p class="mt-1 text-theme-primary-light">Selamat datang, <span class="font-semibold"><?= $_SESSION['user']['nama_mitra'] ?></span></p>
+    </div>
+
+        <!-- Info Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 border-l-4 border-theme-secondary">
+            <div class="flex items-center">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <p class="text-theme-primary-light text-sm">Gudang Favorit</p>
+                    <h4 class="text-xl font-bold text-theme-primary"><?= htmlspecialchars($gudang_favorit) ?></h4>
+                </div>
+            </div>
+        </div>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 border-l-4 <?= $perubahan >= 0 ? 'border-theme-secondary' : 'border-theme-accent' ?>">
+            <div class="flex items-center">
+                <div class="<?= $perubahan >= 0 ? 'bg-theme-secondary' : 'bg-theme-accent' ?> p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <p class="text-theme-primary-light text-sm">Performa</p>
+                    <h4 class="text-xl font-bold <?= $perubahan >= 0 ? 'text-theme-secondary' : 'text-theme-accent' ?>">
+                        <?= $isNaik ? '↑' : '↓' ?> <?= abs(round($perubahan, 1)) ?>% bulan ini
+                    </h4>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Stats Cards dengan Progress -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Total Transaksi -->
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-blue-100 text-sm font-medium">Total Transaksi</p>
-                    <h3 class="text-4xl font-bold mt-2"><?= number_format($total_transaksi) ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Total Transaksi</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= number_format($total_transaksi) ?></h3>
                 </div>
-                <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-secondary bg-opacity-30 p-3 rounded-full">
+                    <svg class="w-8 h-8 text-theme-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                     </svg>
                 </div>
             </div>
             <div class="flex items-center text-sm">
-                <span class="text-blue-100">Rata-rata: <?= $rata_rata_per_hari ?>/hari</span>
+                <span class="text-theme-primary-light">Rata-rata: <?= $rata_rata_per_hari ?>/hari</span>
             </div>
         </div>
 
         <!-- Total Supply -->
-        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-green-100 text-sm font-medium">Total Supply</p>
-                    <h3 class="text-4xl font-bold mt-2"><?= number_format($total_supply) ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Total Supply</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= number_format($total_supply) ?></h3>
                 </div>
-                <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-theme-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
                     </svg>
                 </div>
@@ -49,96 +91,61 @@
         </div>
 
         <!-- Transaksi Bulan Ini -->
-        <?php 
-        $perubahan = $transaksi_bulan_lalu > 0 ? (($transaksi_bulan_ini - $transaksi_bulan_lalu) / $transaksi_bulan_lalu * 100) : 0;
-        $isNaik = $perubahan >= 0;
-        ?>
-        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-purple-100 text-sm font-medium">Bulan Ini</p>
-                    <h3 class="text-4xl font-bold mt-2"><?= number_format($transaksi_bulan_ini) ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Bulan Ini</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= number_format($transaksi_bulan_ini) ?></h3>
                 </div>
-                <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-theme-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
             </div>
             <div class="flex items-center text-sm">
-                <svg class="w-4 h-4 mr-1 <?= $isNaik ? 'text-green-300' : 'text-red-300' ?>" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 mr-1 <?= $isNaik ? 'text-theme-secondary' : 'text-theme-accent' ?>" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="<?= $isNaik ? 'M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z' : 'M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z' ?>" clip-rule="evenodd"></path>
                 </svg>
-                <span class="<?= $isNaik ? 'text-green-300' : 'text-red-300' ?>"><?= abs(round($perubahan, 1)) ?>%</span>
-                <span class="text-purple-100 ml-1">vs bulan lalu</span>
+                <span class="<?= $isNaik ? 'text-theme-secondary' : 'text-theme-accent' ?>"><?= abs(round($perubahan, 1)) ?>%</span>
+                <span class="text-theme-primary-light ml-1">vs bulan lalu</span>
             </div>
         </div>
 
         <!-- Total Buy -->
-        <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+        <div class="bg-theme-light-alt from-theme-accent to-theme-accent-dark rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-orange-100 text-sm font-medium">Total Buy</p>
-                    <h3 class="text-4xl font-bold mt-2"><?= number_format($total_buy) ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Total Buy</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= number_format($total_buy) ?></h3>
                 </div>
-                <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-theme-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                 </div>
             </div>
-            <div class="w-full bg-white bg-opacity-20 rounded-full h-2">
+            <div class="w-full bg-white rounded-full h-2">
                 <div class="bg-white h-2 rounded-full" style="width: <?= $total_transaksi > 0 ? ($total_buy/$total_transaksi*100) : 0 ?>%"></div>
             </div>
         </div>
     </div>
 
-    <!-- Info Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center">
-                <div class="bg-indigo-100 p-3 rounded-full">
-                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <p class="text-gray-500 text-sm">Gudang Favorit</p>
-                    <h4 class="text-xl font-bold text-gray-900"><?= htmlspecialchars($gudang_favorit) ?></h4>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex items-center">
-                <div class="bg-pink-100 p-3 rounded-full">
-                    <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                    </svg>
-                </div>
-                <div class="ml-4">
-                    <p class="text-gray-500 text-sm">Performa</p>
-                    <h4 class="text-xl font-bold <?= $perubahan >= 0 ? 'text-green-600' : 'text-red-600' ?>">
-                        <?= $isNaik ? '↑' : '↓' ?> <?= abs(round($perubahan, 1)) ?>% bulan ini
-                    </h4>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Line Chart - Trend 7 Hari -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Trend 7 Hari Terakhir</h2>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-theme-primary mb-4">Trend 7 Hari Terakhir</h2>
             <div style="height: 250px;">
                 <canvas id="trendChart"></canvas>
             </div>
         </div>
 
         <!-- Bar Chart - Top 5 Barang -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Top 5 Barang</h2>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-bold text-theme-primary mb-4">Top 5 Barang</h2>
             <div style="height: 250px;">
                 <canvas id="topBarangChart"></canvas>
             </div>
@@ -177,24 +184,24 @@
     </div> -->
 
     <!-- Recent Activities -->
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-xl font-bold text-gray-900 mb-4">Aktivitas Terbaru</h2>
+    <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+        <h2 class="text-xl font-bold text-theme-primary mb-4">Aktivitas Terbaru</h2>
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="min-w-full bg-theme-light-bright rounded-lg overflow-hidden">
+                <thead class="bg-theme-primary-light">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Waktu</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jenis</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Barang</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Jumlah</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Waktu</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Jenis</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Barang</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Jumlah</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">User</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-theme-light-bright divide-y divide-gray-200">
                     <?php if (!empty($aktivitas_terbaru)): ?>
                         <?php foreach ($aktivitas_terbaru as $aktivitas): ?>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary-light">
                                 <?php 
                                 $waktu = strtotime($aktivitas['tanggal_transaksi']);
                                 $sekarang = time();
@@ -207,28 +214,28 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <?php if ($aktivitas['jenis_transaksi'] == 'supply'): ?>
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Masuk</span>
+                                    <span class="badge-theme-success">Masuk</span>
                                 <?php else: ?>
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Keluar</span>
+                                    <span class="badge-theme-warning">Keluar</span>
                                 <?php endif; ?>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?= htmlspecialchars($aktivitas['nama_barang']) ?></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= htmlspecialchars($aktivitas['nama_barang']) ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary">
                                 <?= $aktivitas['jenis_transaksi'] == 'supply' ? '+' : '-' ?><?= $aktivitas['kuantitas_transaksi'] ?>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?= htmlspecialchars($aktivitas['nama_admin']) ?> (<?= htmlspecialchars($aktivitas['nama_gudang']) ?>)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary-light"><?= htmlspecialchars($aktivitas['nama_admin']) ?> (<?= htmlspecialchars($aktivitas['nama_gudang']) ?>)</td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada aktivitas</td>
+                            <td colspan="5" class="px-6 py-4 text-center text-theme-primary-light">Belum ada aktivitas</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
         <div class="mt-4 text-center">
-            <a href="/mitra/transaksi" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Lihat Semua Aktivitas →</a>
+            <a href="/mitra/transaksi" class="text-theme-secondary hover:text-theme-secondary-dark font-medium text-sm">Lihat Semua Aktivitas →</a>
         </div>
     </div>
 

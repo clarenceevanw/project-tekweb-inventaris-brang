@@ -127,26 +127,26 @@
     <?php endif; ?>
 
     <div class="flex h-screen overflow-hidden">
-        <aside id="sidebar" class="bg-white text-gray-800 border-r border-gray-200 fixed md:relative z-30 h-full w-0 md:w-20 md:hover:w-64 group sidebar-transition flex flex-col shadow-xl overflow-hidden">
-            <div class="h-16 flex items-center justify-between px-4 md:px-0 border-b border-gray-100 min-w-[5rem] relative">
+        <aside id="sidebar" class="sidebar-theme fixed md:relative z-30 h-full w-0 md:w-20 md:hover:w-64 group sidebar-transition flex flex-col overflow-hidden">
+            <div class="h-16 flex items-center justify-between px-4 md:px-0 min-w-[5rem] relative">
 
                 <!-- Logo Container -->
                 <div class="flex items-center w-full md:w-auto">
                     <!-- Icon Logo -->
                     <div class="w-10 md:w-20 flex justify-center items-center flex-shrink-0">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-8 h-8 text-theme-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
                     <!-- Text Logo -->
                     <div class="opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-300 whitespace-nowrap overflow-hidden">
-                        <span class="font-bold text-lg tracking-wider text-gray-800">GUDANG <span class="text-indigo-600">PINTAR</span></span>
+                        <span class="font-bold text-lg tracking-wider text-theme-light">GUDANG <span class="text-theme-secondary">PINTAR</span></span>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation Links -->
-            <nav class="flex-1 py-6 space-y-1 overflow-y-auto no-scrollbar px-2">
+            <nav class="flex-1 py-6 overflow-y-auto no-scrollbar px-2">
 
                 <?php
                 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -158,7 +158,7 @@
                 ?>
 
                 <!-- 1. Dashboard -->
-                <a href="/mitra/dashboard" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('dashboard') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/mitra/dashboard" class="sidebar-theme-item <?= $isActive('dashboard') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
@@ -170,9 +170,9 @@
                 </a>
 
                 <!-- 2. Transaksi -->
-                <a href="/mitra/transaksi" class="relative flex items-center h-12 px-3 rounded-lg transition-colors <?= $isActive('transaksi') ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100 hover:text-indigo-600' ?>">
+                <a href="/mitra/transaksi" class="sidebar-theme-item <?= $isActive('transaksi') ? 'active' : '' ?>">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 icon icon-tabler icons-tabler-outline icon-tabler-cash-register">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" />
                             <path d="M19 21v1m0 -8v1" />
@@ -191,26 +191,26 @@
             </nav>
 
             <!-- Bottom: Logout -->
-            <div class="border-t border-gray-100 px-4 py-2">
-                <a href="/#hero" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-1 text-gray-600 hover:text-red-600">
+            <div class="border-t border-theme-primary-dark px-2 py-2">
+                <a href="/#hero" class="sidebar-theme-item">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-house-door" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-6 h-6 bi-house-door" viewBox="0 0 16 16">
                             <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
                         </svg>
                     </div>
-                    <span class="ml-[1.15rem] text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span class="ml-3 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Home
                     </span>
                 </a>
             </div>
-            <div class="px-4 py-2">
-                <a href="/logout" class="flex items-center group/logout hover:bg-red-50 rounded-lg transition-colors py-2 px-[0.45rem] text-gray-600 hover:text-red-600">
+            <div class="px-2 pb-2">
+                <a href="/logout" class="sidebar-theme-item">
                     <div class="w-8 flex justify-center items-center flex-shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                         </svg>
                     </div>
-                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    <span class="ml-3 text-sm font-medium opacity-0 group-hover:opacity-100 group-[.mobile-open]:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                         Logout
                     </span>
                 </a>
@@ -221,9 +221,9 @@
         <div class="flex-1 flex flex-col h-screen overflow-hidden">
 
             <!-- Mobile Header -->
-            <header class="md:hidden bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 z-20">
-                <div class="font-bold text-gray-800">GUDANG <span class="text-indigo-600">PINTAR</span></div>
-                <button onclick="toggleSidebar()" class="text-gray-500 hover:text-indigo-600 focus:outline-none">
+            <header class="md:hidden bg-theme-primary border-b border-theme-primary-light h-16 flex items-center justify-between px-4 z-20">
+                <div class="font-bold text-theme-light">GUDANG <span class="text-theme-secondary">PINTAR</span></div>
+                <button onclick="toggleSidebar()" class="text-theme-light hover:text-theme-secondary focus:outline-none">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -231,7 +231,7 @@
             </header>
 
             <!-- Main Content -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-0 relative">
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-0 relative">
                 <!-- Overlay Mobile -->
                 <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-20 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 
