@@ -139,10 +139,27 @@ class SuperAdminController extends BaseController
 
     public function storeAdmin()
     {
-        if ($this->superAdminModel->createAdmin($_POST)) {
-            return $this->json(['success' => true, 'message' => 'Admin berhasil ditambahkan!']);
+        try {
+            // Validasi input
+            if (empty($_POST['nama_admin']) || empty($_POST['email_admin']) || empty($_POST['password_admin'])) {
+                return $this->json(['success' => false, 'message' => 'Semua field wajib diisi!']);
+            }
+            
+            $data = [
+                'nama_admin' => $_POST['nama_admin'],
+                'email_admin' => $_POST['email_admin'],
+                'username_admin' => $_POST['username_admin'],
+                'password_admin' => password_hash($_POST['password_admin'], PASSWORD_DEFAULT),
+                'id_gudang' => !empty($_POST['gudang_id']) ? $_POST['gudang_id'] : null
+            ];
+            
+            if ($this->adminModel->addAdminToGudang($data)) {
+                return $this->json(['success' => true, 'message' => 'Admin berhasil ditambahkan!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menambahkan admin!']);
+        } catch (Exception $e) {
+            return $this->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menambahkan admin!']);
     }
 
     public function storeMitra()
@@ -174,13 +191,43 @@ class SuperAdminController extends BaseController
         return $this->json(['success' => false, 'message' => 'Gagal menghapus gudang!']);
     }
 
+    public function updateAdmin()
+    {
+        $id = $_POST['id_admin'];
+        $data = [
+            'nama_admin' => $_POST['nama_admin'],
+            'email_admin' => $_POST['email_admin'],
+            'username_admin' => $_POST['username_admin'],
+            'id_gudang' => !empty($_POST['gudang_id']) ? $_POST['gudang_id'] : null
+        ];
+        
+        if (!empty($_POST['password_admin'])) {
+            $data['password_admin'] = password_hash($_POST['password_admin'], PASSWORD_DEFAULT);
+        }
+        
+        if ($this->adminModel->updateAdmin($id, $data)) {
+            return $this->json(['success' => true, 'message' => 'Admin berhasil diupdate!']);
+        }
+        return $this->json(['success' => false, 'message' => 'Gagal mengupdate admin!']);
+    }
+
     public function deleteAdmin()
     {
         $id = $_POST['id'];
-        if ($this->superAdminModel->deleteAdmin($id)) {
+        if ($this->adminModel->deleteAdmin($id)) {
             return $this->json(['success' => true, 'message' => 'Admin berhasil dihapus!']);
         }
         return $this->json(['success' => false, 'message' => 'Gagal menghapus admin!']);
+    }
+
+    public function getAdmin()
+    {
+        $id = $_GET['id'];
+        $admin = $this->adminModel->find('id_admin', $id);
+        if ($admin) {
+            return $this->json(['success' => true, 'data' => $admin]);
+        }
+        return $this->json(['success' => false, 'message' => 'Admin tidak ditemukan!']);
     }
 
     public function deleteMitra()
