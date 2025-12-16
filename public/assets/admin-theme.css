@@ -242,7 +242,8 @@
 }
 
 .table-theme tbody {
-    background: var(--theme-light-bright);
+    background: #f8f3ea;
+    border: 1px solid rgba(37, 52, 59, 0.1);
 }
 
 .table-theme tbody tr {
@@ -250,7 +251,7 @@
 }
 
 .table-theme tbody tr:hover {
-    background: var(--theme-secondary-lighter);
+    background: rgba(95, 165, 156, 0.08);
     transition: background 0.2s ease;
 }
 
