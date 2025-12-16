@@ -16,9 +16,12 @@ SET @pass = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
 
 -- GUDANG SURABAYA
 SET @g_sby = UUID();
-INSERT INTO gudang VALUES (@g_sby, 'Gudang Pusat Surabaya', 'Jl. Raya Darmo No. 12, Surabaya', 'active', NULL);
+-- INSERT INTO gudang VALUES (@g_sby, 'Gudang Pusat Surabaya', 'Jl. Raya Darmo No. 12, Surabaya', 'active', NULL);
+INSERT INTO gudang (id_gudang, nama_gudang, lokasi_gudang, status_gudang, expired_date_gudang) 
+VALUES (@g_sby, 'Gudang Cabang Surabaya', 'Jl. Raya Darmo No. 12, Surabaya', 'active', NULL);
 SET @adm_sby = UUID();
-INSERT INTO admin VALUES (@adm_sby, 'Budi Santoso', 'admin1', @pass, 'budi.santoso@gudangsby.com', @g_sby, NULL);
+INSERT INTO admin (id_admin, nama_admin, username_admin, password_admin, email_admin, id_gudang)
+VALUES (@adm_sby, 'Budi Santoso', 'admin1', @pass, 'budi.santoso@gudangsby.com', @g_sby);
 
 SET @r_sby_a = UUID();
 SET @r_sby_b = UUID();
@@ -58,9 +61,9 @@ INSERT INTO barang VALUES
 
 -- GUDANG SIDOARJO
 SET @g_sda = UUID();
-INSERT INTO gudang VALUES (@g_sda, 'Gudang Cabang Sidoarjo', 'Jl. Wahid Hasyim No. 88, Sidoarjo', 'active', NULL);
+INSERT INTO gudang (id_gudang, nama_gudang, lokasi_gudang, status_gudang, expired_date_gudang) VALUES (@g_sda, 'Gudang Cabang Sidoarjo', 'Jl. Wahid Hasyim No. 88, Sidoarjo', 'active', NULL);
 SET @adm_sda = UUID();
-INSERT INTO admin VALUES (@adm_sda, 'Sutrisno Wijaya', 'admin2', @pass, 'sutrisno.wijaya@gudangsda.com', @g_sda, NULL);
+INSERT INTO admin (id_admin, nama_admin, username_admin, password_admin, email_admin, id_gudang) VALUES (@adm_sda, 'Sutrisno Wijaya', 'admin2', @pass, 'sutrisno.wijaya@gudangsda.com', @g_sda);
 
 SET @r_sda_e = UUID();
 SET @r_sda_f = UUID();
@@ -100,9 +103,9 @@ INSERT INTO barang VALUES
 
 -- GUDANG MALANG
 SET @g_mlg = UUID();
-INSERT INTO gudang VALUES (@g_mlg, 'Gudang Cabang Malang', 'Jl. Soekarno Hatta No. 45, Malang', 'trial', DATE_ADD(NOW(), INTERVAL 7 DAY));
+INSERT INTO gudang (id_gudang, nama_gudang, lokasi_gudang, status_gudang, expired_date_gudang) VALUES (@g_mlg, 'Gudang Cabang Malang', 'Jl. Soekarno Hatta No. 45, Malang', 'trial', DATE_ADD(NOW(), INTERVAL 7 DAY));
 SET @adm_mlg = UUID();
-INSERT INTO admin VALUES (@adm_mlg, 'Dewi Lestari', 'admin3', @pass, 'dewi.lestari@gudangmlg.com', @g_mlg, NULL);
+INSERT INTO admin (id_admin, nama_admin, username_admin, password_admin, email_admin, id_gudang) VALUES (@adm_mlg, 'Dewi Lestari', 'admin3', @pass, 'dewi.lestari@gudangmlg.com', @g_mlg);
 
 SET @r_mlg_i = UUID();
 SET @r_mlg_j = UUID();
@@ -139,7 +142,8 @@ INSERT INTO barang VALUES
 -- MITRA
 SET @m_supply = UUID();
 SET @m_buy = UUID();
-INSERT INTO mitra VALUES 
+INSERT INTO mitra (id_mitra, nama_mitra, username_mitra, password_mitra, email_mitra) 
+VALUES 
 (@m_supply, 'PT. Indofood Sukses Makmur', 'indofood', @pass, 'supply@indofood.com'),
 (@m_buy, 'Toko Kelontong Madura', 'madura_jaya', @pass, 'madura@kelontong.com');
 
