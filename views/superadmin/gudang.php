@@ -76,6 +76,7 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Gudang</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Berakhir</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -93,6 +94,25 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-500"><?= $gudang['admin_nama'] ?? 'Belum ditugaskan' ?></div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <?php 
+                                    $expired = $gudang['expired_date_gudang'] ?? null;
+                                    if ($expired) {
+                                        $expiredTime = strtotime($expired);
+                                        $now = time();
+                                        $sisaHari = floor(($expiredTime - $now) / (60 * 60 * 24));
+                                        $textClass = $sisaHari <= 0 ? 'text-red-600' : ($sisaHari <= 7 ? 'text-amber-600' : 'text-gray-900');
+                                        echo '<div class="text-sm ' . $textClass . ' font-medium">' . date('d M Y', $expiredTime) . '</div>';
+                                        if ($sisaHari > 0) {
+                                            echo '<div class="text-xs text-gray-500">(' . $sisaHari . ' hari lagi)</div>';
+                                        } else {
+                                            echo '<div class="text-xs text-red-500">(Sudah berakhir)</div>';
+                                        }
+                                    } else {
+                                        echo '<div class="text-sm text-gray-400">-</div>';
+                                    }
+                                    ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <?php 
@@ -127,7 +147,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-gray-500">Belum ada data gudang</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">Belum ada data gudang</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

@@ -68,7 +68,7 @@ class Transaksi extends BaseModel {
     }
 
     public function getDetailById($id_transaksi) {
-        $stmt = $this->db->prepare("SELECT t.*, m.nama_mitra, a.nama_admin, g.nama_gudang FROM transaksi t LEFT JOIN mitra m ON t.id_mitra = m.id_mitra LEFT JOIN admin a ON t.id_admin = a.id_admin LEFT JOIN gudang g ON a.id_gudang = g.id_gudang WHERE t.id_transaksi = ?");
+        $stmt = $this->db->prepare("SELECT t.*, m.nama_mitra, a.nama_admin, g.nama_gudang FROM transaksi t LEFT JOIN mitra m ON t.id_mitra = m.id_mitra LEFT JOIN admin a ON t.id_admin = a.id_admin LEFT JOIN gudang g ON t.id_gudang = g.id_gudang WHERE t.id_transaksi = ?");
         $stmt->execute([$id_transaksi]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

@@ -149,17 +149,19 @@
     background-color: var(--theme-light-darker);
 }
 
-/* Card Styles with Neumorphism */
+/* Card Styles */
 .card-theme {
-    background: var(--theme-light);
-    border-radius: 1rem;
-    box-shadow: 0 1px 3px rgba(37, 52, 59, 0.08);
+    background: var(--theme-light-alt);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
     transition: all 0.3s ease;
 }
 
 .card-theme:hover {
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.25), 0 6px 8px -2px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(37, 52, 59, 0.1);
+    transition: all 0.3s ease;
 }
 
 /* Icon Styles */
@@ -224,9 +226,9 @@
 /* Table Styles */
 .table-theme {
     background: var(--theme-light-bright);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     overflow: hidden;
-    border: 1px solid rgba(37, 52, 59, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .table-theme thead {

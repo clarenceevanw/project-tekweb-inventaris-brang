@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS `superadmin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `superadmin` (`nama_superadmin`, `email_superadmin`) 
-VALUES ('Super Admin', 'ezra.bryan2006@gmail.com');
+VALUES ('Super Admin', 'c14240069@john.petra.ac.id');
 
