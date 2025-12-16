@@ -141,9 +141,23 @@ class SuperAdmin extends BaseModel
         return $stmt->execute([
             generate_uuid(),
             $data['nama_mitra'],
-            $data['email'],
-            $data['email'],
-            password_hash($data['password'], PASSWORD_DEFAULT)
+            $data['email_mitra'],
+            $data['username_mitra'],
+            password_hash($data['password_mitra'], PASSWORD_DEFAULT)
+        ]);
+    }
+
+    public function updateMitra($id, $data)
+    {
+        $stmt = $this->db->prepare("
+            UPDATE mitra 
+            SET nama_mitra = ?, email_mitra = ?
+            WHERE id_mitra = ?
+        ");
+        return $stmt->execute([
+            $data['nama_mitra'],
+            $data['email_mitra'],
+            $id
         ]);
     }
 
