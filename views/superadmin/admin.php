@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="password_admin" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                                    <input type="password" id="password_admin" name="password_admin" placeholder="Kosongkan jika tidak ingin mengubah password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                    <input type="password" id="password_admin" name="password_admin" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="gudang_id" class="block text-sm font-medium text-gray-700 mb-1">Gudang</label>
@@ -199,9 +199,13 @@
     function openAddModal() {
         const modal = document.getElementById('adminModal');
         const form = document.getElementById('adminForm');
+        const password = document.getElementById('password_admin');
+
         document.getElementById('modalTitle').textContent = 'Tambah Admin';
         form.reset();
-        document.getElementById('password_admin').setAttribute('required', 'required');
+
+        password.setAttribute('required', 'required');
+        password.placeholder = 'Masukkan password admin';
 
         const hiddenInput = form.querySelector('input[name="id_admin"]');
         if (hiddenInput) hiddenInput.remove();
@@ -235,14 +239,17 @@
                 const admin = data.data;
                 const modal = document.getElementById('adminModal');
                 const form = document.getElementById('adminForm');
+                const password = document.getElementById('password_admin');
                 
                 document.getElementById('modalTitle').textContent = 'Edit Admin';
                 document.getElementById('nama_admin').value = admin.nama_admin;
                 document.getElementById('email_admin').value = admin.email_admin;
                 document.getElementById('username_admin').value = admin.username_admin;
-                document.getElementById('password_admin').value = '';
-                document.getElementById('password_admin').removeAttribute('required');
                 document.getElementById('gudang_id').value = admin.id_gudang || '';
+
+                password.value = '';
+                password.removeAttribute('required');
+                password.placeholder = 'Kosongkan jika tidak ingin mengubah password';
                 
                 let hiddenInput = form.querySelector('input[name="id_admin"]');
                 if (!hiddenInput) {
