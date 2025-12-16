@@ -112,7 +112,9 @@ Router::get("/superadmin/laporan", "SuperAdminController@laporan", "superadmin")
 Router::post("/superadmin/gudang/store", "SuperAdminController@storeGudang", "superadmin");
 Router::post("/superadmin/gudang/update", "SuperAdminController@updateGudang", "superadmin");
 Router::post("/superadmin/gudang/delete", "SuperAdminController@deleteGudang", "superadmin");
+Router::get("/superadmin/admin/get", "SuperAdminController@getAdmin", "superadmin");
 Router::post("/superadmin/admin/store", "SuperAdminController@storeAdmin", "superadmin");
+Router::post("/superadmin/admin/update", "SuperAdminController@updateAdmin", "superadmin");
 Router::post("/superadmin/admin/delete", "SuperAdminController@deleteAdmin", "superadmin");
 Router::post("/superadmin/mitra/store", "SuperAdminController@storeMitra", "superadmin");
 Router::post("/superadmin/mitra/delete", "SuperAdminController@deleteMitra", "superadmin");
