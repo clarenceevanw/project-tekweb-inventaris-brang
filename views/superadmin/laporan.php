@@ -114,28 +114,28 @@
 
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
-            <h2 id="chart_title" class="text-xl font-bold text-theme-primary mb-4">Tren Subscription (30 Hari)</h2>
-            <div class="relative h-64 w-full">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-4 sm:p-6">
+            <h2 id="chart_title" class="text-lg sm:text-xl font-bold text-theme-primary mb-4">Tren Subscription (30 Hari)</h2>
+            <div class="relative h-56 sm:h-64 w-full">
                 <canvas id="subscriptionChart"></canvas>
             </div>
         </div>
 
-        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
-            <h2 id="paket_title" class="text-xl font-bold text-theme-primary mb-4">Paket Populer (30 Hari)</h2>
-            <div class="relative h-64 w-full">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-4 sm:p-6">
+            <h2 id="paket_title" class="text-lg sm:text-xl font-bold text-theme-primary mb-4">Paket Populer (30 Hari)</h2>
+            <div class="relative h-56 sm:h-64 w-full">
                 <canvas id="paketChart"></canvas>
             </div>
         </div>
 
-        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 col-span-2">
-            <h2 class="text-xl font-bold text-theme-primary mb-4">Gudang Akan Berakhir (30 Hari)</h2>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-4 sm:p-6 lg:col-span-2">
+            <h2 class="text-lg sm:text-xl font-bold text-theme-primary mb-4">Gudang Akan Berakhir (30 Hari)</h2>
             <div class="space-y-2 max-h-64 overflow-y-auto">
                 <?php if (!empty($gudang_akan_berakhir)): ?>
                     <?php foreach ($gudang_akan_berakhir as $gudang): ?>
-                        <div class="flex items-center justify-between p-2 border-b border-theme-primary-dark">
-                            <span class="text-sm text-theme-primary"><?= $gudang['nama_gudang'] ?></span>
-                            <span class="text-xs font-semibold <?= $gudang['sisa_hari'] <= 7 ? 'text-red-600' : 'text-yellow-600' ?>">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border-b border-theme-primary-dark gap-2 sm:gap-0">
+                            <span class="text-sm sm:text-base text-theme-primary font-medium"><?= $gudang['nama_gudang'] ?></span>
+                            <span class="text-xs sm:text-sm font-semibold <?= $gudang['sisa_hari'] <= 7 ? 'text-red-600' : 'text-yellow-600' ?>">
                                 <?= $gudang['sisa_hari'] ?> hari lagi
                             </span>
                         </div>
@@ -195,10 +195,25 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: window.innerWidth < 640 ? 'bottom' : 'top'
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { stepSize: 1 }
+                        ticks: { 
+                            stepSize: 1,
+                            font: { size: window.innerWidth < 640 ? 10 : 12 }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: { size: window.innerWidth < 640 ? 10 : 12 },
+                            maxRotation: window.innerWidth < 640 ? 45 : 0
+                        }
                     }
                 }
             }
@@ -233,13 +248,23 @@
             options: {
                 indexAxis: 'y',
                 responsive: true,
-                maintainAspectRatio: true,
-                aspectRatio: 2,
-                plugins: { legend: { display: false } },
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false }
+                },
                 scales: {
                     x: {
                         beginAtZero: true,
-                        ticks: { stepSize: 1, precision: 0 }
+                        ticks: { 
+                            stepSize: 1, 
+                            precision: 0,
+                            font: { size: window.innerWidth < 640 ? 10 : 12 }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: { size: window.innerWidth < 640 ? 10 : 12 }
+                        }
                     }
                 }
             }

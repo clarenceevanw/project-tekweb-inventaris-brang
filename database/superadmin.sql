@@ -1,6 +1,6 @@
 
 CREATE TABLE IF NOT EXISTS `superadmin` (
-  `id_superadmin` int(11) NOT NULL AUTO_INCREMENT,
+  `id_superadmin` CHAR(36) PRIMARY KEY DEFAULT (UUID()),
   `nama_superadmin` varchar(100) NOT NULL,
   `email_superadmin` varchar(100) NOT NULL UNIQUE,
   `telepon` varchar(20) DEFAULT NULL,
