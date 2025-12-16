@@ -177,14 +177,35 @@
 <?= $this->section('script'); ?>
 <script>
     // Chart untuk Statistik Gudang
+    const gudangData = <?= json_encode($gudang_chart_data ?? []) ?>;
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    
+    // Generate dynamic labels and data
+    let gudangLabels = [];
+    let gudangValues = [];
+    
+    if (gudangData && gudangData.length > 0) {
+        gudangLabels = gudangData.map(item => monthNames[item.month - 1]);
+        gudangValues = gudangData.map(item => item.count);
+    } else {
+        // Fallback: tampilkan 6 bulan terakhir dengan nilai 0
+        const currentDate = new Date();
+        for (let i = 5; i >= 0; i--) {
+            const date = new Date(currentDate);
+            date.setMonth(date.getMonth() - i);
+            gudangLabels.push(monthNames[date.getMonth()]);
+            gudangValues.push(0);
+        }
+    }
+    
     const gudangCtx = document.getElementById('gudangChart').getContext('2d');
     const gudangChart = new Chart(gudangCtx, {
         type: 'bar',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+            labels: gudangLabels,
             datasets: [{
                 label: 'Gudang Baru',
-                data: <?= json_encode($gudang_chart_data ?? [12, 19, 3, 5, 2, 3]) ?>,
+                data: gudangValues,
                 backgroundColor: 'rgba(59, 130, 246, 0.8)',
                 borderColor: 'rgba(59, 130, 246, 1)',
                 borderWidth: 1
@@ -195,7 +216,11 @@
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        precision: 0
+                    }
                 }
             }
         }

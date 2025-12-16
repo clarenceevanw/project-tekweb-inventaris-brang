@@ -40,7 +40,7 @@ class SuperAdminController extends BaseController
             'total_transaksi' => $stats['total_transaksi'],
             'recent_gudang' => $recentGudang,
             'recent_admin' => $recentAdmin,
-            'gudang_chart_data' => array_column($gudangChartData, 'count'),
+            'gudang_chart_data' => $gudangChartData,
             'admin_chart_data' => $adminChartData
         ]);
     }
