@@ -52,7 +52,15 @@
                     </svg>
                 </div>
                 <h1 class="text-3xl font-bold mb-2" style="color: #25343B;">
-                    <?php echo htmlspecialchars($user[$role === 'admin' ? 'nama_admin' : 'nama_mitra']); ?>
+                    <?php 
+                    if ($role === 'admin') {
+                        echo htmlspecialchars($user['nama_admin']);
+                    } elseif ($role === 'mitra') {
+                        echo htmlspecialchars($user['nama_mitra']);
+                    } else {
+                        echo htmlspecialchars($user['nama_superadmin']);
+                    }
+                    ?>
                 </h1>
                 <p class="text-lg" style="color: rgba(37, 52, 59, 0.8);">
                     <?php echo ucfirst($role); ?>
@@ -66,13 +74,24 @@
                 <div class="space-y-6">
                     <!-- Nama -->
                     <div class="border-b pb-4" style="border-color: rgba(251, 239, 223, 0.3);">
-                        <label class="text-sm font-medium block mb-2" style="color: #FBEFDF;">Nama Lengkap</label>
+                        <label class="text-sm font-medium block mb-2" style="color: #FBEFDF;"><?php echo $role === 'superadmin' ? 'Nama' : 'Nama Lengkap'; ?></label>
+                        <?php if ($role === 'superadmin'): ?>
+                        <form method="POST" action="/profile/update-username" class="flex gap-2">
+                            <input type="text" name="username" value="<?php echo htmlspecialchars($user['nama_superadmin']); ?>" 
+                                   class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2" style="border-color: rgba(251, 239, 223, 0.3); background: rgba(251, 239, 223, 0.1); color: #FBEFDF; --tw-ring-color: #FBEFDF;">
+                            <button type="submit" class="px-6 py-2 rounded-lg transition-colors" style="background: #FBEFDF; color: #25343B;">
+                                Update
+                            </button>
+                        </form>
+                        <?php else: ?>
                         <p class="text-lg font-semibold" style="color: #FBEFDF;">
                             <?php echo htmlspecialchars($user[$role === 'admin' ? 'nama_admin' : 'nama_mitra']); ?>
                         </p>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Username -->
+                    <?php if ($role !== 'superadmin'): ?>
                     <div class="border-b pb-4" style="border-color: rgba(251, 239, 223, 0.3);">
                         <label class="text-sm font-medium block mb-2" style="color: #FBEFDF;">Username</label>
                         <form method="POST" action="/profile/update-username" class="flex gap-2">
@@ -83,12 +102,21 @@
                             </button>
                         </form>
                     </div>
+                    <?php endif; ?>
 
                     <!-- Email -->
                     <div class="border-b pb-4" style="border-color: rgba(251, 239, 223, 0.3);">
                         <label class="text-sm font-medium block mb-2" style="color: #FBEFDF;">Email</label>
                         <form method="POST" action="/profile/update-email" class="flex gap-2">
-                            <input type="email" name="email" value="<?php echo htmlspecialchars($user[$role === 'admin' ? 'email_admin' : 'email_mitra']); ?>" 
+                            <input type="email" name="email" value="<?php 
+                                if ($role === 'admin') {
+                                    echo htmlspecialchars($user['email_admin']);
+                                } elseif ($role === 'mitra') {
+                                    echo htmlspecialchars($user['email_mitra']);
+                                } else {
+                                    echo htmlspecialchars($user['email_superadmin']);
+                                }
+                            ?>" 
                                    class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2" style="border-color: rgba(251, 239, 223, 0.3); background: rgba(251, 239, 223, 0.1); color: #FBEFDF; --tw-ring-color: #FBEFDF;">
                             <button type="submit" class="px-6 py-2 rounded-lg transition-colors" style="background: #FBEFDF; color: #25343B;">
                                 Update
@@ -116,7 +144,15 @@
 
                 <!-- Action Buttons -->
                 <div class="mt-8 flex gap-4">
-                    <a href="<?php echo $role === 'admin' ? '/admin/dashboard' : '/mitra/dashboard'; ?>" 
+                    <a href="<?php 
+                        if ($role === 'admin') {
+                            echo '/admin/dashboard';
+                        } elseif ($role === 'mitra') {
+                            echo '/mitra/dashboard';
+                        } else {
+                            echo '/superadmin/dashboard';
+                        }
+                    ?>" 
                        class="flex-1 font-semibold py-3 px-6 rounded-lg transition-all text-center border-2 border-[#FBEFDF] bg-[#FBEFDF] text-[#25343B] hover:bg-[#25343B] hover:text-[#FBEFDF] active:scale-95">
                         Ke Dashboard
                     </a>

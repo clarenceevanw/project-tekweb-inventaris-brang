@@ -151,7 +151,7 @@
     <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
         <h2 id="table_title" class="text-xl font-bold text-theme-primary mb-4">Subscription (30 Hari)</h2>
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-theme-light-bright rounded-lg overflow-hidden">
+            <table class="min-w-full table-theme rounded-lg overflow-hidden">
                 <thead class="bg-theme-primary-light">
                     <tr>
                         <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Gudang</th>

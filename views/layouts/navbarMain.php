@@ -4,7 +4,7 @@ if (!isset($isLoggedIn)) {
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 }
 $userRole = isset($_SESSION['role']) ? $_SESSION['role'] : '';
-$dashboardUrl = ($userRole === 'mitra') ? '/mitra/dashboard' : '/admin/dashboard';
+$dashboardUrl = ($userRole === 'mitra') ? '/mitra/dashboard' : (($userRole === 'admin') ? '/admin/dashboard' : '/superadmin/dashboard');
 $userData = isset($_SESSION['user']) ? $_SESSION['user'] : [];
 $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
 ?>

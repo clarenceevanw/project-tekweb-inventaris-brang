@@ -116,5 +116,7 @@ Router::get("/superadmin/admin/get", "SuperAdminController@getAdmin", "superadmi
 Router::post("/superadmin/admin/store", "SuperAdminController@storeAdmin", "superadmin");
 Router::post("/superadmin/admin/update", "SuperAdminController@updateAdmin", "superadmin");
 Router::post("/superadmin/admin/delete", "SuperAdminController@deleteAdmin", "superadmin");
+Router::get("/superadmin/mitra/get", "SuperAdminController@getMitra", "superadmin");
 Router::post("/superadmin/mitra/store", "SuperAdminController@storeMitra", "superadmin");
+Router::post("/superadmin/mitra/update", "SuperAdminController@updateMitra", "superadmin");
 Router::post("/superadmin/mitra/delete", "SuperAdminController@deleteMitra", "superadmin");

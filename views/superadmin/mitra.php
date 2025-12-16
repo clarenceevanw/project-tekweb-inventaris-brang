@@ -19,7 +19,7 @@
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="card-theme p-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -47,34 +47,6 @@
                 <div class="icon-theme p-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Langganan Aktif</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1"><?= $langganan_aktif ?? 0 ?></h3>
-                </div>
-                <div class="icon-theme p-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Akan Berakhir</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1"><?= $akan_berakhir ?? 0 ?></h3>
-                </div>
-                <div class="icon-theme p-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
             </div>
@@ -148,12 +120,11 @@
     </div>
 </div>
 
-<!-- Modal Add/Edit Mitra -->
+<!-- Modal Add Mitra -->
 <div id="mitraModal" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="flex items-center justify-center min-h-screen p-4">
         <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeModal()"></div>
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out sm:my-8 sm:align-middle sm:max-w-lg w-full scale-95 opacity-0">
+        <div class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out max-w-lg w-full scale-95 opacity-0 relative z-10">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                     <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
@@ -165,20 +136,57 @@
                                     <input type="text" id="nama_mitra" name="nama_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                    <label for="username_mitra" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                                    <input type="text" id="username_mitra" name="username_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                                    <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                    <label for="email_mitra" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email_mitra" name="email_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="password_mitra" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                    <input type="password" id="password_mitra" name="password_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="px-4 py-3 sm:px-0 sm:flex sm:flex-row-reverse gap-2">
-                    <button type="button" onclick="$('#mitraForm').submit()" class="btn-theme-primary w-full sm:w-auto">Simpan</button>
+                    <button type="submit" form="mitraForm" class="btn-theme-primary w-full sm:w-auto">Simpan</button>
                     <button type="button" onclick="closeModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Mitra -->
+<div id="editMitraModal" class="hidden fixed inset-0 z-50 overflow-y-auto opacity-0 transition-opacity duration-300">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="fixed inset-0 bg-black bg-opacity-80 transition-opacity duration-300" onclick="closeEditModal()"></div>
+        <div class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all duration-300 ease-out max-w-lg w-full scale-95 opacity-0 relative z-10">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Mitra</h3>
+                        <div class="mt-2">
+                            <form id="editMitraForm">
+                                <input type="hidden" id="edit_id_mitra" name="id_mitra">
+                                <div class="mb-4">
+                                    <label for="edit_nama_mitra" class="block text-sm font-medium text-gray-700 mb-1">Nama Mitra</label>
+                                    <input type="text" id="edit_nama_mitra" name="nama_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="edit_email_mitra" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="edit_email_mitra" name="email_mitra" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-3 sm:px-0 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="submit" form="editMitraForm" class="btn-theme-primary w-full sm:w-auto">Update</button>
+                    <button type="button" onclick="closeEditModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">Batal</button>
                 </div>
             </div>
         </div>
@@ -211,17 +219,40 @@
         }, 300);
     }
 
-    function editMitra(id) {
-        // Implementasi edit mitra
-        console.log('Edit mitra:', id);
+    function closeEditModal() {
+        const modal = $('#editMitraModal');
+        modal.addClass('opacity-0');
+        modal.find('.inline-block').addClass('scale-95 opacity-0');
+        setTimeout(() => {
+            modal.addClass('hidden');
+            $('#editMitraForm')[0].reset();
+        }, 300);
     }
 
-    function extendSubscription(id) {
-        currentMitraId = id;
-        document.getElementById('subscriptionForm').reset();
-        // Set tanggal mulai ke hari ini
-        document.getElementById('tanggal_mulai').value = new Date().toISOString().split('T')[0];
-        document.getElementById('subscriptionModal').classList.remove('hidden');
+    function editMitra(id) {
+        fetch('/superadmin/mitra/get?id=' + id)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const mitra = data.data;
+                const modal = $('#editMitraModal');
+                
+                $('#edit_id_mitra').val(mitra.id_mitra);
+                $('#edit_nama_mitra').val(mitra.nama_mitra);
+                $('#edit_email_mitra').val(mitra.email_mitra);
+                
+                modal.removeClass('hidden');
+                setTimeout(() => {
+                    modal.removeClass('opacity-0');
+                    modal.find('.inline-block').removeClass('scale-95 opacity-0');
+                }, 10);
+            } else {
+                Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
+            }
+        })
+        .catch(error => {
+            Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong.'});
+        });
     }
 
     function deleteMitra(id) {
@@ -236,82 +267,116 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                const formData = new FormData();
-                formData.append('id', id);
+                Swal.fire({title: 'Menghapus...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
                 
-                fetch('/superadmin/mitra/delete', {
+                $.ajax({
+                    url: '/superadmin/mitra/delete',
                     method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                        Toastify({
-                            text: data.message,
-                            duration: 3000,
-                            close: true,
-                            gravity: "top",
-                            position: "right",
-                            className: "toast-success"
-                        }).showToast();
-                    } else {
-                        Swal.fire('Error', data.message, 'error');
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function(data) {
+                        Swal.close();
+                        if (data.success) {
+                            Toastify({
+                                text: data.message,
+                                duration: 2000,
+                                close: true,
+                                gravity: "top",
+                                position: "right",
+                                stopOnFocus: true,
+                                className: "toast-success",
+                                style: {background: "#ffffff"}
+                            }).showToast();
+                            setTimeout(() => location.reload(), 1500);
+                        } else {
+                            Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong.'});
                     }
-                })
-                .catch(error => {
-                    Swal.fire('Error', 'Terjadi kesalahan!', 'error');
                 });
             }
         });
     }
 
     // Form submit handlers
-    document.getElementById('mitraForm').addEventListener('submit', function(e) {
+    $('#mitraForm').on('submit', function(e) {
         e.preventDefault();
         
         const formData = new FormData(this);
+        Swal.fire({title: 'Menyimpan...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
         
-        fetch('/superadmin/mitra/store', {
+        $.ajax({
+            url: '/superadmin/mitra/store',
             method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                closeModal();
-                location.reload();
-                Toastify({
-                    text: data.message,
-                    duration: 3000,
-                    close: true,
-                    gravity: "top",
-                    position: "right",
-                    className: "toast-success"
-                }).showToast();
-            } else {
-                Swal.fire('Error', data.message, 'error');
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+                Swal.close();
+                if (data.success) {
+                    closeModal();
+                    Toastify({
+                        text: data.message,
+                        duration: 2000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        className: "toast-success",
+                        style: {background: "#ffffff"}
+                    }).showToast();
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
+                }
+            },
+            error: function(xhr) {
+                Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong.'});
+                console.error(xhr.responseText);
             }
-        })
-        .catch(error => {
-            Swal.fire('Error', 'Terjadi kesalahan!', 'error');
         });
     });
 
-    document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+    $('#editMitraForm').on('submit', function(e) {
         e.preventDefault();
-        // Implementasi perpanjang langganan
-        console.log('Extend subscription for mitra:', currentMitraId);
-        closeSubscriptionModal();
         
-        Toastify({
-            text: "Langganan berhasil diperpanjang!",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            className: "toast-success"
-        }).showToast();
+        const formData = new FormData(this);
+        Swal.fire({title: 'Mengupdate...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
+        
+        $.ajax({
+            url: '/superadmin/mitra/update',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+                Swal.close();
+                if (data.success) {
+                    closeEditModal();
+                    Toastify({
+                        text: data.message,
+                        duration: 2000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                        className: "toast-success",
+                        style: {background: "#ffffff"}
+                    }).showToast();
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
+                }
+            },
+            error: function(xhr) {
+                Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong.'});
+                console.error(xhr.responseText);
+            }
+        });
     });
 </script>
 <?= $this->endSection(); ?>

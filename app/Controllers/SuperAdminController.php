@@ -252,11 +252,25 @@ class SuperAdminController extends BaseController
                 $errors[] = 'Nama mitra minimal 3 karakter';
             }
             
-            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            if (empty($_POST['username_mitra']) || strlen(trim($_POST['username_mitra'])) < 3) {
+                $errors[] = 'Username minimal 3 karakter';
+            }
+            
+            $mitra = $this->mitraModel->find('username_mitra', $_POST['username_mitra']);
+            if ($mitra) {
+                $errors[] = 'Username sudah terdaftar!';
+            }
+            
+            if (empty($_POST['email_mitra']) || !filter_var($_POST['email_mitra'], FILTER_VALIDATE_EMAIL)) {
                 $errors[] = 'Email tidak valid';
             }
             
-            if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+            $mitra = $this->mitraModel->find('email_mitra', $_POST['email_mitra']);
+            if ($mitra) {
+                $errors[] = 'Email sudah terdaftar!';
+            }
+            
+            if (empty($_POST['password_mitra']) || strlen($_POST['password_mitra']) < 6) {
                 $errors[] = 'Password minimal 6 karakter';
             }
             
@@ -266,8 +280,9 @@ class SuperAdminController extends BaseController
             
             $data = [
                 'nama_mitra' => htmlspecialchars(trim($_POST['nama_mitra']), ENT_QUOTES, 'UTF-8'),
-                'email' => filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL),
-                'password' => $_POST['password']
+                'username_mitra' => htmlspecialchars(trim($_POST['username_mitra']), ENT_QUOTES, 'UTF-8'),
+                'email_mitra' => filter_var(trim($_POST['email_mitra']), FILTER_SANITIZE_EMAIL),
+                'password_mitra' => $_POST['password_mitra']
             ];
             
             if ($this->superAdminModel->createMitra($data)) {
@@ -380,6 +395,68 @@ class SuperAdminController extends BaseController
             return $this->json(['success' => true, 'data' => $admin]);
         }
         return $this->json(['success' => false, 'message' => 'Admin tidak ditemukan!']);
+    }
+
+    public function getMitra()
+    {
+        try {
+            if (empty($_GET['id'])) {
+                return $this->json(['success' => false, 'message' => 'ID mitra tidak valid']);
+            }
+            
+            $id = htmlspecialchars(trim($_GET['id']), ENT_QUOTES, 'UTF-8');
+            $mitra = $this->mitraModel->find('id_mitra', $id);
+            
+            if ($mitra) {
+                return $this->json(['success' => true, 'data' => $mitra]);
+            }
+            return $this->json(['success' => false, 'message' => 'Mitra tidak ditemukan!']);
+        } catch (Exception $e) {
+            error_log("Error getMitra: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
+        }
+    }
+
+    public function updateMitra()
+    {
+        try {
+            $errors = [];
+            
+            if (empty($_POST['id_mitra'])) {
+                $errors[] = 'ID mitra tidak valid';
+            }
+            
+            if (empty($_POST['nama_mitra']) || strlen(trim($_POST['nama_mitra'])) < 3) {
+                $errors[] = 'Nama mitra minimal 3 karakter';
+            }
+            
+            if (empty($_POST['email_mitra']) || !filter_var($_POST['email_mitra'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Email tidak valid';
+            }
+            
+            $mitra = $this->mitraModel->find('email_mitra', $_POST['email_mitra']);
+            if ($mitra && $mitra['id_mitra'] !== $_POST['id_mitra']) {
+                $errors[] = 'Email sudah digunakan oleh mitra lain!';
+            }
+            
+            if (!empty($errors)) {
+                return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
+            }
+            
+            $id = htmlspecialchars(trim($_POST['id_mitra']), ENT_QUOTES, 'UTF-8');
+            $data = [
+                'nama_mitra' => htmlspecialchars(trim($_POST['nama_mitra']), ENT_QUOTES, 'UTF-8'),
+                'email_mitra' => filter_var(trim($_POST['email_mitra']), FILTER_SANITIZE_EMAIL)
+            ];
+            
+            if ($this->superAdminModel->updateMitra($id, $data)) {
+                return $this->json(['success' => true, 'message' => 'Mitra berhasil diupdate!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal mengupdate mitra!']);
+        } catch (Exception $e) {
+            error_log("Error updateMitra: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
+        }
     }
 
     public function deleteMitra()

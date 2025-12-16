@@ -2,15 +2,18 @@
 
 require_once __DIR__ . '/../Models/Admin.php';
 require_once __DIR__ . '/../Models/Mitra.php';
+require_once __DIR__ . '/../Models/SuperAdmin.php';
 
 class ProfileController extends BaseController {
     protected $admin;
     protected $mitra;
+    protected $superAdmin;
 
     public function __construct() {
         parent::__construct();
         $this->admin = new Admin();
         $this->mitra = new Mitra();
+        $this->superAdmin = new SuperAdmin();
     }
     
     public function index() {
@@ -36,6 +39,14 @@ class ProfileController extends BaseController {
         $username = $_POST['username'];
         $role = $_SESSION['role'];
         $userId = $_SESSION['user_id'];
+
+        if ($role === 'superadmin') {
+            $this->superAdmin->update(['nama_superadmin' => $username], 'id_superadmin', $userId);
+            $_SESSION['user']['nama_superadmin'] = $username;
+            $_SESSION['username'] = $username;
+            $this->flash('success', 'Nama berhasil diupdate!');
+            return $this->redirect('/profile');
+        }
 
         // Check if username already exists
         $existingAdmin = $this->admin->find('username_admin', $username);
@@ -78,6 +89,7 @@ class ProfileController extends BaseController {
         // Check if email already exists
         $existingAdmin = $this->admin->find('email_admin', $email);
         $existingMitra = $this->mitra->find('email_mitra', $email);
+        $existingSuperAdmin = $this->superAdmin->findByEmail($email);
 
         if ($existingAdmin && $existingAdmin['id_admin'] !== $userId) {
             $this->flash('error', 'Email sudah digunakan!');
@@ -89,13 +101,21 @@ class ProfileController extends BaseController {
             return $this->redirect('/profile');
         }
 
+        if ($existingSuperAdmin && $existingSuperAdmin['id_superadmin'] != $userId) {
+            $this->flash('error', 'Email sudah digunakan!');
+            return $this->redirect('/profile');
+        }
+
         // Update email
         if ($role === 'admin') {
             $this->admin->update(['email_admin' => $email], 'id_admin', $userId);
             $_SESSION['user']['email_admin'] = $email;
-        } else {
+        } elseif ($role === 'mitra') {
             $this->mitra->update(['email_mitra' => $email], 'id_mitra', $userId);
             $_SESSION['user']['email_mitra'] = $email;
+        } else {
+            $this->superAdmin->update(['email_superadmin' => $email], 'id_superadmin', $userId);
+            $_SESSION['user']['email_superadmin'] = $email;
         }
 
         $this->flash('success', 'Email berhasil diupdate!');
