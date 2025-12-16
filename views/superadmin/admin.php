@@ -155,12 +155,16 @@
                                     <input type="text" id="nama_admin" name="nama_admin" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                    <label for="email_admin" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email_admin" name="email_admin" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                                    <input type="password" id="password" name="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                    <label for="username_admin" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                                    <input type="text" id="username_admin" name="username_admin" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="password_admin" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                    <input type="password" id="password_admin" name="password_admin" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="gudang_id" class="block text-sm font-medium text-gray-700 mb-1">Gudang</label>
@@ -178,7 +182,7 @@
                     </div>
                 </div>
                 <div class="px-4 py-3 sm:px-0 sm:flex sm:flex-row-reverse gap-2">
-                    <button type="button" onclick="$('#adminForm').submit()" class="btn-theme-primary w-full sm:w-auto">Simpan</button>
+                    <button type="submit" form="adminForm" class="btn-theme-primary w-full sm:w-auto">Simpan</button>
                     <button type="button" onclick="closeModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">Batal</button>
                 </div>
             </div>
@@ -194,8 +198,18 @@
 
     function openAddModal() {
         const modal = document.getElementById('adminModal');
+        const form = document.getElementById('adminForm');
+        const password = document.getElementById('password_admin');
+
         document.getElementById('modalTitle').textContent = 'Tambah Admin';
-        document.getElementById('adminForm').reset();
+        form.reset();
+
+        password.setAttribute('required', 'required');
+        password.placeholder = 'Masukkan password admin';
+
+        const hiddenInput = form.querySelector('input[name="id_admin"]');
+        if (hiddenInput) hiddenInput.remove();
+        
         modal.classList.remove('hidden');
         setTimeout(() => {
             modal.classList.remove('opacity-0');
@@ -218,14 +232,41 @@
     }
 
     function editAdmin(id) {
-        // Implementasi edit admin
-        console.log('Edit admin:', id);
-    }
+        fetch('/superadmin/admin/get?id=' + id)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const admin = data.data;
+                const modal = document.getElementById('adminModal');
+                const form = document.getElementById('adminForm');
+                const password = document.getElementById('password_admin');
+                
+                document.getElementById('modalTitle').textContent = 'Edit Admin';
+                document.getElementById('nama_admin').value = admin.nama_admin;
+                document.getElementById('email_admin').value = admin.email_admin;
+                document.getElementById('username_admin').value = admin.username_admin;
+                document.getElementById('gudang_id').value = admin.id_gudang || '';
 
-    function assignGudang(id) {
-        currentAdminId = id;
-        document.getElementById('assignForm').reset();
-        document.getElementById('assignModal').classList.remove('hidden');
+                password.value = '';
+                password.removeAttribute('required');
+                password.placeholder = 'Kosongkan jika tidak ingin mengubah password';
+                
+                let hiddenInput = form.querySelector('input[name="id_admin"]');
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'id_admin';
+                    form.appendChild(hiddenInput);
+                }
+                hiddenInput.value = admin.id_admin;
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.inline-block').classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            }
+        });
     }
 
     function deleteAdmin(id) {
@@ -234,12 +275,14 @@
             text: 'Data admin akan dihapus permanen!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
             confirmButtonText: 'Ya, Hapus!',
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
+                Swal.fire({title: 'Menghapus...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
+                
                 const formData = new FormData();
                 formData.append('id', id);
                 
@@ -249,22 +292,26 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    Swal.close();
                     if (data.success) {
-                        location.reload();
                         Toastify({
                             text: data.message,
-                            duration: 3000,
+                            duration: 2000,
                             close: true,
                             gravity: "top",
                             position: "right",
-                            className: "toast-success"
+                            stopOnFocus: true,
+                            className: "toast-success",
+                            style: {background: "#ffffff"}
                         }).showToast();
+                        setTimeout(() => {location.reload();}, 1500);
                     } else {
-                        Swal.fire('Error', data.message, 'error');
+                        Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
                     }
                 })
                 .catch(error => {
-                    Swal.fire('Error', 'Terjadi kesalahan!', 'error');
+                    Swal.close();
+                    Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong'});
                 });
             }
         });
@@ -275,47 +322,58 @@
         e.preventDefault();
         
         const formData = new FormData(this);
+        const isEdit = formData.has('id_admin');
+        const url = isEdit ? '/superadmin/admin/update' : '/superadmin/admin/store';
         
-        fetch('/superadmin/admin/store', {
+        Swal.fire({title: isEdit ? 'Mengupdate...' : 'Menyimpan...', allowOutsideClick: false, didOpen: () => {Swal.showLoading()}});
+        
+        fetch(url, {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
+            Swal.close();
             if (data.success) {
                 closeModal();
-                location.reload();
                 Toastify({
                     text: data.message,
-                    duration: 3000,
+                    duration: 2000,
                     close: true,
                     gravity: "top",
                     position: "right",
-                    className: "toast-success"
+                    stopOnFocus: true,
+                    className: "toast-success",
+                    style: {background: "#ffffff"}
                 }).showToast();
+                setTimeout(() => {location.reload();}, 1500);
             } else {
-                Swal.fire('Error', data.message, 'error');
+                Swal.fire({icon: 'error', title: 'Gagal', text: data.message});
             }
         })
         .catch(error => {
-            Swal.fire('Error', 'Terjadi kesalahan!', 'error');
+            Swal.close();
+            Swal.fire({icon: 'error', title: 'Error Server', text: 'Something went wrong'});
         });
     });
 
-    document.getElementById('assignForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Implementasi assign gudang
-        console.log('Assign admin', currentAdminId, 'to gudang');
-        closeAssignModal();
-        
-        Toastify({
-            text: "Admin berhasil ditugaskan!",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            className: "toast-success"
-        }).showToast();
-    });
+    // Check if assignForm exists before adding event listener
+    const assignForm = document.getElementById('assignForm');
+    if (assignForm) {
+        assignForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Assign admin', currentAdminId, 'to gudang');
+            closeAssignModal();
+            
+            Toastify({
+                text: "Admin berhasil ditugaskan!",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                className: "toast-success"
+            }).showToast();
+        });
+    }
 </script>
 <?= $this->endSection(); ?>
