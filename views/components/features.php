@@ -142,7 +142,7 @@
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Dashboard -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg></div>
@@ -152,7 +152,7 @@
                 </div>
 
                 <!-- Manage Admin -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                         </svg></div>
@@ -162,7 +162,7 @@
                 </div>
 
                 <!-- Manage Product's Category -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
@@ -174,7 +174,7 @@
                 </div>
 
                 <!-- Manage Product -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
                         </svg></div>
@@ -184,7 +184,7 @@
                 </div>
 
                 <!-- Manage Room -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 12v.01" />
@@ -197,7 +197,7 @@
                 </div>
 
                 <!-- Manage Transaction -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" />
@@ -215,7 +215,7 @@
                 </div>
 
                 <!-- scan qr -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16">
                             <path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5M.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5M4 4h1v1H4z" />
                             <path d="M7 2H2v5h5zM3 3h3v3H3zm2 8H4v1h1z" />
@@ -229,7 +229,7 @@
                 </div>
 
                 <!-- Manage Warehouse -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M3 21v-13l9 -4l9 4v13" />
@@ -251,7 +251,7 @@
             </h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Dashboard -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg></div>
@@ -261,7 +261,7 @@
                 </div>
 
                 <!-- Transaction's History -->
-                <div class="feature-card rounded-2xl p-6">
+                <div class="feature-card flex flex-col justify-around rounded-2xl p-6">
                     <div class="feature-icon mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" />
@@ -313,7 +313,7 @@
 <script>
     const featureData = {
         'dashboard-organizer': {
-            image: '/assets/feature/dashboard.png',
+            image: '/assets/feature/mitra-dashboard.png',
             description: 'Dapatkan gambaran lengkap tentang seluruh sistem inventaris Anda secara real-time. Pantau jumlah stok, transaksi terbaru, dan metrik kunci semuanya di satu tempat.',
             features: [
                 'Gambaran inventaris real-time',
@@ -411,7 +411,7 @@
             ]
         },
         'transaction-history': {
-            image: '/assets/feature/dashboard.png',
+            image: '/assets/feature/history-transaksi.png',
             title: 'Riwayat Transaksi',
             description: 'Lihat riwayat detail semua transaksi Anda. Filter dan cari transaksi masa lalu dengan pelaporan komprehensif.',
             features: [

@@ -31,6 +31,28 @@
     <?= $this->renderSection('header') ?>
 
     <style>
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #25343B;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FBEFDF 0%, #FBEFDF 100%);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #FBEFDF 0%, #FBEFDF 100%);
+        }
+
+        * {
+            scrollbar-color: #FBEFDF #25343B;
+            scrollbar-width: thin;
+        }
+
         /* Custom Transition */
         .sidebar-transition {
             transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
