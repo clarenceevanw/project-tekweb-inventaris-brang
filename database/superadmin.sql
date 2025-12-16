@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS superadmin;
 
 CREATE TABLE IF NOT EXISTS `superadmin` (
   `id_superadmin` CHAR(36) PRIMARY KEY DEFAULT (UUID()),
@@ -6,10 +7,8 @@ CREATE TABLE IF NOT EXISTS `superadmin` (
   `telepon` varchar(20) DEFAULT NULL,
   `status` enum('aktif','tidak_aktif') DEFAULT 'aktif',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_superadmin`)
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `superadmin` (`nama_superadmin`, `email_superadmin`) 
 VALUES ('Super Admin', 'c14240069@john.petra.ac.id');
-
