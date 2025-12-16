@@ -142,10 +142,6 @@
     }
 
     @media (max-width: 768px) {
-        .hero-title {
-            font-size: 36px;
-        }
-
         .hero-subtitle {
             font-size: 16px;
         }
@@ -165,7 +161,7 @@
             <svg class="logo w-20 h-20 text-[#FBEFDF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
             </svg>
-            <h1 class="hero-title text-reveal text-6xl font-black text-[#FBEFDF] tracking-tight drop-shadow-lg"><span>GUDANGPINTAR</span></h1>
+            <h1 class="hero-title text-reveal text-3xl sm:text-6xl font-black text-[#FBEFDF] tracking-tight drop-shadow-lg"><span>GUDANGPINTAR</span></h1>
         </div>
         <p class="hero-subtitle text-lg text-[#FBF5ED] font-semibold text-opacity-95 mb-10 leading-relaxed max-w-2xl mx-auto">Solusi manajemen inventaris terpadu yang mengubah cara Anda mengelola gudang dengan teknologi cerdas dan efisien.</p>
 

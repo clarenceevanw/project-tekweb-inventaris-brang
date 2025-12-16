@@ -353,13 +353,13 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                     </svg>
                     <span class="nav-text">Home</span>
                 </a>
-                <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
+                <!-- <a href="/#demo" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg class="nav-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span class="nav-text">Demo</span>
-                </a>
+                </a> -->
                 <a href="/#features" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi w-5 h-5 bi-journal-check" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0" />
@@ -375,6 +375,13 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                         <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12" />
                     </svg>
                     <span class="nav-text">Langganan</span>
+                </a>
+                <a href="/#faq" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi w-5 h-5 nav-icon" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                    </svg>
+                    <span class="nav-text">FAQ</span>
                 </a>
                 <a href="/#contact" class="nav-link relative overflow-hidden px-4 py-2 rounded-md transition-colors duration-400 font-medium" style="color: #FBEFDF;">
                     <svg xmlns="http://www.w3.org/2000/svg" stroke-width="0.3" stroke="currentColor" fill="currentColor" class="bi nav-icon w-5 h-5 bi-telephone" viewBox="0 0 16 16">
@@ -420,7 +427,7 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
             </div>
 
             <div class="menu-content absolute inset-0 flex flex-col items-center justify-center gap-5 opacity-0 scale-[0.85] pointer-events-none">
-                <svg class="menu-logo" style="color: #FBEFDF;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="menu-logo" fill="none" stroke="#FBEFDF" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                 </svg>
@@ -449,9 +456,10 @@ $gudangData = isset($_SESSION['gudang']) ? $_SESSION['gudang'] : [];
                     </div>
                 <?php endif; ?>
                 <a href="/#hero" class="menu-link">HOME</a>
-                <a href="/#demo" class="menu-link">DEMO</a>
+                <!-- <a href="/#demo" class="menu-link">DEMO</a> -->
                 <a href="/#features" class="menu-link">FEATURES</a>
                 <a href="/#subscription" class="menu-link">SUBSCRIPTION</a>
+                <a href="/#faq" class="menu-link">FAQ</a>
                 <a href="#footer" class="menu-link">CONTACT</a>
             </div>
 

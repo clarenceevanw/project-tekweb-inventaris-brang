@@ -60,7 +60,7 @@
     }
 </style>
 
-<section id="contact" class="relative z-2 min-h-screen py-12 md:py-20 px-4 md:px-6 text-[#25343B] relative overflow-hidden" style="background: linear-gradient(135deg, #FBEFDF 0%, #f5e5d0 50%, #FBEFDF 100%);">
+<section id="contact" class="relative z-2 min-h-screen py-12 md:py-20 px-4 md:px-6 bg-[#FBEFDF] text-[#25343B] relative overflow-hidden"">
     <!-- Animated Background Elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-20 left-10 w-48 h-48 md:w-72 md:h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
