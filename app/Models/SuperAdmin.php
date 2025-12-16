@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/BaseModel.php';
+require_once __DIR__ . '/../Utils/UUID.php';
+
 
 class SuperAdmin extends BaseModel
 {
@@ -97,7 +99,6 @@ class SuperAdmin extends BaseModel
 
     public function createAdmin($data)
     {
-        require_once __DIR__ . '/../Utils/UUID.php';
         
         $stmt = $this->db->prepare("
             INSERT INTO admin (id_admin, nama_admin, email_admin, username_admin, password_admin, id_gudang) 
@@ -132,9 +133,7 @@ class SuperAdmin extends BaseModel
     }
 
     public function createMitra($data)
-    {
-        require_once __DIR__ . '/../Utils/UUID.php';
-        
+    {        
         $stmt = $this->db->prepare("
             INSERT INTO mitra (id_mitra, nama_mitra, email_mitra, username_mitra, password_mitra) 
             VALUES (?, ?, ?, ?, ?)
@@ -154,5 +153,4 @@ class SuperAdmin extends BaseModel
         return $stmt->execute([$id]);
     }
 
-    // Subscription methods - delegated to TransaksiSubscription model
 }

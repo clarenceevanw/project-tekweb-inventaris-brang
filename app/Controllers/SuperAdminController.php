@@ -193,32 +193,53 @@ class SuperAdminController extends BaseController
             if (empty($_POST['nama_admin']) || strlen(trim($_POST['nama_admin'])) < 3) {
                 $errors[] = 'Nama admin minimal 3 karakter';
             }
+
+            $admin = $this->adminModel->find('username_admin', $_POST['username_admin']);
+            if ($admin) {
+                $errors[] = 'Username sudah terdaftar!';
+            }
             
-            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            if (empty($_POST['email_admin']) || !filter_var($_POST['email_admin'], FILTER_VALIDATE_EMAIL)) {
                 $errors[] = 'Email tidak valid';
             }
             
-            if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+            if (empty($_POST['password_admin']) || strlen($_POST['password_admin']) < 6) {
                 $errors[] = 'Password minimal 6 karakter';
             }
+
+            if (empty($_POST['id_gudang'])) {
+                $errors[] = 'Gudang harus dipilih';
+            }
             
+            $admin = $this->adminModel->find('email_admin', $_POST['email_admin']);
+            if ($admin) {
+                $errors[] = 'Email sudah terdaftar!';
+            }
+
             if (!empty($errors)) {
                 return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
             }
             
+            error_log("POST data: " . print_r($_POST, true));
+            
             $data = [
                 'nama_admin' => htmlspecialchars(trim($_POST['nama_admin']), ENT_QUOTES, 'UTF-8'),
-                'email' => filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL),
-                'password' => $_POST['password'],
-                'gudang_id' => isset($_POST['gudang_id']) ? htmlspecialchars($_POST['gudang_id'], ENT_QUOTES, 'UTF-8') : null
+                'username_admin' => htmlspecialchars(trim($_POST['username_admin']), ENT_QUOTES, 'UTF-8'),
+                'email_admin' => filter_var(trim($_POST['email_admin']), FILTER_SANITIZE_EMAIL),
+                'password_admin' => $_POST['password_admin'],
+                'id_gudang' => !empty($_POST['id_gudang']) ? htmlspecialchars(trim($_POST['id_gudang']), ENT_QUOTES, 'UTF-8') : null
             ];
             
-            if ($this->superAdminModel->createAdmin($data)) {
+            error_log("Data untuk insert: " . print_r($data, true));
+            
+            if ($this->adminModel->addAdminToGudang($data)) {
                 return $this->json(['success' => true, 'message' => 'Admin berhasil ditambahkan!']);
             }
             return $this->json(['success' => false, 'message' => 'Gagal menambahkan admin!']);
         } catch (Exception $e) {
-            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
+            error_log("Error storeAdmin: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            return $this->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
     }
 
@@ -342,7 +363,7 @@ class SuperAdminController extends BaseController
             
             $id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
             
-            if ($this->superAdminModel->deleteAdmin($id)) {
+            if ($this->adminModel->deleteAdmin($id)) {
                 return $this->json(['success' => true, 'message' => 'Admin berhasil dihapus!']);
             }
             return $this->json(['success' => false, 'message' => 'Gagal menghapus admin!']);

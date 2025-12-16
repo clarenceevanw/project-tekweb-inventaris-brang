@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label for="gudang_id" class="block text-sm font-medium text-gray-700 mb-1">Gudang</label>
-                                    <select id="gudang_id" name="gudang_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
+                                    <select id="gudang_id" name="id_gudang" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--theme-secondary)]">
                                         <option value="">Pilih Gudang</option>
                                         <?php if (!empty($gudang_options)): ?>
                                             <?php foreach ($gudang_options as $gudang): ?>
