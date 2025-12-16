@@ -140,6 +140,62 @@
             flex-direction: row;
         }
     }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+    }
+
+    .modal-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-fade-out {
+        animation: fadeOut 0.3s ease-out;
+    }
+
+    .modal-slide-up {
+        animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-slide-down {
+        animation: slideDown 0.3s ease-out;
+    }
 </style>
 
 <footer id="footer" class="relative z-2 overflow-hidden mt-auto" style="background-color:#25343B; color:#FBEFDF;">
@@ -310,11 +366,231 @@
             <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
                 <p class="text-sm opacity-90">© 2025 GUDANGPINTAR. All rights reserved.</p>
                 <div class="flex gap-6">
-                    <a href="#privacy" class="footer-legal-link relative px-2 py-1 text-sm">Privacy Policy</a>
-                    <a href="#terms" class="footer-legal-link relative px-2 py-1 text-sm">Terms of Service</a>
+                    <button onclick="openLegalModal('privacy')" class="footer-legal-link relative px-2 py-1 text-sm">Privacy Policy</button>
+                    <button onclick="openLegalModal('terms')" class="footer-legal-link relative px-2 py-1 text-sm">Terms of Service</button>
                 </div>
             </div>
         </div>
 
     </div>
 </footer>
+
+<!-- Legal Modals -->
+<div id="legalModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4" onclick="closeLegalModal(event)">
+    <div id="legalModalContent" class="bg-[#25343B] rounded-xl max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+        <div class="sticky top-0 bg-[#1F2B31] px-6 py-4 flex justify-between items-center border-b border-[#FBEFDF]/20">
+            <h2 id="modalTitle" class="text-2xl font-bold text-[#FBEFDF]"></h2>
+            <button onclick="closeLegalModal()" class="text-[#FBEFDF] hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="modalContent" class="px-6 py-6 overflow-y-auto max-h-[calc(85vh-80px)] text-[#FBEFDF]/90 leading-relaxed">
+        </div>
+    </div>
+</div>
+
+<script>
+const legalContent = {
+    privacy: {
+        title: 'Privacy Policy',
+        content: `
+            <div class="space-y-6">
+                <p class="text-sm opacity-75">Terakhir diperbarui: Januari 2025</p>
+                
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">1. Informasi yang Kami Kumpulkan</h3>
+                    <p class="mb-2">Kami mengumpulkan informasi berikut untuk menyediakan layanan GUDANGPINTAR:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Informasi akun (nama, email, nomor telepon)</li>
+                        <li>Data inventaris dan transaksi gudang</li>
+                        <li>Informasi penggunaan aplikasi dan log aktivitas</li>
+                        <li>Data lokasi gudang dan ruangan</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">2. Penggunaan Informasi</h3>
+                    <p class="mb-2">Informasi yang dikumpulkan digunakan untuk:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Menyediakan dan meningkatkan layanan manajemen inventaris</li>
+                        <li>Memproses transaksi dan mengelola data gudang</li>
+                        <li>Mengirim notifikasi terkait aktivitas inventaris</li>
+                        <li>Analisis penggunaan untuk peningkatan fitur</li>
+                        <li>Keamanan dan pencegahan fraud</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">3. Keamanan Data</h3>
+                    <p>Kami menerapkan langkah-langkah keamanan teknis dan organisasi untuk melindungi data Anda, termasuk enkripsi, kontrol akses, dan monitoring sistem secara berkala.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">4. Berbagi Informasi</h3>
+                    <p>Kami tidak menjual data pribadi Anda. Informasi hanya dibagikan dengan:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Partner yang Anda izinkan dalam sistem</li>
+                        <li>Penyedia layanan pihak ketiga yang mendukung operasional</li>
+                        <li>Otoritas hukum jika diwajibkan oleh peraturan</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">5. Hak Anda</h3>
+                    <p class="mb-2">Anda memiliki hak untuk:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Mengakses dan mengunduh data pribadi Anda</li>
+                        <li>Memperbarui atau mengoreksi informasi</li>
+                        <li>Menghapus akun dan data terkait</li>
+                        <li>Menarik persetujuan penggunaan data</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">6. Cookies dan Teknologi Pelacakan</h3>
+                    <p>Kami menggunakan cookies untuk meningkatkan pengalaman pengguna, mengingat preferensi, dan menganalisis penggunaan aplikasi.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">7. Kontak</h3>
+                    <p>Untuk pertanyaan terkait privasi, hubungi kami di:</p>
+                    <p class="mt-2">Email: <a href="mailto:privacy@gudangpintar.com" class="text-[#5FA59C] hover:underline">privacy@gudangpintar.com</a></p>
+                </section>
+            </div>
+        `
+    },
+    terms: {
+        title: 'Terms of Service',
+        content: `
+            <div class="space-y-6">
+                <p class="text-sm opacity-75">Terakhir diperbarui: Januari 2025</p>
+                
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">1. Penerimaan Ketentuan</h3>
+                    <p>Dengan mengakses dan menggunakan GUDANGPINTAR, Anda menyetujui untuk terikat dengan ketentuan layanan ini. Jika Anda tidak setuju, harap tidak menggunakan layanan kami.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">2. Deskripsi Layanan</h3>
+                    <p>GUDANGPINTAR menyediakan platform manajemen inventaris berbasis cloud yang memungkinkan pengguna untuk:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Mengelola data barang dan kategori</li>
+                        <li>Melacak transaksi masuk dan keluar</li>
+                        <li>Mengatur gudang dan ruangan penyimpanan</li>
+                        <li>Berkolaborasi dengan partner bisnis</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">3. Akun Pengguna</h3>
+                    <p class="mb-2">Anda bertanggung jawab untuk:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Menjaga kerahasiaan kredensial akun</li>
+                        <li>Semua aktivitas yang terjadi di akun Anda</li>
+                        <li>Memberikan informasi yang akurat dan terkini</li>
+                        <li>Melaporkan penggunaan tidak sah segera</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">4. Langganan dan Pembayaran</h3>
+                    <p class="mb-2">Ketentuan langganan:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Trial 7 hari gratis untuk pengguna baru</li>
+                        <li>Pembayaran bulanan atau tahunan sesuai paket yang dipilih</li>
+                        <li>Perpanjangan otomatis kecuali dibatalkan</li>
+                        <li>Tidak ada pengembalian dana untuk periode yang sudah dibayar</li>
+                        <li>Harga dapat berubah dengan pemberitahuan 30 hari</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">5. Penggunaan yang Dilarang</h3>
+                    <p class="mb-2">Anda tidak diperbolehkan:</p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>Menggunakan layanan untuk tujuan ilegal</li>
+                        <li>Mengganggu atau merusak sistem</li>
+                        <li>Mengakses akun pengguna lain tanpa izin</li>
+                        <li>Menyebarkan malware atau konten berbahaya</li>
+                        <li>Melakukan reverse engineering pada platform</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">6. Kepemilikan Data</h3>
+                    <p>Anda mempertahankan kepemilikan penuh atas data inventaris yang Anda masukkan. Kami hanya menyimpan dan memproses data untuk menyediakan layanan.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">7. Ketersediaan Layanan</h3>
+                    <p>Kami berusaha menjaga layanan tersedia 99.9% uptime, namun tidak menjamin layanan bebas dari gangguan. Pemeliharaan terjadwal akan diinformasikan sebelumnya.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">8. Batasan Tanggung Jawab</h3>
+                    <p>GUDANGPINTAR tidak bertanggung jawab atas kerugian tidak langsung, kehilangan data akibat force majeure, atau kesalahan pengguna dalam mengelola inventaris.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">9. Penghentian Layanan</h3>
+                    <p>Kami berhak menangguhkan atau menghentikan akun yang melanggar ketentuan layanan tanpa pemberitahuan sebelumnya.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">10. Perubahan Ketentuan</h3>
+                    <p>Kami dapat memperbarui ketentuan ini sewaktu-waktu. Perubahan signifikan akan diberitahukan melalui email atau notifikasi dalam aplikasi.</p>
+                </section>
+
+                <section>
+                    <h3 class="text-xl font-semibold text-[#FBEFDF] mb-3">11. Kontak</h3>
+                    <p>Untuk pertanyaan terkait ketentuan layanan, hubungi:</p>
+                    <p class="mt-2">Email: <a href="mailto:support@gudangpintar.com" class="text-[#5FA59C] hover:underline">support@gudangpintar.com</a></p>
+                </section>
+            </div>
+        `
+    }
+};
+
+function openLegalModal(type) {
+    const modal = document.getElementById('legalModal');
+    const modalContent = document.getElementById('legalModalContent');
+    const title = document.getElementById('modalTitle');
+    const content = document.getElementById('modalContent');
+    
+    title.textContent = legalContent[type].title;
+    content.innerHTML = legalContent[type].content;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex', 'modal-fade-in');
+    modalContent.classList.add('modal-slide-up');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLegalModal(event) {
+    if (!event || event.target.id === 'legalModal') {
+        const modal = document.getElementById('legalModal');
+        const modalContent = document.getElementById('legalModalContent');
+        
+        modal.classList.remove('modal-fade-in');
+        modal.classList.add('modal-fade-out');
+        modalContent.classList.remove('modal-slide-up');
+        modalContent.classList.add('modal-slide-down');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'modal-fade-out');
+            modalContent.classList.remove('modal-slide-down');
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLegalModal();
+    }
+});
+</script>
