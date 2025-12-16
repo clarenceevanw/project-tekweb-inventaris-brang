@@ -4,6 +4,7 @@ require_once __DIR__ . "/../Models/SuperAdmin.php";
 require_once __DIR__ . "/../Models/Gudang.php";
 require_once __DIR__ . "/../Models/Admin.php";
 require_once __DIR__ . "/../Models/Mitra.php";
+require_once __DIR__ . "/../Models/TransaksiSubscription.php";
 
 class SuperAdminController extends BaseController
 {
@@ -11,6 +12,7 @@ class SuperAdminController extends BaseController
     private $gudangModel;
     private $adminModel;
     private $mitraModel;
+    private $subscriptionModel;
 
     public function __construct()
     {
@@ -19,6 +21,7 @@ class SuperAdminController extends BaseController
         $this->gudangModel = new Gudang();
         $this->adminModel = new Admin();
         $this->mitraModel = new Mitra();
+        $this->subscriptionModel = new TransaksiSubscription();
     }
 
     public function dashboard()
@@ -44,7 +47,7 @@ class SuperAdminController extends BaseController
 
     public function gudang()
     {
-        $gudangList = $this->superAdminModel->getAllGudangWithAdmin();
+        $gudangList = $this->gudangModel->getAllWithAdmin();
 
         $totalGudang = count($gudangList);
         $gudangAktif = 0;
@@ -97,10 +100,9 @@ class SuperAdminController extends BaseController
         $totalMitra = count($mitraList);
         $mitraAktif = $totalMitra;
         
-        // Hitung gudang dengan langganan aktif
-        $gudangAktif = $this->superAdminModel->getGudangAktifCount();
+        $gudangAktif = $this->gudangModel->getAktifCount();
         $langgananAktif = $gudangAktif;
-        $akanBerakhir = $this->superAdminModel->getGudangAkanBerakhir();
+        $akanBerakhir = $this->gudangModel->getAkanBerakhir();
 
         return $this->view('superadmin/mitra', [
             'title' => 'Kelola Mitra',
@@ -114,9 +116,9 @@ class SuperAdminController extends BaseController
 
     public function laporan()
     {
-        $subscriptionStats = $this->superAdminModel->getSubscriptionStats();
-        $gudangAkanBerakhir = $this->superAdminModel->getGudangAkanBerakhir();
-        $allSubscriptions = $this->superAdminModel->getAllSubscriptions();
+        $subscriptionStats = $this->subscriptionModel->getStats();
+        $gudangAkanBerakhir = $this->gudangModel->getAkanBerakhir();
+        $allSubscriptions = $this->subscriptionModel->getAllWithDetails();
 
         return $this->view('superadmin/laporan', [
             'title' => 'Laporan Subscription',
@@ -131,64 +133,222 @@ class SuperAdminController extends BaseController
     // CRUD Operations
     public function storeGudang()
     {
-        if ($this->superAdminModel->createGudang($_POST)) {
-            return $this->json(['success' => true, 'message' => 'Gudang berhasil ditambahkan!']);
+        try {
+            // Validasi input
+            $errors = [];
+            
+            if (empty($_POST['nama_gudang']) || strlen(trim($_POST['nama_gudang'])) < 3) {
+                $errors[] = 'Nama gudang minimal 3 karakter';
+            }
+            
+            if (empty($_POST['alamat']) || strlen(trim($_POST['alamat'])) < 5) {
+                $errors[] = 'Alamat minimal 5 karakter';
+            }
+            
+            if (empty($_POST['nama_admin']) || strlen(trim($_POST['nama_admin'])) < 3) {
+                $errors[] = 'Nama admin minimal 3 karakter';
+            }
+            
+            if (empty($_POST['username_admin']) || strlen(trim($_POST['username_admin'])) < 3) {
+                $errors[] = 'Username admin minimal 3 karakter';
+            }
+            
+            if (empty($_POST['email_admin']) || !filter_var($_POST['email_admin'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Email admin tidak valid';
+            }
+            
+            if (empty($_POST['password_admin']) || strlen($_POST['password_admin']) < 6) {
+                $errors[] = 'Password admin minimal 6 karakter';
+            }
+            
+            if (!empty($errors)) {
+                return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
+            }
+            
+            // Sanitasi input
+            $data = [
+                'nama_gudang' => htmlspecialchars(trim($_POST['nama_gudang']), ENT_QUOTES, 'UTF-8'),
+                'alamat' => htmlspecialchars(trim($_POST['alamat']), ENT_QUOTES, 'UTF-8'),
+                'nama_admin' => htmlspecialchars(trim($_POST['nama_admin']), ENT_QUOTES, 'UTF-8'),
+                'username_admin' => htmlspecialchars(trim($_POST['username_admin']), ENT_QUOTES, 'UTF-8'),
+                'email_admin' => filter_var(trim($_POST['email_admin']), FILTER_SANITIZE_EMAIL),
+                'password_admin' => $_POST['password_admin']
+            ];
+            
+            if ($this->gudangModel->createWithAdmin($data)) {
+                return $this->json(['success' => true, 'message' => 'Gudang berhasil ditambahkan!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menambahkan gudang!']);
+        } catch (Exception $e) {
+            error_log("Error storeGudang: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menambahkan gudang!']);
     }
 
     public function storeAdmin()
     {
-        if ($this->superAdminModel->createAdmin($_POST)) {
-            return $this->json(['success' => true, 'message' => 'Admin berhasil ditambahkan!']);
+        try {
+            $errors = [];
+            
+            if (empty($_POST['nama_admin']) || strlen(trim($_POST['nama_admin'])) < 3) {
+                $errors[] = 'Nama admin minimal 3 karakter';
+            }
+            
+            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Email tidak valid';
+            }
+            
+            if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+                $errors[] = 'Password minimal 6 karakter';
+            }
+            
+            if (!empty($errors)) {
+                return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
+            }
+            
+            $data = [
+                'nama_admin' => htmlspecialchars(trim($_POST['nama_admin']), ENT_QUOTES, 'UTF-8'),
+                'email' => filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL),
+                'password' => $_POST['password'],
+                'gudang_id' => isset($_POST['gudang_id']) ? htmlspecialchars($_POST['gudang_id'], ENT_QUOTES, 'UTF-8') : null
+            ];
+            
+            if ($this->superAdminModel->createAdmin($data)) {
+                return $this->json(['success' => true, 'message' => 'Admin berhasil ditambahkan!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menambahkan admin!']);
+        } catch (Exception $e) {
+            error_log("Error storeAdmin: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menambahkan admin!']);
     }
 
     public function storeMitra()
     {
-        if ($this->superAdminModel->createMitra($_POST)) {
-            return $this->json(['success' => true, 'message' => 'Mitra berhasil ditambahkan!']);
+        try {
+            $errors = [];
+            
+            if (empty($_POST['nama_mitra']) || strlen(trim($_POST['nama_mitra'])) < 3) {
+                $errors[] = 'Nama mitra minimal 3 karakter';
+            }
+            
+            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Email tidak valid';
+            }
+            
+            if (empty($_POST['password']) || strlen($_POST['password']) < 6) {
+                $errors[] = 'Password minimal 6 karakter';
+            }
+            
+            if (!empty($errors)) {
+                return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
+            }
+            
+            $data = [
+                'nama_mitra' => htmlspecialchars(trim($_POST['nama_mitra']), ENT_QUOTES, 'UTF-8'),
+                'email' => filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL),
+                'password' => $_POST['password']
+            ];
+            
+            if ($this->superAdminModel->createMitra($data)) {
+                return $this->json(['success' => true, 'message' => 'Mitra berhasil ditambahkan!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menambahkan mitra!']);
+        } catch (Exception $e) {
+            error_log("Error storeMitra: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menambahkan mitra!']);
     }
 
     public function updateGudang()
     {
-        $id = $_POST['id_gudang'];
-        $namaGudang = $_POST['nama_gudang'];
-        $alamat = $_POST['alamat'];
-        
-        if ($this->superAdminModel->updateGudang($id, $namaGudang, $alamat)) {
-            return $this->json(['success' => true, 'message' => 'Gudang berhasil diupdate!']);
+        try {
+            $errors = [];
+            
+            if (empty($_POST['id_gudang'])) {
+                $errors[] = 'ID gudang tidak valid';
+            }
+            
+            if (empty($_POST['nama_gudang']) || strlen(trim($_POST['nama_gudang'])) < 3) {
+                $errors[] = 'Nama gudang minimal 3 karakter';
+            }
+            
+            if (empty($_POST['alamat']) || strlen(trim($_POST['alamat'])) < 5) {
+                $errors[] = 'Alamat minimal 5 karakter';
+            }
+            
+            if (!empty($errors)) {
+                return $this->json(['success' => false, 'message' => implode(', ', $errors)]);
+            }
+            
+            $id = htmlspecialchars(trim($_POST['id_gudang']), ENT_QUOTES, 'UTF-8');
+            $namaGudang = htmlspecialchars(trim($_POST['nama_gudang']), ENT_QUOTES, 'UTF-8');
+            $alamat = htmlspecialchars(trim($_POST['alamat']), ENT_QUOTES, 'UTF-8');
+            
+            if ($this->gudangModel->updateGudang($id, $namaGudang, $alamat)) {
+                return $this->json(['success' => true, 'message' => 'Gudang berhasil diupdate!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal mengupdate gudang!']);
+        } catch (Exception $e) {
+            error_log("Error updateGudang: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal mengupdate gudang!']);
     }
 
     public function deleteGudang()
     {
-        $id = $_POST['id'];
-        if ($this->superAdminModel->deleteGudang($id)) {
-            return $this->json(['success' => true, 'message' => 'Gudang berhasil dihapus!']);
+        try {
+            if (empty($_POST['id'])) {
+                return $this->json(['success' => false, 'message' => 'ID gudang tidak valid']);
+            }
+            
+            $id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
+            
+            if ($this->gudangModel->deleteGudang($id)) {
+                return $this->json(['success' => true, 'message' => 'Gudang berhasil dihapus!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menghapus gudang!']);
+        } catch (Exception $e) {
+            error_log("Error deleteGudang: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menghapus gudang!']);
     }
 
     public function deleteAdmin()
     {
-        $id = $_POST['id'];
-        if ($this->superAdminModel->deleteAdmin($id)) {
-            return $this->json(['success' => true, 'message' => 'Admin berhasil dihapus!']);
+        try {
+            if (empty($_POST['id'])) {
+                return $this->json(['success' => false, 'message' => 'ID admin tidak valid']);
+            }
+            
+            $id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
+            
+            if ($this->superAdminModel->deleteAdmin($id)) {
+                return $this->json(['success' => true, 'message' => 'Admin berhasil dihapus!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menghapus admin!']);
+        } catch (Exception $e) {
+            error_log("Error deleteAdmin: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menghapus admin!']);
     }
 
     public function deleteMitra()
     {
-        $id = $_POST['id'];
-        if ($this->superAdminModel->deleteMitra($id)) {
-            return $this->json(['success' => true, 'message' => 'Mitra berhasil dihapus!']);
+        try {
+            if (empty($_POST['id'])) {
+                return $this->json(['success' => false, 'message' => 'ID mitra tidak valid']);
+            }
+            
+            $id = htmlspecialchars(trim($_POST['id']), ENT_QUOTES, 'UTF-8');
+            
+            if ($this->superAdminModel->deleteMitra($id)) {
+                return $this->json(['success' => true, 'message' => 'Mitra berhasil dihapus!']);
+            }
+            return $this->json(['success' => false, 'message' => 'Gagal menghapus mitra!']);
+        } catch (Exception $e) {
+            error_log("Error deleteMitra: " . $e->getMessage());
+            return $this->json(['success' => false, 'message' => 'Terjadi kesalahan server']);
         }
-        return $this->json(['success' => false, 'message' => 'Gagal menghapus mitra!']);
     }
 }
