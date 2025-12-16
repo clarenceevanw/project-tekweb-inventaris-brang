@@ -17,95 +17,77 @@
     </div>
 
     <!-- Info Transaksi -->
-    <div class="bg-white shadow-md rounded-lg p-6 mb-6 border border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Informasi Transaksi</h3>
+    <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-bold text-theme-primary mb-4">Informasi Transaksi</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <p class="text-sm text-gray-500">ID Transaksi</p>
-                <p class="text-sm font-medium text-gray-900"><?= $transaksi['id_transaksi'] ?></p>
+                <p class="text-sm text-theme-primary-light">ID Transaksi</p>
+                <p class="text-sm font-medium text-theme-primary"><?= $transaksi['id_transaksi'] ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500">Jenis Transaksi</p>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?= $transaksi['jenis_transaksi'] == 'supply' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' ?>">
-                    <?= ucfirst($transaksi['jenis_transaksi']) ?>
-                </span>
+                <p class="text-sm text-theme-primary-light">Jenis Transaksi</p>
+                <?php if ($transaksi['jenis_transaksi'] == 'supply'): ?>
+                    <span class="badge-theme-success">Supply</span>
+                <?php else: ?>
+                    <span class="badge-theme-warning">Buy</span>
+                <?php endif; ?>
             </div>
             <div>
-                <p class="text-sm text-gray-500">Tanggal Transaksi</p>
-                <p class="text-sm font-medium text-gray-900"><?= date('d M Y H:i', strtotime($transaksi['tanggal_transaksi'])) ?></p>
+                <p class="text-sm text-theme-primary-light">Tanggal Transaksi</p>
+                <p class="text-sm font-medium text-theme-primary"><?= date('d M Y H:i', strtotime($transaksi['tanggal_transaksi'])) ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500"><?= $transaksi['jenis_transaksi'] == 'supply' ? 'From Mitra' : 'To Mitra' ?></p>
-                <p class="text-sm font-medium text-gray-900"><?= $transaksi['nama_mitra'] ?? '-' ?></p>
+                <p class="text-sm text-theme-primary-light"><?= $transaksi['jenis_transaksi'] == 'supply' ? 'From Mitra' : 'To Mitra' ?></p>
+                <p class="text-sm font-medium text-theme-primary"><?= $transaksi['nama_mitra'] ?? '-' ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500">Admin</p>
-                <p class="text-sm font-medium text-gray-900"><?= $transaksi['nama_admin'] ?? '-' ?></p>
+                <p class="text-sm text-theme-primary-light">Admin</p>
+                <p class="text-sm font-medium text-theme-primary"><?= $transaksi['nama_admin'] ?? '-' ?></p>
             </div>
             <div>
-                <p class="text-sm text-gray-500">Total Harga</p>
-                <p class="text-lg font-bold text-gray-900">Rp <?= number_format($transaksi['harga_transaksi'], 0, ',', '.') ?></p>
+                <p class="text-sm text-theme-primary-light">Total Harga</p>
+                <p class="text-lg font-bold text-theme-primary">Rp <?= number_format($transaksi['harga_transaksi'], 0, ',', '.') ?></p>
             </div>
         </div>
     </div>
 
     <!-- Detail Items -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-        <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-800">Item Transaksi</h3>
+    <div class="bg-theme-light-alt rounded-lg shadow-lg overflow-hidden">
+        <div class="px-6 py-4">
+            <h3 class="text-xl font-bold text-theme-primary">Item Transaksi</h3>
         </div>
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+            <table class="min-w-full bg-theme-light-bright rounded-lg overflow-hidden">
+                <thead class="bg-theme-primary-light">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Nama Barang
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Kategori
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Kuantitas
-                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Nama Barang</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Kategori</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Kuantitas</th>
                         <?php if($transaksi['jenis_transaksi'] == 'supply'): ?>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Sisa
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Expired Date
-                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Sisa</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Expired Date</th>
                         <?php endif; ?>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Total Harga
-                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Total Harga</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-theme-light-bright divide-y divide-gray-200">
                     <?php if(empty($detailItems)): ?>
                         <tr>
-                            <td colspan="<?= $transaksi['jenis_transaksi'] == 'supply' ? 6 : 4 ?>" class="px-6 py-4 text-center text-gray-500">Tidak ada item.</td>
+                            <td colspan="<?= $transaksi['jenis_transaksi'] == 'supply' ? 6 : 4 ?>" class="px-6 py-4 text-center text-theme-primary-light">Tidak ada item.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($detailItems as $item): ?>
-                        <tr class="hover:bg-gray-50 transition-colors duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900"><?= $item['nama_barang'] ?></div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <?= $item['nama_kategori'] ?>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <?= $item['kuantitas_transaksi'] ?>
-                            </td>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-theme-primary"><?= $item['nama_barang'] ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary-light"><?= $item['nama_kategori'] ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= $item['kuantitas_transaksi'] ?></td>
                             <?php if($transaksi['jenis_transaksi'] == 'supply'): ?>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <?= $item['sisa_kuantitas'] ?>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= $item['sisa_kuantitas'] ?></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary-light">
                                 <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : '-' ?>
                             </td>
                             <?php endif; ?>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-theme-primary">
                                 Rp <?= number_format($item['harga_detail_transaksi'], 0, ',', '.') ?>
                             </td>
                         </tr>
@@ -117,7 +99,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="/admin/transaksi" class="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition">
+        <a href="/admin/transaksi" class="btn-theme-light inline-flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
