@@ -6,15 +6,19 @@
     <nav class="mb-6">
         <div class="flex items-center gap-2 text-sm">
             <a href="/admin/barang" class="text-theme-secondary hover:text-theme-primary-hover font-medium">Barang</a>
-            <span class="text-gray-400">></span>
+            <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
             <a href="<?= '/admin/barang/batch?id=' . $item['id_barang'] ?>" class="text-theme-secondary hover:text-theme-primary-hover font-medium">Batch</a>
-            <span class="text-gray-400">></span>
+            <svg class="w-4 h-4 text-theme-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
             <span class="text-theme-primary-light font-medium">Detail</span>
         </div>
     </nav>
 
     <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-        
+
         <div class="p-8 border-b border-gray-100 bg-gray-50/50">
             <div class="flex items-start justify-between gap-4">
                 <div class="flex items-start gap-4">
@@ -23,7 +27,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
-                    
+
                     <div>
                         <p class="text-sm font-medium text-theme-primary mb-1">Hasil Scan QR</p>
                         <h1 class="text-2xl font-bold text-gray-900 leading-tight">
@@ -37,7 +41,7 @@
                     </div>
                 </div>
 
-                <?php if($item['sisa_kuantitas'] > 100): ?>
+                <?php if ($item['sisa_kuantitas'] > 100): ?>
                     <span class="px-3 py-1 rounded-full text-xs font-bold border bg-green-100 text-green-700 border-green-200 text-center">
                         Stok Aman
                     </span>
@@ -70,11 +74,11 @@
                     <p class="text-xs text-gray-400 mt-1">Unit / Pcs</p>
                 </div>
 
-                <?php 
-                    $daysLeft = (strtotime($item['expired_date']) - time()) / (60 * 60 * 24);
-                    $isExpired = $daysLeft < 0;
-                    $bgClass = $isExpired ? 'bg-red-50 border-red-100' : 'bg-gray-50 border-gray-100';
-                    $textClass = $isExpired ? 'text-red-500' : 'text-gray-500';
+                <?php
+                $daysLeft = (strtotime($item['expired_date']) - time()) / (60 * 60 * 24);
+                $isExpired = $daysLeft < 0;
+                $bgClass = $isExpired ? 'bg-red-50 border-red-100' : 'bg-gray-50 border-gray-100';
+                $textClass = $isExpired ? 'text-red-500' : 'text-gray-500';
                 ?>
                 <div class="<?= $bgClass ?> rounded-lg p-4 border text-center hover:border-theme-primary transition-colors flex flex-col justify-center">
                     <p class="text-xs font-medium <?= $textClass ?> uppercase tracking-wider mb-1">Kedaluwarsa</p>
@@ -82,7 +86,7 @@
                         <?= $item['expired_date'] ? date('d M Y', strtotime($item['expired_date'])) : 'N/A' ?>
                     </p>
                     <?php if ($item['expired_date']): ?>
-                        <?php if($daysLeft < 30): ?>
+                        <?php if ($daysLeft < 30): ?>
                             <p class="text-xs font-bold text-red-600 mt-1 bg-red-100 inline-block px-2 rounded-full self-center">
                                 <?= $isExpired ? 'Sudah Expired' : round($daysLeft) . ' Hari Lagi' ?>
                             </p>
@@ -103,7 +107,7 @@
                 </svg>
                 Scan Barang Lain
             </a>
-            
+
             <a href="/admin/barang" class="flex-1 inline-flex justify-center items-center px-4 py-2.5 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-theme-primary">
                 Lihat Daftar Barang
             </a>
