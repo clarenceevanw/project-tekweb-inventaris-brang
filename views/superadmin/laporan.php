@@ -5,8 +5,8 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-theme-primary">Laporan</h1>
-            <p class="text-theme-primary-light mt-1">Laporan dan analisis sistem</p>
+            <h1 class="text-3xl font-bold text-theme-primary">Laporan Subscription</h1>
+            <p class="text-theme-primary-light mt-1">Statistik subscription dan aktivitas sistem</p>
         </div>
         <div class="mt-4 md:mt-0 flex gap-3">
             <button onclick="exportReport()" class="btn-theme-secondary inline-flex items-center">
@@ -25,73 +25,83 @@
     </div>
 
     <!-- Filter Section -->
-    <div class="card-theme p-6">
-        <h3 class="text-lg font-semibold text-theme-primary mb-4">Filter Laporan</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+        <h2 class="text-xl font-bold text-theme-primary mb-4">Filter Laporan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <label class="block text-sm font-medium text-theme-primary mb-2">Periode</label>
-                <select id="periode" class="input-theme w-full">
+                <select id="periode" class="w-full px-4 py-2 rounded-lg border-2 border-theme-primary-light bg-theme-light-bright text-theme-primary focus:outline-none focus:border-theme-secondary transition-colors">
                     <option value="7">7 Hari Terakhir</option>
-                    <option value="30">30 Hari Terakhir</option>
+                    <option value="30" selected>30 Hari Terakhir</option>
                     <option value="90">3 Bulan Terakhir</option>
                     <option value="365">1 Tahun Terakhir</option>
+                    <option value="all">Semua Data</option>
                     <option value="custom">Custom</option>
                 </select>
             </div>
             <div>
                 <label class="block text-sm font-medium text-theme-primary mb-2">Tanggal Mulai</label>
-                <input type="date" id="tanggal_mulai" class="input-theme w-full">
+                <input type="date" id="tanggal_mulai" class="w-full px-4 py-2 rounded-lg border-2 border-theme-primary-light bg-theme-light-bright text-theme-primary focus:outline-none focus:border-theme-secondary transition-colors">
             </div>
             <div>
                 <label class="block text-sm font-medium text-theme-primary mb-2">Tanggal Akhir</label>
-                <input type="date" id="tanggal_akhir" class="input-theme w-full">
-            </div>
-            <div class="flex items-end">
-                <button onclick="filterReport()" class="btn-theme-primary w-full">
-                    Filter
-                </button>
+                <input type="date" id="tanggal_akhir" class="w-full px-4 py-2 rounded-lg border-2 border-theme-primary-light bg-theme-light-bright text-theme-primary focus:outline-none focus:border-theme-secondary transition-colors">
             </div>
         </div>
     </div>
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+            <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Total Pendapatan</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1">Rp <?= number_format($total_pendapatan ?? 0, 0, ',', '.') ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Subscription Aktif</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= $total_subscription_aktif ?? 0 ?></h3>
                 </div>
-                <div class="icon-theme p-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
             </div>
         </div>
 
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+            <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Transaksi Baru</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1"><?= $transaksi_baru ?? 0 ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Subscription Periode</p>
+                    <h3 id="subscription_filtered" class="text-4xl font-bold mt-2 text-theme-primary">0</h3>
                 </div>
-                <div class="icon-theme p-3">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                     </svg>
                 </div>
             </div>
         </div>
 
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+            <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Gudang Baru</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1"><?= $gudang_baru ?? 0 ?></h3>
+                    <p class="text-theme-primary-light text-sm font-medium">Akan Berakhir (7 Hari)</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= $akan_berakhir_7_hari ?? 0 ?></h3>
                 </div>
-                <div class="icon-theme p-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-theme-primary-light text-sm font-medium">Total Gudang</p>
+                    <h3 class="text-4xl font-bold mt-2 text-theme-primary"><?= $total_gudang_terdaftar ?? 0 ?></h3>
+                </div>
+                <div class="bg-theme-secondary p-3 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-white">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M3 21v-13l9 -4l9 4v13" />
                         <path d="M13 13h4v8h-10v-6h6" />
@@ -100,187 +110,256 @@
                 </div>
             </div>
         </div>
-
-        <div class="card-theme p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-theme-primary-light">Mitra Baru</p>
-                    <h3 class="text-2xl font-bold text-theme-primary mt-1"><?= $mitra_baru ?? 0 ?></h3>
-                </div>
-                <div class="icon-theme p-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-                    </svg>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="card-theme p-6">
-            <h3 class="text-lg font-bold text-theme-primary mb-4">Pendapatan Bulanan</h3>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+            <h2 id="chart_title" class="text-xl font-bold text-theme-primary mb-4">Tren Subscription (30 Hari)</h2>
             <div class="relative h-64 w-full">
-                <canvas id="pendapatanChart"></canvas>
+                <canvas id="subscriptionChart"></canvas>
             </div>
         </div>
 
-        <div class="card-theme p-6">
-            <h3 class="text-lg font-bold text-theme-primary mb-4">Distribusi Gudang per Wilayah</h3>
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+            <h2 id="paket_title" class="text-xl font-bold text-theme-primary mb-4">Paket Populer (30 Hari)</h2>
             <div class="relative h-64 w-full">
-                <canvas id="wilayahChart"></canvas>
+                <canvas id="paketChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 col-span-2">
+            <h2 class="text-xl font-bold text-theme-primary mb-4">Gudang Akan Berakhir (30 Hari)</h2>
+            <div class="space-y-2 max-h-64 overflow-y-auto">
+                <?php if (!empty($gudang_akan_berakhir)): ?>
+                    <?php foreach ($gudang_akan_berakhir as $gudang): ?>
+                        <div class="flex items-center justify-between p-2 border-b border-theme-primary-dark">
+                            <span class="text-sm text-theme-primary"><?= $gudang['nama_gudang'] ?></span>
+                            <span class="text-xs font-semibold <?= $gudang['sisa_hari'] <= 7 ? 'text-red-600' : 'text-yellow-600' ?>">
+                                <?= $gudang['sisa_hari'] ?> hari lagi
+                            </span>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-theme-primary-light text-center py-4">Tidak ada gudang yang akan berakhir</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
     <!-- Tables Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Top Performing Gudang -->
-        <div class="card-theme">
-            <div class="p-6 border-b border-theme-primary-dark">
-                <h3 class="text-lg font-semibold text-theme-primary">Top Performing Gudang</h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-theme-light">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-theme-primary-light uppercase tracking-wider">Gudang</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-theme-primary-light uppercase tracking-wider">Transaksi</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-theme-primary-light uppercase tracking-wider">Pendapatan</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-theme-primary-dark">
-                        <?php if (!empty($top_gudang)): ?>
-                            <?php foreach ($top_gudang as $gudang): ?>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-theme-primary"><?= $gudang['nama_gudang'] ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= $gudang['total_transaksi'] ?></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary">Rp <?= number_format($gudang['total_pendapatan'], 0, ',', '.') ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="3" class="px-6 py-4 text-center text-theme-primary-light">Belum ada data</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+    <div class="bg-theme-light-alt rounded-lg shadow-lg p-6">
+        <h2 id="table_title" class="text-xl font-bold text-theme-primary mb-4">Subscription (30 Hari)</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-theme-light-bright rounded-lg overflow-hidden">
+                <thead class="bg-theme-primary-light">
+                    <tr>
+                        <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Gudang</th>
+                        <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Paket</th>
+                        <th class="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-theme-light uppercase">Tanggal</th>
+                        <th class="px-4 sm:px-6 py-3 text-center text-xs font-medium text-theme-light uppercase">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="subscription_table_body" class="bg-theme-light-bright divide-y divide-gray-200">
+                </tbody>
+            </table>
         </div>
-
-        <!-- Recent Activities -->
-        <div class="card-theme">
-            <div class="p-6 border-b border-theme-primary-dark">
-                <h3 class="text-lg font-semibold text-theme-primary">Aktivitas Terbaru</h3>
-            </div>
-            <div class="p-6 space-y-4">
-                <?php if (!empty($recent_activities)): ?>
-                    <?php foreach ($recent_activities as $activity): ?>
-                        <div class="flex items-start space-x-3">
-                            <div class="flex-shrink-0">
-                                <div class="w-8 h-8 bg-theme-secondary rounded-full flex items-center justify-center">
-                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-theme-primary"><?= $activity['title'] ?></p>
-                                <p class="text-sm text-theme-primary-light"><?= $activity['description'] ?></p>
-                                <p class="text-xs text-theme-primary-light mt-1"><?= $activity['created_at'] ?></p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p class="text-theme-primary-light text-center py-4">Belum ada aktivitas</p>
-                <?php endif; ?>
-            </div>
-        </div>
+    </div>
     </div>
 </div>
 <?= $this->endSection(); ?>
 
 <?= $this->section('script'); ?>
 <script>
-    // Chart untuk Pendapatan Bulanan
-    const pendapatanCtx = document.getElementById('pendapatanChart').getContext('2d');
-    const pendapatanChart = new Chart(pendapatanCtx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [{
-                label: 'Pendapatan (Juta Rupiah)',
-                data: <?= json_encode($pendapatan_chart_data ?? [12, 19, 15, 25, 22, 30, 28, 35, 32, 40, 38, 45]) ?>,
-                borderColor: 'rgba(59, 130, 246, 1)',
-                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                borderWidth: 2,
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
+    // Data subscription dari server
+    const allSubscriptions = <?= json_encode($all_subscriptions ?? []) ?>;
+    let subscriptionChart, paketChart;
+
+    // Inisialisasi charts
+    function initCharts() {
+        const subscriptionCtx = document.getElementById('subscriptionChart').getContext('2d');
+        subscriptionChart = new Chart(subscriptionCtx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Subscription',
+                    data: [],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
                 }
             }
-        }
-    });
+        });
 
-    // Chart untuk Distribusi Gudang per Wilayah
-    const wilayahCtx = document.getElementById('wilayahChart').getContext('2d');
-    const wilayahChart = new Chart(wilayahCtx, {
-        type: 'doughnut',
-        data: {
-            labels: <?= json_encode($wilayah_labels ?? ['Jakarta', 'Bandung', 'Surabaya', 'Medan', 'Makassar']) ?>,
-            datasets: [{
-                data: <?= json_encode($wilayah_data ?? [35, 25, 20, 12, 8]) ?>,
-                backgroundColor: [
-                    'rgba(59, 130, 246, 0.8)',
-                    'rgba(34, 197, 94, 0.8)',
-                    'rgba(251, 191, 36, 0.8)',
-                    'rgba(239, 68, 68, 0.8)',
-                    'rgba(168, 85, 247, 0.8)'
-                ],
-                borderColor: [
-                    'rgba(59, 130, 246, 1)',
-                    'rgba(34, 197, 94, 1)',
-                    'rgba(251, 191, 36, 1)',
-                    'rgba(239, 68, 68, 1)',
-                    'rgba(168, 85, 247, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+        const paketCtx = document.getElementById('paketChart').getContext('2d');
+        paketChart = new Chart(paketCtx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Jumlah Pembelian',
+                    data: [],
+                    backgroundColor: [
+                        'rgba(99, 102, 241, 0.8)',
+                        'rgba(34, 197, 94, 0.8)',
+                        'rgba(249, 115, 22, 0.8)',
+                        'rgba(168, 85, 247, 0.8)',
+                        'rgba(236, 72, 153, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgb(99, 102, 241)',
+                        'rgb(34, 197, 94)',
+                        'rgb(249, 115, 22)',
+                        'rgb(168, 85, 247)',
+                        'rgb(236, 72, 153)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 2,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1, precision: 0 }
+                    }
+                }
+            }
+        });
+    }
 
-    // Filter functions
-    function filterReport() {
-        const periode = document.getElementById('periode').value;
+    // Filter data berdasarkan tanggal
+    function filterData(startDate, endDate) {
+        return allSubscriptions.filter(sub => {
+            const subDate = new Date(sub.tanggal_bayar);
+            return subDate >= startDate && subDate <= endDate;
+        });
+    }
+
+    // Update chart subscription
+    function updateSubscriptionChart(filteredData) {
+        const dateCount = {};
+        filteredData.forEach(sub => {
+            const date = sub.tanggal_bayar.split(' ')[0];
+            dateCount[date] = (dateCount[date] || 0) + 1;
+        });
+
+        const sortedDates = Object.keys(dateCount).sort();
+        const labels = sortedDates.map(date => {
+            const d = new Date(date);
+            return d.getDate() + '/' + (d.getMonth() + 1);
+        });
+        const data = sortedDates.map(date => dateCount[date]);
+
+        subscriptionChart.data.labels = labels.length > 0 ? labels : ['No Data'];
+        subscriptionChart.data.datasets[0].data = data.length > 0 ? data : [0];
+        subscriptionChart.update();
+    }
+
+    // Update chart paket populer
+    function updatePaketChart(filteredData) {
+        const paketCount = {};
+        filteredData.forEach(sub => {
+            paketCount[sub.nama_paket] = (paketCount[sub.nama_paket] || 0) + 1;
+        });
+
+        const sorted = Object.entries(paketCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5);
+
+        paketChart.data.labels = sorted.length > 0 ? sorted.map(p => p[0]) : ['No Data'];
+        paketChart.data.datasets[0].data = sorted.length > 0 ? sorted.map(p => p[1]) : [0];
+        paketChart.update();
+    }
+
+    // Update tabel subscription
+    function updateTable(filteredData) {
+        const tbody = document.getElementById('subscription_table_body');
+        const limited = filteredData.slice(0, 10);
+
+        if (limited.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="px-6 py-8 text-center text-gray-500">
+                        <svg class="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                        </svg>
+                        <p class="text-sm">Tidak ada subscription pada periode ini</p>
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tbody.innerHTML = limited.map(sub => {
+            const date = new Date(sub.tanggal_bayar);
+            const formattedDate = date.getDate() + ' ' + 
+                ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'][date.getMonth()] + 
+                ' ' + date.getFullYear();
+            
+            return `
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                    <td class="px-4 sm:px-6 py-4 text-sm font-medium text-gray-900">
+                        <div class="flex flex-col">
+                            <span>${sub.nama_gudang}</span>
+                            <span class="md:hidden text-xs text-gray-500 mt-1">${formattedDate}</span>
+                        </div>
+                    </td>
+                    <td class="px-4 sm:px-6 py-4 text-sm text-gray-700">${sub.nama_paket}</td>
+                    <td class="hidden md:table-cell px-6 py-4 text-sm text-gray-500">${formattedDate}</td>
+                    <td class="px-4 sm:px-6 py-4 text-center">
+                        <span class="inline-flex px-2 py-1 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            ${sub.status_bayar[0].toUpperCase() + sub.status_bayar.slice(1)}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // Apply filter
+    function applyFilter() {
         const tanggalMulai = document.getElementById('tanggal_mulai').value;
         const tanggalAkhir = document.getElementById('tanggal_akhir').value;
         
-        // Implementasi filter laporan
-        console.log('Filter report:', { periode, tanggalMulai, tanggalAkhir });
+        if (!tanggalMulai || !tanggalAkhir) return;
         
-        Toastify({
-            text: "Laporan berhasil difilter!",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            className: "toast-success"
-        }).showToast();
+        if (new Date(tanggalMulai) > new Date(tanggalAkhir)) return;
+        
+        const startDate = new Date(tanggalMulai);
+        const endDate = new Date(tanggalAkhir);
+        endDate.setHours(23, 59, 59, 999);
+        
+        const filtered = filterData(startDate, endDate);
+        
+        document.getElementById('subscription_filtered').textContent = filtered.length;
+        updateSubscriptionChart(filtered);
+        updatePaketChart(filtered);
+        updateTable(filtered);
+        
+        const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        const periodText = days === 7 ? '7 Hari' : days === 30 ? '30 Hari' : days === 90 ? '3 Bulan' : days === 365 ? '1 Tahun' : 'Custom';
+        document.getElementById('chart_title').textContent = `Tren Subscription (${periodText})`;
+        document.getElementById('paket_title').textContent = `Paket Populer (${periodText})`;
+        document.getElementById('table_title').textContent = `Subscription (${periodText})`;
     }
 
     function exportReport() {
@@ -307,16 +386,59 @@
         const periode = this.value;
         const today = new Date();
         
-        if (periode !== 'custom') {
+        if (periode === 'all') {
+            if (allSubscriptions.length > 0) {
+                const dates = allSubscriptions.map(s => new Date(s.tanggal_bayar));
+                const minDate = new Date(Math.min(...dates));
+                document.getElementById('tanggal_mulai').value = minDate.toISOString().split('T')[0];
+                document.getElementById('tanggal_akhir').value = today.toISOString().split('T')[0];
+                applyFilter();
+            }
+        } else if (periode !== 'custom') {
             const days = parseInt(periode);
             const startDate = new Date(today.getTime() - (days * 24 * 60 * 60 * 1000));
             
             document.getElementById('tanggal_mulai').value = startDate.toISOString().split('T')[0];
             document.getElementById('tanggal_akhir').value = today.toISOString().split('T')[0];
+            applyFilter();
+        }
+    });
+    
+    // Auto switch ke custom dan filter otomatis saat tanggal diubah manual
+    document.getElementById('tanggal_mulai').addEventListener('change', function() {
+        const tanggalAkhir = document.getElementById('tanggal_akhir').value;
+        if (tanggalAkhir && new Date(this.value) > new Date(tanggalAkhir)) {
+            this.value = '';
+            Swal.fire({
+                icon: 'error',
+                title: 'Validasi Gagal',
+                text: 'Tanggal mulai tidak boleh lebih besar dari tanggal akhir!',
+                confirmButtonColor: '#3b82f6'
+            });
+        } else {
+            document.getElementById('periode').value = 'custom';
+            if (tanggalAkhir) applyFilter();
+        }
+    });
+    
+    document.getElementById('tanggal_akhir').addEventListener('change', function() {
+        const tanggalMulai = document.getElementById('tanggal_mulai').value;
+        if (tanggalMulai && new Date(this.value) < new Date(tanggalMulai)) {
+            this.value = '';
+            Swal.fire({
+                icon: 'error',
+                title: 'Validasi Gagal',
+                text: 'Tanggal akhir tidak boleh lebih kecil dari tanggal mulai!',
+                confirmButtonColor: '#3b82f6'
+            });
+        } else {
+            document.getElementById('periode').value = 'custom';
+            if (tanggalMulai) applyFilter();
         }
     });
 
-    // Initialize with default period
+    // Initialize
+    initCharts();
     document.getElementById('periode').dispatchEvent(new Event('change'));
 </script>
 <?= $this->endSection(); ?>

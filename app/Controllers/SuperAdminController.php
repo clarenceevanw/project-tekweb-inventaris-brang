@@ -114,17 +114,17 @@ class SuperAdminController extends BaseController
 
     public function laporan()
     {
-        $laporanData = $this->superAdminModel->getLaporanData();
-        $topGudang = $this->superAdminModel->getTopGudang();
+        $subscriptionStats = $this->superAdminModel->getSubscriptionStats();
+        $gudangAkanBerakhir = $this->superAdminModel->getGudangAkanBerakhir();
+        $allSubscriptions = $this->superAdminModel->getAllSubscriptions();
 
         return $this->view('superadmin/laporan', [
-            'title' => 'Laporan',
-            'total_pendapatan' => $laporanData['total_pendapatan'],
-            'transaksi_baru' => $laporanData['transaksi_baru'],
-            'gudang_baru' => $laporanData['gudang_baru'],
-            'mitra_baru' => $laporanData['mitra_baru'],
-            'top_gudang' => $topGudang,
-            'recent_activities' => []
+            'title' => 'Laporan Subscription',
+            'total_subscription_aktif' => $subscriptionStats['total_aktif'],
+            'akan_berakhir_7_hari' => $subscriptionStats['akan_berakhir'],
+            'total_gudang_terdaftar' => $subscriptionStats['total_gudang'],
+            'gudang_akan_berakhir' => $gudangAkanBerakhir,
+            'all_subscriptions' => $allSubscriptions
         ]);
     }
 
