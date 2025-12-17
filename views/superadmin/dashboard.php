@@ -143,7 +143,7 @@
                                 <p class="font-medium text-theme-primary"><?= $gudang['nama_gudang'] ?></p>
                                 <p class="text-sm text-theme-primary-light"><?= $gudang['lokasi_gudang'] ?></p>
                             </div>
-                            <span class="badge-theme-success"><?= $gudang['status_gudang'] ?></span>
+                            <span class="badge-theme-success"><?= $gudang['status_gudang'] ? ucfirst($gudang['status_gudang']) : '-' ?></span>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
