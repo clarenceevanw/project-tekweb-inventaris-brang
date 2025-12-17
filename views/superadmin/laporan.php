@@ -69,7 +69,7 @@
         <div class="bg-theme-light-alt rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <p class="text-theme-primary-light text-sm font-medium">Subscription Periode</p>
+                    <p class="text-theme-primary-light text-sm font-medium">Total Subscription</p>
                     <h3 id="subscription_filtered" class="text-4xl font-bold mt-2 text-theme-primary">0</h3>
                 </div>
                 <div class="bg-theme-secondary p-3 rounded-full">
