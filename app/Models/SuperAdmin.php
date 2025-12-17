@@ -61,10 +61,42 @@ class SuperAdmin extends BaseModel
 
     public function getGudangChartData()
     {
+        // Ambil data 6 bulan terakhir berdasarkan created_at gudang
+        $stmt = $this->db->prepare("
+            SELECT 
+                MONTH(created_at) as month,
+                YEAR(created_at) as year,
+                COUNT(*) as count
+            FROM gudang
+            WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            GROUP BY YEAR(created_at), MONTH(created_at)
+            ORDER BY year ASC, month ASC
+        ");
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Buat array untuk 6 bulan terakhir dengan nilai default 0
         $data = [];
-        for ($i = 1; $i <= 6; $i++) {
-            $data[] = ['month' => $i, 'count' => rand(1, 10)];
+        $currentDate = new DateTime();
+        
+        for ($i = 5; $i >= 0; $i--) {
+            $date = clone $currentDate;
+            $date->modify("-$i month");
+            $month = (int)$date->format('n');
+            $year = (int)$date->format('Y');
+            
+            // Cari data dari database
+            $count = 0;
+            foreach ($results as $row) {
+                if ((int)$row['month'] === $month && (int)$row['year'] === $year) {
+                    $count = (int)$row['count'];
+                    break;
+                }
+            }
+            
+            $data[] = ['month' => $month, 'count' => $count];
         }
+        
         return $data;
     }
 

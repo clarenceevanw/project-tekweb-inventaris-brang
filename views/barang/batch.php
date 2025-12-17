@@ -55,7 +55,7 @@
                                 <?= $batch['expired_date'] ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium flex justify-center items-center gap-2">
-                                <button onclick="showQrModal('<?= $batch['id_detail_transaksi'] ?>', '<?= $barang['nama_barang'] ?>')" 
+                                <button onclick="showQrModal('<?= $batch['id_detail_transaksi'] ?>', '<?= $barang['nama_barang'] ?>', '<?= $batch['expired_date'] ?>', '<?= $_SESSION['user']['nama_gudang'] ?? 'Gudang' ?>')" 
                                         class="btn-theme-secondary gap-2 cursor-pointer font-medium rounded-lg text-sm px-4 py-2 focus:outline-none transition ease-in-out duration-150 flex items-center justify-center">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
@@ -96,7 +96,7 @@
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
             <div id="qrModalContent" class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-2xl transition-all duration-300 ease-out sm:my-8 sm:w-full sm:max-w-sm border border-gray-100 scale-95 opacity-0">
-                <div class="absolute top-0 right-0 pt-4 pr-4">
+                <div class="absolute top-0 right-0 pt-4 pr-4 no-print">
                     <button type="button" onclick="closeModal()" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none">
                         <span class="sr-only">Close</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -104,22 +104,37 @@
                         </svg>
                     </button>
                 </div>
-                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start justify-center">
-                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                            <h3 class="text-lg font-semibold leading-6 text-gray-900 text-center" id="modalTitle">Loading...</h3>
-                            <div id="qrImageContainer" class="mt-4 flex justify-center items-center h-48 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                                <span class="text-gray-400 text-sm">Generating QR...</span>
+                <div class="bg-white px-6 pb-6 pt-6">
+                    <!-- Label Header -->
+                    <div class="text-center border-b-2 border-gray-800 pb-3 mb-4">
+                        <h2 class="text-xl font-bold text-gray-900" id="modalTitle">Loading...</h2>
+                    </div>
+                    
+                    <!-- QR Code Section -->
+                    <div class="border-4 border-gray-800 rounded-lg p-4 bg-white">
+                        <div id="qrImageContainer" class="flex justify-center items-center h-48 bg-white">
+                            <span class="text-gray-400 text-sm">Generating QR...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Batch Info -->
+                    <div class="mt-4 space-y-2">
+                        <div class="border-t border-gray-300 pt-3">
+                            <div class="text-xs text-gray-600 font-semibold mb-1">Batch ID:</div>
+                            <div class="font-mono text-xs text-gray-900 break-all bg-gray-50 p-2 rounded" id="modalId">-</div>
+                            
+                            <div class="mt-2" id="expiredSection" style="display:none;">
+                                <div class="text-xs text-gray-600 font-semibold mb-1">Expired Date:</div>
+                                <div class="font-mono text-xs text-gray-900 bg-gray-50 p-2 rounded" id="modalExpired">-</div>
                             </div>
-                            <p class="mt-2 text-xs text-center text-gray-500 font-mono bg-gray-100 p-1 rounded" id="modalId">ID: -</p>
                         </div>
                     </div>
                 </div>
-                <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-0 gap-2">
-                    <button type="button" onclick="window.print()" class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 sm:w-auto transition">
+                <div class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2 no-print">
+                    <button type="button" onclick="window.print()" class="btn-theme-primary w-full sm:w-auto">
                         Print Label
                     </button>
-                    <button type="button" onclick="closeModal()" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto transition">
+                    <button type="button" onclick="closeModal()" class="btn-theme-secondary w-full sm:w-auto mt-3 sm:mt-0">
                         Tutup
                     </button>
                 </div>
@@ -129,30 +144,60 @@
 </div>
 
 <style media="print">
+    @page {
+        size: 10cm 15cm;
+        margin: 0;
+    }
     body * { visibility: hidden; }
     #qrModal, #qrModal * { visibility: visible; }
-    #qrModal { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: white; }
-    .bg-gray-50 button { display: none; }
+    #qrModal { 
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        width: 10cm; 
+        height: 15cm; 
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #qrModalContent {
+        box-shadow: none !important;
+        border: 3px solid #000 !important;
+        max-width: 9cm !important;
+        margin: 0.5cm;
+    }
+    .no-print { display: none !important; }
+    #qrModalOverlay { display: none !important; }
 </style>
 
 <?php $this->endSection(); ?>
 
 <?php $this->section('script'); ?>
 <script>
-    function showQrModal(id, namaBarang) {
+    function showQrModal(id, namaBarang, expiredDate = null) {
         const modal = document.getElementById('qrModal');
         const overlay = document.getElementById('qrModalOverlay');
         const content = document.getElementById('qrModalContent');
         
         document.getElementById('modalTitle').innerText = namaBarang;
         document.getElementById('modalId').innerText = id;
+        
+        // Show expired date if available
+        if (expiredDate) {
+            document.getElementById('modalExpired').innerText = expiredDate;
+            document.getElementById('expiredSection').style.display = 'block';
+        } else {
+            document.getElementById('expiredSection').style.display = 'none';
+        }
+        
         document.getElementById('qrImageContainer').innerHTML = '<span class="text-gray-400 text-sm animate-pulse">Loading QR...</span>';
         
         let qrUrl = "/admin/generate-qr?text=" + id; 
         const img = new Image();
         img.src = qrUrl;
         img.alt = "QR Code";
-        img.className = "max-w-full h-auto object-contain p-2";
+        img.className = "max-w-full h-auto object-contain";
         
         img.onload = function() {
             document.getElementById('qrImageContainer').innerHTML = '';
