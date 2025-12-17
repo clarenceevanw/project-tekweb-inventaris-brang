@@ -20,6 +20,17 @@ class Admin extends BaseModel {
             $adminData['id_gudang'] = $id_gudang;
             $this->insert($adminData);
             
+            // Get paket free
+            $stmtPaket = $this->db->prepare("SELECT id_paket FROM paket_subscription WHERE nama_paket LIKE '%free%' OR nama_paket LIKE '%trial%' LIMIT 1");
+            $stmtPaket->execute();
+            $paket = $stmtPaket->fetch(PDO::FETCH_ASSOC);
+            
+            if ($paket) {
+                $id_subscription = generate_uuid();
+                $stmtSubs = $this->db->prepare("INSERT INTO transaksi_subscription (id_subscription, id_gudang, id_paket, tanggal_bayar, status_bayar) VALUES (?, ?, ?, NOW(), 'lunas')");
+                $stmtSubs->execute([$id_subscription, $id_gudang, $paket['id_paket']]);
+            }
+            
             $this->db->commit();
             return true;
         } catch (Exception $e) {
