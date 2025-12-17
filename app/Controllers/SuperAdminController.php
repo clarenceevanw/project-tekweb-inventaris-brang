@@ -52,8 +52,13 @@ class SuperAdminController extends BaseController
         $totalGudang = count($gudangList);
         $gudangAktif = 0;
         foreach ($gudangList as $g) {
-            if (($g['status_gudang'] ?? 'active') === 'active') {
+            if ($g['status_gudang'] === 'active') {
                 $gudangAktif++;
+            } elseif ($g['status_gudang'] === 'trial') {
+                $expiredDate = strtotime($g['expired_date_gudang']);
+                if ($expiredDate > time()) {
+                    $gudangAktif++;
+                }
             }
         }
         $gudangTidakAktif = $totalGudang - $gudangAktif;
