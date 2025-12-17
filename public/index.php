@@ -7,4 +7,6 @@ require_once __DIR__ . "/../app/Router.php";
 
 require_once __DIR__ . "/../routes/web.php";
 
+date_default_timezone_set('Asia/Jakarta');
+
 Router::run();
