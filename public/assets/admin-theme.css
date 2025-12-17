@@ -189,7 +189,16 @@
 }
 
 .badge-theme-warning {
-    background-color: var(--theme-accent-lighter);
+    background-color: var(--theme-secondary-lighter);
+    color: var(--theme-accent-dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-theme-danger {
+    background-color: var(--theme-secondary-lighter);
     color: var(--theme-accent-dark);
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
