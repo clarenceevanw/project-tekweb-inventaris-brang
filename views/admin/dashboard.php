@@ -140,21 +140,32 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    <?php foreach ($top_barang as $item): ?>
+                    <?php if (empty($top_barang)): ?>
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-theme-primary"><?= htmlspecialchars($item['nama_barang']) ?></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= number_format($item['stok']) ?></td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <?php if ($item['stok'] > 100): ?>
-                                    <span class="badge-theme-success">Stok Aman</span>
-                                <?php elseif ($item['stok'] > 50): ?>
-                                    <span class="badge-theme-warning">Stok Sedang</span>
-                                <?php else: ?>
-                                    <span class="badge-theme-warning">Stok Menipis</span>
-                                <?php endif; ?>
+                            <td colspan="3" class="px-6 py-8 text-center text-theme-primary-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="mx-auto h-12 w-12 text-theme-primary-light mb-3 bi bi-box-seam" viewBox="0 0 16 16" stroke="currentColor" stroke-width="0.3">
+                                    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
+                                </svg>
+                                <p class="text-sm">Belum ada data barang</p>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <?php foreach ($top_barang as $item): ?>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-theme-primary"><?= htmlspecialchars($item['nama_barang']) ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-theme-primary"><?= number_format($item['stok']) ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <?php if ($item['stok'] > 100): ?>
+                                        <span class="badge-theme-success">Stok Aman</span>
+                                    <?php elseif ($item['stok'] > 50): ?>
+                                        <span class="badge-theme-warning">Stok Sedang</span>
+                                    <?php else: ?>
+                                        <span class="badge-theme-warning">Stok Menipis</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
