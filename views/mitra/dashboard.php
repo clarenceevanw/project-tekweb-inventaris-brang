@@ -205,7 +205,8 @@
                                 <?php 
                                 $waktu = strtotime($aktivitas['tanggal_transaksi']);
                                 $sekarang = time();
-                                $selisih = $sekarang - $waktu;
+                                $selisih = abs($sekarang - $waktu);
+                                
                                 if ($selisih < 60) echo $selisih . ' detik lalu';
                                 elseif ($selisih < 3600) echo floor($selisih/60) . ' menit lalu';
                                 elseif ($selisih < 86400) echo floor($selisih/3600) . ' jam lalu';
