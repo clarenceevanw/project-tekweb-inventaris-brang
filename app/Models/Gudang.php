@@ -105,7 +105,7 @@ class Gudang extends BaseModel {
     public function getAkanBerakhir() {
         $stmt = $this->db->prepare("
             SELECT g.nama_gudang, g.expired_date_gudang,
-                   DATEDIFF(g.expired_date_gudang, NOW()) as sisa_hari
+                   FLOOR(TIMESTAMPDIFF(SECOND, NOW(), g.expired_date_gudang) / 86400) as sisa_hari
             FROM gudang g
             WHERE g.expired_date_gudang > NOW()
             AND g.expired_date_gudang <= DATE_ADD(NOW(), INTERVAL 30 DAY)
