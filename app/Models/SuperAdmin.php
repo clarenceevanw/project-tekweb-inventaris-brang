@@ -51,7 +51,7 @@ class SuperAdmin extends BaseModel
             FROM admin a 
             LEFT JOIN gudang g ON a.id_gudang = g.id_gudang 
             WHERE a.deleted_at IS NULL
-            ORDER BY a.id_admin DESC 
+            ORDER BY a.id_admin ASC 
             LIMIT ?
         ");
         $stmt->bindValue(1, $limit, PDO::PARAM_INT);
